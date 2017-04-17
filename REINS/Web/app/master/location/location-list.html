@@ -1,0 +1,79 @@
+<div class="col-md-12" ng-controller="LocationListCtrl">
+    <div class="panel panel-primary">
+        <div class="panel-heading clearfix">
+            Location
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-3 pull-left" style="padding-right:0;">
+                    <div class="input-group">
+                        <input type="text" class="form-control" ng-model="keyword"/>
+                        <span class="input-group-addon btn btn-primary" ng-click="onSearch()">
+                            <i class="fa fa-search"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-sm-5 pull-left" style="padding-left:5px;">
+                    <span class="btn btn-primary" ng-click="onCreateNew()">
+                        <i class="fa fa-plus-circle"></i>
+                        Add
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <br />
+                <div class="col-md-12">
+                    <table class="table table-striped table-bordered data-grid">
+                        <thead>
+                            <tr>
+                                <th class="action-button"></th>
+                                <th ng-click="onSort('location_name')">Location
+                                    <span>
+                                        <i class="fa fa-sort"></i>
+                                    </span>
+                                </th>
+                                <th ng-click="onSort('is_common_area')">Common Area
+                                    <span>
+                                        <i class="fa fa-sort"></i>
+                                    </span>
+                                </th>
+                                <th ng-click="onSort('last_updated_date')">Last Modified
+                                    <span>
+                                        <i class="fa fa-sort"></i>
+                                    </span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-hide="locations.length > 0">
+                                <td colspan="3">No data found in the system.
+                                </td>
+                            </tr>
+                            <tr ng-repeat="location in locations">
+                                <td class="action-button">
+                                    <span ng-click="onRowEdit(location)" class="btn btn-primary btn-sm">
+                                        Edit
+                                    </span>
+                                    <span ng-click="onRowDelete(location)"  class="btn btn-danger btn-sm">
+                                        Delete
+                                    </span>
+                                </td>
+                                <td>{{ location.location_name}}</td>
+                                <td>{{(location.is_common_area)?"Yes":"No"}}</td>
+                                <td>{{ location.last_updated_date | momentDateFilter : "DD/MM/YYYY HH:mm:ss"}}</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <td colspan="3">
+                                <div pagination boundary-links="true" total-items="SearchQuery.total_data"  ng-show="SearchQuery.total_data > 0" page="SearchQuery.page" class="pagination-sm" on-select-page="onPageChanged(page)" max-size="10"></div>
+                            </td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                    <!--<div pagination total-items="SearchQuery.total_data" ng-model="SearchQuery.page"></div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

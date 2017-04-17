@@ -1,0 +1,89 @@
+/* List widget top 10 */
+div.modif div.dataTables_wrapper div.dataTables_filter input.input-sm {
+    width: 900px !important;    
+}
+
+#topnav .topbar-main {
+    background-color: #194e82;
+}
+
+/* HALAMAN LOGIN */
+
+.account-pages {
+    background: #194e82;
+}
+
+.wrapper-page .logo {
+   color: #194e82 !important;
+}
+
+.wrapper-page .card-box {
+    box-shadow: 0 0px 24px 0 rgba(0, 0, 0, 0.06), 0 1px 0px 0 rgba(0, 0, 0, 0.02);
+    border: 5px solid #eaeaea;
+}
+
+#morris-line-example {
+    background: url(../images/watermark.jpg) center center no-repeat;
+}
+
+.graphic-options .btn {
+	padding: 0.24rem 0.7rem;
+    font-size: 0.93rem;
+}
+
+#topnav .navigation-menu > li.last-elements .submenu {
+    left: 0px;
+    right: 0;
+}
+
+#loading-bar .bar {
+    background: #d9534f !important;
+}
+
+.light-blue-background {
+    background-color: #039cfd !important;
+}
+.light-blue-border {
+    border-color: #039cfd !important;
+}
+@media(min-device-width: 1024px ){
+    .reins-header {
+        height: 56px;
+        z-index: 1000;
+        position: fixed;
+        width: 100%;
+        background-color: #f5f5f5;
+        border-bottom: 1px solid #ddd;
+        padding: 0px;
+        margin: 0px;
+    }
+    .reins-content{
+        position: absolute;
+        top: 56px;
+        width: 95%;
+    }
+    .reins-navbar{
+        margin-top: 56px;
+    }
+}
+
+.mini-label{
+    font-size: 0.88rem;
+}
+
+.tab-content {
+    border-bottom: 1px solid #ccc;
+}
+
+.row-active {
+    background-color: #eeeecc !important;
+}
+
+.red-font {
+    color: #FF0000;
+}
+
+.validation-message {
+    font-size: 0.8rem;
+}
+

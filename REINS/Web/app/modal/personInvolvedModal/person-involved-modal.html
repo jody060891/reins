@@ -1,0 +1,90 @@
+<div>
+	<div class="modal-header">
+		<button type="button" class="close pull-right" ng-click="$dismiss()" aria-hidden="true">&times;</button>
+		<h4 class="modal-title">{{attr.title}}</h4>
+	</div>
+	<div class="modal-body">
+        <div>
+            <div class="validation-new" ng-show="mainscope.submitNextLevelValidation.sac_score">
+                Please provide SAC Score.
+            </div>
+            <div class="validation-new" ng-show="mainscope.submitNextLevelValidation.rca">
+                Please provide Root Cause Analysis.
+            </div>
+            <div ng-show="mainscope.personInvolvedNotValid && !mainscope.add" class="validation-new">Please add a person involved for this incident.</div>
+            <!--
+        <div ng-show="incident.is_near_miss && personInvolvedNotValidNearMiss" class="validation-new">
+             At least one person involved should be near miss.
+        </div>
+        -->
+            <!--<div ng-show="mainscope.personInvolvedDuplicate" class="validation-new">
+                Can not enter duplicate person.
+            </div>-->
+            <div ng-show="mainscope.add && mainscope.form.is_edited" class="validation-new">Please complete person involved information and click 'Add/Update Person Involved' button or click cancel</div>
+
+            <div class="validation-new" ng-if="!(mainscope.incident.is_near_miss || mainscope.incident.is_near_miss == 0) && !mainscope.first_time">
+                Please select an option for Near Miss as it is mandatory.
+            </div>
+            <div class="validation-new" ng-show="mainscope.newPerson.validation.category && !mainscope.newPerson.person_category">
+                Please provide Person Category.
+            </div>
+            <div class="validation-new" ng-show="mainscope.newPerson.validation.category_other && !mainscope.newPerson.person_category_other_description">
+                Please provide Person Category description.
+            </div>
+            <div class="validation-new" ng-show="mainscope.newPerson.validation.name && !mainscope.newPerson.fullname">
+                Please provide name.
+            </div>
+            <div class="validation-new" ng-show="mainscope.newPerson.validation.id && !mainscope.newPerson.person_id">
+                Please provide Employee ID.
+            </div>
+            <div class="validation-new" ng-show="mainscope.newPerson.validation.nric && !mainscope.newPerson.nric">
+                Please provide NRIC/FIN/ Passport No.
+            </div>
+            <div class="validation-new" ng-show="mainscope.newPerson.validation.contact && !mainscope.newPerson.contact_no">
+                Please provide Contact Number.
+            </div>
+            <div class="validation-new" ng-show="mainscope.newPerson.validation.contact_length">
+                Contact Number must be at least 8 digits
+            </div>
+            <div class="validation-new" ng-show="mainscope.newPerson.validation.gender && !mainscope.newPerson.gender">
+                Please provide Gender.
+            </div>
+            <div class="validation-new" ng-show="mainscope.newPerson.validation.age && !mainscope.newPerson.age">
+                Please provide Age.
+            </div>
+            <div class="validation-new" ng-show="mainscope.newPerson.validation.case_number && !mainscope.newPerson.case_number">
+                Please provide Case Number.
+            </div>
+            <div class="validation-new" ng-show="mainscope.newPerson.validation.admission && !mainscope.newPerson.patient_admission_date">
+                Please provide Admission Date.
+            </div>
+            <div class="validation-new" ng-show="mainscope.newPerson.validation.discipline && !mainscope.newPerson.patient_discipline">
+                Please provide Discipline.
+            </div>
+            <div class="validation-new" ng-show="mainscope.newPerson.validation.staff_years_of_service && !mainscope.newPerson.staff_years_of_service">
+                Please provide staff year of service.
+            </div>
+            <div class="validation-new" ng-show="mainscope.newPerson.validation.staff_years_of_service_other && !mainscope.newPerson.staff_years_of_service_other">
+                Please provide staff years of service.
+            </div>
+            <div class="validation-new" ng-show="mainscope.newPerson.validation.staff_category_other && !mainscope.newPerson.staff_category_other">
+                Please provide staff category description.
+            </div>
+            <div class="validation-new" ng-show="mainscope.newPerson.validation.patient_body_fluid_other_description && !mainscope.newPerson.patient_body_fluid_other_description">
+                Please provide patient body fluid description.
+            </div>
+            <div class="validation-new" ng-show="mainscope.newPerson.validation.patient_caused_injury">
+                Please provide device or item caused the injury.
+            </div>
+            <div class="validation-new" ng-show="mainscope.newPerson.validation.patient_caused_injury_other_description && !mainscope.newPerson.patient_caused_injury_other_description">
+                Please provide description of device or item caused the injury.
+            </div>
+            <div class="validation-new" ng-show="mainscope.newPerson.validation.staff_protective_is_other_description && !mainscope.newPerson.staff_protective_is_other_description">
+                Please provide personal protective equipment used.
+            </div>
+        </div>
+	</div>
+	<div class="modal-footer">
+        <button class="{{attr.btnClass}}" ng-click="onClose();">Ok</button>
+	</div>
+</div>

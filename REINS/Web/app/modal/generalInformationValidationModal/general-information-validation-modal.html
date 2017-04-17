@@ -1,0 +1,62 @@
+<div>
+	<div class="modal-header">
+		<button type="button" class="close pull-right" ng-click="$dismiss()" aria-hidden="true">&times;</button>
+		<h4 class="modal-title">{{attr.title}}</h4>
+	</div>
+	<div class="modal-body">
+        <div>
+            <div class="validation-new" ng-show="attr.submitNextLevelValidation.sac_score">
+                Please provide SAC Score.
+            </div>
+            <div class="validation-new" ng-show="attr.submitNextLevelValidation.rca">
+                Please provide Root Cause Analysis.
+            </div>
+            <div class="validation-new" ng-show="attr.genInfo.validation.reporter_name && !attr.incident.reporter_name">
+                Please provide your Name.
+            </div>
+            <!--<div class="validation-new" ng-show="attr.incident.reporter_name.length > 200">
+            Name is too long (Max 200 Characters).
+        </div>-->
+
+            <div class="validation-new" ng-if="attr.genInfo.validation.designation && (!attr.incident.designation_id || attr.isAnonymous) && !attr.first_time">
+                Please provide your Designation.
+            </div>
+            <div class="validation-new" ng-if="attr.genInfo.validation.department && (!attr.incident.department_id || attr.isAnonymous) && !attr.first_time">
+                Please provide your Department.
+            </div>
+            <div class="validation-new" ng-if="attr.genInfo.validation.employee_category && (!attr.incident.employee_category_id || attr.isAnonymous) && !attr.first_time">
+                Please provide your Employee Category.
+            </div>
+            <div class="validation-new" ng-show="attr.genInfo.validation.incidentType  && !attr.incident.incident_type_id">
+                Please fill up mandatory field for Incident Type.
+            </div>
+            <div class="validation-new" ng-show="attr.genInfo.validation.incidentSubType && !attr.incident.incident_sub_type_id">
+                Please select a Sub Type as it is  mandatory.
+            </div>
+            <div class="validation-new" ng-if="(isSubtypeSpecified(attr.incident.incident_sub_type_id) && !attr.incident.incident_sub_type_others_description) && !attr.first_time">
+                Please provide Incident Subtype Others description.
+            </div>
+            <div class="validation-new" ng-show="attr.genInfo.validation.incidentTypeOther && !attr.incident.incident_type_others">
+                Please provide Incident Type description.
+            </div>
+            <div class="validation-new" ng-show="attr.genInfo.validation.near_miss && attr.incident.is_near_miss === null">
+                Please select an option for Near Miss as it is mandatory.
+            </div>
+            <div class="validation-new" ng-show="attr.genInfo.validation.location && !attr.incident.location_id">
+                Please select a Location of Occurrence as it is  mandatory.
+            </div>
+            <div class="validation-new" ng-show="attr.genInfo.validation.date && !attr.incident.date_of_occurance">
+                Please provide Date.
+            </div>
+            <div class="validation-new" ng-show="attr.genInfo.validation.time && !attr.incident.time_of_occurance">
+                Please provide Time.
+            </div>
+            <div class="validation-new" ng-show="attr.genInfo.validation.time_max">
+                Incorrect Time: Date and Time of Occurrence cannot be a future date.
+            </div>
+        </div>
+	</div>
+	<div class="modal-footer">
+        <button class="{{attr.btnClass}}" ng-click="onClose();">Ok</button>
+	</div>
+</div>

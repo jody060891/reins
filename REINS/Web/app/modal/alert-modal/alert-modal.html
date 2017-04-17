@@ -1,0 +1,14 @@
+<div>
+	<div class="modal-header">
+		<button type="button" class="close pull-right" ng-click="$dismiss()" aria-hidden="true">&times;</button>
+		<h4 class="modal-title">{{attr.title}}</h4>
+	</div>
+    <div ng-if="attr.isHtml" class="modal-body" angular-force-html-bind-template="attr.bodyHtml" compile-scope="dynamicFormScope">
+    </div>
+    <div ng-if="!attr.isHtml" class="modal-body">
+        {{attr.bodyMessage}}
+    </div>
+	<div class="modal-footer">
+        <button class="{{attr.btnClass}}" ng-click="onClose();">Ok</button>
+	</div>
+</div>

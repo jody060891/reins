@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="HITS">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HITS</title>
+
+    <!-- Optional theme -->
+    <!--<link rel="stylesheet" type="text/css" href="../Content/css/eHOR-Style.css">-->
+    <!--<link href="app.less" type="text/css" rel="stylesheet/less">-->
+    <link href="bower_components/bootstrap/dist/css/bootstrap.css" type="text/css" rel="stylesheet">
+    <link href="bower_components/angular-ivh-treeview/dist/ivh-treeview.css" type="text/css" rel="stylesheet">
+    <link href="bower_components/angular-ivh-treeview/dist/ivh-treeview-theme-basic.css" type="text/css" rel="stylesheet">
+    <link href="bower_components/font-awesome/css/font-awesome.css" type="text/css" rel="stylesheet">
+    <link href="bower_components/angular-bootstrap-colorpicker/css/colorpicker.css" type="text/css" rel="stylesheet">
+    <link href="components/css/angular-wizard-custom.css" type="text/css" rel="stylesheet">
+    <link href="components/css/bs-callout.css" type="text/css" rel="stylesheet">
+    <link href="components/css/modal-style.css" type="text/css" rel="stylesheet">
+    <link href="components/css/form-builder.css" type="text/css" rel="stylesheet">
+    <link href="components/css/pkbl.css" type="text/css" rel="stylesheet">
+    <script src="components/js/css3-mediaqueries.js"></script>
+    <!-- JS from Bower Components -->
+    <!--<script src="bower_components/less.js/dist/less-1.6.2.js" data-concat="false"></script>-->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/underscore/underscore.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/angular-ui-utils/ui-utils.js"></script>
+    <script src="bower_components/angular-ivh-treeview/dist/ivh-treeview.js"></script>
+    <script src="bower_components/angular-strap/dist/angular-strap.min.js"></script>
+    <script src="bower_components/angular-strap/dist/angular-strap.tpl.min.js"></script>
+
+    <script src="bower_components/es5-shim/es5-shim.min.js"></script>
+    <script src="bower_components/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.min.js"></script>
+    <script src="bower_components/angular-wysiwyg/angular-wysiwyg.js"></script>
+    <script src="bower_components/ngSticky/dist/sticky.min.js"></script>
+    <script src="bower_components/angular-scroll/angular-scroll.js"></script>
+    <script src="bower_components/es5-shim/es5-sham.min.js"></script>
+    <script src="bower_components/angular-file-upload/angular-file-upload.js"></script>
+    <script src="components/js/timepickerpop.js"></script>
+    <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
+    <script src="bower_components/angular-ui-date/src/date.js"></script>
+    <script src="bower_components/angular-ui-date/src/date.js"></script>
+    <script type="text/javascript" src="components/js/crypto/jsencrypt.js"></script>
+    <!-- Add New Bower Component JS Above -->
+
+
+    <!-- Main App JS -->
+    <script src="appMaintenance.js"></script>
+    <script src="factory/factory.js"></script>
+    <script src="factory/internal-factory.js"></script>
+    <script src="directive/loadingScreen/loadingScreen.js"></script>
+    <script src="directive/toastMessage/toastMessage.js"></script>
+    <script src="internal/maintenance.js"></script>
+
+    <!-- Add New Component JS Above -->
+
+</head>
+<body>
+<div class="row">
+    <div class="col-md-12">
+        <!-- header -->
+
+        <div class="row ">
+            <!---->
+            <div class="col-md-12 eHOR_header">
+
+            </div>
+        </div>
+        <!-- header -->
+
+        <div class="row main-content" ng-controller="MaintenanceCtrl">
+            <loading-screen></loading-screen>
+            <toast-message></toast-message>
+            <div class="col-md-12 ehor-content">
+                <div class="row" style="padding-bottom: 20px;">
+                    <div class="col-md-6 content-border" style="padding-top:80px;">
+                        <div style="text-align: center;"><img src="/Web/img/hits_logo_large.png" /></div>
+                        <h1 style="text-align: center;color:#4e4e4e;">Hospital Incident Tracking System</h1>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row login">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-12" style="min-height: 500px;">
+                                        <div style="padding-top: 150px;"></div>
+                                        <div style="background-color:#B4D0E9;border: solid 10px #337ab7;padding:10px;margin:10px;">
+                                            <div style="font-size:210%;font-weight:bold;text-align:center;">This site is currently under maintenance</div>
+                                            <div style="font-size:150%;font-weight:bold;text-align:center;">Please try again later </div>
+                                            <div style="font-size:150%;font-weight:bold;text-align:center;">Thank you</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="row ">
+    <div class="col-md-12 footers">
+        Copyright &copy; 2015
+    </div>
+</div>
+</body>
+</html>

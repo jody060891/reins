@@ -1,0 +1,44 @@
+
+.bs-callout {
+padding: 20px;
+margin: 20px 0;
+border: 1px solid #eee;
+border-left-width: 5px;
+border-radius: 3px;
+}
+
+.bs-callout h4 {
+margin-top: 0;
+margin-bottom: 5px;
+}
+
+.bs-callout p:last-child {
+margin-bottom: 0;
+}
+
+.bs-callout code {
+border-radius: 3px;
+}
+
+.bs-callout+.bs-callout {
+margin-top: -5px;
+}
+
+.bs-mixin(@name, @callout-color, @font-color) {
+    &.@{name} h4 {
+        color: @font-color;
+    }
+}
+
+.bs-mixin(@name, @callout-color, @font-color) {
+    .@{name}{
+        border-left-color: @callout-color;
+    }
+}
+
+.bs-mixin(bs-callout-default, @gray-lighter, darken(@gray-lighter, 50%));
+.bs-mixin(bs-callout-primary, @brand-primary, @brand-primary);
+.bs-mixin(bs-callout-info, @brand-info, @brand-info);
+.bs-mixin(bs-callout-danger, @brand-danger, @brand-danger);
+.bs-mixin(bs-callout-warning, @brand-warning, @brand-warning);
+.bs-mixin(bs-callout-success, @brand-success, @brand-success);

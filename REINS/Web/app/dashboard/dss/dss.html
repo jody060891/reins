@@ -1,0 +1,48 @@
+<div class="col-md-12" ng-controller="DssCtrl">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="btn-group pull-right m-t-15">
+                <a href="<?php echo site_url('auth/logout')?>">
+                    <button type="button" class="btn btn-custom waves-effect waves-light"
+                            aria-expanded="false">Logout <span class="m-l-5"><i class="icon-close"></i></span></button>
+                </a>
+
+            </div>
+            <h4 class="page-title"></h4>
+        </div>
+    </div>
+
+
+
+    <div class="row">
+        <br>
+        <div class="col-md-12 col-xs-11" style="overflow-x: auto">
+            <div tabset>
+                <div tab="active" heading="Cedant NL Syariah" ng-click="onFetchHukCedantNlSyariah()">
+                    <div angular-html-bind-template="HukCedantNlSyariahTemplate" compile-scope="mainScope"></div>
+                </div>
+
+                <div tab heading="Cedant NL" ng-click="onFetchHukCedantNl()">
+                    <div angular-html-bind-template="HukCedantNlTemplate" compile-scope="mainScope"></div>
+                </div>
+
+                <div tab heading="Cedant Life Syariah"  ng-click="onFetchHukCedantLFSyariah()">
+                    <div angular-html-bind-template="HukCedantLFSyariahTemplate" compile-scope="mainScope"></div>
+                </div>
+
+                <div tab heading="Cedant LF" ng-click="onFetchHukCedantLF()">
+                    <div angular-html-bind-template="HukCedantLFTemplate" compile-scope="mainScope"></div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+    <!-- end row -->
+
+
+    <script type="text/javascript">
+
+    </script>
+</div>

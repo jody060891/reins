@@ -1,0 +1,89 @@
+<style>
+    .validation-new {
+        margin-top: 0px;
+        color: red;
+        font-size:0.9em;
+    }
+</style>
+<div>
+    <div class="modal-header">
+        <button type="button" class="close pull-right" ng-click="$dismiss()" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Search Pinjaman Data</h4>
+    </div>
+    <div class="modal-body form-horizontal">
+        <div class="row">
+            <div class="col-sm-8 col-xs-8" style="padding-right: 0;">
+                <div class="input-group">
+                    <input ng-keypress="onKeyPress($event)" type="text" class="form-control" ng-model="keyword.keyword"/>
+                    <span class="input-group-addon btn btn-primary" ng-click="onSearch()">
+                            <i class="fa fa-search"></i>
+                        </span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <br />
+            <div class="col-md-12 col-xs-11" style="overflow-x: auto">
+                <table class="table table-striped table-bordered data-grid">
+                    <thead>
+                    <tr>
+                        <th class="action-button"></th>
+                        <th ng-click="onSort('nomor_register')">Nomor Registrasi
+                            <span>
+                                <i class="fa fa-arrow-up"></i>
+                            </span>
+                        </th>
+                        <th ng-click="onSort('nomor_perjanjian')">Nomor Perjanjian
+                            <span>
+                                <i class="fa fa-arrow-up"></i>
+                            </span>
+                        </th>
+                        <th ng-click="onSort('nomor_berita_acara')">Nomor Berita Acara
+                            <span>
+                                <i class="fa fa-arrow-up"></i>
+                            </span>
+                        </th>
+                        <th ng-click="onSort('tanggal_perjanjian')">Tanggal Perjanjian
+                            <span>
+                                <i class="fa fa-arrow-up"></i>
+                            </span>
+                        </th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-hide="listPinjaman.length > 0">
+                        <td colspan="5">No data found in the system.
+                        </td>
+                    </tr>
+                    <tr ng-repeat="pinjaman in listPinjaman">
+                        <td class="action-button">
+                                <span ng-click="onSelect(pinjaman)" class="btn btn-primary btn-sm">
+                                    Select
+                                </span>
+                        </td>
+                        <td>{{pinjaman.nomor_register}}</td>
+                        <td>{{pinjaman.nomor_perjanjian}}</td>
+                        <td>{{pinjaman.nomor_berita_acara}}</td>
+                        <td>{{pinjaman.tanggal_perjanjian | momentDateFilter:"DD-MM-YYYY"}}</td>
+
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    <tr ng-show="listPinjaman.length > 0">
+                        <td colspan="5">
+                            <div pagination max-size="10" boundary-links="true" total-items="SearchQuery.total_data"  ng-show="SearchQuery.total_data > 0" page="SearchQuery.page" class="pagination-sm" on-select-page="onPageChanged(page)"></div>
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+   <div class="modal-footer">
+        <button class="btn btn-danger" ng-click="$dismiss()">
+            <i class="fa fa-times"></i>
+            Cancel
+        </button>
+    </div>
+</div>

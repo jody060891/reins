@@ -1,0 +1,97 @@
+<style>
+    .form-control {
+        display: inline;
+        width: auto;
+    }
+
+    .text-year {
+        display: inline;
+        width: 60px;
+    }
+
+    .validation {
+        color: red;
+    }
+
+    .checkbox-inline, .radio-inline {
+        margin-left: 10px;
+    }
+</style>
+<div class="col-md-12 no-side-padding" ng-controller="UamReportCtrl">
+    <div class="panel panel-primary">
+        <div class="panel-heading clearfix">
+            Report > User Access Matrix
+        </div>
+        <div class="panel-body form-horizontal">
+            <div class="row form-group">
+                <div class="col-md-3">
+                    <label>Report Type</label>
+                </div>
+                <div class="col-md-9">
+                    <select class="form-control" ng-model="report_type" ng-change="onReportTypeChanged()">
+                        <option value="1" ng-if="currentAcl['UAM_ACCESS_MATRIX_REPORT_VIEW']">Access Matrix</option>
+                        <option value="2" ng-if="currentAcl['UAM_USER_LISTING_REPORT_VIEW']">User Listing</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-md-3">
+                    <label>Roles</label>
+                </div>
+                <div class="col-md-9">
+                    <div class="col-md-5">
+                        Available
+                    </div>
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-5">
+                        Selected
+                    </div>
+                    <div class="col-md-5">
+                        <div>
+                            <select style="height: 200px; width: 100%" ng-model="available" multiple>
+                                <option ng-repeat="role in roles | filter: {is_hidden: false}" value="{{role.role_id}}" ng-if="!role.is_selected">
+                                    {{role.role_name}}
+                                <option>
+                            </select>
+                        </div>
+                        <div class="mandatory" ng-if="validation.role">Please select role</div>
+                    </div>
+                    <div class="col-md-2">
+                        <button style="width: 100%" class="btn btn-primary" ng-click="select(available, hashRole, true)">
+                            Select
+                        </button>
+                        <button style="width: 100%" class="btn btn-warning" ng-click="select(selected, hashRole, false)">
+                            Unselect
+                        </button>
+                        <button style="width: 100%" class="btn btn-success" ng-click="selectAll(roles, true)">Select All
+                        </button>
+                        <button style="width: 100%" class="btn btn-danger" ng-click="selectAll(roles, false)">Unselect All
+                        </button>
+                    </div>
+                    <div class="col-md-5">
+                        <div>
+                            <select style="height: 200px; width: 100%" ng-model="selected" multiple>
+                                <option ng-repeat="role in roles | filter: {is_hidden: false}" value="{{role.role_id}}" ng-if="role.is_selected">
+                                    {{role.role_name}}
+                                <option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <span ng-disabled="action" ng-click="onGenerateXls('Xls')" class="btn btn-primary"
+                          style="width: 200px">Generate XLS
+                    </span>
+                    <span ng-disabled="action" ng-click="onGenerateXls('Pdf')" class="btn btn-primary"
+                          style="width: 200px">Generate PDF
+                    </span>
+                </div>
+            </div>
+            <br/>
+        </div>
+    </div>
+
+</div>

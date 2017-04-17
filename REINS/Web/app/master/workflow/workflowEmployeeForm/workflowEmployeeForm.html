@@ -1,0 +1,48 @@
+<div>
+	<div class="modal-header">
+        <button type="button" class="close pull-right" ng-click="$dismiss()" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Add Employee Category</h4>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-6">
+                <h4>Available Employee Category</h4>
+                <input type="text" placeholder="Search" ng-model="vSearch">
+                <div>
+                    <label>
+                        <input type="checkbox" ng-model="select.selectAllEmployee" ng-click="select_all_employee()" />
+                        Select All
+                    </label>
+                    <label>
+                        <input type="checkbox" ng-model="select.unselectAllEmployee" ng-click="unselect_all_employee()" />
+                        Unselect All
+                    </label>
+                </div>
+                <div ng-repeat="employeeCategory in workflow.Employees  | filter:vSearch">
+                    <label>
+                        <input type="checkbox" placeholder="Name" ng-model="employeeCategory.is_active">
+                        {{employeeCategory.EmployeeCategory.employee_category_description}}
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h4>Selected Employee Category</h4>
+                <input type="text" placeholder="Search" ng-model="sSearch">
+                <div ng-show="employeeCategory.is_active" ng-repeat="employeeCategory in workflow.Employees | filter:sSearch">
+                    {{employeeCategory.EmployeeCategory.employee_category_description}}
+                </div>
+            </div>
+            <div class="row gap"></div>
+        </div>
+    </div>
+   <div class="modal-footer">
+        <span class="btn btn-danger" ng-click="$dismiss()">
+            <i class="fa fa-times"></i>
+            Cancel
+        </span>
+        <span class="btn btn-success" ng-disabled="!validate.button" ng-click="onSave(workflow)">
+            <i class="fa fa-floppy-o"></i>
+            Save
+        </span>
+    </div>
+</div>

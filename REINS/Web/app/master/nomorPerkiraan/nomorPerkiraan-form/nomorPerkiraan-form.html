@@ -1,0 +1,44 @@
+<style>
+    .validation-new {
+        margin-top: 0px;
+        color: red;
+        font-size:0.9em;
+    }
+</style>
+<div>
+    <div class="modal-header">
+        <button type="button" class="close pull-right" ng-click="$dismiss()" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Nomor Perkiraan</h4>
+    </div>
+    <div class="modal-body form-horizontal">
+        <div class="form-group">
+            <label for="txtNomorPerkiraan" class="col-sm-4 control-label">Nomor Perkiraan <span class="validation-new">*</span></label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="txtNomorPerkiraan" placeholder="Kode Provinsi" ng-model="nomorPerkiraan.nomor_perkiraan">
+                <div class="validation-new" ng-show="validate.nomor_perkiraan">
+                    Please enter Nomor Perkiraan
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="txtNamaPerkiraan" class="col-sm-4 control-label">Nama Provinsi <span class="validation-new">*</span></label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="txtNamaPerkiraan" placeholder="Nama Provinsi" ng-model="nomorPerkiraan.nama_perkiraan">
+                <div class="validation-new" ng-show="validate.nama_perkiraan">
+                    Please enter Nama Perkiraan
+                </div>
+            </div>
+        </div>
+    </div>
+   <div class="modal-footer">
+        <button class="btn btn-danger" ng-click="$dismiss()">
+            <i class="fa fa-times"></i>
+            Cancel
+        </button>
+        <button class="btn btn-success" ng-disabled="!validate.button" ng-click="onSave(nomorPerkiraan)">
+            <i class="fa fa-floppy-o"></i>
+            Save
+        </button>
+    </div>
+</div>

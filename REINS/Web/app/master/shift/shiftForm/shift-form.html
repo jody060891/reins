@@ -1,0 +1,52 @@
+<style>
+    .validation-new {
+        margin-top: 0px;
+        color: red;
+        font-size:0.9em;
+    }
+</style>
+<div>
+    <div class="modal-header">
+        <button type="button" class="close pull-right" ng-click="$dismiss()" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Shift</h4>
+    </div>
+    <div class="form-horizontal" style="padding: 15px;">
+        <div class="form-group">
+            <label for="txtClassName" class="col-sm-4 control-label">Description <span class="validation-new">*</span></label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="Number1" placeholder="Description" ng-model="shift.description" required>
+                <div class="validation-new" ng-show="validate.description">
+                    Please enter Description
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="txtClassName" class="col-sm-4 control-label">Start <span class="validation-new">*</span></label>
+            <div class="col-sm-4">
+                <div ng-required="true" timepicker-pop fb="true" input-time="shift.start" show-meridian='false'></div>
+                <div class="validation-new" ng-show="validate.start">
+                    Please enter Start time
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="txtClassName" class="col-sm-4 control-label">End <span class="validation-new">*</span></label>
+            <div class="col-sm-4">
+                <div ng-required="true" timepicker-pop fb="true" input-time="shift.end" show-meridian='false'></div>
+                <div class="validation-new" ng-show="validate.end">
+                    Please enter End time
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <span class="btn btn-danger" ng-click="$dismiss()">
+            <i class="fa fa-times"></i>
+            Cancel
+        </span>
+        <span class="btn btn-success" ng-disabled="!validate.button" ng-click="onSave(shift)">
+            <i class="fa fa-floppy-o"></i>
+            Save
+        </span>
+    </div>
+</div>

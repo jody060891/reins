@@ -1,0 +1,134 @@
+<div class="col-md-12" ng-controller="LossRatioYearOcCtrl">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="btn-group pull-right m-t-15" ng-controller="LoginCtrl">
+                <a href="#" ng-click="onLogout()">
+                    <button type="button" class="btn btn-custom waves-effect waves-light"
+                            aria-expanded="false">Logout
+                        <span class="m-l-5"><i class="icon-close"></i></span>
+                    </button>
+                </a>
+
+            </div>
+            <h4 class="page-title">OCCUPATION LOSS RATIO BY YEAR</h4>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-lg-12 col-xl-12">
+            <div class="card-box">
+
+                <div class="row">
+
+                    <div class="col-xs-12 col-lg-12 col-xl-5 nice-scroll">
+                        <div class="row">
+                            <div class="col-md-6"></div>
+                            <div class="col-md-6" style="padding-right: 10px">
+                                <div class="dataTables_filter" style="float: right">
+                                    <label>
+                                        <input ng-keypress="onKeyPress($event)" type="search" class="form-control input-sm" placeholder="Search..." ng-model="keyword.keyword">
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div style="height:420px;width:auto;">
+                                <div class="inbox-widget nicescroll" style="height: 420px;padding-right:10px;">
+                                    <table id="datatable" class="table table-striped table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th>Code</th>
+                                            <th>Occupation</th>
+                                            <!-- <th>Premi</th> -->
+                                            <!--th>Ratio 2016</th-->
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="occ in listOccupation">
+                                            <td><a style="cursor:pointer;" ng-click="onSelectOccupation(occ)">{{occ.Occup}}</a></td>
+                                            <td><a style="cursor: pointer;" ng-click="onSelectOccupation(occ)">{{occ.OccupName}}</a></td>
+                                        </tr>
+                                        </tbody>
+                                        <tfoot>
+                                        <tr ng-show="listOccupation.length > 0">
+                                            <td colspan="8">
+                                                <div pagination boundary-links="true" total-items="SearchQuery.total_data" ng-show="SearchQuery.total_data > 0" page="SearchQuery.page" class="pagination-sm" on-select-page="onPageChanged(page)" max-size="5"></div>
+                                            </td>
+                                        </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="col-xs-12 col-lg-12 col-xl-7" id="result_graph">
+                        <!--<h4>{{occupation.OccupName}} loss ratio</h4>-->
+                        <!--<div linechart-setting id="morris-line-example" style="height: 300px;"-->
+                             <!--line-chart-->
+                             <!--line-data="data"-->
+                             <!--line-xkey="{{xaxis}}"-->
+                             <!--line-ykeys="yaxis"-->
+                             <!--line-labels="['Series A', 'Series B']"-->
+                             <!--line-colors='["#0b62a4", "#7A92A3"]'-->
+                             <!--line-hide-hover="true"-->
+                             <!--line-hover-callback="legendHover">-->
+                        <!--</div>-->
+                        <div id="dxchart" dx-chart="chartOptions" style="height: 400px;"></div>
+
+                        <div class="legend" style="margin-top:10px;">
+                            <p>X axis = Underwriting Year</p>
+                            <p>Y axis = Percent (%)</p>
+                        </div>
+                        <div class="graphic-options">
+                            <br>
+
+                            <div class="row">
+                                <div class="col-xs-12 col-lg-12 col-xl-6">
+                                    <div class="button-list">
+                                        <button ng-disabled="occupation.Occup == null" ng-click="onClickAllYear()" type="button" class="btn btn-secondary waves-effect waves-light">Semua tahun</button>
+                                        <button ng-disabled="occupation.Occup == null" ng-click="onClickLatestFiveYears()" type="button" class="btn btn-secondary waves-effect">5 tahun terakhir</button>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12 col-lg-12 col-xl-6">
+                                    <div class="button-list">
+                                        <select ng-disabled="occupation.Occup == null" ng-model="keyword.awal_tahun" class="btn btn-secondary waves-effect waves-light" ng-options="t as t for t in listTahun">
+                                            <option value="">Awal</option>
+                                        </select>
+                                        &nbsp;&nbsp;s.d.&nbsp;
+                                        <select ng-disabled="occupation.Occup == null" ng-model="keyword.akhir_tahun" class="btn btn-secondary waves-effect waves-light" ng-options="t as t for t in listTahun">
+                                            <option value="">Akhir</option>
+                                        </select>
+                                        <button ng-disabled="occupation.Occup == null" ng-click="onSubmitChangeYearRange()" type="button" class="btn btn-primary waves-effect " id="submit_lr">Submit</button>
+
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <br>
+                                &nbsp;&nbsp;&nbsp;<div class="checkbox checkbox-inline">
+                                <input ng-disabled="occupation.Occup == null" ng-change="onClickTrend()" ng-model="keyword.is_show_trend" type="checkbox" id="inlineCheckbox1" value="true" name="trend">
+                                <label for="inlineCheckbox1"> Tampilkan tren </label>
+                            </div>
+                                <br><br>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+
+            </div>
+        </div><!-- end col-->
+
+
+
+    </div>
+</div>

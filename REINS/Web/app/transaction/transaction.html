@@ -1,0 +1,39 @@
+<div class="col-md-12" ng-controller="ListPinjamanCtrl">
+    <div class="panel panel-primary">
+        <div class="panel-heading clearfix">
+            Transaction > List Pinjaman
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-6 col-xs-4">
+                    <span class="btn btn-primary" ng-click="onCreateNew()">
+                        <i class="fa fa-plus-circle"></i>
+                        Pengajuan Pinjaman
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <br>
+                <div class="col-md-12 col-xs-11" style="overflow-x: auto">
+                    <div tabset>
+                        <div tab heading="Pengajuan on Process" ng-click="onFetchNotApprovedYetWithPagination()">
+                            <div angular-html-bind-template="onProcessTemplate" compile-scope="mainScope"></div>
+                        </div>
+
+                        <div tab heading="Pinjaman Normal" ng-click="onFetchAllWithPagination()">
+                            <div angular-html-bind-template="normalTemplate" compile-scope="mainScope"></div>
+                        </div>
+
+                        <div tab heading="Pinjaman Bermasalah {{(listPinjamanBermasalah.length > 0)?'('+listPinjamanBermasalah.length+')':''}}"  ng-click="onFetchAllWithPaginationBermasalah()">
+                            <div angular-html-bind-template="bermasalahTemplate" compile-scope="mainScope"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            
+        </div>
+    </div>
+
+</div>

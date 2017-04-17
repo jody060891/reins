@@ -1,0 +1,56 @@
+<style>
+    .validation-new {
+        margin-top: 0px;
+        color: red;
+        font-size:0.9em;
+    }
+</style>
+<div>
+    <div class="modal-header">
+        <button type="button" class="close pull-right" ng-click="$dismiss()" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Role</h4>
+    </div>
+    <div class="modal-body form-horizontal">
+        <div class="row form-group">
+            <label for="txtRoleName" class="col-md-4 control-label">Role Name <span class="validation-new">*</span></label>
+            <div class="col-md-8">
+                <input type="text" class="form-control" id="txtRoleName" placeholder="Role Name" ng-model="role.role_name">
+                <div class="validation-new" ng-show="validate.role_name">
+                    Please enter Role Name
+                </div>
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="col-md-offset-4 col-md-8 control-label checkbox-inline">
+                <input type="checkbox" ng-model="role.is_default">
+                Default Role
+            </label>
+        </div>
+        <div>
+            <div><span>Role ACL</span></div>
+            <hr />
+            <div>
+                <input type="text" placeholder="Search ACL items..." class="form-control" ng-model="aclSearch" />
+                <div style="max-height: 300px;overflow-y:scroll;"
+                    ivh-treeview="acls"
+                    ivh-treeview-filter="aclSearch"
+                    ivh-treeview-id-attribute="'acl_id'"
+                    ivh-treeview-label-attribute="'description'"
+                    ivh-treeview-children-attribute="'Children'"
+                    ivh-treeview-selected-attribute="'is_selected'"
+                    ivh-treeview-expand-to-depth="-1">
+                </div>
+            </div>
+        </div>
+    </div>
+   <div class="modal-footer">
+        <span class="btn btn-danger" ng-click="$dismiss()">
+            <i class="fa fa-times"></i>
+            Cancel
+        </span>
+        <span class="btn btn-success" ng-disabled="!validate.button" ng-click="onSave(role)">
+            <i class="fa fa-floppy-o"></i>
+            Save
+        </span>
+    </div>
+</div>

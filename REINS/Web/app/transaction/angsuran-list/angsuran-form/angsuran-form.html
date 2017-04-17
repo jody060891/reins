@@ -1,0 +1,271 @@
+<style>
+    .validation-new {
+        margin-top: 0px;
+        color: red;
+        font-size:0.9em;
+    }
+</style>
+<div>
+    <div class="modal-header">
+        <button type="button" class="close pull-right" ng-click="$dismiss()" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Tambah Data Angsuran</h4>
+    </div>
+    <div class="modal-body form-horizontal">
+        <div class="form-group">
+            <label for="txtNomorRegister" class="col-sm-4 control-label">Nomor Register / No. Perjanjian <span class="validation-new">*</span></label>
+            <div class="col-sm-6 col-xs-8" style="padding-right: 0;">
+                <div class="input-group">
+                    <input id="txtNomorRegister" type="text" class="form-control" ng-model="keyword.keyword"/>
+                    <span class="input-group-addon btn btn-primary" ng-click="onSearchPinjaman()">
+                        <i class="fa fa-search"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div accordion close-others="false">
+            <div accordion-group is-open="true" >
+                <div accordion-heading>
+                    Menurut Perjanjian <i class="pull-right fa fa-chevron-down"></i>
+                </div>
+                <div>
+                    <div class="form-group">
+                        <div class="col-sm-4">Nama Pengusaha </div>
+                        <div class="col-sm-8">
+                <span ng-if="pinjaman.ClusterPengusaha != null">
+                    {{pinjaman.ClusterPengusaha.nomor_register_cluster+" "+pinjaman.ClusterPengusaha.nama_cluster+((pinjaman.ClusterPengusaha.KetuaClusterPengusaha != null)?("/"+pinjaman.ClusterPengusaha.KetuaClusterPengusaha.nama_pengurus):"")}}
+                </span>
+                            <span ng-if="pinjaman.Pengusaha != null">
+                    {{pinjaman.Pengusaha.nomor_register_pengusaha+" "+pinjaman.Pengusaha.nama_pengusaha+"/"+pinjaman.Pengusaha.nama_pengurus}}
+                </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-4">No. Perjanjian </div>
+                        <div class="col-sm-8">
+                            {{pinjaman.nomor_perjanjian}}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-4">Tanggal Perjanjian </div>
+                        <div class="col-sm-8">
+                            {{pinjaman.tanggal_perjanjian | momentDateFilter : "DD/MM/YYYY"}}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-4">Jumlah Pinjaman </div>
+                        <div class="col-sm-8">
+                            Rp {{pinjaman.jumlah_pinjaman | momentMoneyFilter}}.00
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-4">Jenis Pinjaman </div>
+                        <div class="col-sm-8">
+                            {{pinjaman.JenisPinjaman.kode+" "+pinjaman.JenisPinjaman.jenis_pinjaman}}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-4">Kode Pengusaha </div>
+                        <div class="col-sm-8">
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12 col-xs-11" style="overflow-x: auto">
+                            <table class="table table-striped table-bordered data-grid">
+                                <thead>
+                                <tr>
+                                    <th>No Bk Bsr</th>
+                                    <th>No Bk Lwn</th>
+                                    <th>No Bukti</th>
+                                    <th>Tgl Bukti</th>
+                                    <th>Ke</th>
+                                    <th>Jumlah Angsuran</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-hide="pinjaman.TransaksiAngsuran.length > 0">
+                                    <td colspan="6">No data found in the system.
+                                    </td>
+                                </tr>
+                                <tr ng-repeat="transAngsuran in pinjaman.TransaksiAngsuran">
+                                    <td>
+                                        {{transAngsuran.NomorPerkiraan.nomor_perkiraan}}
+                                    </td>
+                                    <td>
+                                        {{transAngsuran.nomor_perkiraan_lawan}}
+                                    </td>
+                                    <td>
+                                        {{transAngsuran.nomor_bukti}}
+                                    </td>
+                                    <td>
+                                        {{transAngsuran.tanggal_bukti | momentDateFilter: "DD-MM-YYYY"}}
+                                    </td>
+                                    <td>
+                                        {{transAngsuran.angsuran_ke}}
+                                    </td>
+                                    <td>
+                                        {{transAngsuran.jumlah_angsuran | momentMoneyFilter}}
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div accordion close-others="false">
+            <div accordion-group is-open="true" >
+                <div accordion-heading>
+                    Mutasi Penyaluran <i class="pull-right fa fa-chevron-down"></i>
+                </div>
+                <div>
+                    <div class="form-group">
+                        <label for="txtNomorPerkiraan" class="col-sm-3 control-label">No. Perkiraan<span class="validation-new">*</span></label>
+                        <div class="col-sm-9">
+                            <select ng-change="FetchNomorPerkiraan()" ng-options="i.nomor_perkiraan_id as i.nomor_perkiraan+' '+i.nama_perkiraan for i in listNomorPerkiraan"
+                                    class="form-control" id="txtNomorPerkiraan" ng-model="angsuran.nomor_perkiraan_id">
+                                <option value="">-- Select Nomor Perkiraan --</option>
+                            </select>
+                            <div class="validation-new" ng-show="validate.nomor_perkiraan_id">
+                                Please select Nomor Perkiraan
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="txtNomorPerkiraanLawan" class="col-sm-3 control-label">Nomor Perkiraan Lawan <span class="validation-new">*</span></label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="txtNomorPerkiraanLawan" ng-model="angsuran.nomor_perkiraan_lawan">
+                            <div class="validation-new" ng-show="validate.nomor_perkiraan_lawan">
+                                Please enter Nomor Perkiraan Lawan.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dateTanggalNotaBank" class="col-sm-3 control-label">Tanggal Nota Bank <span class="validation-new">*</span></label>
+                        <div class="col-sm-3">
+                            <p class="input-group">
+                                <input type="text" id="dateTanggalNotaBank" ng-blur="onChangeDateOfOccurance(angsuran.tanggal_bukti)" name="dateTanggalNotaBank"
+                                       class="form-control" datepicker-popup="dd-MM-yyyy" ng-model="angsuran.tanggal_angsuran" close-text="Close" show-weeks="false" show-button-bar="false" date-fix />
+
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default"
+                                            ng-click="datePickerOpen('dateTanggalNotaBank')">
+                                        <i class="fa fa-calendar"></i>
+                                    </button>
+                                </span>
+                            </p>
+                            <div class="validation-new" ng-show="validate.tanggal_angsuran">
+                                Please enter Tanggal Nota Bank.
+                            </div>
+                        </div>
+                        <label for="dateTanggalMutasi" class="col-sm-3 control-label">Tanggal Mutasi <span class="validation-new">*</span></label>
+                        <div class="col-sm-3">
+                            <p class="input-group">
+                                <input type="text" id="dateTanggalMutasi" ng-blur="onChangeDateOfOccurance(angsuran.tanggal_mutasi)" name="dateTanggalMutasi"
+                                       class="form-control" datepicker-popup="dd-MM-yyyy" ng-model="angsuran.tanggal_mutasi" close-text="Close" show-weeks="false" show-button-bar="false" date-fix />
+
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default"
+                                            ng-click="datePickerOpen('dateTanggalMutasi')">
+                                        <i class="fa fa-calendar"></i>
+                                    </button>
+                                </span>
+                            </p>
+                            <div class="validation-new" ng-show="validate.tanggal_mutasi">
+                                Please enter Tanggal Penyaluran.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="txtNomorBukti" class="col-sm-3 control-label">Nomor Bukti <span class="validation-new">*</span></label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="txtNomorBukti" ng-model="angsuran.nomor_bukti">
+                            <div class="validation-new" ng-show="validate.nomor_bukti">
+                                Please enter Nomor Bukti.
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <label for="txtPenyaluranKe" class="col-sm-3 control-label">Angsuran Ke <span class="validation-new">*</span></label>
+                        <div class="col-sm-2">
+                            <input type="text" number-only-input="" class="form-control" id="txtPenyaluranKe" ng-model="angsuran.angsuran_ke">
+                            <div class="validation-new" ng-show="validate.angsuran_ke">
+                                Please enter Angsuran Ke.
+                            </div>
+                        </div>
+                        <div class="col-sm-7">(Tahap angsuran pinjaman dari pihak PPKK kepada ASEI)</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="txtAngsuranPokok" class="col-sm-3 control-label">Angsuran Pokok <span class="validation-new">*</span></label>
+                        <div class="col-sm-3">
+                            <input ng-change="onCalculateJumlahAngsuran()" type="text" placeholder="Rp. " decimal-only-input="" class="form-control" id="txtAngsuranPokok" ng-model="angsuran.angsuran_pokok">
+                            <div class="validation-new" ng-show="validate.angsuran_pokok">
+                                Please enter Angsuran Pokok.
+                            </div>
+                        </div>
+                        <label for="txtDenda" class="col-sm-3 control-label">Denda <span class="validation-new">*</span></label>
+                        <div class="col-sm-3">
+                            <input ng-change="onCalculateJumlahAngsuran()" type="text" placeholder="Rp. " decimal-only-input="" class="form-control" id="txtDenda" ng-model="angsuran.denda">
+                            <div class="validation-new" ng-show="validate.denda">
+                                Please enter Angsuran Pokok.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="txtAngsuranBunga" class="col-sm-3 control-label">Angsuran Bunga <span class="validation-new">*</span></label>
+                        <div class="col-sm-3">
+                            <input ng-change="onCalculateJumlahAngsuran()" type="text" placeholder="Rp. " decimal-only-input="" class="form-control" id="txtAngsuranBunga" ng-model="angsuran.angsuran_bunga">
+                            <div class="validation-new" ng-show="validate.angsuran_bunga">
+                                Please enter Angsuran Bunga.
+                            </div>
+                        </div>
+                        <label for="txtDenda" class="col-sm-3 control-label">Jumlah Angsuran <span class="validation-new">*</span></label>
+                        <div class="col-sm-3">
+                            Rp. {{angsuran.jumlah_angsuran | momentMoneyFilter}}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="txtKeterangan" class="col-sm-3 control-label">Keterangan <span class="validation-new">*</span></label>
+                        <div class="col-sm-9">
+                            <textarea class="form-control" id="txtKeterangan" ng-model="angsuran.keterangan" rows="3"></textarea>
+                            <div class="validation-new" ng-show="validate.keterangan">
+                                Please enter Keterangan
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </div>
+   <div class="modal-footer">
+        <button class="btn btn-danger" ng-click="$dismiss()">
+            <i class="fa fa-times"></i>
+            Cancel
+        </button>
+        <button class="btn btn-success" ng-disabled="!validate.button" ng-click="onSave(penyaluranDana)">
+            <i class="fa fa-floppy-o"></i>
+            Submit
+        </button>
+    </div>
+</div>

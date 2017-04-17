@@ -1,0 +1,74 @@
+<div class="col-md-12" ng-controller="PatientClassListCtrl">
+    <div class="row">
+                <div class="col-sm-3 pull-left" style="padding-right:0;">
+                    <div class="input-group">
+                        <input ng-keypress="onKeyPress($event)" type="text" class="form-control" ng-model="keyword"/>
+                        <span class="input-group-addon btn btn-primary" ng-click="onSearch()">
+                            <i class="fa fa-search"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-sm-5 pull-left" style="padding-left:5px;">
+                    <span class="btn btn-primary" ng-click="onCreateNew()">
+                        <i class="fa fa-plus-circle"></i>
+                        Add
+                    </span>
+                </div>
+            </div>
+    <div class="row">
+                <br />
+                <div class="col-md-12">
+                    <table class="table table-striped table-bordered data-grid">
+                        <thead>
+                            <tr>
+                                <th class="action-button"></th>
+                                <th ng-click="onSort('patient_class_code')" width="15%">
+                                    Patient Class Code
+                                    <img src="/Web/img/sort.png">
+                                </th>
+                                <th ng-click="onSort('patient_class_name')" width="40%">
+                                    Patient Class
+                                    <img src="/Web/img/sort.png">
+                                </th>
+                                <th ng-click="onSort('short_description')" width="30%">
+                                    Short Description
+                                    <img src="/Web/img/sort.png">
+                                </th>
+                                <th ng-click="onSort('last_updated_date')" width="15%">
+                                    Last Modified
+                                    <img src="/Web/img/sort.png">
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-show="patientClasses.length < 1">
+                                <td colspan="5">
+                                    No results found
+                                </td>
+                            </tr>
+                            <tr ng-repeat="patientClass in patientClasses">
+                                <td class="action-button">
+                                    <span ng-click="onRowEdit(patientClass)"  class="btn btn-primary btn-sm">
+                                        Edit
+                                    </span>
+                                    <span ng-click="onRowDelete(patientClass)"  class="btn btn-danger btn-sm">
+                                        Delete
+                                    </span>
+                                </td>
+                                <td>{{patientClass.patient_class_code}}</td>
+                                <td>{{patientClass.patient_class_name}}</td>
+                                <td>{{patientClass.short_description}}</td>
+                                <td>{{patientClass.last_updated_date | momentDateFilter : "DD/MM/YYYY HH:mm:ss"}}</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="5">
+                                    <div pagination max-size="10" boundary-links="true" total-items="SearchQuery.total_data"  ng-show="SearchQuery.total_data > 0" page="SearchQuery.page" class="pagination-sm" on-select-page="onPageChanged(page)"></div>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+</div>

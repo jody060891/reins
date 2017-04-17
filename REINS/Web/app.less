@@ -1,0 +1,464 @@
+@import "bower_components/bootstrap/less/bootstrap.less";
+//@import "bower_components/bootstrap/less/theme.less";
+@import "bower_components/angular-ivh-treeview/dist/ivh-treeview.css";
+@import "bower_components/angular-ivh-treeview/dist/ivh-treeview-theme-basic.css";
+@import "bower_components/font-awesome/less/font-awesome.less";
+@import "components/css/angular-wizard-custom.less";
+@import "components/css/bs-callout.less";
+@import "components/css/modal-style.css";
+@import "components/css/form-builder.css";
+@import "bower_components/angular-bootstrap-colorpicker/less/colorpicker.less";
+@colorpicker-path: '../Web';
+
+@fa-font-path: "bower_components/font-awesome/fonts";
+
+/* Component LESS */
+@import "app/master/location/location-list.less";
+@import "app/master/location/location-form/location-form.less";
+@import "directive/toastMessage/toastMessage.less";
+@import "directive/toastMessage/toastMessage.less";
+@import "app/master/routingGroup/routingGroup.less";
+@import "app/master/routingGroup/routingGroupForm/routingGroupForm.less";
+@import "app/master/routingGroup/locationForm/AddLocationForm.less";
+@import "app/master/routingGroup/manageUserForm/ManageUserForm.less";
+@import "app/master/designation/designation-list.less";
+@import "app/master/designation/designation-form/designation-form.less";
+@import "app/master/department/department-list.less";
+@import "app/master/department/department-form/department-form.less";
+@import "app/master/employeecategory/employeecategory-list.less";
+@import "app/master/employeeCategory/employeeCategory-form/employeeCategory-form.less";
+@import "app/master/institution/institution-list.less";
+@import "app/master/institution/institution-form/institution-form.less";
+@import "app/master/role/role-list.less";
+@import "app/master/role/form/role-form.less";
+@import "app/master/workflow/workflow.less";
+@import "app/master/workflow/workflowForm/workflowForm.less";
+@import "app/master/acl/acl-list.less";
+@import "app/master/user/user-list.less";
+@import "app/master/user/user-form/user-form.less";
+@import "app/master/user/search-user/search-user.less";
+@import "app/master/user/add-user-role/add-user-role.less";
+@import "app/master/committeeGroup/committeeGroup.less";
+@import "app/master/committeeGroup/committeeGroupForm/committeeGroupForm.less";
+@import "app/master/incidentType/incidentType-list.less";
+@import "app/master/incidentType/incidentType-form/incidentType-form.less";
+@import "app/master/committeeGroup/committeeUserForm/committeeUserForm.less";
+@import "directive/loadingScreen/loadingScreen.less";
+@import "app/incident/newIncident/newIncident.less";
+@import "app/incident/incidentList/incidentList.less";
+//@import "app/interface/sap-hr-interface/sap-hr-interface.less";
+@import "app/incident-details/security-detail/security-detail.less";
+@import "app/master/discipline/discipline-list.less";
+@import "app/master/discipline/discipline-form/discipline-form.less";
+@import "app/master/patientClass/patientClass-list.less";
+@import "app/master/patientClass/patientClass-form/patientClass-form.less";
+@import "app/master/incidentType/incidentSubType-form/incidentSubType-form.less";
+@import "app/master/applicationSetting/applicationSetting-form.less";
+@import "app/incident/track/incident-track-list.less";
+@import "app/incident/form/incident-form.less";
+@import "app/incident-details/anesthesia/anesthesia-detail.less";
+@import "app/master/routingGroup/routing-group-user/routing-group-user.less";
+@import "app/master/routingGroup/add-routing-group-user/add-routing-group-user.less";
+@import "app/master/routingGroup/add-routing-group-location/add-routing-group-location.less";
+@import "app/master/designationGroup/designationGroup-list.less";
+@import "app/master/workflow/workflowEmployeeForm/workflowEmployeeForm.less";
+@import "app/master/designationGroup/designationGroup-form/designationGroup-form.less";
+@import "app/incident/form/incident-comment/incident-comment.less";
+@import "app/master/gcs/gcs-list.less";
+@import "app/master/gcs/gcs-form/gcs-form.less";
+@import "app/master/gcs/gcsDetail-form/gcsDetail-form.less";
+@import "app/incident/form/reporter-confirmation/incident-reporter-confirmation.less";
+@import "app/master/rootCauseCategory/rootCauseCategory.less";
+@import "app/master/rootCauseCategory/rootCauseCategoryForm/rootCauseCategoryForm.less";
+@import "app/master/rootCause/rootCause.less";
+@import "app/master/rootCause/rootCauseForm/rootCauseForm.less";
+@import "app/incident/form/incident-re-route/incident-re-route.less";
+@import "app/incident/form/incident-close/incident-close.less";
+@import "app/incident-details/blood-product-transfusion/blood-product-transfusion.less";
+@import "app/incident-details/clinical-assessment-treatment/clinical-assessment-treatment.less";
+@import "app/incident-details/behaviour/behaviour.less";
+@import "app/incident/form/incident-re-open/incident-re-open.less";
+@import "app/incident/track/incident-status-movement/incident-status-movement.less";
+@import "app/incident/track/incident-mass-close/incident-mass-close.less";
+@import "app/incident/track/incident-mass-re-route/incident-mass-re-route.less";
+@import "app/incident/track/incident-mass-re-open/incident-mass-re-open.less";
+@import "app/incident/track/incident-follow-up/incident-follow-up.less";
+@import "app/incident/form/incident-comment/incident-comment-choose-user/incident-comment-choose-user.less";
+@import "app/incident/merge/incident-merge-list.less";
+@import "app/incident/merge/form/incident-merge-form.less";
+@import "app/incident/merge/form/incident-merge-add-incident-main/incident-merge-add-incident-main.less";
+@import "app/incident/merge/form/incident-merge-add-incident-detail/incident-merge-add-incident-detail.less";
+@import "app/incident/forward/incident-forward/incident-forward-list.less";
+@import "app/incident/forward/incident-forward-guest/incident-forward-guest-list.less";
+@import "app/incident/forward/incident-forward/form/incident-forward-form.less";
+@import "app/incident/forward/incident-forward/form/choose-guest/incident-forward-form-choose-guest.less";
+@import "app/incident/forward/incident-forward-guest/incident-view/incident-forward-guest-view.less";
+@import "app/setting/application-setting/application-setting.less";
+@import "app/incident-details/device-equipment/device-equipment.less";
+@import "app/incident-details/environment-safety/environment-safety.less";
+@import "app/incident-details/falls/falls.less";
+@import "app/incident-details/laboratory-pathology/laboratory-pathology.less";
+@import "app/incident-details/documentation/documentation.less";
+@import "app/incident-details/medication-events/medication-events.less";
+@import "app/incident-details/peripheral-venous-complications/peripheral-venous-complications.less";
+@import "app/incident-details/pressure-injury/pressure-injury.less";
+@import "app/incident-details/others/others.less";
+@import "app/master/routingGroup/add-routing-group-department/add-routing-group-department.less";
+@import "app/incident/form/search-person-involved-staff/search-person-involved-staff.less";
+@import "app/incident/form/search-person-involved-patient/search-person-involved-patient.less";
+@import "app/master/emailTemplate/emailTemplate.less";
+@import "app/master/emailTemplate/emailTemplateForm/emailTemplateForm.less";
+@import "app/master/patient-location/patient-location-list.less";
+@import "app/master/patient-location/patient-form/patient-location-form.less";
+@import "app/incident/form/add-cc-sap-hr/add-cc-sap-hr.less";
+@import "app/incident/form/add-cc-user/add-cc-user.less";
+@import "app/master/workflow/manage-employee-designation/manage-employee-designation.less";
+@import "app/incident/track/incident-view-comment/incident-view-comment.less";
+@import "app/incident/form/incident-additional-info/incident-additional-info.less";
+@import "app/report/all-incident-report/sac-score-report/sac-score-report";
+@import "app/report/falls/fall-location-report.less";
+@import "app/report/environment-and-safety/ens-sharp-incidence-report/ens-sharp-incidence-report.less";
+@import "app/report/environment-and-safety/ens-sharp-injury-by-department-report/ens-sharp-injury-by-department-report.less";
+@import "app/report/medication-events/me-safety-committee-by-location-report/me-safety-committee-by-location-report.less";
+@import "app/report/medication-events/me-safety-committee-by-staff-report/me-safety-committee-by-staff-report.less";
+@import "app/report/medication-events/me-type-of-medication-error-report/me-type-of-medication-error-report.less";
+@import "app/report/environment-and-safety/ens-workplace-aggression-report/ens-workplace-aggression-report.less";
+@import "app/report/falls/exact-location/fall-exact-location.less";
+@import "app/report/falls/level-injury/fall-level-injury.less";
+@import "app/report/environment-and-safety/ens-workplace-aggression-n7-report/ens-workplace-aggression-n7-report.less";
+@import "app/report/environment-and-safety/ens-sharp-injury-mot-dsot-report/ens-sharp-injury-msot-dsot-report.less";
+@import "app/report/environment-and-safety/ens-police-report-lodged-report/ens-police-report-lodged-report.less";
+@import "app/report/environment-and-safety/ens-sharp-injury-hwc/ens-sharp-injury-hwc.less";
+@import "app/report/falls/fall-by-time/fall-by-time.less";
+@import "app/report/falls/shift/fall-by-shift.less";
+@import "app/report/falls/fall-age-group/fall-age-group.less";
+@import "app/report/falls/fall-by-discipline/fall-by-discipline.less";
+@import "app/report/falls/department-workload/fall-department-workload.less";
+@import "app/report/falls/gender/fall-by-gender.less";
+@import "app/report/falls/activity/fall-by-activity.less";
+@import "app/report/falls/ad-hoc/fall-ad-hoc.less";
+@import "app/master/patientDays/patient-days.less";
+@import "app/master/patientDays/patientDaysForm/patient-days-form.less";
+@import "app/report/medication-events/me-no-of-allied-health/me-no-of-allied-health.less";
+@import "app/report/medication-events/me-no-of-medication-by-designation-discipline/me-no-of-medication-by-designation-discipline.less";
+@import "app/report/medication-events/me-no-of-medication-by-staff-designation/me-no-of-medication-by-staff-designation.less";
+@import "app/report/medication-events/me-no-of-medication-by-designation-and-sequential-stage/me-no-of-medication-by-designation-and-sequential-stage.less";
+@import "app/report/falls/inpatientInjury/fall-inpatient-injury.less";
+@import "app/report/pressure-injury/psi-presure-injury-report/psi-pressure-injury-report.less";
+@import "app/report/medication-events/me-sequential-stage/me-sequential-stage.less";
+@import "app/report/medication-events/me-type-of-medication/me-type-of-medication.less";
+@import "app/master/shift/shift.less";
+@import "app/master/shift/shiftForm/shift-form.less";
+@import "app/master/committeeGroup/committeeLocationForm/committeeLocationForm.less";
+@import "app/master/committeeGroup/committeeDepartmentForm/committeeDepartmentForm.less";
+@import "app/master/committeeGroup/committeeDisciplineForm/committeeDisciplineForm.less";
+@import "app/report/all-incident-report/rca-history/rca-history-report.less";
+@import "app/rawData/raw-data.less";
+@import "app/report/uam/uam-user-listing-report/uam-user-listing-report.less";
+@import "app/report/uam/uam-access-matrix-report/uam-access-matrix-report.less";
+@import "directive/report-filter/report-filter.less";
+@import "internal/session-reminder/session-reminder.less";
+@import "app/unauthorized/unauthorized.less";
+@import "app/modal/committeeGroupModal/committee-group-modal.less";
+@import "app/modal/routingGroupModal/routing-group-modal.less";
+@import "app/landing-page/landing-page";
+@import "app/incident/incident-not-found/incident-not-found.html.less";
+@import "app/setting/release-incident-lock/release-incident-lock.html.less";
+@import "app/master/committeeGroup/committeePersonCategoryForm/committeePersonCategoryForm.less";
+@import "app/incident/form/step/general-information/general-information";
+@import "app/incident/form/incident-form-main";
+@import "app/incident/form/step/person-involved/person-involved.less";
+@import "app/incident/form/step/incident-details/incident-details.less";
+@import "app/incident/form/step/description/description.less";
+@import "app/incident/form/step/comments/comments.less";
+@import "app/incident/form/step/sac/sac.less";
+@import "app/incident/form/step/rca/rca.less";
+@import "app/incident/form/add-dynamic-routing-user/add-dynamic-routing-user.less";
+@import "app/modal/locationModal/location-modal.less";
+@import "app/modal/departmentModal/department-modal.less";
+@import "app/incident/form/incident-print/incident-print.less";
+@import "app/master/committeeGroup/committee-emp-category-form/committee-emp-category-form.less";
+@import "app/incident/merge/form/incident-unmerge/incident-unmerge.less";
+@import "app/incident/form/tab/incident-open-tab.less";
+@import "app/setting/logging-list/logging-list.less";
+@import "app/incident/form/incident-comment/view-all-comment/view-all-comment.less";
+@import "app/dashboard/dashboard.less";
+@import "app/dashboard/monthly-incident-dashboard/monthly-incident-dashboard.less";
+@import "app/dashboard/incident-rate-dashboard/incident-rate-dashboard.less";
+@import "app/dashboard/outstanding-case-dashboard/outstanding-case-dashboard.less";
+@import "app/dashboard/follow-up-dashboard/follow-up-dashboard.less";
+@import "app/dashboard/sharp-injury-dashboard/sharp-injury-dashboard.less";
+@import "app/dashboard/yearly-incident-rate-dashboard/yearly-incident-rate-dashboard.less";
+@import "app/master/medication-name/form/medication-name.less";
+@import "app/master/medication-name/medication-name-list.less";
+/* Add Component LESS Above */
+
+/* Required for Angular UI Bootstrap */
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+}
+
+
+.content-border {
+  border-right-style: dashed #e0e0dc;
+  padding-bottom: 10px;
+}
+
+.content-border img {
+  max-width:100%;
+  max-height:100%;
+}
+
+.login {
+  border-left:1px  dashed rgb(228, 229, 231);
+}
+
+.login h2 {
+  color:#3992d0;
+  font-size:18px;
+}
+
+.disclaimer {
+  border: 1px solid #ddd;
+  padding:5px;
+  border-radius: 5px;
+}
+.disclaimer a {
+  text-decoration:underline;
+  alignment-adjust:central;
+}
+
+.disclaimer p {
+  text-align:justify;
+  font-size: 90%;
+}
+
+.disclaimer h5 {
+  text-align:center;
+  text-decoration:underline;
+  color:#0079c2;
+  font-weight:bold;
+  font-family:Verdana, Geneva, sans-serif;
+}
+
+.modal-backdrop {
+  bottom: 0;
+}
+
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu > .dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -6px;
+    margin-left: -1px;
+    -webkit-border-radius: 0 6px 6px 6px;
+    -moz-border-radius: 0 6px 6px;
+    border-radius: 0 6px 6px 6px;
+}
+
+.dropdown-submenu:hover > .dropdown-menu {
+    display: block;
+}
+
+.dropdown-submenu > a:after {
+    display: block;
+    content: " ";
+    float: right;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 5px 0 5px 5px;
+    border-left-color: #ccc;
+    margin-top: 5px;
+    margin-right: -10px;
+}
+
+.dropdown-submenu:hover > a:after {
+    border-left-color: #fff;
+}
+
+.dropdown-submenu.pull-left {
+    float: none;
+}
+
+.dropdown-submenu.pull-left > .dropdown-menu {
+    left: -100%;
+    margin-left: 10px;
+    -webkit-border-radius: 6px 0 6px 6px;
+    -moz-border-radius: 6px 0 6px 6px;
+    border-radius: 6px 0 6px 6px;
+}
+
+.container {
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    width:100%;
+}
+
+body {
+    background-image: url(img/tages.png);
+    background-repeat: repeat;
+}
+
+.footers
+{
+  text-align: center;
+  font-size: 90%;
+  padding: 5px;
+  background-color: rgb(228, 229, 231);
+  box-shadow: 0 0 8px rgba(119,119,119,.5);
+}
+
+.ehor-content {
+    box-shadow: 0 0 8px rgba(119,119,119,.5);
+    background-color: #fff;
+}
+
+.icon-blue {
+    color: #478fca !important;
+}
+
+.icon-red {
+    color: #dd5a43 !important;
+}
+
+
+.icon-white {
+    color: #ffffff !important;
+}
+
+
+table thead th.action-button,
+table tbody td.action-button {
+    width: 1px;
+    white-space: nowrap;
+    border-right: 1px #dddddd solid;
+}
+
+table.data-grid thead tr {
+    color: #707070;
+    background-image: -webkit-gradient(linear,0 0,0 100%,from(#f8f8f8),to(#ececec));
+    background-image: -webkit-linear-gradient(top,#f8f8f8,#ececec);
+    background-image: -o-linear-gradient(top,#f8f8f8,#ececec);
+    background-image: linear-gradient(to bottom,#f8f8f8,#ececec);
+    background-repeat: repeat-x;
+}
+
+table.data-grid .center {
+    text-align: center;
+}
+
+.eHOR_header
+{
+  /*height:108px;
+  border-top:2px solid #7ac043;
+  box-shadow: 0 0 8px rgba(119,119,119,.5);
+     background-image:url(../images/header-bg.png);
+     max-width: 100%;*/
+
+
+  /*height:55px;*/
+
+  border-top:2px solid #7ac043;
+  box-shadow: 0 0 8px rgba(119,119,119,.5);
+  background-image:url(/Web/img/header-bg.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+
+}
+
+#logo-hits img{
+  padding-top: 10px;
+  height:65px;
+}
+
+.ktphalign p
+{
+  margin-top:45px;
+  margin-left:-60px;
+
+}
+.ktphalign1 img
+{
+  margin-top:50px;
+}
+
+.incident-confirmation{
+  text-align: center;
+  font-weight: bold;
+  font-size: 110%;
+}
+
+.radio-incident-sub-type{
+  padding-left: 20px;
+  font-size: 90%;
+  font-style: italic;
+}
+
+.sac-bg-level-1{
+  background-color: #FF6B90;
+}
+
+.sac-bg-level-2{
+  background-color: #FF8533;
+}
+
+.sac-bg-level-3{
+  background-color: #FFEB33;
+}
+
+.sac-bg-level-4{
+  background-color: #00994D;
+}
+
+.merge-header-incident {
+  border-bottom: 1px #ececec solid;
+}
+
+.fa {
+  cursor: pointer;
+}
+
+.pointer {
+  cursor: pointer;
+}
+.pagination{
+  display: block;
+  margin: 0px 0px;
+}
+
+.tooltip-inner {
+  white-space:pre-wrap;
+}
+
+
+.text-area-ie8{
+  height: 300px;
+  min-width: 100%;
+  max-width: 100%;
+}
+
+/* Personal preference for BS modal.  The LESS below makes the backdrop white and
+   causes the modal to fade in rather than slide in. */
+//@modal-backdrop-bg: white;
+//.modal {
+//	&.fade {
+//		.transition(opacity .3s);
+//	}
+//	&.fade .modal-dialog {
+//		.translate(0,0);
+//	}
+//}

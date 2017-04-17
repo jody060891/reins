@@ -1,0 +1,86 @@
+<head>
+    <style type="text/css">
+        .auto-style4 {
+            width: 23%;
+        }
+        a {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<div class="row" style="margin-top:10px !important;">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-sm-3 col-xs-8" style="padding-right: 0;">
+                <div class="input-group">
+                    <input ng-keypress="onKeyPressOnProcessTab($event)" placeholder="Nomor Register" type="text" class="form-control" ng-model="keyword.keywordOnProcessTab"/>
+                    <span class="input-group-addon btn btn-primary" ng-click="onSearchOnProcessTab()">
+                            <i class="fa fa-search"></i>
+                        </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <br>
+        <table class="table table-striped table-bordered data-grid">
+            <thead>
+            <tr>
+                <th class="action-button pointer track-table-th-bg"></th>
+                <th ng-click="onSortOnProcessTab('nomor_register')" class="pointer track-table-th-bg">
+                    Nomor Register
+                    <img src="/Web/img/sort.png">
+                </th>
+                <th ng-click="onSortOnProcessTab('nomor_perjanjian')" class="pointer track-table-th-bg">
+                    Nomor Perjanjian
+                    <img src="/Web/img/sort.png">
+                </th>
+                <th ng-click="onSortOnProcessTab('nomor_berita_acara')" class="pointer track-table-th-bg">
+                    Nomor Berita Acara
+                    <img src="/Web/img/sort.png">
+                </th>
+                <th ng-click="onSortOnProcessTab('status_usulan')"
+                    class="pointer track-table-th-bg">
+                    Status
+                    <img src="/Web/img/sort.png">
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-show="listPinjamanOnProcess.length < 1">
+                <td colspan="5">
+                    No results found
+                </td>
+            </tr>
+            <tr ng-repeat="pinjamanOnProcess in listPinjamanOnProcess">
+                <td style="word-wrap:break-word;" class="action-button">
+                    <button class="btn btn-primary btn-sm" ng-click="onRowEditOnProcess(pinjamanOnProcess)">Edit</button>
+                </td>
+                <td style="word-wrap:break-word;">
+                    {{pinjamanOnProcess.nomor_register}}
+                </td>
+                <td style="word-wrap:break-word;">
+                    {{pinjamanOnProcess.nomor_perjanjian}}
+                </td>
+                <td style="word-wrap:break-word;">
+                    {{pinjamanOnProcess.nomor_berita_acara}}
+                </td>
+
+                <td style="word-wrap:break-word;">
+                    {{pinjamanOnProcess.status_usulan}}
+                    <a ng-click="onPenyaluranDana(pinjamanOnProcess)" style="cursor:pointer;" ng-if="pinjamanOnProcess.status_usulan == 'DANA'">(Penyaluran Dana)</a>
+                </td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="5">
+                    <div pagination boundary-links="true" max-size="10" total-items="SearchQueryOnProcessTab.total_data"
+                         ng-show="SearchQueryOnProcessTab.total_data > 0" page="SearchQueryOnProcessTab.page" class="pagination-sm"
+                         on-select-page="onPageChangedOnProcessTab(page)"></div>
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>

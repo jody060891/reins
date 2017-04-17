@@ -1,0 +1,159 @@
+<div class="col-md-12 no-side-padding">
+    <div class="panel panel-primary">
+        <div class="panel-heading clearfix">
+            Setup > Routing and Committee Group        
+        </div>
+        <div class="panel-body">
+            <div tabset>
+                <div tab heading="Routing Group" ng-controller="RoutinggroupCtrl">
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-3 pull-left" style="padding-right: 0;">
+                            <div class="input-group">
+                                <input ng-keypress="onKeyPress($event)" type="text" class="form-control" ng-model="keyword" />
+                                <span class="input-group-addon btn btn-primary" ng-click="onSearch()">
+                                    <i class="fa fa-search icon-white"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-sm-9 pull-left" style="padding-left: 5px;">
+                            <span class="btn btn-primary" ng-click="onCreateNew()">
+                                <i class="fa fa-plus-circle"></i>
+                                Add
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <br />
+                        <div class="col-md-12">
+                            <table class="table table-striped table-bordered data-grid">
+                                <thead>
+                                    <tr>
+                                        <th class="action-button"></th>
+                                        <th ng-click="onSort('location_name')">Name
+                                            <span>
+                                                <i class="fa fa-arrow-up"></i>
+                                            </span>
+                                        </th>
+                                        <th>Institution</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-show="routingGroups.length <= 0">
+                                        <td colspan="3">No results found
+                                        </td>
+                                    </tr>
+                                    <tr ng-repeat="routingGroup in routingGroups | filter:{ name: '!REPORTER'}">
+                                        <td class="action-button">
+                                            <span ng-click="onRowEdit(routingGroup)" class="btn btn-primary btn-sm">Edit
+                                                <!--<i class="fa fa-pencil-square-o icon-blue" tooltip="Edit Data"></i>-->
+                                            </span>
+                                            <span ng-click="onRowDelete(routingGroup)" class="btn btn-danger btn-sm">
+                                                <!--<i class="fa fa-times icon-red" tooltip="Delete Data"></i>-->
+                                                Delete
+                                            </span>
+                                            <span class="btn btn-primary btn-sm" ng-click="openUserForm(routingGroup)">
+                                                <i class="fa fa-users" tooltip="Assign User"></i>
+                                                Assign User
+                                            </span>
+                                        </td>
+                                        <td>{{routingGroup.name}}</td>
+                                        <td>{{routingGroup.Institution.institution_name}}</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="3">
+                                            <div pagination max-size="10" boundary-links="true" total-items="SearchQuery.total_data" ng-show="SearchQuery.total_data > 0" page="SearchQuery.page" class="pagination-sm" on-select-page="onPageChanged(page)"></div>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div tab heading="Committee Group" ng-controller="CommitteegroupCtrl">
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-3 pull-left" style="padding-right: 0;">
+                            <div class="input-group">
+                                <input ng-keypress="onKeyPress($event)" type="text" class="form-control" ng-model="keywordCommittee" />
+                                <span class="input-group-addon btn btn-primary" ng-click="onSearchCommittee()">
+                                    <i class="fa fa-search icon-white"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-sm-9 pull-left" style="padding-left: 5px;">
+                            <span class="btn btn-primary" ng-click="onCreateNew()">
+                                <i class="fa fa-plus-circle"></i>
+                                Add
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <br />
+                        <div class="col-md-12">
+                            <table class="table table-striped table-bordered data-grid">
+                                <thead>
+                                    <tr>
+                                        <th class="action-button"></th>
+                                        <th ng-click="onSort('location_name')">Name
+                                            <span>
+                                                <i class="fa fa-arrow-up"></i>
+                                            </span>
+                                        </th>
+                                        <th>Incident Type</th>
+                                        <th>Incident Sub Types</th>
+                                        <th>Locations</th>
+                                        <th>Departments</th>
+                                        <th>Disciplines</th>
+                                        <th>Category of Person</th>
+                                        <th>Emp. Category</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-show="committeeGroups.length <= 0">
+                                        <td colspan="8">No results found
+                                        </td>
+                                    </tr>
+                                    <tr ng-repeat="committeeGroup in committeeGroups">
+                                        <td class="action-button">
+                                            <span class="btn btn-primary btn-sm" ng-click="onRowEdit(committeeGroup)">
+                                                <!--<i class="fa fa-pencil-square-o icon-blue" tooltip="Edit Data"></i>-->
+                                                Edit
+                                            </span>
+                                            <span class="btn btn-danger btn-sm" ng-click="onRowDelete(committeeGroup)">
+                                                <!--<i class="fa fa-times icon-red" tooltip="Delete Data"></i>-->
+                                                Delete
+                                            </span>
+                                            <span class="btn btn-primary btn-sm" ng-click="openUserForm(committeeGroup)">
+                                                <i class="fa fa-users" tooltip="Assign User"></i>
+                                                Assign User
+                                            </span>
+                                        </td>
+                                        <td>{{committeeGroup.name}}</td>
+                                        <td>{{committeeGroup.IncidentType.incident_type_name}}</td>
+                                        <td><span ng-repeat="subType in committeeGroup.IncidentSubTypes">[{{subType.IncidentSubType.incident_sub_type_name}}]</span></td>
+                                        <td><span ng-repeat="location in committeeGroup.Locations">[{{location.Location.location_name}}]</span></td>
+                                        <td><span ng-repeat="department in committeeGroup.Departments">[{{department.Department.department_short_description}}]</span></td>
+                                        <td><span ng-repeat="discipline in committeeGroup.Disciplines">[{{discipline.Discipline.discipline_name}}]</span></td>
+                                        <td><span ng-repeat="personCategory in committeeGroup.PersonCategorys">[{{personCategory.label}}]</span></td>
+                                        <td><span ng-repeat="empCat in committeeGroup.EmployeeCategories">[{{empCat.EmployeeCategory.employee_category_description}}]</span></td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="9">
+                                            <div pagination max-size="10" boundary-links="true" total-items="SearchQueryCommittee.total_data" ng-show="SearchQueryCommittee.total_data > 0" page="SearchQueryCommittee.page" class="pagination-sm" on-select-page="onPageChanged(page)"></div>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,129 @@
+<div class="col-md-12" ng-controller="RiskPolisCtrl">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="btn-group pull-right m-t-15">
+                <a href="<?php echo site_url('auth/logout')?>">
+                    <button type="button" class="btn btn-custom waves-effect waves-light"
+                            aria-expanded="false">Logout <span class="m-l-5"><i class="icon-close"></i></span></button>
+                </a>
+            </div>
+            <h4 class="page-title">Risk Polis</h4>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-xs-12 col-lg-12 col-xl-12">
+            <div class="card-box nice-scroll">
+                <h4 class="header-title m-t-0 m-b-30"></h4>
+
+                <div class="inbox-widget nicescroll" style="height: 550px;">
+                    <div class="row">
+                        <label class="col-md-2" for="tRange">Range</label>
+                        <div class="col-md-2">
+                            <select ng-change="onSearch()" class="form-control" id="tRange" ng-model="keyword.range" ng-options="t.list_range as t.range for t in listRange">
+
+                            </select>
+                        </div>
+                        <label class="col-md-2" for="tTahunFrom">Tahun From</label>
+                        <div class="col-md-2">
+                            <input number-only-input class="form-control" id="tTahunFrom" ng-model="keyword.tahunFrom" />
+                        </div>
+                        <label class="col-md-2" for="tTahunTo">Tahun To</label>
+                        <div class="col-md-2">
+                            <input number-only-input class="form-control" id="tTahunTo" ng-model="keyword.tahunTo" />
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10"></div>
+                        <div class="col-md-2">
+                            <br>
+                            <button ng-click="onSearch()" class="btn btn-primary btn-sm" style="float: right">Search <i class="fa fa-search" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <br>
+                        <table datatable="" id="datatable" class="table table-striped table-bordered">
+                            <thead>
+                            <tr>
+                                <th style="cursor: pointer" ng-click="onSort('band_from')">Band From</th>
+                                <th style="cursor: pointer" ng-click="onSort('band_to')">Band To</th>
+                                <th style="cursor: pointer" ng-click="onSort('band_middle')">Band Middle</th>
+                                <th style="cursor: pointer" ng-click="onSort('freq_polis')">Freq Polis</th>
+                                <th style="cursor: pointer" ng-click="onSort('freq_polis_sum')">Freq Polis Sum</th>
+                                <th style="cursor: pointer" ng-click="onSort('freq_polis_percent')">Freq Polis Percent</th>
+                                <th style="cursor: pointer" ng-click="onSort('freq_polis_percent_sum')">Freq Polis Percent Sum</th>
+
+                                <th style="cursor: pointer" ng-click="onSort('premi_amt')">Premi Amt</th>
+                                <th style="cursor: pointer" ng-click="onSort('premi_amt_sum')">Premi Amt Sum</th>
+                                <th style="cursor: pointer" ng-click="onSort('premi_amt_percent')">Premi Amt Percent</th>
+                                <th style="cursor: pointer" ng-click="onSort('premi_amt_percent_sum')">Premi Amt Percent Sum</th>
+
+                                <th style="cursor: pointer" ng-click="onSort('freq_claim')">Freq Claim</th>
+                                <th style="cursor: pointer" ng-click="onSort('freq_claim_sum')">Freq Claim Sum</th>
+                                <th style="cursor: pointer" ng-click="onSort('freq_claim_percent')">Freq Claim Percent</th>
+                                <th style="cursor: pointer" ng-click="onSort('freq_claim_percent_sum')">Freq Claim Percent Sum</th>
+
+                                <th style="cursor: pointer" ng-click="onSort('claim_sever_amt')">Claim Sever Amt</th>
+                                <th style="cursor: pointer" ng-click="onSort('claim_sever_amt_sum')">Claim Sever Amt Sum</th>
+                                <th style="cursor: pointer" ng-click="onSort('claim_sever_amt_percent')">Claim Sever Amt Percent</th>
+                                <th style="cursor: pointer" ng-click="onSort('claim_sever_amt_percent_sum')">Claim Sever Amt Percent Sum</th>
+
+                                <th style="cursor: pointer" ng-click="onSort('loss_ratio_percent')">Loss Ratio Percent</th>
+                                <th style="cursor: pointer" ng-click="onSort('loss_ratio_percent_cum')">Loss Ratio Percent Cum</th>
+                                <th style="cursor: pointer" ng-click="onSort('thn_uw')">Tahun</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-if="listRiskPolis.length < 1">
+                                <td colspan="22">
+                                    No results found
+                                </td>
+                            </tr>
+                            <tr ng-repeat="riskPolis in listRiskPolis">
+                                <td>{{riskPolis.band_from | momentMoneyFilter}}</td>
+                                <td>{{riskPolis.band_to | momentMoneyFilter}}</td>
+                                <td>{{riskPolis.band_middle | momentMoneyFilter}}</td>
+
+                                <td>{{riskPolis.freq_polis | momentMoneyFilter}}</td>
+                                <td>{{riskPolis.freq_polis_sum | momentMoneyFilter}}</td>
+                                <td>{{riskPolis.freq_polis_percent | momentMoneyFilter}}</td>
+                                <td>{{riskPolis.freq_polis_percent_sum | momentMoneyFilter}}</td>
+
+                                <td>{{riskPolis.premi_amt | momentMoneyFilter}}</td>
+                                <td>{{riskPolis.premi_amt_sum | momentMoneyFilter}}</td>
+                                <td>{{riskPolis.premi_amt_percent | momentMoneyFilter}}</td>
+                                <td>{{riskPolis.premi_amt_percent_sum | momentMoneyFilter}}</td>
+
+                                <td>{{riskPolis.freq_claim | momentMoneyFilter}}</td>
+                                <td>{{riskPolis.freq_claim_sum | momentMoneyFilter}}</td>
+                                <td>{{riskPolis.freq_claim_percent | momentMoneyFilter}}</td>
+                                <td>{{riskPolis.freq_claim_percent_sum | momentMoneyFilter}}</td>
+
+                                <td>{{riskPolis.claim_sever_amt | momentMoneyFilter}}</td>
+                                <td>{{riskPolis.claim_sever_amt_sum | momentMoneyFilter}}</td>
+                                <td>{{riskPolis.claim_sever_amt_percent | momentMoneyFilter}}</td>
+                                <td>{{riskPolis.claim_sever_amt_percent_sum | momentMoneyFilter}}</td>
+
+                                <td>{{riskPolis.loss_ratio_percent | momentMoneyFilter}}</td>
+                                <td>{{riskPolis.loss_ratio_percent_cum | momentMoneyFilter}}</td>
+                                <td>{{riskPolis.thn_uw}}</td>
+                            </tr>
+                            </tbody>
+                            <tfoot>
+                            <tr ng-show="listRiskPolis.length > 0">
+                                <td colspan="22">
+                                    <div pagination boundary-links="true" total-items="SearchQuery.total_data" ng-show="SearchQuery.total_data > 0" page="SearchQuery.page" class="pagination-sm" on-select-page="onPageChanged(page)" max-size="8"></div>
+                                </td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- end col-->
+    </div>
+</div>

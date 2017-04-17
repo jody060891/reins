@@ -1,0 +1,49 @@
+<style>
+    .validation-new {
+        margin-top: 0px;
+        color: red;
+        font-size:0.9em;
+    }
+</style>
+<div>
+    <div class="modal-header">
+        <button type="button" class="close pull-right" ng-click="$dismiss()" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Discipline</h4>
+    </div>
+    <div class="modal-body form-horizontal">
+        <div class="form-group">
+            <label for="txtDisciplineName" class="col-sm-4 control-label">Discipline Code <span class="validation-new">*</span></label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="Text1" placeholder="Discipline Code" ng-model="discipline.discipline_code">
+                <div class="validation-new" ng-show="validate.discipline_code">
+                    Please enter Discipline Code
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="txtDisciplineName" class="col-sm-4 control-label">Discipline Name <span class="validation-new">*</span></label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="txtDisciplineName" placeholder="Discipline Name" ng-model="discipline.discipline_name">
+                <div class="validation-new" ng-show="validate.discipline_name">
+                    Please enter Discipline Name
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="txtDisciplineName" class="col-sm-4 control-label">Exclude From Report</label>
+            <div class="col-sm-8"  style="padding-top: 7px;">
+                <input type="checkbox" id="Text2" placeholder="Exclude" ng-model="discipline.exclude_from_report">
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+         <span class="btn btn-danger" ng-click="$dismiss()">
+            <i class="fa fa-times"></i>
+            Cancel
+        </span>
+        <span class="btn btn-success" ng-disabled="!validate.button" ng-click="onSave(discipline)">
+            <i class="fa fa-floppy-o"></i>
+            Save
+        </span>
+    </div>
+</div>

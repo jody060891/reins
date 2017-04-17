@@ -1,0 +1,357 @@
+<div class="panel-body form-horizontal">
+    <div class="row form-group">
+        <div class="col-md-3">
+            <label>Incident Group <span class="validation">*</span> </label>
+        </div>
+        <div class="col-md-2">
+            <select  ng-change="onIncidentTypeReportChange(param.incident_type_report_id)" ng-model="param.incident_type_report_id" class="form-control"
+                ng-options="i.incident_type_report_id as i.incident_type_report_name for i in incidentTypeReports">
+                <option value="">-- Please Select Incident Group --</option>
+            </select>
+            <div ng-show="validation.incident_type_report_id" class="validation">
+                Please Select Incident Group.
+            </div>
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-md-3">
+            <label>Report Type <span class="validation">*</span> </label>
+        </div>
+        <div class="col-md-2">
+            <select ng-disabled="ReportTypes.length <= 0" ng-model="param.report_type_id" class="form-control"
+                ng-options="i.report_type_id as i.report_type_name for i in ReportTypes">
+                <option value="">-- Please Select Report Type --</option>
+            </select>
+            <div ng-show="validation.report_type_id" class="validation">
+                Please Select Report Type.
+            </div>
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-md-3">
+            <label>Period Type <span class="validation">*</span> </label>
+        </div>
+        <div class="col-md-2">
+            <select ng-model="param.report_type" class="form-control">
+                <option value="Monthly">Monthly</option>
+                <option value="Quarterly">Quarterly</option>
+                <option value="HalfYearly">Half Yearly</option>
+                <option value="Yearly">Yearly</option>
+                <option value="DateRange">Date Range</option>
+            </select>
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-md-3">
+            <label>Date of Reporting <span class="validation">*</span> </label>
+        </div>
+        <div class="col-md-9">
+            <div ng-if="param.report_type == 'Monthly'">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div>
+                            <label style="width: 35px; font-weight: normal;">From</label>
+                            <input type="text" number-only-input maxlength="4" ng-model="flt.month_year" class="form-control text-year" />
+                            (YYYY)
+                                <select ng-model="flt.month_from" class="form-control">
+                                    <option value="1">January</option>
+                                    <option value="2">February</option>
+                                    <option value="3">March</option>
+                                    <option value="4">April</option>
+                                    <option value="5">May</option>
+                                    <option value="6">June</option>
+                                    <option value="7">July</option>
+                                    <option value="8">August</option>
+                                    <option value="9">September</option>
+                                    <option value="10">October</option>
+                                    <option value="11">November</option>
+                                    <option value="12">December</option>
+                                </select>
+                            <br />
+                            <label style="width: 35px; font-weight: normal;">To</label>
+                            <input type="text" number-only-input maxlength="4" ng-model="flt.month_year_to" class="form-control text-year" />
+                            (YYYY)
+                                <select ng-model="flt.month_to" class="form-control">
+                                    <option value="1">January</option>
+                                    <option value="2">February</option>
+                                    <option value="3">March</option>
+                                    <option value="4">April</option>
+                                    <option value="5">May</option>
+                                    <option value="6">June</option>
+                                    <option value="7">July</option>
+                                    <option value="8">August</option>
+                                    <option value="9">September</option>
+                                    <option value="10">October</option>
+                                    <option value="11">November</option>
+                                    <option value="12">December</option>
+                                </select>
+                        </div>
+                        <div ng-show="validation.month_period" class="validation">
+                            Invalid Month Period selected.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="param.report_type == 'Quarterly'">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div>
+                            <label style="width: 35px; font-weight: normal;">Year From</label>
+                            <input type="text" number-only-input maxlength="4" ng-model="flt.q_year" class="form-control text-year" />
+                            (YYYY)
+                                <select ng-model="flt.q_from" class="form-control">
+                                    <option value="1">Q1(Jan - Mar)</option>
+                                    <option value="2">Q2(Apr - Jun)</option>
+                                    <option value="3">Q3(Jul - Sep)</option>
+                                    <option value="4">Q4(Oct - Dec)</option>
+                                </select>
+                            <br />
+                            <label style="width: 35px; font-weight: normal;">Year To</label>
+                            <input type="text" number-only-input maxlength="4" ng-model="flt.q_year_to" class="form-control text-year" />
+                            (YYYY)
+                                <select ng-model="flt.q_to" class="form-control">
+                                    <option value="1">Q1(Jan - Mar)</option>
+                                    <option value="2">Q2(Apr - Jun)</option>
+                                    <option value="3">Q3(Jul - Sep)</option>
+                                    <option value="4">Q4(Oct - Dec)</option>
+                                </select>
+                        </div>
+                        <div ng-show="validation.q_period" class="validation">
+                            Invalid Quarter Period selected.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="param.report_type == 'HalfYearly'">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div>
+                            <label style="width: 35px; font-weight: normal;">From</label>
+                            <input type="text" number-only-input maxlength="4" ng-model="flt.hf_year" class="form-control text-year" />(YYYY)
+                                <select ng-model="flt.hf_from" class="form-control">
+                                    <option value="1">Jan - Jun</option>
+                                    <option value="2">Jul - Dec</option>
+                                </select>
+                            <br />
+                            <label style="width: 35px; font-weight: normal;">To</label>
+                            <input type="text" number-only-input maxlength="4" ng-model="flt.hf_year_to" class="form-control text-year" />(YYYY)
+                                <select ng-model="flt.hf_to" class="form-control">
+                                    <option value="1">Jan - Jun</option>
+                                    <option value="2">Jul - Dec</option>
+                                </select>
+                        </div>
+                        <div ng-show="validation.hf_period" class="validation">
+                            Invalid Half Year Period selected.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="param.report_type == 'Yearly'">
+                <div class="row">
+                    <div class="col-md-12">
+                        <label style="width: 35px; font-weight: normal;">From</label>
+                        <input type="text" number-only-input maxlength="4" ng-model="flt.year_from" class="form-control text-year" />(YYYY)
+                            <br />
+                        <label style="width: 35px; font-weight: normal;">To</label>
+                        <input type="text" number-only-input maxlength="4" ng-model="flt.year_to" class="form-control text-year" />
+                        (YYYY)
+                    </div>
+                    <div ng-show="validation.year_period" class="validation">
+                        Invalid Year Period selected.
+                    </div>
+                </div>
+            </div>
+            <div ng-if="param.report_type == 'DateRange'" class="row">
+                <div class="col-md-3">
+					<label style="width: 35px; font-weight: normal;">From</label>
+                    <div class="input-group">
+                        <input ng-readonly="!isDateEnable" 
+                            type="text"  name="dateFrom" class="form-control"  datepicker-popup="dd-MM-yyyy" 
+                            ng-model="param.report_from_date" close-text="Close" 
+                            show-weeks="false" show-button-bar="false" max="today"
+                            id="dtFrom"
+                        date-fix />                                
+                        <span ng-if="!isDateEnable" class="input-group-btn">
+                            <button type="button" class="btn btn-default"
+                                ng-click="param.report_from_date = null">
+                                <img src="/Web/img/fa-times.png" />
+                            </button>
+                        </span>
+                        <span ng-if="isDateEnable" class="input-group-btn">
+                            <button type="button" class="btn btn-default"
+                                ng-click="datePickerOpen('dtFrom')">
+                                <i class="fa fa-calendar"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+					<label style="width: 35px; font-weight: normal;">To</label>
+                    <div class="input-group">
+                        <input ng-readonly="!isDateEnable" 
+                            type="text"  name="dateFrom" class="form-control"  datepicker-popup="dd-MM-yyyy" 
+                            ng-model="param.report_to_date" close-text="Close" 
+                            show-weeks="false" show-button-bar="false" max="today"
+                            id="dateTo"
+                        date-fix />                                
+                        <span ng-if="!isDateEnable" class="input-group-btn">
+                            <button type="button" class="btn btn-default"
+                                ng-click="param.report_to_date = null">
+                                <img src="/Web/img/fa-times.png" />
+                            </button>
+                        </span>
+                        <span ng-if="isDateEnable" class="input-group-btn">
+                            <button type="button" class="btn btn-default"
+                                ng-click="datePickerOpen('dateTo')">
+                                <i class="fa fa-calendar"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+                <div ng-show="validation.date_period" class="validation">
+                    Invalid Date Period selected.
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-md-3">
+            <label>Near Miss?</label>
+        </div>
+        <div class="col-md-9">
+            <label class="checkbox-inline">
+                <input type="checkbox" ng-model="flt.near_miss.yes" />Yes</label>
+            <label class="checkbox-inline">
+                <input type="checkbox" ng-model="flt.near_miss.no" />No</label>
+
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-md-3">
+            <label>Type of Person Involved</label>
+        </div>
+        <div class="col-md-9">
+            <label class="checkbox-inline">
+                <input type="checkbox" ng-model="flt.person_type.patient" ng-change="onClickPatient()" />Patient</label>
+            <label class="checkbox-inline">
+                <input type="checkbox" ng-model="flt.person_type.staff" />Staff</label>
+            <label class="checkbox-inline">
+                <input type="checkbox" ng-model="flt.person_type.visitor" />Visitor</label>
+            <label class="checkbox-inline">
+                <input type="checkbox" ng-model="flt.person_type.other" />Other</label>
+
+        </div>
+    </div>
+
+    <div class="row form-group" ng-show="flt.person_type.patient">
+        <div class="col-md-3">
+            <label>Patient Type</label>
+        </div>
+        <div class="col-md-9">
+            <label class="checkbox-inline">
+                <input type="checkbox" ng-model="flt.patient_type.inpatient">In-Patient</label>
+            <label class="checkbox-inline">
+                <input type="checkbox" ng-model="flt.patient_type.outpatient">Out-Patient</label>
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-md-3">
+            <label>Person Affected?</label>
+        </div>
+        <div class="col-md-9">
+            <label class="checkbox-inline">
+                <input type="checkbox" ng-model="flt.person_affected.yes" />Yes</label>
+            <label class="checkbox-inline">
+                <input type="checkbox" ng-model="flt.person_affected.no" />No</label>
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-md-3">
+            <label>Location <span class="validation">*</span></label>
+            <div ng-show="locationNotValid" class="validation">Please select location.</div>
+        </div>
+        <div class="col-md-9">
+            <div class="col-md-5">
+                Available
+            </div>
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-5">
+                Selected
+            </div>
+
+            <div class="col-md-5">
+                <div>
+                    <select style="height: 200px; width: 100%" ng-model="available" multiple>
+                        <option ng-repeat="loc in locations" value="{{loc.location_id}}" ng-if="!loc.is_selected">
+                        {{loc.location_name}}<option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <button style="width: 100%" class="btn btn-primary" ng-click="select(available, hashLocation, true)">Select</button>
+                <button style="width: 100%" class="btn btn-warning" ng-click="select(selected, hashLocation, false)">Unselect</button>
+                <button style="width: 100%" class="btn btn-success" ng-click="selectAll(locations, true)">Select All</button>
+                <button style="width: 100%" class="btn btn-danger" ng-click="selectAll(locations, false)">Unselect All</button>
+            </div>
+            <div class="col-md-5">
+                <div>
+                    <select style="height: 200px; width: 100%" ng-model="selected" multiple>
+                        <option ng-repeat="loc in locations" value="{{loc.location_id}}" ng-if="loc.is_selected">
+                        {{loc.location_name}}<option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-md-3">
+            <label>Department</label>
+        </div>
+        <div class="col-md-9">
+            <div class="col-md-5">
+                Available
+            </div>
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-5">
+                Selected
+            </div>
+
+            <div class="col-md-5">
+                <div>
+                    <select style="height: 200px; width: 100%" ng-model="available" multiple>
+                        <option ng-repeat="dep in departments" value="{{dep.department_id}}" ng-if="!dep.is_selected">
+                        {{dep.department_description}}<option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <button style="width: 100%" class="btn btn-primary" ng-click="select(available, hashDepartment, true)">Select</button>
+                <button style="width: 100%" class="btn btn-warning" ng-click="select(selected, hashDepartment, false)">Unselect</button>
+                <button style="width: 100%" class="btn btn-success" ng-click="selectAll(departments, true)">Select All</button>
+                <button style="width: 100%" class="btn btn-danger" ng-click="selectAll(departments, false)">Unselect All</button>
+            </div>
+            <div class="col-md-5">
+                <div>
+                    <select style="height: 200px; width: 100%" ng-model="selected" multiple>
+                        <option ng-repeat="dep in departments" value="{{dep.department_id}}" ng-if="dep.is_selected">
+                        {{dep.department_description}}<option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--<!--<div class="row">
+        <div class="col-md-12">
+            <span ng-disabled="action" ng-click="onGenerateXls('Xls')" class="btn btn-primary" style="width: 200px">Generate XLS
+            </span>
+            <span ng-disabled="action" ng-click="onGenerateXls('Pdf')" class="btn btn-primary" style="width: 200px">Generate PDF
+            </span>
+        </div>
+    </div>
+    <br />-->
+</div>

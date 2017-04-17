@@ -1,0 +1,76 @@
+<div class="col-md-12" ng-controller="DesignationListCtrl">
+    <div class="row">
+                <div class="col-sm-3 pull-left" style="padding-right: 0;">
+                    <div class="input-group">
+                        <input ng-keypress="onKeyPress($event)" type="text" class="form-control" ng-model="keyword"/>
+                        <span class="input-group-addon btn btn-primary" ng-click="onSearch()">
+                            <i class="fa fa-search"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-sm-9 pull-left" style="padding-left: 5px;">
+                    <span class="btn btn-primary" ng-click="onCreateNew()">
+                        <i class="fa fa-plus-circle"></i>
+                        Add
+                    </span>
+                </div>
+            </div>
+    <div class="row">
+                <br />
+                <div class="col-md-12">
+                    <table class="table table-striped table-bordered data-grid">
+                        <thead>
+                            <tr>
+                                <th class="action-button"></th>
+                                <th ng-click="onSort('designation_description')" width="30%">Designation
+                                    <img src="/Web/img/sort.png">
+                                </th>
+                                <th ng-click="onSort('EmployeeCategory.employee_category_description')" width="30%">
+                                    Employee Category
+                                    <img src="/Web/img/sort.png">
+                                </th>
+                                <th ng-click="onSort('DesignationGroup.designation_group_name')" width="25%">
+
+                                    Designation Group
+                                    <img src="/Web/img/sort.png">
+                                </th>
+
+                                <th ng-click="onSort('last_updated_date')" width="15%">
+                                    Last Modified
+                                    <img src="/Web/img/sort.png">
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-show="designations.length < 1">
+                                <td colspan="5">No results found
+                                </td>
+                            </tr>
+                            <tr ng-repeat="designation in designations">
+                                <td class="action-button">
+                                    <span ng-click="onRowEdit(designation)" class="btn btn-primary btn-sm">
+                                        Edit
+                                    </span>
+                                    <span ng-click="onRowDelete(designation)" class="btn btn-danger btn-sm">
+                                        Delete
+                                    </span>
+                                </td>
+                                <td>{{designation.designation_description}}</td>
+                                <td>{{designation.EmployeeCategory.employee_category_description}}</td>
+
+                                <td>{{designation.DesignationGroup.designation_group_name}}</td>
+
+                                <td>{{designation.last_updated_date | momentDateFilter : "DD/MM/YYYY HH:mm:ss"}}</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <td colspan="5">
+                                <div pagination boundary-links="true" total-items="SearchQuery.total_data" ng-show="SearchQuery.total_data > 0" page="SearchQuery.page" class="pagination-sm" on-select-page="onPageChanged(page)" max-size="10"></div>
+                            </td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+</div>

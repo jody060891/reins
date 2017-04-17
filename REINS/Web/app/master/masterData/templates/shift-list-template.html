@@ -1,0 +1,76 @@
+<div class="col-md-12" ng-controller="ShiftCtrl">
+    <div class="row">
+                <div class="col-sm-3 pull-left" style="padding-right:0;">
+                    <div class="input-group">
+                        <input ng-keypress="onKeyPress($event)" type="text" class="form-control" ng-model="keyword"/>
+                        <span class="input-group-addon btn btn-primary" ng-click="onSearch()">
+                            <i class="fa fa-search"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-sm-5 pull-left" style="padding-left:5px;">
+                    <span class="btn btn-primary" ng-click="onCreateNew()">
+                        <i class="fa fa-plus-circle"></i>
+                        Add
+                    </span>
+                </div>
+            </div>
+    <div class="row">
+                <br />
+                <div class="col-md-12">
+                    <table class="table table-striped table-bordered data-grid">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th ng-click="onSort('description')" width="55%">
+                                    Description
+                                    <img src="/Web/img/sort.png">
+                                </th>
+                                <th ng-click="onSort('start')" width="15%">
+                                    Start
+                                    <img src="/Web/img/sort.png">
+                                </th>
+                                <th ng-click="onSort('end')" width="15%">
+                                    End
+                                    <img src="/Web/img/sort.png">
+                                </th>
+                                <th ng-click="onSort('last_updated_date')" width="15%">
+                                    Last Modified
+                                    <img src="/Web/img/sort.png">
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-show="shiftes.length < 1">
+                                <td colspan="5">
+                                    No results found
+                                </td>
+                            </tr>
+                            <tr ng-repeat="shift in shiftes">
+                                <td class="action-button">
+                                    <span ng-click="onRowEdit(shift)"  class="btn btn-primary btn-sm">
+                                        Edit
+                                    </span>
+                                    <span ng-click="onRowDelete(shift)"  class="btn btn-danger btn-sm">
+                                        Delete
+                                    </span>
+                                </td>
+                                <td>{{shift.description}}</td>
+                                <td>{{shift.start | momentDateFilter : "HH:mm"}}</td>
+                                <td>{{shift.end | momentDateFilter : "HH:mm"}}</td>
+                                <td>{{shift.last_updated_date | momentDateFilter : "DD/MM/YYYY HH:mm:ss"}}</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="5">
+                                    <div pagination max-size="10" boundary-links="true" total-items="SearchQuery.total_data"  ng-show="SearchQuery.total_data > 0" page="SearchQuery.page" class="pagination-sm" on-select-page="onPageChanged(page)"></div>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+</div>
+
+

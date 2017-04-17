@@ -1,0 +1,24 @@
+<div>
+    <div class="modal-header">
+        <button type="button" class="close pull-right" ng-click="$dismiss()" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Employee Category</h4>
+    </div>
+    <div class="modal-body form-horizontal">
+        <div class="form-group">
+            <label for="txtEmployeeCategory" class="col-sm-4 control-label">Employee Category</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="txtEmployeeCategory" placeholder="Employee Category" ng-model="employeeCategory.employee_category_description">
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <span class="btn btn-danger" ng-click="$dismiss()">
+            <i class="fa fa-times"></i>
+            Cancel
+        </span>
+        <span class="btn btn-success" ng-disabled="!validate.button" ng-click="onSave(employeeCategory)">
+            <i class="fa fa-floppy-o"></i>
+            Save
+        </span>
+    </div>
+</div>

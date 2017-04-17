@@ -1,0 +1,199 @@
+.angular-wizard-step-indicator-container {
+    background-color: #337ab7;
+    padding: 10px;
+}
+
+.steps-indicator {
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 30px;
+    padding: 1em 0 3em 0;
+    margin: 0;
+    list-style: none;
+}
+
+.steps-indicator:before {
+    position: absolute;
+    height: 1px;
+    background-color: #e6e6e6;
+    content: '';
+}
+
+.steps-indicator.steps-2:before {
+    right: 25%;
+    left: 25%;
+}
+
+.steps-indicator.steps-3:before {
+    right: 16.666666666666668%;
+    left: 16.666666666666668%;
+}
+
+.steps-indicator.steps-4:before {
+    right: 14%;
+    left: 12.5%;
+}
+
+.steps-indicator.steps-5:before {
+    right: 12%;
+    left: 10%;
+}
+
+.steps-indicator.steps-6:before {
+    right: 8.333333333333334%;
+    left: 8.333333333333334%;
+}
+
+.steps-indicator.steps-7:before {
+    right: 10.142857142857143%;
+    left: 7.142857142857143%;
+}
+
+.steps-indicator.steps-8:before {
+    right: 6.25%;
+    left: 6.25%;
+}
+
+.steps-indicator.steps-9:before {
+    right: 5.555555555555555%;
+    left: 5.555555555555555%;
+}
+
+.steps-indicator.steps-10:before {
+    right: 5%;
+    left: 5%;
+}
+
+.steps-indicator * {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.steps-indicator li {
+    position: relative;
+    float: left;
+    padding: 0;
+    padding-top: 15px;
+    margin: 0;
+    line-height: 15px;
+    text-align: center;
+}
+
+.steps-indicator li a {
+    font-weight: bold;
+    color: #ffffff;
+    text-decoration: none;
+    /*text-transform: uppercase;*/
+    cursor: pointer;
+    transition: 0.25s;
+    font-size: 90%;
+}
+
+.steps-indicator li a:before {
+    position: absolute;
+    top: -7px;
+    left: 43%;
+    width: 18px;
+    height: 18px;
+    border-radius: 100%;
+    content: '';
+    transition: 0.25s;
+    -moz-border-radius: 100%;
+	-webkit-border-radius: 100%;
+    background: url(/Web/img/gray-circle.png) no-repeat;
+    background-size:contain;
+	
+}
+
+.steps-indicator li a:hover {
+    color: #4d4d4d;
+}
+
+.steps-indicator.steps-2 li {
+    width: 50%;
+}
+
+.steps-indicator.steps-3 li {
+    width: 33%;
+}
+
+.steps-indicator.steps-4 li {
+    width: 25%;
+}
+
+.steps-indicator.steps-5 li {
+    width: 20%;
+}
+
+.steps-indicator.steps-6 li {
+    width: 16%;
+}
+
+.steps-indicator.steps-7 li {
+    width: 14%;
+}
+
+.steps-indicator.steps-8 li {
+    width: 12.5%;
+}
+
+.steps-indicator.steps-9 li {
+    width: 11%;
+}
+
+.steps-indicator.steps-10 li {
+    width: 10%;
+}
+
+.steps-indicator.steps-11 li {
+    width: 9%;
+}
+
+.steps-indicator li.default {
+    /*pointer-events: none;*/
+}
+
+.steps-indicator li.default a:hover {
+    color: #aeaeae;
+}
+
+.steps-indicator li.current,
+.steps-indicator li.editing {
+    /*pointer-events: none;*/
+    font-weight: bold;
+    color: #ffffff;
+    font-size: 20px;
+}
+
+.steps-indicator li.current a:before {
+    background: url(/Web/img/blue-circle.png) no-repeat;
+    background-size:contain;
+    content:" "; /*IE8 fix*/
+}
+
+.steps-indicator li.done a:before {
+    background: url(/Web/img/yellow-circle.png) no-repeat;
+    background-size:contain;
+    content:"  "; /*IE8 fix*/
+}
+
+.steps-indicator li.editing a:before {
+    background: url(/Web/img/yellow-circle.png) no-repeat;
+    background-size:contain;
+    content:"  "; /*IE8 fix*/
+    
+}
+.angular-wizard-header {
+    margin-top: 5px;
+    border-bottom: 1px solid #ececec;
+    padding: 5px 10px;
+    text-align: right;
+}
+.angular-wizard-footer {
+    margin-top: 5px;
+    border-top: 1px solid #ececec;
+    padding: 5px 10px;
+    text-align: right;
+}

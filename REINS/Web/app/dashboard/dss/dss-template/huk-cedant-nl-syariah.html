@@ -1,0 +1,88 @@
+<head>
+    <style type="text/css">
+        .auto-style4 {
+            width: 23%;
+        }
+        a {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<div class="row" style="margin-top:10px !important;">
+    <div class="col-md-12">
+        <div class="row">
+            <br>
+            <div class="col-sm-4 col-xs-12" style="padding-right: 0;">
+                <div class="input-group">
+                    <input ng-keypress="onKeyPressHukCedantNLSyariah($event)" placeholder="Search by company name or cedant" type="text" class="form-control" ng-model="keyword.keywordHukCedantNLSyariah"/>
+                    <span class="input-group-addon btn btn-primary" ng-click="onSearchHukCedantNLSyariah()">
+                            <i class="fa fa-search"></i>
+                        </span>
+                </div>
+            </div>
+            <div class="col-sm-2 col-xs-8" style="padding-right: 0;">
+                <div class="input-group">
+                    <select ng-change="onSearchHukCedantNLSyariah()"
+                            type="text" class="form-control" ng-model="keyword.keywordHukCedantNLSyariahTahun"
+                            ng-options="t as t for t in listTahun">
+                        <option value="">-Tahun-</option>
+                    </select>
+
+                </div>
+            </div>
+            <div class="col-sm-6 col-xs-12" style="padding-right: 0;">
+                <div class="input-group col-sm-6" style="float: right;">
+                    <label for="HukCedantNLSyariahNumberRow" class="col-sm-7 control-label">Rows per page :</label>
+                    <div class="col-sm-5">
+                        <select id="HukCedantNLSyariahNumberRow" ng-change="onChangeRowNumberHukCedantNLSyariah()"
+                                type="text" class="form-control" ng-model="SearchQueryHukCedantNLSyariah.row_per_page"
+                                ng-options="t as t for t in listRowNumber">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <br>
+        <table datatable="" id="datatable" class="table table-striped table-bordered">
+            <thead>
+            <tr>
+                <th style="cursor: pointer" ng-click="onSortHukCedantNLSyariah('cedant')">Cedant</th>
+                <th style="cursor: pointer" ng-click="onSortHukCedantNLSyariah('comp_name')">Company Name</th>
+                <th style="cursor: pointer" ng-click="onSortHukCedantNLSyariah('premi')">Premi</th>
+                <th style="cursor: pointer" ng-click="onSortHukCedantNLSyariah('komisi')">Komisi</th>
+                <th style="cursor: pointer" ng-click="onSortHukCedantNLSyariah('klaim')">Klaim</th>
+                <th style="cursor: pointer" ng-click="onSortHukCedantNLSyariah('net')">Net</th>
+                <th style="cursor: pointer" ng-click="onSortHukCedantNLSyariah('anggaran')">Anggaran</th>
+                <th style="cursor: pointer" ng-click="onSortHukCedantNLSyariah('tbus')">Tbus</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-if="listHukCedantNlSyariahList.length < 1">
+                <td colspan="8">
+                    No results found
+                </td>
+            </tr>
+            <tr ng-repeat="hukCedantNlSyariah in listHukCedantNlSyariahList">
+                <td>{{hukCedantNlSyariah.cedant}}</td>
+                <td>{{hukCedantNlSyariah.comp_name}}</td>
+                <td>Rp {{hukCedantNlSyariah.premi | momentDecimalFilter: 3 | momentMoneyFilter}}</td>
+                <td>Rp {{hukCedantNlSyariah.komisi | momentDecimalFilter: 3 | momentMoneyFilter}}</td>
+                <td>Rp {{hukCedantNlSyariah.klaim | momentDecimalFilter: 3 | momentMoneyFilter}}</td>
+                <td>Rp {{hukCedantNlSyariah.net | momentDecimalFilter: 3 | momentMoneyFilter}}</td>
+                <td>Rp {{hukCedantNlSyariah.anggaran | momentDecimalFilter: 3 | momentMoneyFilter}}</td>
+                <td>{{hukCedantNlSyariah.tbus}}</td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr ng-show="listHukCedantNlSyariahList.length > 0">
+                <td colspan="8">
+                    <div pagination boundary-links="true" items-per-page="SearchQueryHukCedantNLSyariah.row_per_page" total-items="SearchQueryHukCedantNLSyariah.total_data" ng-show="SearchQueryHukCedantNLSyariah.total_data > 0" page="SearchQueryHukCedantNLSyariah.page" class="pagination-sm" on-select-page="onPageChangedHukCedantNLSyariah(page)" max-size="8"></div>
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>

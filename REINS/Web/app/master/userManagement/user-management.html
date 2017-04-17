@@ -1,0 +1,32 @@
+<div class="col-md-12 no-side-padding" ng-controller="UserManagementCtrl" id="user-management-content">
+    <div class="panel panel-primary" style="font-size: 90%;">
+        <div class="panel-heading clearfix">
+            Setup > User Management
+        </div>
+        <div class="panel-body" style="overflow-x:auto">
+            <br />
+            <!--
+            <div class="row">
+                <div class="col-sm-9" style="padding-left: 20px;">
+                    <span class="btn btn-primary" ng-click="onCreateNew()">
+                        Add New Incident
+                    </span>
+                </div>
+            </div>
+             
+            <br />
+            -->
+            <div tabset>
+                <div tab heading="User" ng-if="currentAcl['SM_USER_MANAGEMENT_USER_VIEW']"  ng-click="onFetchUserTab()">
+                    <div angular-html-bind-template="userTabTemplate" compile-scope="mainScope"></div>
+                </div>
+                <div tab heading="Role" ng-if="currentAcl['SM_USER_MANAGEMENT_ROLE_VIEW']" ng-click="onFetchRoleTab()">
+                    <div angular-html-bind-template="roleTabTemplate" compile-scope="mainScope"></div>
+                </div>
+                <div tab heading="Access Control Level (ACL)" ng-if="currentAcl['SM_USER_MANAGEMENT_ACL_VIEW']" ng-click="onFetchAclTab()">
+                    <div angular-html-bind-template="aclTabTemplate" compile-scope="mainScope"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

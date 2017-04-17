@@ -1,0 +1,199 @@
+* {
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+
+
+
+h1,
+h2,
+h3,
+p,
+pre,
+ul {
+	margin: 0;
+	padding: 0;
+}
+
+h1 {
+	font-size: 48px;
+	line-height: 1;
+	margin-bottom: 1em;
+}
+
+h2 {
+	font-size: 24px;
+	line-height: 1;
+	margin-bottom: 1em;
+}
+
+h3 {
+	font-size: 16px;
+	line-height: 1;
+	margin-bottom: 1em;
+}
+
+p,
+pre,
+ul {
+	margin-bottom: 2em;
+}
+
+pre {
+	background: #fefefe;
+	border: 1px solid #dedede;
+	overflow-x: auto;
+	padding: 2em;
+}
+
+ul {
+	margin-left: 1em;
+}
+
+#nav {
+	left: 20px;
+	list-style: none;
+	margin: 0;
+	position: fixed;
+	margin-left:-10px;
+    padding-left:100px;
+}
+
+#nav li {
+	margin-bottom: 2px;
+}
+
+#nav a {
+	background: #ededed;
+	color: #666;
+	display: block;
+	font-size: 14px;
+	padding: 5px 10px;
+	text-decoration: none;
+	
+}
+
+#nav a:hover {
+	background: #dedede;
+}
+
+#nav .current a {
+	background: #666;
+	color: #ededed;
+}
+
+#container {
+	margin: 0 auto;
+	width: 800px;
+}
+
+.section {
+	border-bottom: 5px solid #ccc;
+	min-height: 60vh;
+	padding: 50px 20px;
+}
+
+.section p:last-child {
+	margin-bottom: 0;
+}
+
+
+
+#nav1 {
+	left: 20px;
+	list-style: none;
+	margin: 0;
+	position: fixed;
+	margin-left:-20px;
+    padding-left:100px;
+}
+
+#nav1 li {
+	margin-bottom: 2px;
+}
+
+#nav1 a {
+	background: #ededed;
+	color: #666;
+	display: block;
+	font-size: 14px;
+	padding: 5px 10px;
+	text-decoration: none;
+	
+}
+
+#nav1 a:hover {
+	background: #dedede;
+}
+
+#nav1 .current a {
+	background: #666;
+	color: #ededed;
+}
+
+
+.f-nav{  /* To fix main menu container */
+    z-index: 9999;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+}
+
+
+
+.f-nav1{  /* To fix main menu container */
+    z-index: 1000;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+}
+
+
+
+/* iPads (landscape) -----------  projector width*/ 
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : landscape) 
+{
+
+    
+    #nav {
+	
+	list-style: none;
+	margin: 0;
+	position: fixed;
+    margin-left:-38px;
+	
+}
+
+
+    #nav1 {
+	
+	list-style: none;
+	margin: 0;
+	position: fixed;
+    margin-left:-38px;
+	
+}
+
+    #nav a {
+	background: #ededed;
+	color: #666;
+	display: block;
+	font-size: 11px;
+	padding: 5px 10px;
+	text-decoration: none;
+	
+}
+
+}

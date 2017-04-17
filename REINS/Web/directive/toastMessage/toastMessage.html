@@ -1,0 +1,3 @@
+<div class="toastMessageContainer">
+    <div ng-repeat="alert in alerts" class="alert" ng-class="{'alert-info': alert.type == 'success', 'alert-danger': alert.type == 'danger'}" role="alert"> {{alert.msg}} </div>
+</div>

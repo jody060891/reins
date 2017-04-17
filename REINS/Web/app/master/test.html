@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="//rawgit.com/iVantage/angular-ivh-treeview/master/dist/ivh-treeview.css">
+  <link rel="stylesheet" href="//rawgit.com/iVantage/angular-ivh-treeview/master/dist/ivh-treeview-theme-basic.css">
+  <meta charset="utf-8">
+<meta name="robots" content="noindex">
+  <title>Angular JS</title>
+</head>
+<body ng-app="jsbin">
+  <div class="container">
+    <div ng-controller="DemoCtrl">
+      <input type="text" ng-model="bagSearch" class="form-control" placeholder="Find stuff in your bag..." style="">
+      <div ivh-treeview="bag"
+           ivh-treeview-filter="bagSearch"
+           ivh-treeview-expand-to-depth="1"></div>
+    </div>
+  </div>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.16/angular.js"></script>
+  <script src="//rawgit.com/iVantage/angular-ivh-treeview/master/dist/ivh-treeview.min.js"></script>
+<script>
+    var app = angular.module('jsbin', ['ivh.treeview']);
+
+    app.controller('DemoCtrl', function ($scope) {
+        $scope.bag = [
+            {
+                label: 'Glasses',
+                value: 'glasses',
+                children: [
+                    {
+                        label: 'Top Hat',
+                        value: 'top_hat'
+                    }, {
+                        label: 'Curly Mustache',
+                        value: 'mustachio'
+                    }
+                ]
+            }
+        ];
+    });
+</script>
+
+</body>
+</html>

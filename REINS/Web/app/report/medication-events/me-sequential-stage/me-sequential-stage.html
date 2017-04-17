@@ -1,0 +1,37 @@
+<style>
+    .form-control {
+        display: inline;
+        width: auto;
+    }
+
+    .text-year {
+        display: inline;
+        width: 60px;
+    }
+
+    .validation {
+        color: red;
+    }
+
+    .checkbox-inline, .radio-inline {
+        margin-left: 10px;
+    }
+</style>
+<div class="col-md-12" ng-controller="MeSequentialStageCtrl">
+    <div class="panel panel-primary">
+        <div class="panel-heading clearfix">
+            Sequential Stage
+        </div>
+        <div report-filter param="param" control="control" service="service"></div>
+
+        <div class="panel-body form-horizontal">
+            <div class="col-md-12">
+                    <span ng-disabled="action" ng-click="control.onGenerateXls('Xls')" class="btn btn-primary" style="width: 200px">Generate XLS
+                    </span>
+                    <span ng-disabled="action" ng-click="control.onGenerateXls('Pdf')" class="btn btn-primary" style="width: 200px">Generate PDF
+                    </span>
+            </div>
+        </div>
+    </div>
+</div>
+

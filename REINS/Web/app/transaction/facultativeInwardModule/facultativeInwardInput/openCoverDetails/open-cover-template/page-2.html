@@ -1,0 +1,148 @@
+<br>
+<div class="form-group row" style="margin-bottom: 0px;">
+    <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Currency<span class="red-font">*</span> :</label>
+    <div class="col-sm-2 col-xs-6" style="padding-left: 5px">
+        <input ng-disabled="!isEditState" type="text" class="form-control mini-label" ng-model="openCover.FacCurrency" />
+        <div ng-if="!validation.FacCurrency && isSaveClicked" class="red-font validation-message">Please enter currency</div>
+    </div>
+    <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Write Share<span class="red-font">*</span> :</label>
+    <div class="col-sm-2 col-xs-6" style="padding-left: 5px">
+        <input ng-disabled="!isEditState" type="number" step="0.001" class="form-control mini-label" ng-model="openCover.FacWrtShr" />
+        <div ng-if="!validation.FacWrtShr && isSaveClicked" class="red-font validation-message">Please enter write share</div>
+    </div>
+    <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Signd Share<span class="red-font">*</span> :</label>
+    <div class="col-sm-2 col-xs-6" style="padding-left: 5px">
+        <input ng-disabled="!isEditState" type="number" step="0.001" class="form-control mini-label"  ng-model="openCover.FacSndShr" />
+        <div ng-if="!validation.FacSndShr && isSaveClicked" class="red-font validation-message">Please enter signd share</div>
+    </div>
+</div>
+<div class="form-group row" style="margin-bottom: 0px;">
+    <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Total S.I.<span class="red-font">*</span> :</label>
+    <div class="col-sm-4 col-xs-6" style="padding-left: 5px;">
+        <input ng-disabled="!isEditState" type="text" class="form-control mini-label" money-format-input ng-model="openCover.FacTotsi" />
+        <div ng-if="!validation.FacTotsi && isSaveClicked" class="red-font validation-message">Please enter total S.I.</div>
+    </div>
+</div>
+
+<div class="form-group row" style="margin-bottom: 0px;">
+    <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">CC. Share S.I.<span class="red-font">*</span> :</label>
+    <div class="col-sm-4 col-xs-6" style="padding-left: 5px;">
+        <input ng-disabled="!isEditState" type="text" class="form-control mini-label" money-format-input ng-model="openCover.FacCcsi" />
+        <div ng-if="!validation.FacCcsi && isSaveClicked" class="red-font validation-message">Please enter CC. Share S.I.</div>
+    </div>
+
+</div>
+
+<div class="form-group row" style="margin-bottom: 0px;">
+    <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">CC. Retention<span class="red-font">*</span> :</label>
+    <div class="col-sm-4 col-xs-6" style="padding-left: 5px;">
+        <input ng-disabled="!isEditState" type="text" class="form-control mini-label" money-format-input ng-model="openCover.FacCcRetn" />
+        <div ng-if="!validation.FacCcRetn && isSaveClicked" class="red-font validation-message">Please enter CC. retention</div>
+    </div>
+</div>
+
+<div class="form-group row" style="margin-bottom: 0px;">
+    <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Our Share S.I.<span class="red-font">*</span> :</label>
+    <div class="col-sm-4 col-xs-6" style="padding-left: 5px;">
+        <input ng-disabled="!isEditState" type="text" class="form-control mini-label" money-format-input ng-model="openCover.FacOursi" />
+        <div ng-if="!validation.FacOursi && isSaveClicked" class="red-font validation-message">Please enter our share S.I.</div>
+    </div>
+</div>
+
+<div class="form-group row" style="margin-bottom: 0px;">
+    <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Est Gross Premium<span class="red-font">*</span> :</label>
+    <div class="col-sm-4 col-xs-6" style="padding-left: 5px;">
+        <input ng-disabled="!isEditState" type="text" class="form-control mini-label" money-format-input ng-model="openCover.FacGpremium" />
+        <div ng-if="!validation.FacGpremium && isSaveClicked" class="red-font validation-message">Please enter est gross premium</div>
+    </div>
+</div>
+
+<div class="form-group row" style="margin-bottom: 0px;">
+    <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Est Net Premium<span class="red-font">*</span> :</label>
+    <div class="col-sm-4 col-xs-6" style="padding-left: 5px;">
+        <input ng-disabled="!isEditState" type="text" class="form-control mini-label" money-format-input ng-model="openCover.FacNpremium" />
+        <div ng-if="!validation.FacNpremium && isSaveClicked" class="red-font validation-message">Please enter est net premium</div>
+    </div>
+
+    <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Accumulated CC. S.I.<span class="red-font">*</span> :</label>
+    <div class="col-sm-4 col-xs-6" style="padding-left: 5px;">
+        <input ng-disabled="!isEditState" type="text" class="form-control mini-label" money-format-input ng-model="openCover.FacAccsi" />
+        <div ng-if="!validation.FacAccsi && isSaveClicked" class="red-font validation-message">Please enter accumulated CC. S.I.</div>
+    </div>
+
+</div>
+
+<div class="form-group row" style="margin-bottom: 0px;">
+    <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Premium Rate :</label>
+    <div class="col-sm-5 col-xs-6" style="padding-left: 5px;">
+        <input ng-disabled="!isEditState" type="text" class="form-control mini-label"  ng-model="openCover.FacPremRate1" />
+    </div>
+
+</div>
+<div class="form-group row" style="margin-bottom: 0px;">
+    <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">&nbsp;</label>
+    <div class="col-sm-5 col-xs-6" style="padding-left: 5px;">
+        <input ng-disabled="!isEditState" type="text" class="form-control mini-label"  ng-model="openCover.FacPremRate2" />
+    </div>
+
+</div>
+
+<div class="form-group row" style="margin-bottom: 0px;">
+    <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Commission Rate :</label>
+    <div class="col-sm-5 col-xs-6" style="padding-left: 5px;">
+        <input ng-disabled="!isEditState" type="text" class="form-control mini-label"  ng-model="openCover.FacCommRate1" />
+    </div>
+
+</div>
+<div class="form-group row" style="margin-bottom: 0px;">
+    <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">&nbsp;</label>
+    <div class="col-sm-5 col-xs-6" style="padding-left: 5px;">
+        <input ng-disabled="!isEditState" type="text" class="form-control mini-label"  ng-model="openCover.FacCommRate2" />
+    </div>
+
+</div>
+
+<div class="form-group row" style="margin-bottom: 0px;">
+    <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Other Charges :</label>
+    <div class="col-sm-5 col-xs-6" style="padding-left: 5px;">
+        <input ng-disabled="!isEditState" type="text" class="form-control mini-label"  ng-model="openCover.FacOthDeduct1" />
+    </div>
+
+</div>
+<div class="form-group row" style="margin-bottom: 0px;">
+    <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">&nbsp;</label>
+    <div class="col-sm-5 col-xs-6" style="padding-left: 5px;">
+        <input ng-disabled="!isEditState" type="text" class="form-control mini-label"  ng-model="openCover.FacOthDeduct2" />
+    </div>
+
+</div>
+<div class="form-group row" style="margin-bottom: 0px;">
+    <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Status<span class="red-font">*</span> :</label>
+    <div class="col-sm-5 col-xs-6" style="padding-left: 5px;">
+        <div angucomplete-alt id="ex1" style="width: 50px; display: inline-block;"
+             placeholder=""
+             maxlength="50"
+             pause="100"
+             selected-object="selectedStatus"
+             disable-input="!isEditState"
+             local-data="listStatus"
+             search-fields="StatusCode"
+             title-field="StatusCode, StatusDesc"
+             description-field="StatusDesc"
+             minlength="1"
+             input-class="form-control form-control-small mini-label"
+             model-name="{{openCover.FacAccSts}}"
+             match-class="highlight"></div>
+        <!--<input style="width: 50px; display: inline-block;" type="text" class="form-control mini-label" ng-model="openCover.FacAccSts" />-->
+        <input disabled style="width: 100%; display: inline-block;" type="text" class="form-control mini-label" ng-model="openCover.MasterStatus.StatusDesc" />
+        <div ng-if="!validation.FacAccSts && isSaveClicked" class="red-font validation-message">Please enter status</div>
+    </div>
+
+</div>
+<br>
+
+
+
+
+
+

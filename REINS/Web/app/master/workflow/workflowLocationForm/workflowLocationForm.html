@@ -1,0 +1,56 @@
+<div>
+	<div class="modal-header">
+        <button type="button" class="close pull-right" ng-click="$dismiss()" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Manage Locations routed by this Workflow</h4>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <label>
+                    <input type="checkbox" ng-model="workflow.is_all_location" />
+                    Ignore locations
+                </label>
+            </div>
+        </div>
+        <div class="row" ng-show="!workflow.is_all_location">
+            <div class="col-md-6">
+                <h4>Available Location</h4>
+                <input type="text" placeholder="Search" ng-model="vSearch">
+                <div>
+                    <label>
+                        <input type="checkbox" ng-model="select.selectAllLocation" ng-click="select_all_location()" />
+                        Select All
+                    </label>
+                    <label>
+                        <input type="checkbox" ng-model="select.unselectAllLocation" ng-click="unselect_all_location()" />
+                        Unselect All
+                    </label>
+                </div>
+                <div ng-repeat="location in workflow.Locations  | filter:vSearch">
+                    <label>
+                        <input type="checkbox" placeholder="Name" ng-model="location.is_active">
+                        {{location.Location.location_name}}
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h4>Selected Location</h4>
+                <input type="text" placeholder="Search" ng-model="sSearch">
+                <div ng-show="location.is_active" ng-repeat="location in workflow.Locations | filter:sSearch">
+                    {{location.Location.location_name}}
+                </div>
+            </div>
+            <div class="row gap"></div>
+        </div>
+    </div>
+   <div class="modal-footer">
+        <span class="btn btn-danger" ng-click="$dismiss()">
+            <i class="fa fa-times"></i>
+            Cancel
+        </span>
+        <span class="btn btn-success" ng-disabled="!validate.button" ng-click="onSave(workflow)">
+            <i class="fa fa-floppy-o"></i>
+            Save
+        </span>
+    </div>
+</div>

@@ -1,0 +1,301 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PatientViewModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="PatientViewModelStoreContainer">
+          <EntitySet Name="vw_KTPH_PatAdmission" EntityType="PatientViewModel.Store.vw_KTPH_PatAdmission" store:Type="Views" store:Schema="dbo" store:Name="vw_KTPH_PatAdmission">
+            <DefiningQuery>SELECT 
+      [vw_KTPH_PatAdmission].[CaseID] AS [CaseID], 
+      [vw_KTPH_PatAdmission].[SAPPaientID] AS [SAPPaientID], 
+      [vw_KTPH_PatAdmission].[WardClass] AS [WardClass], 
+      [vw_KTPH_PatAdmission].[MovementDateTime] AS [MovementDateTime], 
+      [vw_KTPH_PatAdmission].[OrganizationalUnit] AS [OrganizationalUnit], 
+      [vw_KTPH_PatAdmission].[Bed] AS [Bed], 
+      [vw_KTPH_PatAdmission].[PatientClass] AS [PatientClass], 
+      [vw_KTPH_PatAdmission].[AttendingDoctor] AS [AttendingDoctor], 
+      [vw_KTPH_PatAdmission].[Institution] AS [Institution], 
+      [vw_KTPH_PatAdmission].[CaseType] AS [CaseType], 
+      [vw_KTPH_PatAdmission].[Department] AS [Department], 
+      [vw_KTPH_PatAdmission].[Room] AS [Room], 
+      [vw_KTPH_PatAdmission].[SequenceNumber] AS [SequenceNumber], 
+      [vw_KTPH_PatAdmission].[MovementCategory] AS [MovementCategory], 
+      [vw_KTPH_PatAdmission].[InternalPatientID] AS [InternalPatientID], 
+      [vw_KTPH_PatAdmission].[AdmittingDoctor] AS [AdmittingDoctor], 
+      [vw_KTPH_PatAdmission].[PlannedIndicator] AS [PlannedIndicator], 
+      [vw_KTPH_PatAdmission].[EmergencyIndicator] AS [EmergencyIndicator], 
+      [vw_KTPH_PatAdmission].[AccidentType] AS [AccidentType], 
+      [vw_KTPH_PatAdmission].[AccidentNumber] AS [AccidentNumber], 
+      [vw_KTPH_PatAdmission].[ExternalHospital] AS [ExternalHospital], 
+      [vw_KTPH_PatAdmission].[AdmittingDepartment] AS [AdmittingDepartment], 
+      [vw_KTPH_PatAdmission].[DischargeDisposition] AS [DischargeDisposition], 
+      [vw_KTPH_PatAdmission].[MovementCreateUser] AS [MovementCreateUser], 
+      [vw_KTPH_PatAdmission].[MovementCancelIndicator] AS [MovementCancelIndicator], 
+      [vw_KTPH_PatAdmission].[MovementCancelUser] AS [MovementCancelUser], 
+      [vw_KTPH_PatAdmission].[MovementReason1] AS [MovementReason1], 
+      [vw_KTPH_PatAdmission].[MovementReason2] AS [MovementReason2], 
+      [vw_KTPH_PatAdmission].[PhysicianSpecialty] AS [PhysicianSpecialty], 
+      [vw_KTPH_PatAdmission].[ModeOfArrival] AS [ModeOfArrival], 
+      [vw_KTPH_PatAdmission].[DischargeDoctor] AS [DischargeDoctor], 
+      [vw_KTPH_PatAdmission].[ReferingDoctor] AS [ReferingDoctor], 
+      [vw_KTPH_PatAdmission].[MovementType] AS [MovementType], 
+      [vw_KTPH_PatAdmission].[TreatmentCategory] AS [TreatmentCategory], 
+      [vw_KTPH_PatAdmission].[BillingIndicator] AS [BillingIndicator], 
+      [vw_KTPH_PatAdmission].[CheckDigit] AS [CheckDigit], 
+      [vw_KTPH_PatAdmission].[CaseCreateUser] AS [CaseCreateUser], 
+      [vw_KTPH_PatAdmission].[CaseUpdateUser] AS [CaseUpdateUser], 
+      [vw_KTPH_PatAdmission].[CaseCancelIndicator] AS [CaseCancelIndicator], 
+      [vw_KTPH_PatAdmission].[CaseCancelUser] AS [CaseCancelUser], 
+      [vw_KTPH_PatAdmission].[Specialty] AS [Specialty], 
+      [vw_KTPH_PatAdmission].[CaseEndType] AS [CaseEndType], 
+      [vw_KTPH_PatAdmission].[MovementUpdateUser] AS [MovementUpdateUser]
+      FROM [dbo].[vw_KTPH_PatAdmission] AS [vw_KTPH_PatAdmission]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_PatientMasterInfo" EntityType="PatientViewModel.Store.vw_PatientMasterInfo" store:Type="Views" store:Schema="dbo" store:Name="vw_PatientMasterInfo">
+            <DefiningQuery>SELECT 
+      [vw_PatientMasterInfo].[InternalPatientID] AS [InternalPatientID], 
+      [vw_PatientMasterInfo].[SAPPatientID] AS [SAPPatientID], 
+      [vw_PatientMasterInfo].[Sex] AS [Sex], 
+      [vw_PatientMasterInfo].[PatientName] AS [PatientName], 
+      [vw_PatientMasterInfo].[DOB] AS [DOB], 
+      [vw_PatientMasterInfo].[IdentificationDocNo] AS [IdentificationDocNo], 
+      [vw_PatientMasterInfo].[ExternalPatientID] AS [ExternalPatientID], 
+      [vw_PatientMasterInfo].[Insitution] AS [Insitution]
+      FROM [dbo].[vw_PatientMasterInfo] AS [vw_PatientMasterInfo]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'PATIENT_VIEW.dbo.vw_KTPH_PatAdmission' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="vw_KTPH_PatAdmission">
+          <Key>
+            <PropertyRef Name="CaseID" />
+            <PropertyRef Name="SequenceNumber" />
+          </Key>
+          <Property Name="CaseID" Type="varchar" Nullable="false" MaxLength="11" />
+          <Property Name="SAPPaientID" Type="varchar" MaxLength="50" />
+          <Property Name="WardClass" Type="varchar" MaxLength="4" />
+          <Property Name="MovementDateTime" Type="datetime" />
+          <Property Name="OrganizationalUnit" Type="varchar" MaxLength="8" />
+          <Property Name="Bed" Type="varchar" MaxLength="8" />
+          <Property Name="PatientClass" Type="nvarchar" MaxLength="100" />
+          <Property Name="AttendingDoctor" Type="varchar" MaxLength="60" />
+          <Property Name="Institution" Type="nvarchar" MaxLength="50" />
+          <Property Name="CaseType" Type="nvarchar" MaxLength="50" />
+          <Property Name="Department" Type="nvarchar" MaxLength="100" />
+          <Property Name="Room" Type="nvarchar" MaxLength="100" />
+          <Property Name="SequenceNumber" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="MovementCategory" Type="nvarchar" MaxLength="100" />
+          <Property Name="InternalPatientID" Type="uniqueidentifier" />
+          <Property Name="AdmittingDoctor" Type="nvarchar" MaxLength="100" />
+          <Property Name="PlannedIndicator" Type="nvarchar" MaxLength="100" />
+          <Property Name="EmergencyIndicator" Type="nvarchar" MaxLength="100" />
+          <Property Name="AccidentType" Type="nvarchar" MaxLength="100" />
+          <Property Name="AccidentNumber" Type="nvarchar" MaxLength="100" />
+          <Property Name="ExternalHospital" Type="nvarchar" MaxLength="100" />
+          <Property Name="AdmittingDepartment" Type="nvarchar" MaxLength="100" />
+          <Property Name="DischargeDisposition" Type="nvarchar" MaxLength="100" />
+          <Property Name="MovementCreateUser" Type="nvarchar" MaxLength="100" />
+          <Property Name="MovementCancelIndicator" Type="nvarchar" MaxLength="100" />
+          <Property Name="MovementCancelUser" Type="nvarchar" MaxLength="100" />
+          <Property Name="MovementReason1" Type="nvarchar" MaxLength="100" />
+          <Property Name="MovementReason2" Type="nvarchar" MaxLength="100" />
+          <Property Name="PhysicianSpecialty" Type="nvarchar" MaxLength="100" />
+          <Property Name="ModeOfArrival" Type="nvarchar" MaxLength="100" />
+          <Property Name="DischargeDoctor" Type="nvarchar" MaxLength="100" />
+          <Property Name="ReferingDoctor" Type="nvarchar" MaxLength="100" />
+          <Property Name="MovementType" Type="nvarchar" MaxLength="100" />
+          <Property Name="TreatmentCategory" Type="nvarchar" MaxLength="100" />
+          <Property Name="BillingIndicator" Type="nvarchar" MaxLength="100" />
+          <Property Name="CheckDigit" Type="nvarchar" MaxLength="100" />
+          <Property Name="CaseCreateUser" Type="nvarchar" MaxLength="100" />
+          <Property Name="CaseUpdateUser" Type="nvarchar" MaxLength="100" />
+          <Property Name="CaseCancelIndicator" Type="nvarchar" MaxLength="100" />
+          <Property Name="CaseCancelUser" Type="nvarchar" MaxLength="100" />
+          <Property Name="Specialty" Type="nvarchar" MaxLength="100" />
+          <Property Name="CaseEndType" Type="nvarchar" MaxLength="100" />
+          <Property Name="MovementUpdateUser" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'PATIENT_VIEW.dbo.vw_PatientMasterInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="vw_PatientMasterInfo">
+          <Key>
+            <PropertyRef Name="InternalPatientID" />
+            <PropertyRef Name="SAPPatientID" />
+          </Key>
+          <Property Name="InternalPatientID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SAPPatientID" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Sex" Type="varchar" MaxLength="1" />
+          <Property Name="PatientName" Type="varchar" MaxLength="30" />
+          <Property Name="DOB" Type="datetime" />
+          <Property Name="IdentificationDocNo" Type="nvarchar" MaxLength="20" />
+          <Property Name="ExternalPatientID" Type="nvarchar" MaxLength="100" />
+          <Property Name="Insitution" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PatientViewModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="PATIENT_VIEW_Database" p1:LazyLoadingEnabled="true" >
+          <EntitySet Name="vw_PatientMasterInfo" EntityType="PatientViewModel.vw_PatientMasterInfo" />
+          <EntitySet Name="vw_KTPH_PatAdmission" EntityType="PatientViewModel.vw_KTPH_PatAdmission" />
+        </EntityContainer>
+        <EntityType Name="vw_PatientMasterInfo">
+          <Key>
+            <PropertyRef Name="InternalPatientID" />
+            <PropertyRef Name="SAPPatientID" />
+          </Key>
+          <Property Type="Guid" Name="InternalPatientID" Nullable="false" />
+          <Property Type="String" Name="SAPPatientID" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Sex" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="PatientName" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="DOB" Precision="3" />
+          <Property Type="String" Name="IdentificationDocNo" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ExternalPatientID" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Insitution" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="vw_KTPH_PatAdmission">
+          <Key>
+            <PropertyRef Name="CaseID" />
+            <PropertyRef Name="SequenceNumber" />
+          </Key>
+          <Property Type="String" Name="CaseID" Nullable="false" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SAPPaientID" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="WardClass" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="MovementDateTime" Precision="3" />
+          <Property Type="String" Name="OrganizationalUnit" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Bed" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="PatientClass" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="AttendingDoctor" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Institution" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="CaseType" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Department" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Room" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="SequenceNumber" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="MovementCategory" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="Guid" Name="InternalPatientID" />
+          <Property Type="String" Name="AdmittingDoctor" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="PlannedIndicator" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="EmergencyIndicator" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="AccidentType" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="AccidentNumber" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ExternalHospital" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="AdmittingDepartment" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="DischargeDisposition" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="MovementCreateUser" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="MovementCancelIndicator" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="MovementCancelUser" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="MovementReason1" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="MovementReason2" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="PhysicianSpecialty" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ModeOfArrival" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="DischargeDoctor" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ReferingDoctor" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="MovementType" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="TreatmentCategory" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="BillingIndicator" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="CheckDigit" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="CaseCreateUser" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="CaseUpdateUser" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="CaseCancelIndicator" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="CaseCancelUser" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Specialty" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="CaseEndType" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="MovementUpdateUser" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PatientViewModelStoreContainer" CdmEntityContainer="PATIENT_VIEW_Database" >
+          <EntitySetMapping Name="vw_PatientMasterInfo">
+            <EntityTypeMapping TypeName="PatientViewModel.vw_PatientMasterInfo">
+              <MappingFragment StoreEntitySet="vw_PatientMasterInfo">
+                <ScalarProperty Name="Insitution" ColumnName="Insitution" />
+                <ScalarProperty Name="ExternalPatientID" ColumnName="ExternalPatientID" />
+                <ScalarProperty Name="IdentificationDocNo" ColumnName="IdentificationDocNo" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="PatientName" ColumnName="PatientName" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="SAPPatientID" ColumnName="SAPPatientID" />
+                <ScalarProperty Name="InternalPatientID" ColumnName="InternalPatientID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_KTPH_PatAdmission">
+            <EntityTypeMapping TypeName="PatientViewModel.vw_KTPH_PatAdmission">
+              <MappingFragment StoreEntitySet="vw_KTPH_PatAdmission">
+                <ScalarProperty Name="MovementUpdateUser" ColumnName="MovementUpdateUser" />
+                <ScalarProperty Name="CaseEndType" ColumnName="CaseEndType" />
+                <ScalarProperty Name="Specialty" ColumnName="Specialty" />
+                <ScalarProperty Name="CaseCancelUser" ColumnName="CaseCancelUser" />
+                <ScalarProperty Name="CaseCancelIndicator" ColumnName="CaseCancelIndicator" />
+                <ScalarProperty Name="CaseUpdateUser" ColumnName="CaseUpdateUser" />
+                <ScalarProperty Name="CaseCreateUser" ColumnName="CaseCreateUser" />
+                <ScalarProperty Name="CheckDigit" ColumnName="CheckDigit" />
+                <ScalarProperty Name="BillingIndicator" ColumnName="BillingIndicator" />
+                <ScalarProperty Name="TreatmentCategory" ColumnName="TreatmentCategory" />
+                <ScalarProperty Name="MovementType" ColumnName="MovementType" />
+                <ScalarProperty Name="ReferingDoctor" ColumnName="ReferingDoctor" />
+                <ScalarProperty Name="DischargeDoctor" ColumnName="DischargeDoctor" />
+                <ScalarProperty Name="ModeOfArrival" ColumnName="ModeOfArrival" />
+                <ScalarProperty Name="PhysicianSpecialty" ColumnName="PhysicianSpecialty" />
+                <ScalarProperty Name="MovementReason2" ColumnName="MovementReason2" />
+                <ScalarProperty Name="MovementReason1" ColumnName="MovementReason1" />
+                <ScalarProperty Name="MovementCancelUser" ColumnName="MovementCancelUser" />
+                <ScalarProperty Name="MovementCancelIndicator" ColumnName="MovementCancelIndicator" />
+                <ScalarProperty Name="MovementCreateUser" ColumnName="MovementCreateUser" />
+                <ScalarProperty Name="DischargeDisposition" ColumnName="DischargeDisposition" />
+                <ScalarProperty Name="AdmittingDepartment" ColumnName="AdmittingDepartment" />
+                <ScalarProperty Name="ExternalHospital" ColumnName="ExternalHospital" />
+                <ScalarProperty Name="AccidentNumber" ColumnName="AccidentNumber" />
+                <ScalarProperty Name="AccidentType" ColumnName="AccidentType" />
+                <ScalarProperty Name="EmergencyIndicator" ColumnName="EmergencyIndicator" />
+                <ScalarProperty Name="PlannedIndicator" ColumnName="PlannedIndicator" />
+                <ScalarProperty Name="AdmittingDoctor" ColumnName="AdmittingDoctor" />
+                <ScalarProperty Name="InternalPatientID" ColumnName="InternalPatientID" />
+                <ScalarProperty Name="MovementCategory" ColumnName="MovementCategory" />
+                <ScalarProperty Name="SequenceNumber" ColumnName="SequenceNumber" />
+                <ScalarProperty Name="Room" ColumnName="Room" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="CaseType" ColumnName="CaseType" />
+                <ScalarProperty Name="Institution" ColumnName="Institution" />
+                <ScalarProperty Name="AttendingDoctor" ColumnName="AttendingDoctor" />
+                <ScalarProperty Name="PatientClass" ColumnName="PatientClass" />
+                <ScalarProperty Name="Bed" ColumnName="Bed" />
+                <ScalarProperty Name="OrganizationalUnit" ColumnName="OrganizationalUnit" />
+                <ScalarProperty Name="MovementDateTime" ColumnName="MovementDateTime" />
+                <ScalarProperty Name="WardClass" ColumnName="WardClass" />
+                <ScalarProperty Name="SAPPaientID" ColumnName="SAPPaientID" />
+                <ScalarProperty Name="CaseID" ColumnName="CaseID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,353 @@
+<style>
+    .validation-new {
+        margin-top: 0px;
+        color: red;
+        font-size:0.9em;
+    }
+</style>
+<div>
+    <div class="modal-header">
+        <button type="button" class="close pull-right" ng-click="$dismiss()" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">User</h4>
+    </div>
+    <div class="modal-body form-horizontal" style="max-height:450px;overflow-y: scroll;">
+        <div accordion close-others="false">
+            <div accordion-group is-open="true">
+                <div accordion-heading>
+                    User Info <i class="pull-right fa fa-chevron-down"></i>
+                </div>
+                <div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="row form-group">
+                                <label class="col-sm-4 control-label" for="txtEmployeeName">Employee Name <span class="validation-new">*</span></label>
+                                <div class="col-sm-8">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Search Employee" id="txtEmployeeName" ng-model="user.name"/>
+                                        <span class="input-group-addon" style="cursor: pointer;" ng-click="onSearchUser(user.name)">
+                                            <i class="fa fa-search"></i>
+                                        </span>
+                                    </div>
+                                    <div class="validation-new" ng-show="validate.name">
+                                        Please enter Employee Name
+                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--<div class="col-sm-6">-->
+                            <!--<div class="row form-group">-->
+                                <!--<label class="col-sm-4 control-label">Institution <span class="validation-new">*</span></label>-->
+                                <!--<div class="col-sm-8">-->
+                                    <!--<select ng-model="user.institution_id" class="form-control"-->
+                                        <!--ng-options="i.institution_id as i.institution_name for i in institutions">-->
+                                        <!--<option value="">-- Select Institution --</option>-->
+                                    <!--</select>-->
+                                    <!--<div class="validation-new" ng-show="validate.institution_id">-->
+                                        <!--Please Select Institution-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    </div>
+                    <div class="row">
+                        <!--<div class="col-sm-6">
+                            <div class="row form-group">
+                                <label class="col-sm-4 control-label" for="txtUsername">Username <span class="validation-new">*</span></label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" placeholder="Username" id="txtUsername" ng-disabled="tempUsername != null" ng-model="user.user_name" />
+                                    <div class="validation-new" ng-show="validate.user_name">
+                                        Please enter Username
+                                    </div>
+                                </div>
+                            </div>
+                        </div>-->
+                        <div class="col-sm-6">
+                            <div class="row form-group">
+                                <label class="col-sm-4 control-label" for="txtADID">ADID <span class="validation-new">*</span></label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" placeholder="ADID" id="txtADID" ng-model="user.adid" />
+                                    <div class="validation-new" ng-show="validate.adid">
+                                        Please enter ADID
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="row form-group">
+                                <label class="col-sm-4 control-label" for="txtEmployeeId">Employee ID</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" placeholder="Employee ID" id="txtEmployeeId" ng-model="user.employee_id" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="row form-group">
+                                <label class="col-sm-4 control-label" for="txtEmail">Email <span class="validation-new">*</span></label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" placeholder="Email" id="txtEmail" ng-model="user.email" />
+                                    <div class="validation-new" ng-show="validate.email">
+                                        Please enter Email
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="row form-group">
+                                <label class="col-sm-4 control-label">Gender</label>
+                                <div class="col-sm-8">
+                                    <label class="radio-inline"><input type="radio" id="rboGenderM" name="rboGender" value="M" ng-model="user.gender"/>Male</label>
+                                    <label class="radio-inline"><input type="radio" id="rboGenderF" name="rboGender" value="F" ng-model="user.gender"/>Female</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="row form-group">
+                                <label class="col-sm-4 control-label">Join Date</label>
+                                <div class="col-sm-8">
+                                    <p class="input-group">
+                                        <input ng-readonly="!isDateEnable" 
+                                            type="text"  class="form-control" ng-model="user.date_of_join" 
+                                            name="dateOfJoin"
+                                            datepicker-popup="dd-MM-yyyy" close-text="Close" show-weeks="false" show-button-bar="false"
+                                            id="dtDateOfJoin"
+                                        date-fix />                                
+                                        <span ng-if="!isDateEnable" class="input-group-btn">
+                                            <button type="button" class="btn btn-default"
+                                                ng-click="user.date_of_join = null">
+                                                <img src="/Web/img/fa-times.png" />
+                                            </button>
+                                        </span>
+                                        <span ng-if="isDateEnable" class="input-group-btn">
+                                            <button type="button" class="btn btn-default"
+                                                ng-click="datePickerOpen('dtDateOfJoin')">
+                                                <i class="fa fa-calendar"></i>
+                                            </button>
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="row form-group">
+                                <label class="col-sm-4 control-label">Department</label>
+                                <div class="col-sm-8">
+                                    <select ng-model="user.department_id" class="form-control"
+                                        ng-options="d.department_id as d.department_description for d in departments">
+                                        <option value=""> -- Select Department -- </option>
+                                    </select>
+                                    <!--<input type="text" class="form-control" placeholder="Department" id="txtDepartment" disabled ng-model="user.department_id" />-->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="row form-group">
+                                <label class="col-sm-4 control-label">Employee Category</label>
+                                <div class="col-sm-8">
+                                    <select ng-model="user.employee_category_id" class="form-control"
+                                        ng-options="e.employee_category_id as e.employee_category_description for e in employeeCategories">
+                                        <option value="">-- Select Employee Category --</option>
+                                    </select>
+                                    <!--<input type="text" class="form-control" placeholder="Employee Category" id="txtEmployeCategory" disabled ng-model="user.employee_category_id" />-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="row form-group">
+                                <label class="col-sm-4 control-label">Designation</label>
+                                <div class="col-sm-8">
+                                    <select ng-model="user.designation_id" class="form-control"
+                                        ng-options="d.designation_id as d.designation_description for d in designations">
+                                        <option value="">-- Select Designation --</option>
+                                    </select>
+                                    <!--<input type="text" class="form-control" placeholder="Designation" id="txtDesignation" disabled ng-model="user.designation_id" />-->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="row form-group">
+                                <label class="col-sm-4 control-label" for="txtMCR">MCR</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" placeholder="MCR" id="txtMCR" ng-model="user.mcr" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="row form-group">
+                                <label class="col-sm-4 control-label">LDAP User?</label>
+                                <div class="col-sm-8">
+                                    <input type="checkbox" ng-model="user.is_ldap" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                        </div>
+                    </div>
+                    -->
+                </div>
+            </div>
+            <div accordion-group is-open="true" >
+                <div accordion-heading>
+                    User Roles <i class="pull-right fa fa-chevron-down"></i>
+                </div>
+                <div>
+                    
+                    <span class="btn btn-primary" ng-click="onAddRole(user.UserRoles)">
+                        <i class="fa fa-plus-circle"></i>
+                        Add Role
+                    </span>
+                    <div class="row" ng-show="user.UserRoles.length >= 0">
+                    <br />
+                        <table class="table table-striped table-bordered data-grid">
+                            <thead>
+                                <tr>
+                                    <th class="action-button"></th>
+                                    <th>Role</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-hide="(user.UserRoles | filter: {is_active: true}).length > 0">
+                                    <td colspan="2">No data found in the system.
+                                    </td>
+                                </tr>
+                                <tr ng-repeat="userRole in user.UserRoles | filter:{is_active: true}">
+                                    <td class="action-button" ng-show="userRole.Role.role_name != 'REPORTER' && userRole.Role.role_name != 'GUEST' && userRole.Role.role_name != 'ANONYMOUS REPORTER' && userRole.Role.role_name != 'ADDITIONAL CC'">
+                                        <span ng-click="onDeleteRole(userRole)"  class="btn btn-danger btn-sm">
+                                            Delete
+                                        </span>
+                                    </td>
+                                    <td ng-show="userRole.Role.role_name != 'REPORTER' && userRole.Role.role_name != 'GUEST' && userRole.Role.role_name != 'ANONYMOUS REPORTER' && userRole.Role.role_name != 'ADDITIONAL CC'">
+                                        {{userRole.Role.role_name}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div accordion-group is-open="true" >
+                <div accordion-heading>
+                    Routing Groups <i class="pull-right fa fa-chevron-down"></i>
+                </div>
+                <div>
+                    
+                    <span class="btn btn-primary" ng-click="onAddRoutingGroup(user)">
+                        <i class="fa fa-plus-circle"></i>
+                        Add Routing Group
+                    </span>
+                    <div class="row" ng-show="user.RoutingGroups.length >= 0">
+                    <br />
+                        <table class="table table-striped table-bordered data-grid">
+                            <thead>
+                                <tr>
+                                    <th class="action-button"></th>
+                                    <th>Routing Group</th>
+                                    <th>Locations</th>
+                                    <th>Departments</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-hide="(user.RoutingGroups | filter: {is_active: true}).length > 0">
+                                    <td colspan="4">No data found in the system.
+                                    </td>
+                                </tr>
+                                <tr ng-repeat="item in user.RoutingGroups | filter:{is_active: true}">
+                                    <td class="action-button" ng-show="item.RoutingGroup.name != 'Reporter'">
+                                        <span ng-click="item.is_active = false"  class="btn btn-danger btn-sm">
+                                            Delete
+                                        </span>
+                                        <span ng-click="onAddLocation(item)"  class="btn btn-primary btn-sm">
+                                            Assign Location
+                                        </span>
+                                        <span ng-click="onAddDepartment(item)"  class="btn btn-primary btn-sm">
+                                            Assign Department
+                                        </span>
+                                    </td>
+                                    <td ng-show="item.RoutingGroup.name != 'Reporter'">
+                                        {{item.RoutingGroup.name}}
+                                    </td>
+                                    <td ng-show="item.RoutingGroup.name != 'Reporter'">
+                                        <div ng-show="item.is_all_location">
+                                            All Locations
+                                        </div>
+                                        <div ng-show="!item.is_all_location">
+                                            <span ng-show="location.is_active" ng-repeat="location in item.RoutingLocations">[{{location.Location.location_name}}]</span>
+                                        </div>
+                                    </td>
+                                    <td ng-show="item.RoutingGroup.name != 'Reporter'">
+                                        <div ng-show="item.is_all_department">
+                                            All Departments
+                                        </div>
+                                        <div ng-show="!item.is_all_department">
+                                            <span ng-show="department.is_active" ng-repeat="department in item.RoutingDepartments">[{{department.Department.department_description}}]</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div accordion-group is-open="true" >
+                <div accordion-heading>
+                    Committee Groups <i class="pull-right fa fa-chevron-down"></i>
+                </div>
+                <div>
+                    
+                    <span class="btn btn-primary" ng-click="onAddCommitteeGroup(user)">
+                        <i class="fa fa-plus-circle"></i>
+                        Add Committee Group
+                    </span>
+                    <div class="row" ng-show="user.CommitteeGroups.length >= 0">
+                    <br />
+                        <table class="table table-striped table-bordered data-grid">
+                            <thead>
+                                <tr>
+                                    <th class="action-button"></th>
+                                    <th>CommitteeGroup</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-hide="(user.CommitteeGroups | filter: {is_active: true}).length > 0">
+                                    <td colspan="2">No data found in the system.
+                                    </td>
+                                </tr>
+                                <tr ng-repeat="item in user.CommitteeGroups | filter:{is_active: true}">
+                                    <td class="action-button">
+                                        <span ng-click="onDeleteCommittee(item)"  class="btn btn-danger btn-sm">
+                                            Delete
+                                        </span>
+                                    </td>
+                                    <td>
+                                        {{item.CommitteeGroup.name}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <div class="modal-footer">
+        <span class="btn btn-danger" ng-click="$dismiss()">
+            <i class="fa fa-times"></i>
+            Cancel
+        </span>
+        <span class="btn btn-success" ng-disabled="!validate.button" ng-click="onSave(user)">
+            <i class="fa fa-floppy-o"></i>
+            Save
+        </span>
+    </div>
+</div>

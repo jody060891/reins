@@ -1,0 +1,56 @@
+<div>
+	<div class="modal-header">
+        <button type="button" class="close pull-right" ng-click="$dismiss()" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Manage Departments routed by this Workflow</h4>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <label>
+                    <input type="checkbox" ng-model="workflow.is_all_department" />
+                    Ignore departments
+                </label>
+            </div>
+        </div>
+        <div class="row" ng-show="!workflow.is_all_department">
+            <div class="col-md-6">
+                <h4>Available Department</h4>
+                <input type="text" placeholder="Search" ng-model="vSearch">
+                <div>
+                    <label>
+                        <input type="checkbox" ng-model="select.selectAllDepartment" ng-click="select_all_department()" />
+                        Select All
+                    </label>
+                    <label>
+                        <input type="checkbox" ng-model="select.unselectAllDepartment" ng-click="unselect_all_department()" />
+                        Unselect All
+                    </label>
+                </div>
+                <div ng-repeat="department in workflow.Departments  | filter:vSearch">
+                    <label>
+                        <input type="checkbox" placeholder="Name" ng-model="department.is_active">
+                        {{department.Department.department_description}}
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h4>Selected Department</h4>
+                <input type="text" placeholder="Search" ng-model="sSearch">
+                <div ng-show="department.is_active" ng-repeat="department in workflow.Departments | filter:sSearch">
+                    {{department.Department.department_description}}
+                </div>
+            </div>
+            <div class="row gap"></div>
+        </div>
+    </div>
+   <div class="modal-footer">
+        <span class="btn btn-danger" ng-click="$dismiss()">
+            <i class="fa fa-times"></i>
+            Cancel
+        </span>
+        <span class="btn btn-success" ng-disabled="!validate.button" ng-click="onSave(workflow)">
+            <i class="fa fa-floppy-o"></i>
+            Save
+        </span>
+    </div>
+</div>

@@ -1,0 +1,297 @@
+<style>
+    .validation-new {
+        margin-top: 0px;
+        color: red;
+        font-size:0.9em;
+    }
+</style>
+<div>
+    <div class="modal-header">
+        <button type="button" class="close pull-right" ng-click="$dismiss()" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Pengajuan Pinjaman</h4>
+    </div>
+    <div class="modal-body form-horizontal">
+        <div class="form-group">
+            <label class="col-sm-4 control-label">Tipe Pinjaman <span class="validation-new">*</span></label>
+            <div class="col-sm-4">
+                <input ng-change="onChangeTipe()" type="radio" name="optionsTipeRadios"  id="radioClusterTipe"
+                       ng-model="pinjaman.tipe" value="CLUSTER" >
+                <label for="radioClusterTipe">Cluster</label>
+
+            </div>
+            <div class="col-sm-4">
+                <input ng-change="onChangeTipe()" type="radio" name="optionsTipeRadios"  id="radioPersonalTipe"
+                       ng-model="pinjaman.tipe" value="PERSONAL" >
+                <label for="radioPersonalTipe">Personal</label>
+
+            </div>
+            <div class="col-sm-4"></div>
+            <div class="validation-new col-sm-4" ng-show="validate.tipe">
+                Please select Tipe Pinjaman.
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="txtNomorRegister" class="col-sm-4 control-label">Nomor Register <span class="validation-new">*</span></label>
+            <div class="col-sm-3 col-xs-8" style="padding-right: 0;">
+                <div class="input-group">
+                    <input id="txtNomorRegister" type="text" class="form-control" ng-model="keyword.keyword"/>
+                    <span class="input-group-addon btn btn-primary" ng-click="onSearchRegister()">
+                        <i class="fa fa-search"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="txtPropinsi" class="col-sm-4 control-label">Jenis Pinjaman <span class="validation-new">*</span></label>
+            <div class="col-sm-8">
+                <select ng-change="FetchWilayah()" ng-options="i.jenis_pinjaman_id as i.kode+' '+i.jenis_pinjaman for i in listJenisPinjaman"
+                        class="form-control" id="txtPropinsi" ng-model="pinjaman.jenis_pinjaman_id">
+                    <option value="">-- Select Jenis Pinjaman --</option>
+                </select>
+                <div class="validation-new" ng-show="validate.jenis_pinjaman_id">
+                    Please select Jenis Pinjaman.
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="txtNomorPerjanjian" class="col-sm-4 control-label">Nomor Perjanjian <span class="validation-new">*</span></label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="txtNomorPerjanjian" ng-model="pinjaman.nomor_perjanjian">
+                <div class="validation-new" ng-show="validate.nomor_perjanjian">
+                    Please enter Nomor Perjanjian.
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="datePerjanjian" class="col-sm-4 control-label">Tanggal Perjanjian <span class="validation-new">*</span></label>
+            <div class="col-sm-4">
+                <p class="input-group">
+                    <input type="text" id="datePerjanjian" ng-blur="onChangeDateOfOccurance(pinjaman.tanggal_perjanjian)" name="datePerjanjian"
+                           class="form-control" datepicker-popup="dd-MM-yyyy" ng-model="pinjaman.tanggal_perjanjian" close-text="Close" show-weeks="false" show-button-bar="false" date-fix />
+
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default"
+                            ng-click="datePickerOpen('datePerjanjian')">
+                            <i class="fa fa-calendar"></i>
+                        </button>
+                    </span>
+                </p>
+                <div class="validation-new" ng-show="validate.tanggal_perjanjian">
+                    Please enter Tanggal Perjanjian.
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="txtBeritaAcara" class="col-sm-4 control-label">Nomor Berita Acara <span class="validation-new">*</span></label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="txtBeritaAcara" ng-model="pinjaman.nomor_berita_acara">
+                <div class="validation-new" ng-show="validate.nomor_berita_acara">
+                    Please enter Nomor Berita Acara.
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="txtJumlahPinjaman" class="col-sm-4 control-label">Jumlah Pinjaman <span class="validation-new">*</span></label>
+            <div class="col-sm-8">
+                <input type="text" decimal-only-input placeholder="Rp" class="form-control" id="txtJumlahPinjaman" ng-model="pinjaman.jumlah_pinjaman">
+                <div class="validation-new" ng-show="validate.jumlah_pinjaman">
+                    Please enter Jumlah Pinjaman.
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="txtBunga" class="col-sm-4 control-label">Bunga (%) <span class="validation-new">*</span></label>
+            <div class="col-sm-8">
+                <input type="text" decimal-only-input placeholder="%" class="form-control" id="txtBunga" ng-model="pinjaman.bunga">
+                <div class="validation-new" ng-show="validate.bunga">
+                    Please enter Bunga.
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="txtJangkaWaktu" class="col-sm-4 control-label">Jangka Waktu (Tahun) <span class="validation-new">*</span></label>
+            <div class="col-sm-8">
+
+                <input type="text" number-only-input placeholder="" class="form-control" id="txtJangkaWaktu" ng-model="pinjaman.jangka_waktu">
+                <div class="validation-new" ng-show="validate.jangka_waktu">
+                    Please enter Jangka Waktu.
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="txtJangkaWaktu" class="col-sm-4 control-label">Tanggal Mulai Angsuran <span class="validation-new">*</span></label>
+            <div class="col-sm-4">
+                <p class="input-group">
+                    <input type="text" id="dateMulaiAngsuran" ng-blur="onChangeDateOfOccurance(pinjaman.tanggal_mulai_angsuran)" name="dateMulaiAngsuran"
+                           class="form-control" datepicker-popup="dd-MM-yyyy" ng-model="pinjaman.tanggal_mulai_angsuran" close-text="Close" show-weeks="false" show-button-bar="false" date-fix />
+
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default"
+                                ng-click="datePickerOpen('dateMulaiAngsuran')">
+                            <i class="fa fa-calendar"></i>
+                        </button>
+                    </span>
+                </p>
+                <div class="validation-new" ng-show="validate.tanggal_mulai_angsuran">
+                    Please enter Tanggal Mulai Angsuran.
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="txtPeriodeAngsuran" class="col-sm-4 control-label">Periode Angsuran <span class="validation-new">*</span></label>
+            <div class="col-sm-8">
+
+                <input type="text" number-only-input placeholder="" class="form-control" id="txtPeriodeAngsuran" ng-model="pinjaman.periode_angsuran">
+                <div class="validation-new" ng-show="validate.periode_angsuran">
+                    Please enter Periode Angsuran.
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-4 control-label">Input Data Jaminan? <span class="validation-new">*</span></label>
+            <div class="col-sm-2">
+                <input type="radio" name="optionsJaminanRadio"  id="radioDataJaminanYes"
+                       ng-model="pinjaman.is_ada_jaminan" ng-value="true">
+                <label for="radioDataJaminanYes">Yes</label>
+
+            </div>
+            <div class="col-sm-2">
+                <input type="radio" name="optionsJaminanRadio"  id="radioDataJaminanNo"
+                       ng-model="pinjaman.is_ada_jaminan" ng-value="false">
+                <label for="radioDataJaminanNo">No</label>
+
+            </div>
+        </div>
+
+        <div accordion close-others="false" ng-if="pinjaman.is_ada_jaminan">
+            <div accordion-group is-open="true" >
+                <div accordion-heading>
+                    Jaminan <i class="pull-right fa fa-chevron-down"></i>
+                </div>
+                <div>
+
+                    <button ng-if="(pinjaman.tipe == 'PERSONAL' && (pinjaman.Jaminan == null || (pinjaman.Jaminan | filter: {is_active: true}).length == 0)) || pinjaman.tipe == 'CLUSTER'"
+                            class="btn btn-primary" ng-click="onAddJaminan()">
+                        <i class="fa fa-plus-circle"></i>
+                        Tambah Jaminan
+                    </button>
+                    <div class="row" ng-show="(pinjaman.Jaminan | filter: {is_active: true}).length > 0">
+                        <br />
+                        <div class="col-md-12 col-xs-11" style="overflow-x: auto">
+                            <table class="table table-striped table-bordered data-grid">
+                                <thead>
+                                <tr>
+                                    <th class="action-button"></th>
+                                    <th>Jenis Jaminan</th>
+                                    <th>Nama Pemilik</th>
+                                    <th>Nomor Jaminan</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-hide="(pinjaman.Jaminan | filter: {is_active: true}).length > 0">
+                                    <td colspan="4">No data found in the system.
+                                    </td>
+                                </tr>
+                                <tr ng-repeat="jaminan in pinjaman.Jaminan | filter:{is_active: true}">
+                                    <td class="action-button">
+                                        <span ng-click="onEditJaminan(jaminan)" class="btn btn-primary btn-sm">
+                                            Edit
+                                        </span>
+                                        <span ng-click="onDeleteJaminan(jaminan)"  class="btn btn-danger btn-sm">
+                                            Delete
+                                        </span>
+                                    </td>
+                                    <td>
+                                        {{jaminan.jenis_jaminan}}
+                                    </td>
+                                    <td>
+                                        {{jaminan.nama_pemilik}}
+                                    </td>
+                                    <td>
+                                        {{jaminan.nomor_jaminan}}
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div ng-if="(pinjaman.Jaminan | filter: {is_active: true}).length > 0">
+            <div class="form-group">
+                <label for="txtPenyerah" class="col-sm-4 control-label">Nama Yang Menyerahkan <span class="validation-new">*</span></label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="txtPenyerah" ng-model="pinjaman.nama_penyerah">
+                    <div class="validation-new" ng-show="validate.nama_penyerah">
+                        Please enter Nama Yang Menyerahkan
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="txtPekerjaan" class="col-sm-4 control-label">Pekerjaan <span class="validation-new">*</span></label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="txtPekerjaan" ng-model="pinjaman.pekerjaan">
+                    <div class="validation-new" ng-show="validate.pekerjaan">
+                        Please enter Pekerjaan
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="txtAlamat" class="col-sm-4 control-label">Alamat <span class="validation-new">*</span></label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="txtAlamat" ng-model="pinjaman.alamat">
+                    <div class="validation-new" ng-show="validate.alamat">
+                        Please enter Alamat
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="txtPenerima" class="col-sm-4 control-label">Yang Menerima (ASEI) <span class="validation-new">*</span></label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="txtPenerima" ng-model="pinjaman.penerima">
+                    <div class="validation-new" ng-show="validate.penerima">
+                        Please enter Penerima
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="txtJabatan" class="col-sm-4 control-label">Jabatan <span class="validation-new">*</span></label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="txtJabatan" ng-model="pinjaman.jabatan">
+                    <div class="validation-new" ng-show="validate.jabatan">
+                        Please enter Jabatan
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+   <div class="modal-footer">
+        <button class="btn btn-danger" ng-click="$dismiss()">
+            <i class="fa fa-times"></i>
+            Cancel
+        </button>
+        <button class="btn btn-success" ng-disabled="!validate.button" ng-click="onSave(wilayah)">
+            <i class="fa fa-floppy-o"></i>
+            Save
+        </button>
+    </div>
+</div>

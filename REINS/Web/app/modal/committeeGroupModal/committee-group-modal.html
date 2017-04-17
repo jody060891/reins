@@ -1,0 +1,52 @@
+<div>
+	<div class="modal-header">
+        <button type="button" class="close pull-right" ng-click="$dismiss()" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Add Committee Group</h4>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-6">
+                <h4>Available Committee Group</h4>
+                <input type="text" placeholder="Search" ng-model="vSearch">
+                <div>
+                    <label>
+                        <input type="checkbox" ng-model="select.selectAllCommitteeGroup" ng-click="select_all_committeeGroup()" />
+                        Select All
+                    </label>
+                    <label>
+                        <input type="checkbox" ng-model="select.unselectAllCommitteeGroup" ng-click="unselect_all_committeeGroup()" />
+                        Unselect All
+                    </label>
+                </div>
+                <div ng-repeat="committeeGroup in data.CommitteeGroups  | filter:vSearch">
+                    <label>
+                        <input type="checkbox" placeholder="Name" ng-model="committeeGroup.is_active">
+                        {{committeeGroup.CommitteeGroup.name}}
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h4>Selected Committee Group</h4>
+                <input type="text" placeholder="Search" ng-model="sSearch">
+                <div ng-show="committeeGroup.is_active" ng-repeat="committeeGroup in data.CommitteeGroups | filter:sSearch">
+                    {{committeeGroup.CommitteeGroup.name}}
+                </div>
+            </div>
+            <div class="row gap"></div>
+        </div>
+    </div>
+   <div class="modal-footer">
+        <span class="btn btn-danger" ng-click="$dismiss()">
+            <i class="fa fa-times"></i>
+            Cancel
+        </span>
+        <!--<span class="btn btn-success" ng-disabled="!validate.button" ng-click="onSave(data)">
+            <i class="fa fa-floppy-o"></i>
+            Save
+        </span>-->
+       <span class="btn btn-success" ng-disabled="!validate.button" ng-click="onSubmit(data)">
+            <i class="fa fa-floppy-o"></i>
+            Select
+        </span>
+    </div>
+</div>

@@ -1,0 +1,181 @@
+ <style>
+    .validation-new {
+        margin-top: 0px;
+        color: red;
+        font-size:0.9em;
+    }
+</style>
+<div>
+    <div class="modal-header">
+        <button type="button" class="close pull-right" ng-click="$dismiss()" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Data Jaminan</h4>
+    </div>
+    <div class="modal-body form-horizontal">
+        <div class="form-group">
+            <label for="txtJenisJaminan" class="col-sm-4 control-label">Jenis Jaminan <span class="validation-new">*</span></label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="txtJenisJaminan" placeholder="Jenis Jaminan" ng-model="jaminan.jenis_jaminan">
+                <div class="validation-new" ng-show="validate.jenis_jaminan">
+                    Please enter Jenis Jaminan
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="txtNamaPemilik" class="col-sm-4 control-label">Nama Pemilik <span class="validation-new">*</span></label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="txtNamaPemilik" placeholder="Nama Pemilik" ng-model="jaminan.nama_pemilik">
+                <div class="validation-new" ng-show="validate.nama_pemilik">
+                    Please enter Nama Pemilik
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="txtLokasiJaminan" class="col-sm-4 control-label">Lokasi Jaminan <span class="validation-new">*</span></label>
+            <div class="col-sm-8">
+                <textarea class="form-control" rows="3" id="txtLokasiJaminan" placeholder="Lokasi Jaminan" ng-model="jaminan.lokasi_jaminan"></textarea>
+                <div class="validation-new" ng-show="validate.lokasi_jaminan">
+                    Please enter Lokasi Jaminan
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="txtLuas" class="col-sm-4 control-label">Luas (m<span class="power-font">2</span>) <span class="validation-new">*</span></label>
+            <div class="col-sm-8">
+                <input type="text" decimal-only-input="" class="form-control" id="txtLuas" placeholder="Luas" ng-model="jaminan.luas">
+                <div style="color:darkgray;">Contoh : xx.xx (60.00)</div>
+                <div class="validation-new" ng-show="validate.luas">
+                    Please enter Luas
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="txtNilaiTaksiran" class="col-sm-4 control-label">Nilai Taksiran (Rp) <span class="validation-new">*</span></label>
+            <div class="col-sm-8">
+                <input type="text" decimal-only-input="" class="form-control" id="txtNilaiTaksiran" placeholder="Nilai Taksiran" ng-model="jaminan.nilai_taksiran">
+                <div style="color:darkgray;">Contoh : xx.xx (60.00)</div>
+                <div class="validation-new" ng-show="validate.nilai_taksiran">
+                    Please enter Nilai Taksiran
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="txtNomorJaminan" class="col-sm-4 control-label">Nomor Jaminan <span class="validation-new">*</span></label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="txtNomorJaminan" placeholder="Nomor Jaminan" ng-model="jaminan.nomor_jaminan">
+                <div class="validation-new" ng-show="validate.nomor_jaminan">
+                    Please enter Nomor Jaminan
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="txtKeterangan" class="col-sm-4 control-label">Keterangan <span class="validation-new">*</span></label>
+            <div class="col-sm-8">
+                <textarea class="form-control" rows="3" id="txtKeterangan" placeholder="Keterangan" ng-model="jaminan.keterangan"></textarea>
+                <div class="validation-new" ng-show="validate.keterangan">
+                    Please enter Keterangan
+                </div>
+            </div>
+        </div>
+
+        <div class="row form-group" >
+            <label class="col-sm-4 control-label">Attachment</label>
+            <div class="col-sm-8">
+                <input type="file" nv-file-select uploader="uploader" multiple style="display: inline;" />
+                <div>
+                    <table class="table" ng-show="uploader.queue.length > 0">
+                        <thead>
+                        <tr>
+                            <th width="50%">Name</th>
+                            <th ng-show="uploader.isHTML5">Size</th>
+                            <th>Result</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="item in uploader.queue">
+                            <td>
+                                <strong><span ng-bind="item.file.name"></span></strong>
+                            </td>
+                            <td ng-show="uploader.isHTML5"><span>{{ item.file.size/1024/1024|number:2 }} MB</span></td>
+                            <td>
+                                <div ng-show="uploader.isHTML5 && item.isUploading" class="progress" style="margin-bottom: 0;">
+                                    <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+                                </div>
+                                <i class="fa fa-check icon-blue" ng-show="item.isSuccess"></i>
+                                <i class="fa fa-times icon-red" ng-show="item.isError"></i>
+                                <span ng-show="item.isSuccess">Uploaded</span>
+                                <span ng-show="item.errorMessage" class="invalid">Upload attachment failed</span>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-danger btn-s" ng-click="item.cancel()" ng-show="item.isUploading">
+                                    <span class="glyphicon glyphicon-trash"></span>Cancel
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <table class=" col-sm-12 table table-striped table-bordered data-grid">
+                    <thead>
+                    <tr>
+                        <th class="action-button"></th>
+                        <th>File Name</th>
+                        <th>File Size</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-hide="(jaminan.Attachments | filter: {is_active: true}).length > 0">
+                        <td colspan="5">No attachment.
+                        </td>
+                    </tr>
+                    <tr ng-repeat="att in jaminan.Attachments" ng-show="att.is_active">
+                        <td>
+                            <button class="btn btn-danger btn-xs" ng-click="onDeleteAttachment(att)">
+                                <i class="fa fa-times" tooltip-trigger="mouseenter" tooltip="Delete Data"></i>
+                            </button>
+                        </td>
+                        <td>{{att.filename}}</td>
+                        <td align="right">{{att.filesize/1024.00/1024.00| number:2}} MB</td>
+                        <td>
+                            <button class="btn btn-primary btn-xs" ng-click="download(att)">
+                                <i class="fa fa-download"></i>
+                                Download
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <tfoot ng-show="(jaminan.Attachments | filter: {is_active: true}).length > 0">
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td align="right">{{totalFileSize | number:2}} MB</td>
+                        <td></td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+        </div>
+
+
+    </div>
+   <div class="modal-footer">
+        <button class="btn btn-danger" ng-click="$dismiss()">
+            <i class="fa fa-times"></i>
+            Cancel
+        </button>
+        <button class="btn btn-success" ng-disabled="!validate.button" ng-click="onSave(jaminan)">
+            <i class="fa fa-floppy-o"></i>
+            Save
+        </button>
+    </div>
+</div>

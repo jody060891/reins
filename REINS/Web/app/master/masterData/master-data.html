@@ -1,0 +1,37 @@
+<div class="col-md-12 no-side-padding" ng-controller="MasterDataCtrl" id="master-data-content">
+    <div class="panel panel-primary" style="font-size: 90%;">
+        <div class="panel-heading clearfix">
+            Setup > Master Data
+        </div>
+        <div class="panel-body" style="overflow-x:auto">
+            <br />
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="input-group">
+                        <select class="form-control" ng-model="mastertab" ng-change="onTabChanged()">
+                            <option value="1" ng-if="currentAcl['SM_MASTER_DATA_AE_ATTENDANCE_VIEW']">A&E Attendance</option>
+                            <option value="11" ng-if="currentAcl['SM_MASTER_DATA_ADMISSION_DAYS_VIEW']">Admission Days</option>
+                            <option value="2" ng-if="currentAcl['SM_MASTER_DATA_DEPARTMENT_VIEW']">Department</option>
+                            <option value="3" ng-if="currentAcl['SM_MASTER_DATA_DESIGNATION_VIEW']">Designation</option>
+                            <option value="12" ng-if="currentAcl['SM_MASTER_DATA_DESIGNATION_GROUP_VIEW']">Designation Group</option>
+                            <option value="4" ng-if="currentAcl['SM_MASTER_DATA_DISCIPLINE_VIEW']">Discipline</option>
+                            <option value="5" ng-if="currentAcl['SM_MASTER_DATA_EMPLOYEE_CATEGORY_VIEW']">Employee Category</option>
+                            <option value="6" ng-if="currentAcl['SM_MASTER_DATA_LOCATION_VIEW']">Location of Occurrence</option>
+                            <option value="7" ng-if="currentAcl['SM_MASTER_DATA_PATIENT_CLASS_VIEW']">Patient Class</option>
+                            <option value="8" ng-if="currentAcl['SM_MASTER_DATA_PATIENT_DAYS_VIEW']">Patient Days</option>
+                            <option value="9" ng-if="currentAcl['SM_MASTER_DATA_PATIENT_LOCATION_VIEW']">Patient Location</option>
+                            <option value="10" ng-if="currentAcl['SM_MASTER_DATA_SHIFT_TIMING_VIEW']">Shift Timing</option>
+                            <option value="13" ng-if="currentAcl['SM_MASTER_DATA_MEDICATION_NAME_VIEW']">Medication Name</option>
+                            <option value="14" ng-if="currentAcl['SM_MASTER_DATA_OPERATION_DAYS_VIEW']">Operation Days</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div angular-html-bind-template="masterDataTemplate" compile-scope="mainScope"></div>
+            </div>
+            
+        </div>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="486acde08c6c4476b47da043d05252a4" Name="Diagram1" ZoomLevel="77" >
+        <EntityTypeShape EntityType="PatientViewModel.vw_PatientMasterInfo" Width="1.5" PointX="1.4928092553712471" PointY="1.3528840250116232" />
+        <EntityTypeShape EntityType="PatientViewModel.vw_KTPH_PatAdmission" Width="1.5" PointX="1.013688941026893" PointY="30.402608334274316" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

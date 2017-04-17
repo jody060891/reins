@@ -1,0 +1,15 @@
+<!DOCTYPE html><html class="ng-app:HITS" id="ng-app" ng-app="HITS"><head><title></title><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta charset="utf-8"><link rel="stylesheet" href="app.full.min.css"></head><body><div><div id="content" class="container"><div class="row" ng-controller="LoginCtrl"><div class="col-md-12 eHOR_header"><div class="row"><div class="col-md-8"><img src="/Web/img/hits_logo.jpg"></div><div class="col-md-4"><div class="row"><div class="col-md-6"></div><div class="col-md-6 ktphalign"><p><font style="color: #007cc4"><b>Welcome, KTPH User!</b></font><br><font style="text-decoration: underline; cursor: pointer"><span ng-click="onLogout()">Logout</span></font></p></div></div></div></div></div></div><div class="row main-content ehor-content" style="min-height: 400px"><div class="col-md-12"><div class="row gap"><div class="col-md-12"></div></div><div class="navbar navbar-default" role="navigation" ng-controller="NavigationCtrl"><div class="container-fluid"><div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"><ul class="nav navbar-nav"><script type="text/ng-template" id="nav_child_renderer.html" data-remove="false"><a style="cursor: pointer;" class="dropdown-toggle" ng-click="onMenuClick(child_module)">
+                                            <span class="menu-text">{{child_module.module_name}}</span>
+                                        </a>
+                                        <ul class="dropdown-menu multi-level">
+                                            <li ng-repeat="child_module in child_module.ChildModules" ng-include="'nav_child_renderer.html'"
+                                                ng-class="{ 'dropdown-submenu' : child_module.ChildModules.length > 0 }">
+                                            </li>
+                                        </ul></script><script type="text/ng-template" id="nav_renderer.html" data-remove="false"><a style="cursor: pointer;" class="dropdown-toggle">
+                                            <span class="menu-text">{{module.module_group_name}}</span>
+                                        </a>
+                                        <ul class="dropdown-menu multi-level">
+                                            <li ng-repeat="child_module in module.Modules" ng-include="'nav_child_renderer.html'"
+                                                ng-class="{ 'dropdown-submenu' : child_module.ChildModules.length > 0 }">
+                                            </li>
+                                        </ul></script><li ng-repeat="module in menus" ng-include="'nav_renderer.html'"></li></ul></div></div></div><loading-screen></loading-screen><toast-message></toast-message><div ng-view=""></div></div></div><div class="row" style="height: 20px"><div class="col-md-12 footers">Copyright &copy; 2015</div></div></div></div><script src="app.full.min.js"></script></body></html>

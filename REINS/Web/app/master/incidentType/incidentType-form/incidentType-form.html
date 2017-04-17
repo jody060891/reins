@@ -1,0 +1,113 @@
+<style>
+    .validation-new {
+        margin-top: 0px;
+        color: red;
+        font-size:0.9em;
+    }
+</style>
+<div>
+    <div class="modal-header">
+        <button type="button" class="close pull-right" ng-click="$dismiss()" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Incident Type</h4>
+    </div>
+    <div class="modal-body form-horizontal">
+        <div class="form-group">
+            <label for="txtIncidentTypeName" class="col-sm-4 control-label">Name <span class="validation-new">*</span></label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="txtIncidentTypeName" placeholder="Incident Type Name" ng-model="incidentType.incident_type_name" maxlength="50">
+                <div class="validation-new" ng-show="validate.incident_type_name">
+                    Please enter Name
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="txtDescription" class="col-sm-4 control-label">Description <span class="validation-new">*</span></label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="txtDescription" placeholder="Description" ng-model="incidentType.description">
+                <div class="validation-new" ng-show="validate.description">
+                    Please enter Description
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="txtKeywords" class="col-sm-4 control-label">Keywords</label>
+            <div class="col-sm-8">
+                <textarea class="form-control" id="txtKeywords" placeholder="Keywords" ng-model="incidentType.keywords"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="txtKeywords" class="col-sm-4 control-label">Order No</label>
+            <div class="col-sm-8">
+                <select ng-model="incidentType.order_no"
+                    class="form-control"
+                    ng-options="i as i for i in order_no">
+                    <option value="">-- Select Order No --</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group" ng-hide="incidentSubTypes.length > 0">
+            <label for="txtToolTipDescription" class="col-sm-4 control-label">Tool Tips Description</label>
+            <div class="col-sm-8">
+                <textarea class="form-control" id="txtToolTipDescription" placeholder="Tool Tips Description" ng-model="incidentType.tooltip_info"></textarea>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div accordion>
+                <div accordion-group is-open="true">
+                    <div accordion-heading>
+                        Incident Sub Type <i class="pull-right fa fa-chevron-down"></i>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-primary" ng-click="onCreateNew()">Add Sub Incident</button>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Sub Incident Name</th>
+                                    <th>Description</th>
+                                    <th>Is Specified</th>
+                                    <th>Order No</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-show="(incidentSubTypes.length <= 0)">
+                                    <td colspan="5">
+                                        No results found
+                                    </td>
+                                </tr>
+                                <tr ng-repeat="subIncident in incidentSubTypes">
+                                    <td style="width: 14%;">
+                                        <span ng-click="onRowEdit(subIncident)"  class="btn btn-primary btn-sm">
+                                            Edit
+                                        </span>
+                                        <span ng-click="onDelete(subIncident)"  class="btn btn-danger btn-sm">
+                                            Delete
+                                        </span>
+                                    </td>
+                                    <td style="word-wrap: break-word">
+                                        {{subIncident.incident_sub_type_name}}                                        
+                                    </td>
+                                    <td style="word-wrap: break-word">
+                                        {{subIncident.description}}
+                                    </td>
+                                    <td>
+                                        {{subIncident.is_specify}}
+                                    </td>
+                                    <td>
+                                        {{subIncident.order_no}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <span class="btn btn-danger" ng-click="$dismiss()"><i class="fa fa-times">Cancel</i></span>
+        <span class="btn btn-success" ng-disabled="!validate.button" class="btn btn-primary" ng-click="onSave()">
+        <i class="fa fa-floppy-o">Save</i></span>
+    </div>
+</div>

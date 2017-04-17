@@ -1,0 +1,49 @@
+<div class="col-md-12" ng-controller="LossRatioYearCtrl">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="btn-group pull-right m-t-15">
+                <a href="<?php echo site_url('auth/logout')?>">
+                    <button type="button" class="btn btn-custom waves-effect waves-light"
+                            aria-expanded="false">Logout <span class="m-l-5"><i class="icon-close"></i></span></button>
+                </a>
+
+            </div>
+            <h4 class="page-title">LOSS RATIO BY YEAR</h4>
+        </div>
+    </div>
+
+
+
+
+
+    <div class="row">
+        <div class="col-xs-12 col-lg-12 col-xl-12">
+            <div class="card-box">
+                <!--<div id="morris-line-example" style="height: 300px;"-->
+                     <!--line-chart-->
+                     <!--line-data="data"-->
+                     <!--line-xkey="{{xaxis}}"-->
+                     <!--line-ykeys="yaxis"-->
+                     <!--line-labels='["Series A"]'-->
+                     <!--line-colors='["#31C0BE"]'-->
+                     <!--line-hide-hover="true"-->
+                     <!--line-hover-callback="legendHover">-->
+                <!--</div>-->
+                <div id="dxchart" dx-chart="chartOptions" style="height: 400px;"></div>
+                <div class="legend" style="margin-top:10px;">
+                    <p>X axis = Underwriting Year</p>
+                    <p>Y axis = Percent (%)</p>
+                </div>
+            </div>
+        </div><!-- end col-->
+
+
+
+    </div>
+    <!-- end row -->
+
+
+    <script type="text/javascript">
+
+    </script>
+</div>

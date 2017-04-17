@@ -1,0 +1,2576 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="HITS">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HITS - Print Incident</title>
+
+    <!-- Optional theme -->
+    <!--<link rel="stylesheet" type="text/css" href="../Content/css/eHOR-Style.css">-->
+    <!--<link href="app.less" type="text/css" rel="stylesheet/less">-->
+    <link href="bower_components/bootstrap/dist/css/bootstrap.css" type="text/css" rel="stylesheet">
+    <link href="bower_components/angular-ivh-treeview/dist/ivh-treeview.css" type="text/css" rel="stylesheet">
+    <link href="bower_components/angular-ivh-treeview/dist/ivh-treeview-theme-basic.css" type="text/css"
+          rel="stylesheet">
+    <link href="bower_components/font-awesome/css/font-awesome.css" type="text/css" rel="stylesheet">
+    <link href="bower_components/angular-bootstrap-colorpicker/css/colorpicker.css" type="text/css" rel="stylesheet">
+    <link href="components/css/angular-wizard-custom.css" type="text/css" rel="stylesheet">
+    <link href="components/css/bs-callout.css" type="text/css" rel="stylesheet">
+    <link href="components/css/modal-style.css" type="text/css" rel="stylesheet">
+    <link href="components/css/form-builder.css" type="text/css" rel="stylesheet">
+    <link href="components/css/pkbl.css" type="text/css" rel="stylesheet">
+    <script src="components/js/css3-mediaqueries.js"></script>
+    <!-- JS from Bower Components -->
+    <!--<script src="bower_components/less.js/dist/less-1.6.2.js" data-concat="false"></script>-->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/underscore/underscore.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/angular-ui-utils/ui-utils.js"></script>
+    <script src="bower_components/angular-ivh-treeview/dist/ivh-treeview.js"></script>
+    <script src="bower_components/angular-strap/dist/angular-strap.min.js"></script>
+    <script src="bower_components/angular-strap/dist/angular-strap.tpl.min.js"></script>
+
+    <script src="bower_components/es5-shim/es5-shim.min.js"></script>
+    <script src="bower_components/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.min.js"></script>
+    <script src="bower_components/angular-wysiwyg/angular-wysiwyg.js"></script>
+    <script src="bower_components/ngSticky/dist/sticky.min.js"></script>
+    <script src="bower_components/angular-scroll/angular-scroll.js"></script>
+    <script src="bower_components/es5-shim/es5-sham.min.js"></script>
+    <script src="bower_components/angular-file-upload/angular-file-upload.js"></script>
+    <script src="components/js/timepickerpop.js"></script>
+    <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
+    <script src="bower_components/angular-ui-date/src/date.js"></script>
+    <script src="bower_components/angular-ui-date/src/date.js"></script>
+    <script type="text/javascript" src="components/js/crypto/jsencrypt.js"></script>
+    <!-- Add New Bower Component JS Above -->
+
+
+    <!-- Main App JS -->
+    <script src="appPrintIncident.js"></script>
+    <script src="factory/factory.js"></script>
+    <script src="factory/internal-factory.js"></script>
+    <script src="filter/momentDateFilter.js"></script>
+    <script src="directive/loadingScreen/loadingScreen.js"></script>
+    <script src="directive/toastMessage/toastMessage.js"></script>
+    <script src="directive/angularHtmlBind/angularHtmlBind.js"></script>
+    <script src="printIncident.js"></script>
+
+    <!-- Add New Component JS Above -->
+
+</head>
+<body>
+<div class="row">
+<div class="col-md-12">
+<!-- header -->
+<div class="row ">
+    <!---->
+    <div class="col-md-12 eHOR_header">
+
+    </div>
+</div>
+<!-- header -->
+
+<div class="row main-content">
+<div class="col-md-12 ehor-content">
+<style>
+    .print-section-header {
+        background-color: #337ab7;
+        color: #ffffff;
+        font-weight: bold;
+        font-size: 20px;
+        padding: 10px;
+    }
+
+    .print-section-wrap {
+        border: solid 2px #337ab7;
+    }
+
+    .print-section-content {
+        padding: 0px 10px;
+    }
+
+    .print-box {
+        border: solid 1px #000000;
+        padding: 5px;
+    }
+    .word-wrap-word-break-all {
+        word-wrap:break-word !important;
+        word-break:break-all !important;
+        -ms-word-wrap:break-word !important;
+    }
+</style>
+<div class="col-md-12" ng-controller="PrintIncidentCtrl" style="font-size: 90%;">
+<div class="row">
+<div class="print-section-wrap">
+<div class="print-section-header">General Information</div>
+<div class="print-section-content">
+<div class="bs-callout bs-callout-primary"
+     ng-if="incident.current_tracking_status_holder == 'DRAFT' && !incident.incident_no && !isAnonymous">
+    <div class="row">
+        <div class="col-md-3 word-wrap-sub-type" ng-if="incident.IncidentType != null"
+             ng-class="{'col-md-6': (incident.IncidentSubType != null)}">
+            Incident Type: {{incident.IncidentType.incident_type_name}} {{(incident.incident_type_others !=
+            null)?("("+incident.incident_type_others+")"):""}}
+        </div>
+        <div class="col-md-3 word-wrap-sub-type" ng-if="incident.IncidentSubType != null">
+            Incident SubType: {{incident.IncidentSubType.incident_sub_type_name}}
+            {{(incident.incident_sub_type_others_description !=
+            null)?("("+incident.incident_sub_type_others_description+")"):""}}
+        </div>
+    </div>
+</div>
+<div class="bs-callout bs-callout-primary"
+     ng-if="incident.current_tracking_status != 'DRAFT' && incident.current_tracking_status != 'MERGED'">
+    <div class="row">
+        <div class="col-md-4 word-wrap-sub-type" ng-class="{'col-md-3': (incident.IncidentSubType != null)}">
+            {{(incident.incident_merged.length > 0)? "Main Incident Number" : "Incident Number"}} :
+            {{incident.incident_no}}
+        </div>
+        <div class="col-md-4" ng-class="{'col-md-3': (incident.IncidentSubType != null)}">
+            Incident Type: {{incident.IncidentType.incident_type_name}} {{(incident.incident_type_others !=
+            null)?("("+incident.incident_type_others+")"):""}}
+        </div>
+        <div class="col-md-3 word-wrap-sub-type" ng-if="incident.IncidentSubType != null">
+            Incident SubType: {{incident.IncidentSubType.incident_sub_type_name}}
+            {{(incident.incident_sub_type_others_description !=
+            null)?("("+incident.incident_sub_type_others_description+")"):""}}
+        </div>
+        <div class="col-md-4 word-wrap-sub-type" ng-class="{'col-md-3': (incident.IncidentSubType != null)}">
+            Creation Datetime : {{incident.report_date | momentDateFilter : "DD/MM/YYYY"}} {{incident.report_date |
+            momentDateFilter : "HH:mm:ss"}}
+        </div>
+    </div>
+    <div class="row" ng-if="incident.incident_merged.length > 0">
+        <div class="col-md-4 word-wrap-sub-type">
+            Sub Incident Number :
+                            <span ng-repeat="merged in incident.incident_merged">
+                                <span style="cursor: pointer" ng-click="onViewIncidentMerged(merged)">
+                                    <a href="">[{{merged.incident_no}}]</a>
+                                </span>
+                            </span>
+        </div>
+    </div>
+</div>
+<div class="bs-callout bs-callout-primary" ng-if="incident.current_tracking_status == 'MERGED'">
+    <div class="row">
+        <div class="col-md-4 word-wrap-sub-type" ng-class="{'col-md-3': (incident.IncidentSubType != null)}">
+            {{(incident.incident_main)? "Sub Incident Number" : "Incident Number"}} : {{incident.incident_no}}
+        </div>
+        <div class="col-md-4 word-wrap-sub-type" ng-class="{'col-md-3': (incident.IncidentSubType != null)}">
+            Incident Type: {{incident.IncidentType.incident_type_name}} {{(incident.incident_type_others !=
+            null)?("("+incident.incident_type_others+")"):""}}
+        </div>
+        <div class="col-md-3 word-wrap-sub-type" ng-if="incident.IncidentSubType != null">
+            Incident SubType: {{incident.IncidentSubType.incident_sub_type_name}}
+            {{(incident.incident_sub_type_others_description !=
+            null)?("("+incident.incident_sub_type_others_description+")"):""}}
+        </div>
+        <div class="col-md-4 word-wrap-sub-type" ng-class="{'col-md-3': (incident.IncidentSubType != null)}">
+            Creation Datetime : {{incident.report_date | momentDateFilter : "DD/MM/YYYY"}} {{incident.report_date |
+            momentDateFilter : "HH:mm:ss"}}
+        </div>
+    </div>
+    <div class="row" ng-if="incident.incident_main">
+        <div class="col-md-4">
+            Main Incident Number :
+                            <span style="cursor: pointer" ng-click="onViewIncidentMerged(incident.incident_main)">
+                                <a href="">[{{incident.incident_main.incident_no}}]</a>
+                            </span>
+        </div>
+    </div>
+</div>
+
+<fieldset ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited">
+<div class="bs-callout bs-callout-primary" style="margin-top:6px">
+    <h4 class="text-primary">Reported by</h4>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-3">Name</label>
+
+                    <div class="col-sm-8">
+                        <input ng-hide="printed"
+                               ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited || !incident.is_anonymous"
+                               type="text" class="form-control" placeholder="Name" maxlength="100"
+                               ng-model="incident.reporter_name">
+                        <span ng-show="printed">{{incident.reporter_name}}</span>
+
+                        <div class="validation-new"
+                             ng-show="incident.validation.reporter_name && !incident.reporter_name">
+                            Please provide your Name.
+                        </div>
+                        <!--<div class="validation-new" ng-show="incident.reporter_name.length > 200">
+                            Name is too long (Max 200 Characters).
+                        </div>-->
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3">Designation <span ng-show="!incident.is_anonymous" class="red-star">*</span></label>
+
+                    <div class="col-sm-8">
+                        <select ng-hide="printed" ng-model="incident.designation_id"
+                                class="form-control"
+                                ng-options="i.designation_id as i.designation_description for i in designations">
+                            <option value="">-- Select Designation --</option>
+                        </select>
+                                <span ng-show="printed">
+                                    {{incident.Designation.designation_description}}
+                                </span>
+
+                        <div class="validation-new"
+                             ng-if="incident.validation.designation && (!incident.designation_id || isAnonymous) && !first_time">
+                            Please provide your Designation.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-3">Department <span ng-show="!incident.is_anonymous" class="red-star">*</span></label>
+
+                    <div class="col-sm-8">
+                        <select ng-hide="printed" ng-model="incident.department_id"
+                                class="form-control"
+                                ng-options="i.department_id as i.department_description for i in departments">
+                            <option value="">-- Select Department --</option>
+                        </select>
+                                <span ng-show="printed">
+                                    {{incident.Department.department_description}}
+                                </span>
+
+                        <div class="validation-new"
+                             ng-if="incident.validation.department && (!incident.department_id || isAnonymous) && !first_time">
+                            Please provide your Department.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3">Employee Category <span ng-show="!incident.is_anonymous"
+                                                                    class="red-star">*</span></label>
+
+                    <div class="col-sm-8">
+                        <select ng-hide="printed" ng-model="incident.employee_category_id"
+                                class="form-control"
+                                ng-options="i.employee_category_id as i.employee_category_description for i in employeeCategorys">
+                            <option value="">-- Select Employee Category --</option>
+                        </select>
+                                <span ng-show="printed">
+                                    {{incident.EmployeeCategory.employee_category_description}}
+                                </span>
+
+                        <div class="validation-new"
+                             ng-if="incident.validation.employee_category && (!incident.employee_category_id || isAnonymous) && !first_time">
+                            Please provide your Employee Category.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="bs-callout bs-callout-primary">
+<h4 class="text-primary">Incident Type<span class="red-star">*</span></h4>
+
+<div class="validation-new" ng-show="incident.validation.incidentType  && !incident.incident_type_id">
+    Please fill up mandatory field for Incident Type.
+</div>
+<div class="validation-new" ng-show="incident.validation.incidentSubType && !incident.incident_sub_type_id">
+    Please select a Sub Type as it is mandatory.
+</div>
+<div class="row">
+    <div class="col-md-8">
+        <div class="row">
+            <div class="col-md-6">
+
+                <div class="radio row" ng-repeat="type in incidentTypes1">
+
+                    <div class="col-md-12">
+                        <label ng-class="{'selected_incident': (incident.incident_type_id == type.incident_type_id)}">
+                            <input type="radio" name="optionsRadios" ng-model="incident.incident_type_id"
+                                   ng-value="type.incident_type_id">
+                            {{type.incident_type_name}}
+                                                                        <span class="fa-stack"
+                                                                              ng-show="type.tooltip_info != null"
+                                                                              tooltip-html-unsafe="{{type.tooltip_info}}"
+                                                                              tooltip-placement="right">
+                                                                            <i class="fa fa-circle icon-blue fa-stack-1x fa-lg"></i>
+                                                                            <i class="fa fa-info fa-stack-1x icon-white"></i>
+                                                                        </span>
+                        </label>
+
+                        <div class="radio radio-incident-sub-type"
+                             ng-show="incident.incident_type_id == type.incident_type_id"
+                             ng-repeat="subType in type.MasterIncidentSubTypes">
+                            <label class="word-wrap-sub-type"
+                                   ng-class="{'selected_incident': (incident.incident_sub_type_id == subType.incident_sub_type_id)}">
+                                <input type="radio" name="optionsRadiosSubType{{type.incident_type_id}}"
+                                       ng-model="incident.incident_sub_type_id" ng-value="subType.incident_sub_type_id">
+                                {{subType.incident_sub_type_name}}
+                            </label>
+                                                                        <span ng-if="subType.is_specify && incident.incident_sub_type_id == subType.incident_sub_type_id">, Please Specify :
+                                                                    <input ng-hide="printed"
+                                                                           ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                                                                           type="text" maxlength="50" class="form-group"
+                                                                           ng-model="incident.incident_sub_type_others_description"
+                                                                           style="width: 160px;">
+                                                                    <span ng-show="printed">
+                                                                        {{incident.incident_sub_type_others_description}}
+                                                                    </span>
+
+                                                                        </span>
+                        </div>
+                                                                    <span ng-if="incident.incident_type_id == 14 && incident.incident_type_id == type.incident_type_id">, Please Specify :
+                                                            <input ng-hide="printed" type="text" class="form-group"
+                                                                   ng-model="incident.incident_type_others"
+                                                                   maxlength="50"
+                                                                   style="width: 160px;">
+                                                            <span ng-show="printed">
+                                                                {{incident.incident_type_others}}
+                                                            </span>
+                                                                        <div class="validation-new"
+                                                                             ng-if="incident.incident_type_id === 14 && !incident.incident_type_others && !firsttime">
+                                                                            Please provide Incident Type Others
+                                                                            Description.
+                                                                        </div>
+                                                                    </span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+
+                <div class="radio row" ng-repeat="type in incidentTypes2">
+
+                    <div class="col-md-12">
+                        <label ng-class="{'selected_incident': (incident.incident_type_id == type.incident_type_id)}">
+                            <input type="radio" name="optionsRadios" ng-model="incident.incident_type_id"
+                                   ng-value="type.incident_type_id">
+                            {{type.incident_type_name}}
+                                                                <span class="fa-stack"
+                                                                      ng-show="type.tooltip_info != null"
+                                                                      tooltip-html-unsafe="{{type.tooltip_info}}"
+                                                                      tooltip-placement="right">
+                                                                    <i class="fa fa-circle icon-blue fa-stack-1x fa-lg"></i>
+                                                                    <i class="fa fa-info fa-stack-1x icon-white"></i>
+                                                                </span>
+                        </label>
+
+                        <div class="radio radio-incident-sub-type"
+                             ng-show="incident.incident_type_id == type.incident_type_id"
+                             ng-repeat="subType in type.MasterIncidentSubTypes">
+                            <label class="word-wrap-sub-type"
+                                   ng-class="{'selected_incident': (incident.incident_sub_type_id == subType.incident_sub_type_id)}">
+                                <input type="radio" name="optionsRadiosSubType{{type.incident_type_id}}"
+                                       ng-model="incident.incident_sub_type_id" ng-value="subType.incident_sub_type_id">
+                                {{subType.incident_sub_type_name}}
+                            </label>
+                                                                        <span ng-if="subType.is_specify && incident.incident_sub_type_id == subType.incident_sub_type_id">, Please Specify :
+                                                                    <input ng-hide="printed"
+                                                                           ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                                                                           type="text" maxlength="50" class="form-group"
+                                                                           ng-model="incident.incident_sub_type_others_description"
+                                                                           style="width: 160px;">
+                                                                    <span ng-show="printed">
+                                                                        {{incident.incident_sub_type_others_description}}
+                                                                    </span>
+
+                                                                        </span>
+                        </div>
+                                                                    <span ng-if="incident.incident_type_id == 14 && incident.incident_type_id == type.incident_type_id">, Please Specify :
+                                                            <input ng-hide="printed" type="text" class="form-group"
+                                                                   ng-model="incident.incident_type_others"
+                                                                   maxlength="50"
+                                                                   style="width: 160px;">
+                                                            <span ng-show="printed">
+                                                                {{incident.incident_type_others}}
+                                                            </span>
+                                                                        <div class="validation-new"
+                                                                             ng-if="incident.incident_type_id === 14 && !incident.incident_type_others && !firsttime">
+                                                                            Please provide Incident Type Others
+                                                                            Description.
+                                                                        </div>
+                                                                    </span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+</div>
+<br/>
+
+<div class="row" ng-if="incident.incident_type_id == 8">
+    <div class="col-md-6">
+        <div class="form-horizontal">
+            <div class="row">
+                <label class="col-sm-5">Witnessed</label>
+
+                <div class="col-sm-5">
+                    <label>
+                        <input type="radio" name="rbWitnessedYes" ng-model="incident.is_witnessed" ng-value="true">
+                        Yes
+                    </label>
+                    <label>
+                        <input type="radio" name="rbWitnessedNo" ng-model="incident.is_witnessed" ng-value="false">
+                        No
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-horizontal">
+            <div class="form-group">
+                <label class="col-sm-5">
+                    Near Miss?
+                    <span class="red-star">*</span>
+                                                                <span class="fa-stack"
+                                                                      tooltip-html-unsafe="An event that could have resulted in unwanted consequences, <br>but did not because either by chance or through timely intervention,<br> the event did not reach the patient"
+                                                                      tooltip-placement="right">
+                                                                    <i class="fa fa-circle icon-blue fa-stack-1x fa-lg"></i>
+                                                                    <i class="fa fa-info fa-stack-1x icon-white"></i>
+                                                                </span>
+                </label>
+
+                <div class="col-sm-5">
+                    <label>
+                        <input type="radio" name="radioButtonsNearMissYes" ng-model="incident.is_near_miss"
+                               ng-value="true">
+                        Yes
+                    </label>
+                    <label>
+                        <input type="radio" name="radioButtonsNearMissNo" ng-model="incident.is_near_miss"
+                               ng-value="false">
+                        No
+                    </label>
+
+                    <div class="validation-new" ng-if="genInfo.validation.near_miss && incident.is_near_miss === null">
+                        Please select an option for Near Miss as it is mandatory.
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-5">Location of Occurrence <span class="red-star">*</span></label>
+
+                <div class="col-sm-7">
+                    <select ng-hide="printed" ng-model="incident.location_id"
+                            class="form-control select-auto-width"
+                            ng-options="i.location_id as i.location_name for i in locations"
+                            ng-change="onLocationChange(i)">
+                        <option value="">-- Select Location --</option>
+                    </select>
+                            <span ng-show="printed">
+                                {{incident.Location.location_name}}
+                            </span>
+
+                    <div class="validation-new" ng-show="genInfo.validation.location || !incident.location_id">
+                        Please select a Location of Occurrence as it is mandatory.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-horizontal">
+            <div class="form-group" ng-class="{'has-error': datepickerForm.date.$invalid}">
+                <label class="col-sm-7">Date of Occurrence (DD/MM/YYYY)<span class="red-star">*</span></label>
+
+                <div class="col-sm-5">
+                            <span ng-show="printed">
+                                {{incident.date_of_occurance | momentDateFilter}}
+                            </span>
+
+                    <!--<input type="text" class="form-control" ng-model="incident.date_of_occurance" name="date" datepicker-popup="dd-MM-yyyy" is-open="opened" close-text="Close" show-weeks="false" show-button-bar="false">-->
+                    <div class="validation-new" ng-show="genInfo.validation.date && !incident.date_of_occurance">
+                        Please provide Date.
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{'has-error': timepickerForm.time.$invalid}">
+                <label class="col-sm-7">Time of Occurrence <span class="red-star">*</span></label>
+
+                <div class="col-sm-5">
+                    <div ng-hide="printed" ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                         timepicker-pop
+                         input-time="incident.time_of_occurance" class="input-group" show-meridian='false'></div>
+                            <span ng-show="printed">
+                                {{incident.time_of_occurance | momentTimeFilter}}
+                            </span>
+
+                    <div class="validation-new" ng-show="genInfo.validation.time && !incident.time_of_occurance">
+                        Please provide Time.
+                    </div>
+                    <div class="validation-new" ng-show="genInfo.validation.time_max">
+                        Incorrect Time: Date and Time of Occurrence cannot be a future date.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" ng-if="incident.is_witnessed && incident.incident_type_id == 8">
+    <div class="col-md-12">
+        <h4>Witness (If Applicable)</h4>
+    </div>
+    <div class="col-md-6">
+        <div class="row form-horizontal">
+            <label class="col-sm-3">Name of Witness</label>
+
+            <div class="col-sm-8">
+                <input ng-hide="printed" ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                       type="text"
+                       class="form-control" ng-model="incident.witness_name"/>
+                        <span ng-show="printed">
+                            {{incident.witness_name}}
+                        </span>
+            </div>
+        </div>
+        <div class="row form-horizontal">
+            <label class="col-sm-3">Relationship</label>
+
+            <div class="col-sm-8">
+                <label class="radio-inline">
+                    <input type="radio" value="Parents" ng-model="incident.witness_relation_type">Parents</label>
+                <label class="radio-inline">
+                    <input type="radio" value="Spouse" ng-model="incident.witness_relation_type">Spouse</label>
+                <label class="radio-inline">
+                    <input type="radio" value="Sibling" ng-model="incident.witness_relation_type">Sibling</label>
+                <label class="radio-inline">
+                    <input type="radio" value="Son" ng-model="incident.witness_relation_type">Son</label>
+                <label class="radio-inline">
+                    <input type="radio" value="Daughter" ng-model="incident.witness_relation_type">Daughter</label>
+                <label class="radio-inline" style="padding-left:0.3px; margin-left : 20px;">
+                    <input type="radio" value="Guardian" ng-model="incident.witness_relation_type">Guardian</label>
+                <label class="radio-inline" style="margin-left:0px;">
+                    <input type="radio" value="Others" ng-model="incident.witness_relation_type"
+                           class="fb">Others</label>
+                                                            <span ng-if="incident.witness_relation_type == 'Others'">
+                                                                (Specify:
+                                                                <input type="text" class="fb" maxlength="50"
+                                                                       ng-model="incident.witness_relation_other_description"
+                                                                       style="width: 160px;margin-right: 0px;margin-left: 0px;padding-top: 2px;margin-bottom: 30px;">)
+                                                            </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="row form-horizontal">
+            <label class="col-sm-3">Contact Number</label>
+
+            <div class="col-sm-8">
+                <input ng-hide="printed" ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                       number-only-input
+                       maxlength="50" class="form-control" ng-model="incident.witness_contact_no"/>
+            </div>
+                    <span ng-show="printed">
+                        {{incident.witness_contact_no}}
+                    </span>
+        </div>
+        <div class="row form-horizontal">
+            <label class="col-sm-3">Address</label>
+
+            <div class="col-sm-8">
+                <input ng-hide="printed" ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                       type="text"
+                       class="form-control" maxlength="100" ng-model="incident.witness_address"/>
+            </div>
+                    <span ng-show="printed">
+                        {{incident.witness_address}}
+                    </span>
+        </div>
+    </div>
+</div>
+</div>
+</fieldset>
+</div>
+</div>
+<div class="print-section-wrap">
+<div class="print-section-header">Person Involved</div>
+<div class="print-section-content">
+<div ng-show="!incident.PersonInvolveds || incident.PersonInvolveds.length <= 0">
+    No person involved.
+</div>
+<div ng-repeat="newPerson in incident.PersonInvolveds" class="print-box">
+<h4>Person Information</h4>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-horizontal">
+            <div class="form-group">
+                <label class="col-md-4">Person affected by the incident/near miss <span
+                        class="red-star">*</span></label>
+
+                <div class="col-md-8">
+                    <label class="radio-inline">
+                        <input type="radio" disabled name="rbPersonNearMiss{{newPerson.incident_person_involved_id}}"
+                               ng-model="newPerson.is_affected" ng-value="true">
+                        Yes
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" disabled name="rbPersonNearMiss{{newPerson.incident_person_involved_id}}"
+                               ng-model="newPerson.is_affected" ng-value="false"/>
+                        No
+                    </label>
+
+                    <div class="validation-new" ng-if="newPerson.validation.near_miss && !newPerson.is_affected">
+                        Please select an option for Near Miss as it is mandatory.
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-4">Category of Person <span class="red-star">*</span></label>
+
+                <div class="col-md-8">
+                    <label class="radio-inline" ng-repeat="category in personCategorys" style="padding-top: 0"
+                           ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited">
+                        <input type="radio" name="personCategory{{newPerson.incident_person_involved_id}}"
+                               ng-model="newPerson.person_category"
+                               ng-value="category" disabled/>
+                        {{category}}
+                    </label>
+                    &nbsp;
+                            <span ng-show="newPerson.person_category=='Others'">Specify<span
+                                    class="red-star">*</span>:
+                                <input ng-hide="printed" type="text" maxlength="50" class="form-control"
+                                       placeholder="Others"
+                                       ng-model="newPerson.person_category_other_description"
+                                       style="width: 20%; display: inline; margin-left: 3%;"
+                                       disabled/>
+                                <span ng-show="printed">
+                                    {{newPerson.person_category_other_description}}
+                                </span>
+                            </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<fieldset disabled>
+<div class="row" ng-show="newPerson.person_category">
+    <div class="col-md-6">
+        <div class="form-horizontal">
+            <div class="form-group" ng-show="newPerson.person_category == patient">
+                <label class="col-sm-3">Patient Type<span class="red-star">*</span></label>
+
+                <div class="col-sm-8">
+                    <label class="radio-inline">
+                        <input ng-change="newPerson.patient_bed_no = null;
+                            newPerson.patient_admission_date = null;
+                            newPerson.patient_visit_date = null;" type="radio" name="patientType{{newPerson.incident_person_involved_id}}"
+                               ng-model="newPerson.patient_type" value="I"
+                               ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited">
+                        In-Patient
+                    </label>
+                    <label class="radio-inline">
+                        <input ng-change="newPerson.patient_bed_no = null;
+                            newPerson.patient_admission_date = null;
+                            newPerson.patient_visit_date = null;" type="radio" name="patientType{{newPerson.incident_person_involved_id}}"
+                               ng-model="newPerson.patient_type" value="O"
+                               ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited">
+                        Out-Patient
+                    </label>
+
+                    <div class="validation-new" ng-show="newPerson.validation.patient_type && !newPerson.patient_type">
+                        Please provide Patient Type
+                    </div>
+                </div>
+            </div>
+            <div class="form-group"
+                 ng-show="newPerson.person_category == patient && incident.incident_type_id == 7 && (incident.incident_sub_type_id >= 18 && incident.incident_sub_type_id <= 21)">
+                <label class="col-sm-3">Source Patient</label>
+
+                <div class="col-sm-8">
+                    <label class="radio-inline">
+                        <input ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                               type="radio" name="patientSource{{newPerson.incident_person_involved_id}}" ng-model="newPerson.patient_source" value="No">
+                        No
+                    </label>
+                    <label class="radio-inline">
+                        <input ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                               type="radio" name="patientSource{{newPerson.incident_person_involved_id}}" ng-model="newPerson.patient_source" value="Yes">
+                        Yes
+                    </label>
+                    <label class="radio-inline">
+                        <input ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                               type="radio" name="patientSource{{newPerson.incident_person_involved_id}}" ng-model="newPerson.patient_source" value="Unknown">
+                        Unknown
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3">Full Name<span class="red-star">*</span></label>
+
+                <div class="col-sm-8">
+                    <input ng-hide="printed"
+                           ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited || !hasSearch"
+                           type="text" class="form-control" placeholder="Name" ng-model="newPerson.fullname"
+                           maxlength="100">
+                            <span ng-show="printed">
+                                {{newPerson.fullname}}
+                            </span>
+
+                    <div class="validation-new" ng-show="newPerson.validation.name && !newPerson.fullname">
+                        Please provide name.
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" ng-show="newPerson.person_category == staff">
+                <label class="col-sm-3">Employee ID <span class="red-star">*</span></label>
+
+                <div class="col-sm-8">
+                    <input ng-hide="printed"
+                           ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited  || !hasSearch"
+                           type="text" maxlength="50" class="form-control" placeholder="Employee ID"
+                           ng-model="newPerson.person_id">
+                            <span ng-show="printed">
+                                {{newPerson.person_id}}
+                            </span>
+
+                    <div class="validation-new" ng-show="newPerson.validation.id && !newPerson.person_id">
+                        Please provide Employee ID.
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" ng-hide="newPerson.person_category == staff">
+                <label class="col-sm-3">NRIC/FIN/ Passport No<span class="red-star"
+                                                                   ng-show="newPerson.person_category == patient">*</span></label>
+
+                <div class="col-sm-8">
+                    <input ng-hide="printed"
+                           ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited  || !hasSearch"
+                           type="text" maxlength="50" class="form-control" placeholder="NRIC/FIN/ Passport No"
+                           ng-model="newPerson.nric">
+                            <span ng-show="printed">
+                                {{newPerson.nric}}
+                            </span>
+
+                    <div class="validation-new" ng-show="newPerson.validation.nric && !newPerson.nric">
+                        Please provide NRIC/FIN/ Passport Number
+                    </div>
+                </div>
+            </div>
+            <div class="form-group"
+                 ng-hide="newPerson.person_category == patient || newPerson.person_category == staff">
+                <label class="col-sm-3">Contact Number <span class="red-star">*</span></label>
+
+                <div class="col-sm-8">
+                    <input ng-hide="printed"
+                           ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited  || !hasSearch"
+                           number-phone-only-input minlength="8" maxlength="50" class="form-control"
+                           placeholder="Contact Number"
+                           ng-model="newPerson.contact_no">
+                            <span ng-show="printed">
+                                {{newPerson.contact_no}}
+                            </span>
+
+                    <div class="validation-new" ng-show="newPerson.validation.contact && !newPerson.contact_no">
+                        Please provide Contact Number.
+                    </div>
+
+                    <div class="validation-new" ng-show="newPerson.validation.contact_length">
+                        Contact Number must be at least 8 digits
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-horizontal">
+            <div class="form-group">
+                <label class="col-sm-3">Gender<span class="red-star"
+                                                    ng-hide="newPerson.person_category == others || newPerson.person_category == visitor">*</span></label>
+
+                <div class="col-sm-8">
+                    <label class="radio-inline">
+                        <input ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                               type="radio" name="gender{{newPerson.incident_person_involved_id}}" ng-model="newPerson.gender" value="Male">
+                        Male
+                    </label>
+                    <label class="radio-inline">
+                        <input ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                               type="radio" name="gender{{newPerson.incident_person_involved_id}}" ng-model="newPerson.gender" value="Female">
+                        Female
+                    </label>
+
+                    <div class="validation-new" ng-show="newPerson.validation.gender && !newPerson.gender">
+                        Please provide Gender.
+                    </div>
+                </div>
+            </div>
+            <div class="form-group"
+                 ng-show="newPerson.person_category == staff">
+                <label class="col-sm-3">Contact Number</label>
+
+                <div class="col-sm-8">
+                    <input ng-hide="printed"
+                           ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited  || !hasSearch"
+                           number-phone-only-input minlength="8" maxlength="50" class="form-control"
+                           placeholder="Contact Number"
+                           ng-model="newPerson.contact_no">
+                            <span ng-show="printed">
+                                {{newPerson.contact_no}}
+                            </span>
+
+                    <div class="validation-new" ng-show="newPerson.validation.contact && !newPerson.contact_no">
+                        Please provide Contact Number.
+                    </div>
+
+                    <div class="validation-new" ng-show="newPerson.validation.contact_length">
+                        Contact Number must be at least 8 digits
+                    </div>
+                </div>
+            </div>
+            <div class="form-group"
+                 ng-show="newPerson.person_category == staff && (incident.incident_type_id == 5 || incident.incident_type_id == 7)">
+                <label class="col-sm-3">No of MC / Hospitalisation Leave</label>
+
+                <div class="col-sm-8">
+                    <input ng-hide="printed"
+                           ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited || !hasSearch"
+                           class="form-control" number-only-input placeholder="No of  MC / Hospitalisation Leave"
+                           ng-model="newPerson.staff_no_mc">
+                            <span ng-show="printed">
+                                {{newPerson.staff_no_mc}}
+                            </span>
+                </div>
+            </div>
+            <div class="form-group" ng-hide="newPerson.person_category == staff">
+                <label class="col-sm-3">Age<span class="validation-new"
+                                                 ng-hide="newPerson.person_category == others || newPerson.person_category == visitor">*</span></label>
+
+                <div class="col-sm-8">
+                    <input ng-hide="printed"
+                           ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited || !hasSearch"
+                           number-only-input maxlength="5" class="form-control" placeholder="Age"
+                           ng-model="newPerson.age">
+                            <span ng-show="printed">
+                                {{newPerson.age}}
+                            </span>
+
+                    <div class="validation-new" ng-show="newPerson.validation.age && !newPerson.age">
+                        Please provide Age.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div ng-show="newPerson.person_category == patient">
+    <h4>Patient Details</h4>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-3">Case Number<span class="red-star">*</span></label>
+
+                    <div class="col-sm-8">
+                        <input ng-hide="printed"
+                               ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited || !hasSearch"
+                               type="text" maxlength="50" class="form-control" placeholder="Case Number"
+                               ng-model="newPerson.case_number">
+                                <span ng-show="printed">
+                                    {{newPerson.case_number}}
+                                </span>
+
+                        <div class="validation-new"
+                             ng-show="newPerson.validation.case_number && !newPerson.case_number">
+                            Please provide Case Number.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" ng-if="newPerson.patient_type == 'I'">
+                    <label class="col-sm-3">Date of Admission<span class="red-star">*</span> (DD/MM/YYYY)</label>
+
+                    <div class="col-sm-8">
+                        <p class="input-group" ng-hide="printed">
+                            <input readonly
+                                   ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited || !hasSearch"
+                                   type="text" id="dtAdmissionDate" class="form-control"
+                                   ng-model="newPerson.patient_admission_date" name="admissionDate"
+                                   datepicker-popup="dd-MM-yyyy" close-text="Close" show-weeks="false"
+                                   show-button-bar="false"/>
+                        </p>
+                                <span ng-show="printed">
+                                    {{newPerson.patient_admission_date | momentDateFilter}}
+                                </span>
+
+                        <div class="validation-new"
+                             ng-show="newPerson.validation.admission && !newPerson.patient_admission_date">
+                            Please provide Date of Admission.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" ng-if="newPerson.patient_type == 'O'">
+                    <label class="col-sm-3">Date of Visit<span class="red-star">*</span> (DD/MM/YYYY)</label>
+
+                    <div class="col-sm-8">
+                        <p class="input-group" ng-hide="printed">
+                            <input readonly
+                                   ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited || !hasSearch"
+                                   type="text" id="Text1" class="form-control"
+                                   ng-model="newPerson.patient_visit_date" name="visitDate"
+                                   datepicker-popup="dd-MM-yyyy" close-text="Close" show-weeks="false"
+                                   show-button-bar="false"/>
+                        </p>
+                                <span ng-show="printed">
+                                    {{newPerson.patient_visit_date | momentDateFilter}}
+                                </span>
+
+                        <div class="validation-new"
+                             ng-show="newPerson.validation.visit && !newPerson.patient_visit_date">
+                            Please provide Date of Visit.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3">Patient Location</label>
+
+                    <div class="col-sm-8">
+                        <select ng-hide="printed"
+                                ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                                ng-model="newPerson.patient_location"
+                                class="form-control"
+                                ng-options="i.patient_location_code as i.patient_location_unit_name for i in patientLocations">
+                            <option value="">-- Select Patient Location --</option>
+                        </select>
+                                <span ng-show="printed">
+                                    {{newPerson.PatientLocation.patient_location_unit_name}}
+                                </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-3">Discipline<span class="red-star">*</span></label>
+
+                    <div class="col-sm-8">
+                        <select ng-hide="printed"
+                                ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                                ng-model="newPerson.patient_discipline"
+                                class="form-control"
+                                ng-options="i.discipline_code as i.discipline_name for i in disciplines">
+                            <option value="">-- Select Discipline --</option>
+                        </select>
+                                <span ng-show="printed">
+                                    {{newPerson.PatientDiscipline.discipline_name}}
+                                </span>
+
+                        <div class="validation-new"
+                             ng-show="newPerson.validation.discipline && !newPerson.patient_discipline">
+                            Please provide Discipline.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3">Class</label>
+
+                    <div class="col-sm-8">
+                        <!--<input type="text" class="form-control" placeholder="Class" ng-model="newPerson.patient_class">-->
+                        <select ng-hide="printed"
+                                ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                                ng-model="newPerson.patient_class"
+                                class="form-control"
+                                ng-options="i.patient_class_code as i.patient_class_name for i in patientClasses">
+                            <option value="">-- Select Patient Class --</option>
+                        </select>
+                                <span ng-show="printed">
+                                    {{newPerson.PatientClass.patient_class_name}}
+                                </span>
+                    </div>
+                </div>
+                <div class="form-group" ng-show="newPerson.patient_type == 'I'">
+                    <label class="col-sm-3">Bed No</label>
+
+                    <div class="col-sm-8">
+                        <input ng-hide="printed"
+                               ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited || !hasSearch"
+                               type="text" maxlength="20" class="form-control" placeholder="Bed No"
+                               ng-model="newPerson.patient_bed_no">
+                                <span ng-show="printed">
+                                    {{newPerson.patient_bed_no}}
+                                </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div ng-show="newPerson.person_category == patient">
+    <h4>Diagnosis, Consultant/Doctors, Operation</h4>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-3">Main Diagnosis</label>
+
+                    <div class="col-sm-8">
+                        <input ng-hide="printed"
+                               ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited || !hasSearch"
+                               type="text" class="form-control" placeholder="Main Diagnosis"
+                               ng-model="newPerson.patient_main_diagnosis">
+                                <span ng-show="printed">
+                                    {{newPerson.patient_main_diagnosis}}
+                                </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3">Consultant in Charge</label>
+
+                    <div class="col-sm-8">
+                        <input ng-hide="printed"
+                               ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited || !hasSearch"
+                               type="text" maxlength="60" class="form-control" placeholder="Consultant in Charge"
+                               ng-model="newPerson.patient_consultant_in_charge">
+                                <span ng-show="printed">
+                                    {{newPerson.patient_consultant_in_charge}}
+                                </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-3">Operation Done</label>
+
+                    <div class="col-sm-8">
+                        <label class="radio-inline">
+                            <input ng-change="newPerson.patient_type_of_operation = null;
+                                newPerson.patient_operation_date = null;"
+                                   ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                                   type="radio" name="operationDone{{newPerson.incident_person_involved_id}}" ng-value="true"
+                                   ng-model="newPerson.patient_is_operation_done">Yes</label>
+                        <label class="radio-inline">
+                            <input ng-change="newPerson.patient_type_of_operation = null;
+                                newPerson.patient_operation_date = null;"
+                                   ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                                   type="radio" name="operationDone{{newPerson.incident_person_involved_id}}" ng-value="false"
+                                   ng-model="newPerson.patient_is_operation_done">No</label>
+                    </div>
+                </div>
+                <div class="form-group" ng-show="newPerson.patient_is_operation_done">
+                    <label class="col-sm-3">Type of Operation</label>
+
+                    <div class="col-sm-8">
+                        <input ng-hide="printed"
+                               ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited || !hasSearch"
+                               type="text" class="form-control" placeholder="Type of Operation"
+                               ng-model="newPerson.patient_type_of_operation">
+                                <span ng-show="printed">
+                                    {{newPerson.patient_type_of_operation}}
+                                </span>
+                    </div>
+                </div>
+                <div class="form-group" ng-show="newPerson.patient_is_operation_done">
+                    <label class="col-sm-3">Operation Date (DD/MM/YYYY)</label>
+
+                    <div class="col-sm-8">
+                        <p class="input-group" ng-hide="printed">
+                            <input readonly
+                                   ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited || !hasSearch"
+                                   type="text" id="dtOperationDate" class="form-control"
+                                   ng-model="newPerson.patient_operation_date" name="operationDate"
+                                   datepicker-popup="dd-MM-yyyy" close-text="Close" show-weeks="false"
+                                   show-button-bar="false" datepicker-append-to-body="true">
+                                                <span class="input-group-btn">
+                                                    <button ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                                                            id="btnOperationDate" class="btn btn-default"
+                                                            ng-click="newPerson.patient_operation_date = null">
+                                                        <img src="/Web/img/fa-times.png"/>
+                                                    </button>
+                                                </span>
+                        </p>
+                                <span ng-show="printed">
+                                    {{newPerson.patient_operation_date | momentDateFilter}}
+                                </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div ng-if="newPerson.person_category == staff && incident.incident_type_id == 11">
+<h4>Staff Designation</h4>
+<table width="100%" class="table table-bordered">
+<thead>
+<tr>
+    <th class="fb-w-60">Category of Staff Involved <span class="red-star">*</span>
+
+        <div class="validation-new" ng-show="newPerson.validation.staff_category && !newPerson.staff_category">
+            Please provide staff category.
+        </div>
+    </th>
+    <th class="fb-w-40">Years Of Service (KTPH) <span class="red-star">*</span>
+
+        <div class="validation-new"
+             ng-show="newPerson.validation.staff_years_of_service && !newPerson.staff_years_of_service">
+            Please provide staff year of service.
+        </div>
+    </th>
+</tr>
+</thead>
+<tbody>
+<tr style="font-size: 90%;">
+<td class="fb-w-60">
+    <div class="row">
+        <div class="col-md-3">
+            <div style="text-decoration: underline;">Doctors</div>
+            <div>
+                <label class="radio-inline"
+                       ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited">
+                    <input ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                           type="radio" name="rboStaffCategory{{newPerson.incident_person_involved_id}}" value="HO"
+                           ng-model="newPerson.staff_category">House Officer (HO)</label>
+            </div>
+            <div>
+                <label class="radio-inline"
+                       ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited">
+                    <input ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                           type="radio" name="rboStaffCategory{{newPerson.incident_person_involved_id}}" value="MO"
+                           ng-model="newPerson.staff_category">Medical Officer (MO)</label>
+            </div>
+            <div>
+                <label class="radio-inline"
+                       ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited">
+                    <input ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                           type="radio" name="rboStaffCategory{{newPerson.incident_person_involved_id}}" value="RP"
+                           ng-model="newPerson.staff_category">Resident Physician (RP)</label>
+            </div>
+            <div>
+                <label class="radio-inline"
+                       ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited">
+                    <input ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                           type="radio" name="rboStaffCategory{{newPerson.incident_person_involved_id}}" value="Reg"
+                           ng-model="newPerson.staff_category">Registrar (Reg)</label>
+            </div>
+            <div>
+                <label class="radio-inline"
+                       ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited">
+                    <input ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                           type="radio" name="rboStaffCategory{{newPerson.incident_person_involved_id}}" value="AC"
+                           ng-model="newPerson.staff_category">Associate Consultant (AC)</label>
+            </div>
+            <div>
+                <label class="radio-inline"
+                       ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited">
+                    <input ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                           type="radio" name="rboStaffCategory{{newPerson.incident_person_involved_id}}" value="C"
+                           ng-model="newPerson.staff_category">Consultant (C)</label>
+            </div>
+            <div>
+                <label class="radio-inline"
+                       ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited">
+                    <input ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                           type="radio" name="rboStaffCategory{{newPerson.incident_person_involved_id}}" value="SC"
+                           ng-model="newPerson.staff_category">Senior Consultant (SC)</label>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div style="text-decoration: underline;">Nurse</div>
+            <div>
+                <label class="radio-inline"
+                       ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited">
+                    <input ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                           type="radio" name="rboStaffCategory{{newPerson.incident_person_involved_id}}" value="EN"
+                           ng-model="newPerson.staff_category">Enrolled Nurse (EN)</label>
+            </div>
+            <div>
+                <label class="radio-inline"
+                       ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited">
+                    <input ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                           type="radio" name="rboStaffCategory{{newPerson.incident_person_involved_id}}" value="SN"
+                           ng-model="newPerson.staff_category">Staff Nurse (SN)</label>
+            </div>
+            <div>
+                <label class="radio-inline"
+                       ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited">
+                    <input ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                           type="radio" name="rboStaffCategory{{newPerson.incident_person_involved_id}}" value="SSN"
+                           ng-model="newPerson.staff_category">Senior Staff Nurse (SSN)</label>
+            </div>
+            <div>
+                <label class="radio-inline"
+                       ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited">
+                    <input ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                           type="radio" name="rboStaffCategory{{newPerson.incident_person_involved_id}}" value="NC"
+                           ng-model="newPerson.staff_category">Nurse Clinician (NC)</label>
+            </div>
+            <div>
+                <label class="radio-inline"
+                       ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited">
+                    <input ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                           type="radio" name="rboStaffCategory{{newPerson.incident_person_involved_id}}" value="SNC"
+                           ng-model="newPerson.staff_category">Senior Nurse Clinician (SNC)</label>
+            </div>
+            <div>
+                <label class="radio-inline"
+                       ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited">
+                    <input ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                           type="radio" name="rboStaffCategory{{newPerson.incident_person_involved_id}}" value="NM"
+                           ng-model="newPerson.staff_category">Nurse Manager (NM)</label>
+            </div>
+            <div>
+                <label class="radio-inline"
+                       ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited">
+                    <input ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                           type="radio" name="rboStaffCategory{{newPerson.incident_person_involved_id}}" value="SNM"
+                           ng-model="newPerson.staff_category">Senior Nurse Manager (SNM)</label>
+            </div>
+            <div>
+                <label class="radio-inline"
+                       ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited">
+                    <input ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                           type="radio" name="rboStaffCategory{{newPerson.incident_person_involved_id}}" value="APN"
+                           ng-model="newPerson.staff_category">Advanced Practice Nurse (APN)</label>
+            </div>
+
+        </div>
+        <div class="col-md-3">
+            <div style="text-decoration: underline;">Allied Health</div>
+            <div>
+                <label class="radio-inline"
+                       ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited">
+                    <input ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                           type="radio" name="rboStaffCategory{{newPerson.incident_person_involved_id}}" value="P"
+                           ng-model="newPerson.staff_category">Pharmacist</label>
+            </div>
+            <div>
+                <label class="radio-inline"
+                       ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited">
+                    <input ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                           type="radio" name="rboStaffCategory{{newPerson.incident_person_involved_id}}" value="PA"
+                           ng-model="newPerson.staff_category">Pharmacy Assistant</label>
+            </div>
+            <div>
+                <label class="radio-inline"
+                       ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited">
+                    <input ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                           type="radio" name="rboStaffCategory{{newPerson.incident_person_involved_id}}" value="PT"
+                           ng-model="newPerson.staff_category">Pharmacy Technician</label>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div>
+                <label class="radio-inline"
+                       ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited">
+                    <input ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                           type="radio" name="rboStaffCategory{{newPerson.incident_person_involved_id}}" value="Others"
+                           ng-model="newPerson.staff_category">Others</label>
+            </div>
+
+            <div class="row" ng-if="newPerson.staff_category == 'Others'">
+                            <span>(Specify:<input ng-hide="printed"
+                                                  ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited  || !hasSearch"
+                                                  type="text" maxlength="50" style="width: 100px;"
+                                                  ng-model="newPerson.staff_category_other">
+                                <span ng-show="printed">
+                                    {{newPerson.staff_category_other}}
+                                </span>)</span>
+
+                <div class="validation-new"
+                     ng-show="newPerson.validation.staff_category_other && !newPerson.staff_category_other">
+                    Please provide staff category description.
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</td>
+<td class="fb-w-40">
+    <div class="row">
+        <div class="col-md-6">
+            <div>
+                <label class="radio-inline"
+                       ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited">
+                    <input ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                           type="radio" name="rboStaffYearsOfService{{newPerson.incident_person_involved_id}}" value="less3mo"
+                           ng-model="newPerson.staff_years_of_service">Less than 3 months</label>
+            </div>
+            <div>
+                <label class="radio-inline"
+                       ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited">
+                    <input ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                           type="radio" name="rboStaffYearsOfService{{newPerson.incident_person_involved_id}}" value="36mo"
+                           ng-model="newPerson.staff_years_of_service">3 - 6 months</label>
+            </div>
+            <div>
+                <label class="radio-inline"
+                       ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited">
+                    <input ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                           type="radio" name="rboStaffYearsOfService{{newPerson.incident_person_involved_id}}" value="612mo"
+                           ng-model="newPerson.staff_years_of_service">6 - 12 months</label>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div>
+                <label class="radio-inline"
+                       ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited">
+                    <input ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                           type="radio" name="rboStaffYearsOfService{{newPerson.incident_person_involved_id}}" value="12years"
+                           ng-model="newPerson.staff_years_of_service">1 - 2 years</label>
+            </div>
+            <div>
+                <label class="radio-inline"
+                       ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited">
+                    <input ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                           type="radio" name="rboStaffYearsOfService{{newPerson.incident_person_involved_id}}" value="25years"
+                           ng-model="newPerson.staff_years_of_service">2 - 5 years</label>
+            </div>
+            <div>
+                <label class="radio-inline"
+                       ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited">
+                    <input ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                           type="radio" name="rboStaffYearsOfService{{newPerson.incident_person_involved_id}}" value="more5years"
+                           ng-model="newPerson.staff_years_of_service">More than 5 years</label>
+            </div>
+        </div>
+    </div>
+    <div class="row" ng-if="newPerson.staff_years_of_service == 'more5years'">
+        <div class="col-md-12">
+                        <span>If more than 5 years, specify: (<input ng-hide="printed"
+                                                                     ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited || !hasSearch"
+                                                                     type="text" maxlength="50"
+                                                                     ng-model="newPerson.staff_years_of_service_other">
+                                <span ng-show="printed">
+                                    {{newPerson.staff_years_of_service_other}}
+                                </span>)</span>
+
+            <div class="validation-new"
+                 ng-show="newPerson.validation.staff_years_of_service_other && !newPerson.staff_years_of_service_other">
+                Please provide staff years of service.
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div style="font-size: 90%;"
+     ng-show="newPerson.person_category == patient && incident.incident_type_id == 7 && (incident.incident_sub_type_id >= 18 && incident.incident_sub_type_id <= 21)">
+    <table width="100%" class="table table-bordered">
+        <thead>
+        <tr>
+            <th class="fb-w-100">Body Fluid
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label class="checbox-inline"
+                               ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited">
+                            <input ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                                   type="checkbox" ng-model="newPerson.patient_body_fluid_is_blood">Blood</label>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="checbox-inline"
+                               ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited">
+                            <input ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                                   type="checkbox" ng-model="newPerson.patient_body_fluid_is_urine">Urine</label>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="checbox-inline"
+                               ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited">
+                            <input ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                                   type="checkbox" ng-model="newPerson.patient_body_fluid_is_bile">Bile</label>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="checbox-inline"
+                               ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited">
+                            <input ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                                   type="checkbox" ng-model="newPerson.patient_body_fluid_is_other">Others</label>
+                        <span>(Specify:<input ng-hide="printed"
+                                              ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited || !hasSearch || !newPerson.patient_body_fluid_is_other"
+                                              type="text" maxlength="50" style="width: 100px;"
+                                              ng-model="newPerson.patient_body_fluid_other_description">
+                                <span ng-show="printed">
+                                    {{newPerson.patient_body_fluid_other_description}}
+                                </span>)</span>
+
+                        <div class="validation-new"
+                             ng-show="newPerson.validation.patient_body_fluid_other_description && !newPerson.patient_body_fluid_other_description">
+                            Please provide patient body fluid description.
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <table width="100%" class="table table-bordered">
+        <thead>
+        <tr>
+            <th class="fb-w-100">What device or item caused the injury (Mandatory for sharp injury) <span
+                    ng-show="incident.incident_sub_type_id == 18" class="red-star">*</span>
+
+                <div class="validation-new" ng-show="newPerson.validation.patient_caused_injury">
+                    Please provide device or item caused the injury.
+                </div>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div>
+                            <label class="checbox-inline"
+                                   ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                                   type="checkbox">
+                                <input ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                                       type="checkbox" ng-model="newPerson.patient_caused_injury_is_hypo_needle">Hypodermic
+                                Needle</label>
+                        </div>
+                        <div>
+                            <label class="checbox-inline"
+                                   ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                                   type="checkbox">
+                                <input ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                                       type="checkbox" ng-model="newPerson.patient_caused_injury_is_spinal_needle">Spinal
+                                or epidural needle</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div>
+                            <label class="checbox-inline"
+                                   ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                                   type="checkbox">
+                                <input ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                                       type="checkbox" ng-model="newPerson.patient_caused_injury_is_suture_needle">Suture
+                                needle</label>
+                        </div>
+                        <div>
+                            <label class="checbox-inline"
+                                   ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                                   type="checkbox">
+                                <input ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                                       type="checkbox" type="checkbox"
+                                       ng-model="newPerson.patient_caused_injury_is_catheter">I/V catheter
+                                (stylet)</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div>
+                            <label class="checbox-inline"
+                                   ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                                   type="checkbox">
+                                <input ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                                       type="checkbox" type="checkbox"
+                                       ng-model="newPerson.patient_caused_injury_is_lancet">Lancet</label>
+                        </div>
+                        <div>
+                            <label class="checbox-inline"
+                                   ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                                   type="checkbox">
+                                <input ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                                       type="checkbox" type="checkbox"
+                                       ng-model="newPerson.patient_caused_injury_is_other">Others</label>
+                            (Specify:<input ng-hide="printed"
+                                            ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited || !hasSearch || !newPerson.patient_caused_injury_is_other"
+                                            type="text" maxlength="50" style="width: 80px;"
+                                            ng-model="newPerson.patient_caused_injury_other_description">
+                                        <span ng-show="printed">
+                                            {{newPerson.patient_caused_injury_other_description}}
+                                        </span>)
+                        </div>
+                        <div class="validation-new"
+                             ng-show="newPerson.validation.patient_caused_injury_other_description">
+                            Please provide device or item caused the injury.
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div>
+                            <label class="checbox-inline"
+                                   ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                                   type="checkbox">
+                                <input ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                                       type="checkbox" type="checkbox"
+                                       ng-model="newPerson.patient_caused_injury_is_scalpel">Scalpel blade</label>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div style="font-size: 90%;"
+     ng-if="newPerson.person_category == staff && incident.incident_type_id == 7 && (incident.incident_sub_type_id >= 18 && incident.incident_sub_type_id <= 21)">
+<table width="100%" class="table table-bordered">
+<thead>
+<tr>
+    <th colspan="4">Staff Involved
+    </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+    <td class="fb-w-15">Staff Designation
+    </td>
+    <td class="fb-w-35">
+        <select ng-hide="printed" ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                type="checkbox"
+                ng-model="newPerson.staff_designation_id"
+                ng-options="i.designation_id as i.designation_description for i in designations">
+            <option value="">-- Select Designation --</option>
+        </select>
+                <span ng-show="printed">
+                    {{newPerson.Designation.designation_description}}
+                </span>
+    </td>
+    <td class="fb-w-10">Discipline (Dr only)
+    </td>
+    <td class="fb-w-40">
+        <select ng-hide="printed" ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                type="checkbox"
+                ng-model="newPerson.staff_discipline_id"
+                ng-options="i.department_id as i.department_description for i in departments">
+            <option value="">-- Select Department --</option>
+        </select>
+                <span ng-show="printed">
+                    {{newPerson.Department.department_description}}
+                </span>
+    </td>
+</tr>
+<tr>
+    <td class="fb-w-15">Years Of Service (KTPH) <span class="red-star">*</span>
+
+        <div class="validation-new"
+             ng-show="newPerson.validation.staff_years_of_service && !newPerson.staff_years_of_service">
+            Please provide staff year of service.
+        </div>
+    </td>
+    <td class="fb-w-35">
+        <div class="row">
+            <div class="col-md-6">
+                <div>
+                    <label class="radio-inline"
+                           ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited">
+                        <input ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                               type="radio" type="radio" name="rboStaffYearsOfService{{newPerson.incident_person_involved_id}}" value="less3mo"
+                               ng-model="newPerson.staff_years_of_service">Less than 3 months</label>
+                </div>
+                <div>
+                    <label class="radio-inline"
+                           ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited">
+                        <input ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                               type="radio" type="radio" name="rboStaffYearsOfService{{newPerson.incident_person_involved_id}}" value="36mo"
+                               ng-model="newPerson.staff_years_of_service">3 - 6 months</label>
+                </div>
+                <div>
+                    <label class="radio-inline"
+                           ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited">
+                        <input ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                               type="radio" type="radio" name="rboStaffYearsOfService{{newPerson.incident_person_involved_id}}" value="612mo"
+                               ng-model="newPerson.staff_years_of_service">6 - 12 months</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div>
+                    <label class="radio-inline"
+                           ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited">
+                        <input ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                               type="radio" type="radio" name="rboStaffYearsOfService{{newPerson.incident_person_involved_id}}" value="12years"
+                               ng-model="newPerson.staff_years_of_service">1 - 2 years</label>
+                </div>
+                <div>
+                    <label class="radio-inline"
+                           ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited">
+                        <input ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                               type="radio" type="radio" name="rboStaffYearsOfService{{newPerson.incident_person_involved_id}}" value="25years"
+                               ng-model="newPerson.staff_years_of_service">2 - 5 years</label>
+                </div>
+                <div>
+                    <label class="radio-inline"
+                           ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited">
+                        <input ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                               type="radio" type="radio" name="rboStaffYearsOfService{{newPerson.incident_person_involved_id}}" value="more5years"
+                               ng-model="newPerson.staff_years_of_service">More than 5 years</label>
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-if="newPerson.staff_years_of_service == 'more5years'">
+            <div class="col-md-12">
+                If more than 5 years, specify: (<input ng-hide="printed"
+                                                       ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited || !hasSearch"
+                                                       type="text" maxlength="3" style="width: 30px;" number-only-input
+                                                       ng-model="newPerson.staff_years_of_service_other">
+                            <span ng-show="printed">
+                                {{newPerson.staff_years_of_service_other}}
+                            </span>)
+                <div class="validation-new"
+                     ng-show="newPerson.validation.staff_years_of_service_other && !newPerson.staff_years_of_service_other">
+                    Please provide staff years of service.
+                </div>
+            </div>
+        </div>
+    </td>
+    <td class="fb-w-10" style="background-color: #ddd">Personal Protective Equipment Used
+    </td>
+    <td class="fb-w-40">
+        <div class="row">
+            <div class="col-md-3">
+                <div>
+                    <label class="checkbox-inline"
+                           ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited">
+                        <input ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                               type="checkbox" type="checkbox"
+                               ng-model="newPerson.staff_protective_is_gloves">Gloves</label>
+                </div>
+                <div>
+                    <label class="checkbox-inline"
+                           ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited">
+                        <input ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                               type="checkbox" type="checkbox" ng-model="newPerson.staff_protective_is_googles">Googles</label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div>
+                    <label class="checkbox-inline"
+                           ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited">
+                        <input ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                               type="checkbox" type="checkbox"
+                               ng-model="newPerson.staff_protective_is_mask">Mask</label>
+                </div>
+                <div>
+                    <label class="checkbox-inline"
+                           ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited">
+                        <input ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                               type="checkbox" type="checkbox"
+                               ng-model="newPerson.staff_protective_is_gown">Gown</label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div>
+                    <label class="checkbox-inline"
+                           ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited">
+                        <input ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                               type="checkbox" type="checkbox"
+                               ng-model="newPerson.staff_protective_is_shield">Shield</label>
+                </div>
+                <div>
+                    <label class="checkbox-inline"
+                           ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited">
+                        <input ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                               type="checkbox" type="checkbox"
+                               ng-model="newPerson.staff_protective_is_lab_coat">Lab Coat</label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div>
+                    <label class="checkbox-inline"
+                           ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited">
+                        <input ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+                               type="checkbox" type="checkbox"
+                               ng-model="newPerson.staff_protective_is_apron">Apron</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div>
+                    <label class="checkbox-inline"
+                           ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited">
+                        <input ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited  || !hasSearch"
+                               type="checkbox" type="checkbox" ng-model="newPerson.staff_protective_is_other">Others,
+                        Specify: (<input ng-hide="printed"
+                                         ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited  || !hasSearch || !newPerson.staff_protective_is_other"
+                                         type="text" maxlength="50" style="width: 100px;"
+                                         ng-model="newPerson.staff_protective_is_other_description">
+                                    <span ng-show="printed">
+                                        {{newPerson.staff_protective_is_other_description}}
+                                    </span>)
+                    </label>
+                </div>
+                <div class="validation-new"
+                     ng-show="newPerson.validation.staff_protective_is_other_description && !newPerson.staff_protective_is_other_description">
+                    Please provide personal protective equipment used.
+                </div>
+            </div>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>Address
+    </td>
+    <td colspan="3">
+        <input ng-hide="printed" ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited"
+               type="text"
+               maxlength="100" style="width: 95%;" ng-model="newPerson.staff_address">
+                <span ng-show="printed">
+                    {{newPerson.staff_address}}
+                </span>
+    </td>
+</tr>
+<tr>
+    <td>Contact
+    </td>
+    <td colspan="3">(Mobile)
+        <input ng-hide="printed"
+               ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited || !hasSearch"
+               type="text" minlength="8" maxlength="20" style="width: 80px;" number-only-input
+               ng-model="newPerson.staff_contact_mobile">
+                <span ng-show="printed">
+                    {{newPerson.staff_contact_mobile}}
+                </span>
+        (Home)
+        <input ng-hide="printed"
+               ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited || !hasSearch"
+               type="text" minlength="8" maxlength="20" style="width: 80px;" number-only-input
+               ng-model="newPerson.staff_contact_home">
+                <span ng-show="printed">
+                    {{newPerson.staff_contact_home}}
+                </span>
+    </td>
+</tr>
+<tr>
+    <td>Marital Status
+    </td>
+    <td colspan="3">
+        <label class="radio-inline"
+               ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited">
+            <input ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited" type="radio"
+                   value="Single" ng-model="newPerson.staff_marital_status">Single</label>
+        <label class="radio-inline"
+               ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited" type="checkbox">
+            <input ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited" type="radio"
+                   value="Married" ng-model="newPerson.staff_marital_status">Married</label>
+        <label class="radio-inline"
+               ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited" type="checkbox">
+            <input ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited" type="radio"
+                   value="Divorced" ng-model="newPerson.staff_marital_status">Divorced</label>
+        <label class="radio-inline"
+               ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited" type="checkbox">
+            <input ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited" type="radio"
+                   value="Widowed" ng-model="newPerson.staff_marital_status">Widowed</label>
+    </td>
+</tr>
+</tbody>
+</table>
+</div>
+</fieldset>
+
+</div>
+
+</div>
+</div>
+<div class="print-section-wrap">
+    <div class="print-section-header">Incident Details</div>
+    <div class="print-section-content" style="font-size:90%;">
+        <fieldset ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited">
+            <form name="details">
+                <!--<div angular-html-bind="main_template"></div>-->
+                <div class="row" id="incident-top-flag">
+                    <!--<div class="col-md-3">-->
+                    <!--<div angular-html-bind="main_template_navigation" compile-scope="dynamicFormScope"></div>-->
+                    <!--</div>-->
+                    <div class="col-md-12">
+                        <div angular-html-bind-array="templateSections" compile-scope="dynamicFormScope"></div>
+                    </div>
+                </div>
+            </form>
+        </fieldset>
+    </div>
+</div>
+<div class="print-section-wrap">
+<div class="print-section-header">Description</div>
+<div class="print-section-content">
+    <fieldset ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited">
+
+        <div class="bs-callout bs-callout-primary form-horizontal"
+             ng-show="incident.current_tracking_status_holder == 'DRAFT' && form.is_edited">
+            <div class="container form-horizontal">
+                <div class="row form-group">
+                    <label class="col-md-2 control-label">To</label>
+
+                    <div class="col-md-4">
+                        <div class="form-control">
+                            <span>{{routingGroup.name}}</span>
+                        </div>
+                    </div>
+                    <span style="color: red;"
+                          ng-show="!submitValid">Please choose supervisor for this routing group</span>
+
+                    <div class="col-md-6">
+                            <span class="btn btn-info btn-xs" style="cursor: default;margin: 0px 2px;"
+                                  ng-repeat="user in routingUsers | filter: {user_id : '!'+userSession.user_id}">
+                                {{user.User.name}}
+                            </span>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-4">
+                        <button ng-show="isShowButtonManualRouting" class="btn btn-primary btn-sm"
+                                ng-click="onAddDynamicRoutingUser()">Add User for Next Routing Group
+                        </button>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label class="col-md-2 control-label">CC</label>
+
+                    <div class="col-md-4">
+                        <div style="padding:5px; border: 1px solid #aeaeae;height:60px;overflow-y:scroll;">
+                            <div ng-repeat="c in committeeGroups">[{{c.name}}]</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div ng-repeat="c in committeeGroups">
+                                    <span class="btn btn-info btn-xs" style="cursor: default;margin: 0px 2px;"
+                                          ng-repeat="user in c.Users">
+                                        {{user.User.name}}
+                                    </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label class="col-md-2 control-label">Additional CC</label>
+
+                    <div class="col-md-10">
+                        <div>
+                                    <span ng-repeat="adc in incident.AdditionalCcs">
+                                        <span class="btn btn-info btn-sm" style="cursor: default;">{{adc.name}} {{(adc.email)?("["+adc.email+"]"):""}}
+                                            <span style="cursor: pointer; padding-left: 3px; padding-right: 3px; font-weight: bold;"
+                                                  ng-click="onDeleteAdditionalCc(adc)">X
+                                            </span>
+                                        </span>
+                                    </span>
+                        </div>
+                        <div style="padding-top: 5px;">
+
+                                    <span class="btn btn-primary btn-sm" ng-click="onAddCcSapHr()">Add User
+                                    </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <br/>
+        </div>
+        <br/>
+        <br/>
+
+        <div class="bs-callout bs-callout-primary form-horizontal"
+             ng-show="currentAcl['INCIDENT_TRACK_INCIDENT_SRE_LEGAL_MEDIA'] && incident.current_tracking_status!='DRAFT' && userSession.user_id != incident.created_by">
+            <br/>
+
+            <div class="row">
+                <br/>
+                <label class="col-md-2">
+                    Potential SRE?
+                        <span class="fa-stack" ng-click="onOpenSREModal()">
+                            <i class="fa fa-circle icon-red fa-stack-1x fa-lg"></i>
+                            <i class="fa fa-question fa-stack-1x icon-white"></i>
+                        </span>
+                </label>
+
+                <div class="col-md-2">
+                    <label class="radio-inline">
+                        <input type="radio" name="rboSre" ng-model="incident.is_potential_sre"
+                               ng-value="true">Yes</label>
+                    <label class="radio-inline">
+                        <input type="radio" name="rboSre" ng-model="incident.is_potential_sre"
+                               ng-value="false">No</label>
+                </div>
+                <div class="col-md-1" ng-show="currentAcl['INCIDENT_TRACK_INCIDENT_SRE_LEGAL_MEDIA_BOX']">
+                    <label class="control-label">SRE#</label>
+                </div>
+                <div class="col-md-4" ng-show="currentAcl['INCIDENT_TRACK_INCIDENT_SRE_LEGAL_MEDIA_BOX']">
+                    <input ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited" type="text"
+                           class="form-control" ng-model="incident.sre_description"/>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-md-2">Potential Media?</label>
+
+                <div class="col-md-2">
+                    <label class="radio-inline">
+                        <input type="radio" name="rboMedia" ng-model="incident.is_potential_media"
+                               ng-value="true">Yes</label>
+                    <label class="radio-inline">
+                        <input type="radio" name="rboMedia" ng-model="incident.is_potential_media"
+                               ng-value="false">No</label>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-md-2">Potential Legal?</label>
+
+                <div class="col-md-2">
+                    <label class="radio-inline">
+                        <input type="radio" name="rboLegal" ng-model="incident.is_potential_legal"
+                               ng-value="true">Yes</label>
+                    <label class="radio-inline">
+                        <input type="radio" name="rboLegal" ng-model="incident.is_potential_legal"
+                               ng-value="false">No</label>
+                </div>
+            </div>
+        </div>
+        <div class="bs-callout bs-callout-primary">
+            <div class="form-group">
+                <h4 class="text-primary">Description</h4>
+            </div>
+            <br/>
+
+            <div ng-if="incident.current_tracking_status == 'CLOSED' || !form.is_edited">
+                <div class="form-group">
+                    <label>Situation <span class="validation-new">*</span></label>
+                    <div class="print-box angular-with-newlines word-wrap-word-break-all">
+                        {{incident.situation}}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Background <span class="validation-new">*</span></label>
+
+                    <div class="print-box angular-with-newlines word-wrap-word-break-all">
+                        {{incident.background}}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Assessment <span class="validation-new">*</span></label>
+
+                    <div class="print-box angular-with-newlines word-wrap-word-break-all">
+                        {{incident.assessment}}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Recommendations <span class="validation-new">*</span></label>
+
+                    <div class="print-box angular-with-newlines word-wrap-word-break-all">
+                        {{incident.recommendations}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div ng-show="currentAcl['INCIDENT_TRACK_INCIDENT_DESCRIPTION_SUPERVISOR'] && incident.current_tracking_status!='DRAFT'"
+             angular-html-bind="main_template_supervisor"
+             compile-scope="dynamicFormScope"></div>
+
+        <div class="bs-callout bs-callout-primary">
+            <div>
+                <label>Attachments</label>
+            </div>
+            <table class="table table-striped table-bordered data-grid">
+                <thead>
+                <tr>
+                    <th class="action-button"></th>
+                    <th>File Name</th>
+                    <th>File Size</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-hide="incident.Attachments.length > 0">
+                    <td colspan="5">No attachment.
+                    </td>
+                </tr>
+                <tr ng-repeat="att in incident.Attachments" ng-show="att.is_active">
+                    <td>
+                        <button ng-if="form.is_edited" class="btn btn-danger btn-xs" ng-click="onDeleteAttachment(att)">
+                            <i class="fa fa-times" tooltip-trigger="mouseenter" tooltip="Delete Data"></i>
+                        </button>
+                    </td>
+                    <td>{{att.filename}}</td>
+                    <td align="right">{{att.filesize/1024.00/1024.00| number:2}} MB</td>
+                    <td>
+                        <button class="btn btn-primary btn-xs" ng-click="download(att)"
+                                ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited">
+                            <i class="fa fa-download"></i>
+                            Download
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+                <tfoot ng-show="incident.Attachments.length > 0">
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td align="right">{{totalFileSize| number:2}} MB</td>
+                    <td></td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </fieldset>
+</div>
+</div>
+<div class="print-section-wrap" ng-if="wizard.steps[4].showed">
+<div class="print-section-header">Comments</div>
+<div class="print-section-content">
+<br/>
+
+<div ng-hide="incident.Comments.length > 0">No Comments.</div>
+<div ng-repeat="incidentComment in incident.Comments | filter:{is_active: true}">
+<fieldset disabled>
+<div class="bs-callout bs-callout-primary">
+
+<div class="row form-group" style="border-bottom: 1px #aeaeae solid;">
+    <label class="col-sm-12 control-label">{{incidentComment.comment_type}}</label>
+</div>
+<div class="row form-group"
+     ng-show="incidentComment.comment_type == 'COMMENT' || incidentComment.comment_type == 'CORRECTIVE ACTION'">
+    <label class="col-sm-3 control-label">Date</label>
+
+    <div class="col-sm-9">
+        {{incidentComment.comment_date | momentDateFilter: "DD/MM/YYYY HH:mm:ss"}}
+    </div>
+</div>
+<div class="row form-group"
+     ng-show="incidentComment.comment_type == 'COMMENT' || incidentComment.comment_type == 'CORRECTIVE ACTION'">
+    <label class="col-sm-3 control-label">Comment By</label>
+
+    <div class="col-sm-9">
+        {{incidentComment.comment_by}}
+    </div>
+</div>
+<div class="row form-group" ng-show="incidentComment.comment_type == 'FOLLOW UP'">
+    <label class="col-sm-3 control-label">To <span class="mandatory">*</span></label>
+
+    <div class="col-sm-5">
+        <div class="input-group">
+            <input readonly disabled type="text" class="form-control" placeholder="Search User" id="txtUser"
+                   ng-model="incidentComment.CommentTo.name"/>
+                                <span class="input-group-addon" style="cursor: pointer;">
+                                    <i class="fa fa-search"></i>
+                                </span>
+        </div>
+    </div>
+    <div class="mandatory" ng-show="valid.user">Please select User</div>
+</div>
+<div class="row form-group" ng-show="incidentComment.comment_type == 'FOLLOW UP'">
+    <label class="col-sm-3 control-label">Due Date</label>
+
+    <div class="col-sm-4">
+        <p class="input-group">
+            <input readonly disabled type="text" id="dtFollowUpDueDate" name="followUpDueDate" class="form-control"
+                   datepicker-popup="dd-MM-yyyy" ng-model="incidentComment.follow_up_due_date" close-text="Close"
+                   show-weeks="false" show-button-bar="false" min="today"/>
+        </p>
+    </div>
+</div>
+<div class="row form-group">
+    <label class="col-sm-12 control-label">Description</label>
+
+    <div class="col-sm-12">
+        <div style="width: 95%;word-break:break-word;" class="print-box">
+            {{incidentComment.comment_description}}
+        </div>
+
+    </div>
+</div>
+<div class="row form-group"
+     ng-show="incidentComment.comment_type == 'COMMENT' || incidentComment.comment_type == 'CORRECTIVE ACTION'">
+    <label class="col-sm-3 control-label">Attachment</label>
+
+    <div class="col-sm-7">
+        <table ng-show="incidentComment.attachment_filename" class="table table-striped table-bordered data-grid">
+            <thead>
+            <tr>
+                <th>Uploaded File Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>{{incidentComment.attachment_filename}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="row form-group" ng-show="incidentComment.comment_type == 'COMMENT'">
+    <label class="col-sm-3 control-label">Incident noted by Supervisor</label>
+
+    <div class="col-sm-9">
+        <input type="checkbox" ng-disabled="!currentAcl['INCIDENT_TRACK_INCIDENT_COMMENT_ADD_NOTED_BY_SUPERVISOR']"
+               ng-model="incidentComment.is_noted"/>
+    </div>
+</div>
+<div class="row form-group"
+     ng-show="incidentComment.comment_type == 'COMMENT' || incidentComment.comment_type == 'CORRECTIVE ACTION'">
+    <label class="col-sm-3 control-label">Reporter Can View</label>
+
+    <div class="col-sm-9">
+        <input type="checkbox" ng-model="incidentComment.is_reporter_view"/>
+    </div>
+</div>
+<div ng-show="incidentComment.comment_type == 'FOLLOW UP'">
+    <div class="row">
+        <div class="col-sm-12">
+            <label>Follow up Response - Please response once the follow up has been done</label>
+        </div>
+    </div>
+    <div class="row" ng-show="!incidentComment.follow_up_is_confirmed">
+        <div class="col-sm-12">
+            <i>No Response Yet.</i>
+        </div>
+    </div>
+    <div class="row" ng-show="incidentComment.follow_up_is_confirmed">
+        <div class="col-sm-12">
+            <div id="followUpRemarks" style="resize: vertical; height: 100px; overflow: auto" contenteditable="false"
+                 class="form-control"
+                 rows="3" name="txtFollowUpRemarks">
+                {{incidentComment.follow_up_remarks}}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row form-group"
+     ng-show="incidentComment.comment_type == 'CORRECTIVE ACTION'  && incident.incident_type_id == 2"
+     style="padding-left: 15px; padding-right: 15px">
+    <table class="table table-bordered table-condensed table-responsive">
+        <thead>
+        <tr>
+            <th colspan="2">Factors Minimizing Incident
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>
+                <div>
+                    <input type="checkbox" ng-model="incidentComment.factors_minimizing_incident.monitor_detection"
+                           class="fb"/>Monitor detection
+                </div>
+                <div>
+                    <input type="checkbox" ng-model="incidentComment.factors_minimizing_incident.healthy_patient"
+                           class="fb"/>Healthy patient
+                </div>
+                <div>
+                    <input type="checkbox" ng-model="incidentComment.factors_minimizing_incident.high_awareness"
+                           class="fb"/>High Awareness
+                </div>
+                <div>
+                    <input type="checkbox" ng-model="incidentComment.factors_minimizing_incident.qa_activity"
+                           class="fb"/>QA activity
+                </div>
+                <div>
+                    <input type="checkbox" ng-model="incidentComment.factors_minimizing_incident.prior_experience"
+                           class="fb"/>Prior experience
+                </div>
+                <div>
+                    <input type="checkbox" ng-model="incidentComment.factors_minimizing_incident.training" class="fb"/>Training
+                </div>
+            </td>
+            <td>
+                <div>
+                    <input type="checkbox" ng-model="incidentComment.factors_minimizing_incident.re_check_of"
+                           class="fb"/>Re-check of Equipment
+                </div>
+                <div>
+                    <input type="checkbox" ng-model="incidentComment.factors_minimizing_incident.relief_anaesthetist"
+                           class="fb"/>Relief anaesthetist
+                </div>
+                <div>
+                    <input type="checkbox" ng-model="incidentComment.factors_minimizing_incident.staff_change"
+                           class="fb"/>Staff change
+                </div>
+                <div>
+                    <input type="checkbox" ng-model="incidentComment.factors_minimizing_incident.skilled_assistance"
+                           class="fb"/>Skilled assistance
+                </div>
+                <div>
+                    <input type="checkbox" ng-model="incidentComment.factors_minimizing_incident.supervision"
+                           class="fb"/>Supervision
+                </div>
+                <div>
+                    <input ng-change="incidentComment.factors_minimizing_incident_other_description = null"
+                           type="checkbox" ng-model="incidentComment.factors_minimizing_incident.other" class="fb"/>Others
+                    (Specify:
+                    <input disabled type="text" maxlength="25"
+                           ng-model="incidentComment.factors_minimizing_incident_other_description" class="fb"/>)
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="row form-group"
+     ng-show="incidentComment.comment_type == 'CORRECTIVE ACTION' && incident.incident_type_id == 2"
+     style="padding-left: 15px; padding-right: 15px">
+    <table class="table table-bordered table-condensed table-responsive">
+        <thead>
+        <tr>
+            <th colspan="2">How can we prevent it from happening again
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>
+                <div>
+                    <input type="checkbox" ng-model="incidentComment.how_to_prevent.additional_equipment" class="fb"/>Additional
+                    equipment
+                </div>
+                <div>
+                    <input type="checkbox" ng-model="incidentComment.how_to_prevent.additional_monitor" class="fb"/>Additional
+                    monitor
+                </div>
+                <div>
+                    <input type="checkbox" ng-model="incidentComment.how_to_prevent.additional_training" class="fb"/>Additional
+                    training
+                </div>
+                <div>
+                    <input type="checkbox" ng-model="incidentComment.how_to_prevent.equipment_checking_discipline"
+                           class="fb"/>Equipment checking discipline
+                </div>
+                <div>
+                    <input type="checkbox" ng-model="incidentComment.how_to_prevent.equipment_design_improvement"
+                           class="fb"/>Equipment design improvement
+                </div>
+                <div>
+                    <input type="checkbox" ng-model="incidentComment.how_to_prevent.equipment_maintenance_discipline"
+                           class="fb"/>Equipment maintenance discipline
+                </div>
+                <div>
+                    <input type="checkbox" ng-model="incidentComment.how_to_prevent.fatigue_alleviation_routine"
+                           class="fb"/>Fatigue alleviation routine
+                </div>
+            </td>
+            <td>
+                <div>
+                    <input type="checkbox" ng-model="incidentComment.how_to_prevent.improved_communication" class="fb"/>Improved
+                    communication
+                </div>
+                <div>
+                    <input type="checkbox" ng-model="incidentComment.how_to_prevent.improved_environment" class="fb"/>Improved
+                    environment
+                </div>
+                <div>
+                    <input type="checkbox" ng-model="incidentComment.how_to_prevent.improved_supervision" class="fb"/>Improved
+                    supervision
+                </div>
+                <div>
+                    <input type="checkbox" ng-model="incidentComment.how_to_prevent.more_manpower" class="fb"/>More
+                    manpower
+                </div>
+                <div>
+                    <input type="checkbox" ng-model="incidentComment.how_to_prevent.quality_assurance_activity"
+                           class="fb"/>Quality assurance activity
+                </div>
+                <div>
+                    <input type="checkbox" ng-model="incidentComment.how_to_prevent.specific_protocol_development"
+                           class="fb"/>Specific protocol development
+                </div>
+                <div>
+                    <input type="checkbox" ng-change="incidentComment.how_to_prevent_other_description = null"
+                           ng-model="incidentComment.how_to_prevent.other" class="fb"/>Other Strategy: Specify
+                    <input disabled maxlength="25" type="text"
+                           ng-model="incidentComment.how_to_prevent_other_description" class="fb"/>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+</div>
+</fieldset>
+</div>
+
+
+</div>
+</div>
+<div class="print-section-wrap" ng-if="wizard.steps[5].showed">
+    <div class="print-section-header">SAC</div>
+    <div class="print-section-content">
+        <fieldset ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited">
+            <div class="bs-callout bs-callout-primary">
+                <h4>Severity Assessment Code (SAC) Scoring</h4>
+
+                <div class="row">
+                    <label class="col-md-2">
+                        Likelihood <span class="mandatory">*</span>
+                        <span class="fa-stack" ng-click="onOpenLikelihoodModal()">
+                            <i class="fa fa-circle icon-red fa-stack-1x fa-lg"></i>
+                            <i class="fa fa-question fa-stack-1x icon-white"></i>
+                        </span>
+                    </label>
+
+                    <div class="col-md-5">
+                        <label class="radio-inline">
+                            <input type="radio" name="rboSacLikelihood" ng-model="incident.sac_likelihood" value="1"
+                                   ng-change="calculateSAC()">Frequent</label>
+                        <label class="radio-inline">
+                            <input type="radio" name="rboSacLikelihood" ng-model="incident.sac_likelihood" value="2"
+                                   ng-change="calculateSAC()">Likely</label>
+                        <label class="radio-inline">
+                            <input type="radio" name="rboSacLikelihood" ng-model="incident.sac_likelihood" value="3"
+                                   ng-change="calculateSAC()">Possible</label>
+                        <label class="radio-inline">
+                            <input type="radio" name="rboSacLikelihood" ng-model="incident.sac_likelihood" value="4"
+                                   ng-change="calculateSAC()">Unlikely</label>
+                        <label class="radio-inline">
+                            <input type="radio" name="rboSacLikelihood" ng-model="incident.sac_likelihood" value="5"
+                                   ng-change="calculateSAC()">Rare</label>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <label class="col-md-2">
+                        Consequences <span class="mandatory">*</span>
+                        <span class="fa-stack" ng-click="onOpenConsequencesModal()">
+                            <i class="fa fa-circle icon-red fa-stack-1x fa-lg"></i>
+                            <i class="fa fa-question fa-stack-1x icon-white"></i>
+                        </span>
+                    </label>
+
+                    <div class="col-md-5">
+                        <label class="radio-inline">
+                            <input type="radio" name="rboSacConsequences" ng-model="incident.sac_consequences" value="1"
+                                   ng-change="calculateSAC()">Serious</label>
+                        <label class="radio-inline">
+                            <input type="radio" name="rboSacConsequences" ng-model="incident.sac_consequences" value="2"
+                                   ng-change="calculateSAC()">Major</label>
+                        <label class="radio-inline">
+                            <input type="radio" name="rboSacConsequences" ng-model="incident.sac_consequences" value="3"
+                                   ng-change="calculateSAC()">Moderate</label>
+                        <label class="radio-inline">
+                            <input type="radio" name="rboSacConsequences" ng-model="incident.sac_consequences" value="4"
+                                   ng-change="calculateSAC()">Minor</label>
+                        <label class="radio-inline">
+                            <input type="radio" name="rboSacConsequences" ng-model="incident.sac_consequences" value="5"
+                                   ng-change="calculateSAC()">Minimum</label>
+                    </div>
+                </div>
+            </div>
+            <div class="bs-callout bs-callout-primary">
+                <h4>SAC Score</h4>
+                <table class="table table-bordered">
+                    <tbody>
+                    <tr>
+                        <td></td>
+                        <td colspan="10" align="center"><span><b>Consequences</b></span></td>
+                    </tr>
+                    <tr>
+                        <td align="center"><span><b>Likelihood</b></span></td>
+                        <td colspan="2" class="fb-w-10" align="center"><span>Serious</span></td>
+                        <td colspan="2" class="fb-w-10" align="center"><span>Major</span></td>
+                        <td colspan="2" class="fb-w-10" align="center"><span>Moderate</span></td>
+                        <td colspan="2" class="fb-w-10" align="center"><span>Minor</span></td>
+                        <td colspan="2" class="fb-w-10" align="center"><span>Minimum</span></td>
+                    </tr>
+                    <tr>
+                        <td><span>Frequent</span></td>
+                        <td class="action-button sac-bg-level-1">
+                            <input type="radio" disabled name="rboSacScore" ng-model="sacScore" value="11">
+                        </td>
+                        <td class="action-button sac-bg-level-1">1</td>
+                        <td class="action-button sac-bg-level-1">
+                            <input type="radio" disabled name="rboSacScore" ng-model="sacScore" value="12">
+                        </td>
+                        <td class="action-button sac-bg-level-1">1</td>
+                        <td class="action-button sac-bg-level-2">
+                            <input type="radio" disabled name="rboSacScore" ng-model="sacScore" value="13">
+                        </td>
+                        <td class="action-button sac-bg-level-2">2</td>
+                        <td class="action-button sac-bg-level-3">
+                            <input type="radio" disabled name="rboSacScore" ng-model="sacScore" value="14">
+                        </td>
+                        <td class="action-button sac-bg-level-3">3</td>
+                        <td class="action-button sac-bg-level-3">
+                            <input type="radio" disabled name="rboSacScore" ng-model="sacScore" value="15">
+                        </td>
+                        <td class="action-button sac-bg-level-3">3</td>
+                    </tr>
+                    <tr>
+                        <td><span>Likely</span></td>
+                        <td class="action-button sac-bg-level-1">
+                            <input type="radio" disabled name="rboSacScore" ng-model="sacScore" value="21">
+                        </td>
+                        <td class="action-button sac-bg-level-1">1</td>
+                        <td class="action-button sac-bg-level-1">
+                            <input type="radio" disabled name="rboSacScore" ng-model="sacScore" value="22">
+                        </td>
+                        <td class="action-button sac-bg-level-1">1</td>
+                        <td class="action-button sac-bg-level-2">
+                            <input type="radio" disabled name="rboSacScore" ng-model="sacScore" value="23">
+                        </td>
+                        <td class="action-button sac-bg-level-2">2</td>
+                        <td class="action-button sac-bg-level-3">
+                            <input type="radio" disabled name="rboSacScore" ng-model="sacScore" value="24">
+                        </td>
+                        <td class="action-button sac-bg-level-3">3</td>
+                        <td class="action-button sac-bg-level-4">
+                            <input type="radio" disabled name="rboSacScore" ng-model="sacScore" value="25">
+                        </td>
+                        <td class="action-button sac-bg-level-4">4</td>
+                    </tr>
+                    <tr>
+                        <td><span>Possible</span></td>
+                        <td class="action-button sac-bg-level-1">
+                            <input type="radio" disabled name="rboSacScore" ng-model="sacScore" value="31">
+                        </td>
+                        <td class="action-button sac-bg-level-1">1</td>
+                        <td class="action-button sac-bg-level-2">
+                            <input type="radio" disabled name="rboSacScore" ng-model="sacScore" value="32">
+                        </td>
+                        <td class="action-button sac-bg-level-2">2</td>
+                        <td class="action-button sac-bg-level-2">
+                            <input type="radio" disabled name="rboSacScore" ng-model="sacScore" value="33">
+                        </td>
+                        <td class="action-button sac-bg-level-2">2</td>
+                        <td class="action-button sac-bg-level-3">
+                            <input type="radio" disabled name="rboSacScore" ng-model="sacScore" value="34">
+                        </td>
+                        <td class="action-button sac-bg-level-3">3</td>
+                        <td class="action-button sac-bg-level-4">
+                            <input type="radio" disabled readonly name="rboSacScore" ng-model="sacScore" value="35">
+                        </td>
+                        <td class="action-button sac-bg-level-4">4</td>
+                    </tr>
+                    <tr>
+                        <td><span>Unlikely</span></td>
+                        <td class="action-button sac-bg-level-1">
+                            <input type="radio" disabled name="rboSacScore" ng-model="sacScore" value="41">
+                        </td>
+                        <td class="action-button sac-bg-level-1">1</td>
+                        <td class="action-button sac-bg-level-2">
+                            <input type="radio" disabled name="rboSacScore" ng-model="sacScore" value="42">
+                        </td>
+                        <td class="action-button sac-bg-level-2">2</td>
+                        <td class="action-button sac-bg-level-3">
+                            <input type="radio" disabled name="rboSacScore" ng-model="sacScore" value="43">
+                        </td>
+                        <td class="action-button sac-bg-level-3">3</td>
+                        <td class="action-button sac-bg-level-4">
+                            <input type="radio" disabled name="rboSacScore" ng-model="sacScore" value="44">
+                        </td>
+                        <td class="action-button sac-bg-level-4">4</td>
+                        <td class="action-button sac-bg-level-4">
+                            <input type="radio" disabled name="rboSacScore" ng-model="sacScore" value="45">
+                        </td>
+                        <td class="action-button sac-bg-level-4">4</td>
+                    </tr>
+                    <tr>
+                        <td><span>Rare</span></td>
+                        <td class="action-button sac-bg-level-2">
+                            <input type="radio" disabled name="rboSacScore" ng-model="sacScore" value="51">
+                        </td>
+                        <td class="action-button sac-bg-level-2">2</td>
+                        <td class="action-button sac-bg-level-3">
+                            <input type="radio" disabled name="rboSacScore" ng-model="sacScore" value="52">
+                        </td>
+                        <td class="action-button sac-bg-level-3">3</td>
+                        <td class="action-button sac-bg-level-3">
+                            <input type="radio" disabled name="rboSacScore" ng-model="sacScore" value="53">
+                        </td>
+                        <td class="action-button sac-bg-level-3">3</td>
+                        <td class="action-button sac-bg-level-4">
+                            <input type="radio" disabled name="rboSacScore" ng-model="sacScore" value="54">
+                        </td>
+                        <td class="action-button sac-bg-level-4">4</td>
+                        <td class="action-button sac-bg-level-4">
+                            <input type="radio" disabled name="rboSacScore" ng-model="sacScore" value="55">
+                        </td>
+                        <td class="action-button sac-bg-level-4">4</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </fieldset>
+    </div>
+</div>
+<div class="print-section-wrap" ng-if="wizard.steps[6].showed">
+    <div class="print-section-header">Root Cause Analysis</div>
+    <div class="print-section-content">
+        <fieldset ng-disabled="incident.current_tracking_status == 'CLOSED' || !form.is_edited">
+            <div class="row" id="rca-top-flag">
+                <!--<div class="col-md-3">-->
+                <!--<div class="nav-incident-rca rca-sticky">-->
+                <!--<nav>-->
+                <!--<ul class="nav-incident-detail">-->
+                <!--<li ng-repeat="rcaCategory in incident.RcaCategories"-->
+                <!--style="width: 230px; margin-bottom: 0;">-->
+                <!--<a style="padding: 2px 5px;" href="#rca{{rcaCategory.root_cause_category_id}}">{{rcaCategory.description}}</a>-->
+                <!--</li>-->
+                <!--</ul>-->
+                <!--</nav>-->
+                <!--</div>-->
+                <!--</div>-->
+                <div class="col-md-12">
+                    <div ng-hide="printed">
+                        Please provide Root Cause Analysis <span class="mandatory">*</span>
+                    </div>
+                    <br/>
+                    <table id="rca{{rcaCategory.root_cause_category_id}}" class="table table-bordered"
+                           ng-repeat="rcaCategory in incident.RcaCategories">
+                        <tr>
+                            <td align="center"><b>{{rcaCategory.description}}</b></td>
+                        </tr>
+                        <tr ng-repeat="rca in rcaCategory.IncidentRcas"
+                            ng-show="rca.parent_incident_rca_id === null && rca.parent_root_cause_id === null">
+                            <td>
+                                <label class="fb-label">
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" ng-change="rca.free_text = null"
+                                                       ng-model="rca.is_selected"/>
+                                            </td>
+                                            <td>
+                                                {{rca.description}} <span ng-show="rca.show_freetext">(Specify:
+                            <input ng-disabled="!form.is_edited || !rca.is_selected" type="text"
+                                   ng-model="rca.free_text" class="fb"/>)</span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </label>
+
+                                <div style="margin-left: 20px;" ng-repeat="rcaChild in rcaCategory.IncidentRcas"
+                                     ng-if="rcaChild.parent_root_cause_id==rca.root_cause_id || rcaChild.parent_incident_rca_id==rca.incident_rca_id">
+                                    <label class="fb-label">
+                                        <input type="checkbox" ng-model="rcaChild.is_selected"/>
+                                        {{rcaChild.description}} <span ng-show="rcaChild.show_freetext">(Specify:
+                            <input ng-disabled="!form.is_edited" type="text" ng-model="rcaChild.free_text" class="fb"/>)</span>
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+<style>
+    .validation-new {
+        margin-top: 0px;
+        color: red;
+        font-size:0.9em;
+    }
+</style>
+<div>
+    <div class="modal-header">
+        <button type="button" class="close pull-right" ng-click="$dismiss()" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Medication Name</h4>
+    </div>
+    <div class="modal-body form-horizontal">
+        <div class="form-group col-md-12">
+            <div class="row">
+                <label for="txtMedicationName" class="col-md-4 control-label">Medication Name <span class="validation-new">*</span></label>
+                <div class="col-md-8">
+                    <input type="text" class="form-control" id="txtMedicationName" placeholder="Medication Name" ng-model="medication.medication_name">
+                    <div class="validation-new" ng-show="validate.medication_name">
+                        Please enter Medication Name
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-8">
+                    <label>
+                        <input type="checkbox" ng-model="medication.is_specify" />
+                        Need to Specify?
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <span class="btn btn-danger" ng-click="$dismiss()">
+            <i class="fa fa-times"></i>
+            Cancel
+        </span>
+        <span class="btn btn-success" ng-disabled="!validate.button" ng-click="onSave(medication)">
+            <i class="fa fa-floppy-o"></i>
+            Save
+        </span>
+    </div>
+</div>

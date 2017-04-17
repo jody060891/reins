@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Indonesiare: Client Portal</title><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta charset="utf-8"><!--[if lte IE 8]><script type="text/javascript" src="components/Dashboard/excanvas.js"></script>
+    <script src="components/Dashboard/es5-shim.min.js"></script><![endif]--><link rel="stylesheet" href="app.full.min.css"></head><!--[if IE 8]><body class="oldie"><![endif]--><!--[if gt IE 8]><!--><body><!--<![endif]--><header id="topnav"><div class="topbar-main" style="min-height: 60px"><div class="container"><div class="topbar-left"><a href="http://indonesiare.co.id/client_portal/corporate" class="logo"><span>INDONESIARE CLIENTS PORTAL</span></a></div><div class="menu-extras"><ul class="nav navbar-nav pull-right"><li class="nav-item"><a class="navbar-toggle"><div class="lines"><span></span> <span></span> <span></span></div></a> </li></ul></div><div class="clearfix"></div></div></div><div class="navbar-custom" ng-controller="NavigationCtrl"><div class="container"><div id="navigation"><ul class="navigation-menu"><li><a ng-click="menuClicked($event)" data-route="/client_portal/dashboard" class="menu-click" style="cursor:pointer"><i class="zmdi zmdi-view-dashboard"></i> <span>Dashboard</span></a></li><li class="has-submenu"><a class="parent" style="cursor:pointer"><i class="zmdi zmdi-time-interval"></i> <span>Loss Ratio</span></a><ul class="submenu"><li><a ng-click="menuClicked($event)" data-route="/client_portal/lr_year" class="menu-click" style="cursor:pointer">By Year</a></li><li><a ng-click="menuClicked($event)" data-route="/client_portal/lr_year_oc" class="menu-click" style="cursor:pointer">Occupation by year</a></li><li><a ng-click="menuClicked($event)" data-route="/client_portal/lr_month_oc" class="menu-click" style="cursor:pointer">Occupation by month</a></li></ul></li><li class="has-submenu"><a class="parent" style="cursor:pointer"><i class="ion-help-buoy"></i> <span>Marine Claim Highlight</span></a><ul class="submenu"><li><a href="http://indonesiare.co.id/client_portal/claim_highlight">Loss Frequency by Vessel Types</a></li><li><a href="http://indonesiare.co.id/client_portal/claim_highlight/marine_loss_by_cause">Loss Frequency by Cause of Loss</a></li><li><a href="http://indonesiare.co.id/client_portal/claim_highlight/marine_big_loss">Big Loss</a></li><li><a href="http://indonesiare.co.id/client_portal/claim_highlight/marine_loss_ratio">Loss Ratio</a></li><li><a href="http://indonesiare.co.id/client_portal/claim_highlight/trend_loss_location">Trend Loss Location</a></li></ul></li><li class="has-submenu last-elements"><a class="parent" style="cursor:pointer"><i class="wi wi-fire"></i><span>Fire Claim Highlight</span></a><ul class="submenu"><li><a href="http://indonesiare.co.id/client_portal/claim_highlight/fire_loss_by_occup">Loss by Occupations</a></li><li><a href="http://indonesiare.co.id/client_portal/claim_highlight/fire_loss_by_ratio">Loss Frequency by Ratio of Loss to Sum Insured</a></li><li><a href="http://indonesiare.co.id/client_portal/claim_highlight/fire_occup_loss_si">Occupations which Loss &gt; 50% Sum Insured</a></li><li><a href="http://indonesiare.co.id/client_portal/claim_highlight/fire_occup_vs_lr">Occupations vs L/R</a></li><li><a href="http://indonesiare.co.id/client_portal/claim_highlight/fire_loss_by_cause">Loss Frequency by Cause of Loss</a></li><li><a href="http://indonesiare.co.id/client_portal/claim_highlight/fire_big_loss">Big Loss</a></li></ul></li><img src="img/logo_indonesiare_small.png" alt="logo" class="pull-right"> </ul></div></div></div></header><div class="wrapper"><div class="container"><div class="row"><div class="col-sm-12 col-md-12" style="padding-left: 0px; padding-right: 0px"><div ng-controller="MainCtrl"><div id="main-content-app" ng-view="ng-view"></div></div></div></div><footer class="footer text-right"><div class="container"><div class="row"><div class="col-xs-6">2016 © IndonesiaRe.</div><div class="col-xs-6 text-xs-right">Source: BPPDAN | Last Update: [31-DEC-16]</div></div></div></footer></div></div><div user-activity-watcher="click mousemove keypress"></div><div id="scriptPlaceholder"><script src="app.full.min.js"></script></div><script type="text/javascript" src="/Web/JavaScriptSpellCheck/include.js" data-remove="false" data-concat="false"></script><script type="text/javascript" data-remove="false" data-concat="false">(function () {
+                var pkblApp = angular.module('PKBL');
+                var finishFetchUser = false;
+                var currentProgress = 0;
+                var maxProgress = 240;
+                var finishFetchUserAcl = false;
+                $.post("/Authentication/GetCurrentUser", function (response) {
+                    pkblApp.value("UserSessionData", response.data);
+                    finishFetchUser = true;
+                });
+
+                $.post("/Authentication/GetCurrentUserAcl", function (responseAcl) {
+                    pkblApp.value("UserAclSessionData", responseAcl.data);
+                    finishFetchUserAcl = true;
+                });
+                var bootstrapHandler = setInterval(function () {
+                    if (finishFetchUser) {
+                        maxProgress = 256;
+                        angular.bootstrap(document, ["PKBL"]);
+                        clearInterval(bootstrapHandler);
+//                        $.post("/Module/RenderNavigation", function (response) {
+//                            $("#navigation-container").html(response.data);
+//
+//                        });
+                        $(".menu-click").on("click.navigation", function () {
+                            if ($(this).hasClass("open-toggle") && $(this).attr("data-route") == '') {
+                                $(document).unbind("click.navigation");
+                                $("li.open").removeClass("open");
+                                setTimeout(function () {
+                                    $(document).on("click.navigation", function () {
+                                        $("li.open").removeClass("open");
+                                        $(document).unbind("click.navigation");
+                                    })
+                                }, 1);
+                                $(this).parent().addClass("open");
+                            } else if ($(this).attr("data-route") != '') {
+                                if($(window).width() <= 991){
+                                    $('#navigation').slideToggle(500);
+                                }
+
+                                $(document).unbind("click.navigation");
+                                $("li.open").removeClass("open");
+                                document.location = 'index.html#' + $(this).attr("data-route");
+                            }
+                        });
+
+                        $('.lines').on("click", function(){
+                            $('#navigation').slideToggle(500);
+                        });
+                        
+                        $('.has-submenu').on("click", function () {
+                            if($(window).width() <= 991){
+                                $(this).children(".submenu").slideToggle(100);
+                                $('.parent').show();
+                            }
+
+                        })
+                    }
+                }, 10);
+
+
+                
+            }());</script></body></html>

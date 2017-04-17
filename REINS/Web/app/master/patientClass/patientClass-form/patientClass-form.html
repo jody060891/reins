@@ -1,0 +1,56 @@
+<style>
+    .validation-new {
+        margin-top: 0px;
+        color: red;
+        font-size:0.9em;
+    }
+</style>
+<div>
+    <div class="modal-header">
+        <button type="button" class="close pull-right" ng-click="$dismiss()" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Patient Class</h4>
+    </div>
+    <div class="modal-body form-horizontal">
+        <div class="form-group">
+            <label for="txtClassName" class="col-sm-4 control-label">Class Code <span class="validation-new">*</span></label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="Text1" placeholder="Class Code" ng-model="patientClass.patient_class_code">
+                <div class="validation-new" ng-show="validate.patient_class_code">
+                    Please enter Class Code
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="txtClassName" class="col-sm-4 control-label">Class Name <span class="validation-new">*</span></label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="txtClassName" placeholder="Class Name" ng-model="patientClass.patient_class_name">
+                <div class="validation-new" ng-show="validate.patient_class_name">
+                    Please enter Class Name
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="txtClassName" class="col-sm-4 control-label">Is Private?</label>
+            <div class="col-sm-1">
+                <input type="checkbox" class="form-control" id="Text2" placeholder="Class Code" ng-model="patientClass.is_private">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="txtClassName" class="col-sm-4 control-label">Short Description</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="Text3" placeholder="Short Description" ng-model="patientClass.short_description">
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <span class="btn btn-danger" ng-click="$dismiss()">
+            <i class="fa fa-times"></i>
+            Cancel
+        </span>
+        <span class="btn btn-success" ng-disabled="!validate.button" ng-click="onSave(patientClass)">
+            <i class="fa fa-floppy-o"></i>
+            Save
+        </span>
+    </div>
+</div>

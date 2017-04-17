@@ -1,0 +1,30 @@
+<div>
+	<div class="modal-header">
+		<button type="button" class="close pull-right" ng-click="$dismiss()" aria-hidden="true">&times;</button>
+		<h4 class="modal-title">Add User Role</h4>
+	</div>
+	<div class="modal-body">
+        <div class="row">
+		    <div class="col-md-12">
+                <div><span>Available Role(s)</span></div>
+                <input type="text" placeholder="Search" ng-model="searchRole">
+                <div ng-repeat="role in roles  | filter:searchRole" ng-hide="role.is_active">
+                    <label ng-show="role.Role.role_name != 'REPORTER' && role.Role.role_name != 'GUEST' && role.Role.role_name != 'ANONYMOUS REPORTER'">
+                        <input type="checkbox" ng-model="role.is_selected" >
+                        {{role.Role.role_name}}
+                    </label>
+                </div>
+            </div>
+        </div>
+	</div>
+	<div class="modal-footer">
+        <span class="btn btn-danger" ng-click="$dismiss()">
+            <i class="fa fa-times"></i>
+            Cancel
+        </span>
+        <span class="btn btn-success" ng-disabled="!validate.button" ng-click="onSaveRole()">
+            <i class="fa fa-floppy-o"></i>
+            Save
+        </span>
+    </div>
+</div>

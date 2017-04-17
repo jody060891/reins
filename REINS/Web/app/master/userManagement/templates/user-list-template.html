@@ -1,0 +1,160 @@
+<div class="col-md-12" ng-controller="UserListCtrl">
+    <br />
+    <div class="row">
+        <div class="col-md-2">
+            <div class="input-group">
+                <select class="form-control" ng-model="usertab" ng-change="onTabChanged()">
+                    <option value="1">Active Users</option>
+                    <option value="2">Deleted Users</option>
+                </select>
+            </div>
+        </div>
+
+    </div>
+    
+    <div ng-show="usertab == 1">
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-3 pull-left" style="padding-right: 0;">
+                            <div class="input-group">
+                                <input ng-keypress="onKeyPress($event)" type="text" class="form-control" ng-model="keyword.keyword" />
+                                <span class="input-group-addon btn btn-primary" ng-click="onSearch()">
+                                    <i class="fa fa-search"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-sm-9 pull-left" style="padding-left: 5px;">
+                            <span class="btn btn-primary" ng-click="onCreateNew()">
+                                <i class="fa fa-plus-circle"></i>
+                                Add
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <br />
+                        <div class="col-md-12">
+                            <table class="table table-striped table-bordered data-grid">
+                                <thead>
+                                    <tr>
+                                        <th class="action-button"></th>
+                                        <th ng-click="onSort('name')">Name
+                                            <span ng-show="SearchQuery.is_sort_asc">
+                                                <i class="fa fa-arrow-up"></i>
+                                            </span>
+                                            <span ng-show="!SearchQuery.is_sort_asc">
+                                                <i class="fa fa-arrow-down"></i>
+                                            </span>
+                                        </th>
+                                       <!-- <th>Username
+                                            <!--<span ng-show="SearchQuery.is_sort_asc">
+                                                <i class="fa fa-arrow-up"></i>
+                                            </span>
+                                            <span ng-show="!SearchQuery.is_sort_asc">
+                                                <i class="fa fa-arrow-down"></i>
+                                            </span>
+                                        </th>-->
+                                        <th>Institution</th>
+                                        <th>Gender</th>
+                                        <th>Email</th>
+                                        <th>ADID</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-show="users.length < 1">
+                                        <td colspan="7">No results found
+                                        </td>
+                                    </tr>
+                                    <tr ng-repeat="user in users">
+                                        <td class="action-button">
+                                            <span ng-click="onRowEdit(user)"  class="btn btn-primary btn-sm">
+                                                Edit
+                                            </span>
+                                            <span ng-click="onRowDelete(user)"  class="btn btn-danger btn-sm">
+                                                Delete
+                                            </span>
+                                        </td>
+                                        <td>{{user.name}}</td>
+                                        <!--<td>{{user.user_name}}</td>-->
+                                        <td>{{user.Institution.institution_description}}</td>
+                                        <td>{{user.gender}}</td>
+                                        <td>{{user.email}}</td>
+                                        <td>{{user.adid}}</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <td colspan="7">
+                                        <div pagination boundary-links="true" total-items="SearchQuery.total_data"  ng-show="SearchQuery.total_data > 0" page="SearchQuery.page" class="pagination-sm" on-select-page="onPageChanged(page)" max-size="10"></div>
+                                    </td>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+    <div ng-show="usertab == 2">
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-3 pull-left" style="padding-right: 0;">
+                            <div class="input-group">
+                                <input ng-keypress="onKeyPressDeleted($event)" type="text" class="form-control" ng-model="keyword.deletedKeyword" />
+                                <span class="input-group-addon btn btn-primary" ng-click="onSearchDeleted()">
+                                    <i class="fa fa-search"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <br />
+                        <div class="col-md-12">
+                            <table class="table table-striped table-bordered data-grid">
+                                <thead>
+                                    <tr>
+                                        <th class="action-button"></th>
+                                        <th ng-click="onSortDeleted('name')">Name
+                                            <span ng-show="SearchQueryDeleted.is_sort_asc">
+                                                <i class="fa fa-arrow-up"></i>
+                                            </span>
+                                            <span ng-show="!SearchQueryDeleted.is_sort_asc">
+                                                <i class="fa fa-arrow-down"></i>
+                                            </span>
+                                        </th>
+                                        <th>Username
+                                        </th>
+                                        <th>Institution</th>
+                                        <th>Gender</th>
+                                        <th>Email</th>
+                                        <th>ADID</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-show="DeletedUsers.length < 1">
+                                        <td colspan="7">No results found
+                                        </td>
+                                    </tr>
+                                    <tr ng-repeat="deletedUser in DeletedUsers">
+                                        <td class="action-button">
+                                            <span ng-click="onRowUnDelete(deletedUser)"  class="btn btn-danger btn-sm">
+                                                Undelete
+                                            </span>
+                                        </td>
+                                        <td>{{deletedUser.name}}</td>
+                                        <td>{{deletedUser.user_name}}</td>
+                                        <td>{{deletedUser.Institution.institution_description}}</td>
+                                        <td>{{deletedUser.gender}}</td>
+                                        <td>{{deletedUser.email}}</td>
+                                        <td>{{user.adid}}</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <td colspan="7">
+                                        <div pagination boundary-links="true" total-items="SearchQueryDeleted.total_data"  ng-show="SearchQueryDeleted.total_data > 0" page="SearchQueryDeleted.page" class="pagination-sm" on-select-page="onPageDeletedChanged(page)" max-size="10"></div>
+                                    </td>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+</div>

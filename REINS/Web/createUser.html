@@ -1,0 +1,212 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="PKBL">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login - Indonesiare: Client Portal</title>
+    <!-- Optional theme -->
+    <!--<link rel="stylesheet" type="text/css" href="../Content/css/eHOR-Style.css">-->
+    <!--<link href="app.less" type="text/css" rel="stylesheet/less">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
+    <meta name="author" content="Coderthemes">
+    <!-- Extra metadata -->
+    <!-- App Favicon -->
+    <link rel="shortcut icon" href="img/favicon.ico">
+
+    <!-- App title -->
+
+
+    <!-- App CSS -->
+    <!--Morris Chart CSS -->
+    <link rel="stylesheet" href="components/css/morris.css">
+    <!-- DataTables -->
+    <link href="components/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="components/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <!-- Responsive datatable examples -->
+    <link href="components/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <!-- Switchery css -->
+    <link href="components/css/switchery.min.css" rel="stylesheet" />
+    <!-- App CSS -->
+
+    <link href="components/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="components/css/custom.css" rel="stylesheet" type="text/css" />
+    <link href="bower_components/angular-loading-bar/src/loading-bar.css" rel="stylesheet" type="text/css" />
+
+    <script src="components/js/css3-mediaqueries.js"></script>
+    <!-- JS from Bower Components -->
+    <!--<script src="bower_components/less.js/dist/less-1.6.2.js" data-concat="false"></script>-->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/underscore/underscore.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/angular-ui-utils/ui-utils.js"></script>    
+    <script src="bower_components/angular-ivh-treeview/dist/ivh-treeview.js"></script>
+    <script src="bower_components/angular-strap/dist/angular-strap.min.js"></script>
+    <script src="bower_components/angular-strap/dist/angular-strap.tpl.min.js"></script>
+    
+    <script src="bower_components/es5-shim/es5-shim.min.js"></script>
+    <script src="bower_components/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.min.js"></script>
+    <script src="bower_components/angular-wysiwyg/angular-wysiwyg.js"></script>
+    <script src="bower_components/ngSticky/dist/sticky.min.js"></script>
+    <script src="bower_components/angular-scroll/angular-scroll.js"></script>
+    <script src="bower_components/es5-shim/es5-sham.min.js"></script>
+    <script src="bower_components/angular-file-upload/angular-file-upload.js"></script>
+    <script src="components/js/timepickerpop.js"></script>
+    <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
+    <script src="bower_components/angular-ui-date/src/date.js"></script>
+    <script src="bower_components/angular-ui-date/src/date.js"></script>
+    <script src="bower_components/angular-loading-bar/src/loading-bar.js"></script>
+    <script type="text/javascript" src="components/js/crypto/jsencrypt.js"></script>
+    <!-- Add New Bower Component JS Above -->
+
+
+    <!-- Main App JS -->
+    <script src="appLogin.js"></script>
+    <script src="factory/factory.js"></script>
+    <script src="factory/internal-factory.js"></script>
+    <script src="directive/loadingScreen/loadingScreen.js"></script>
+    <script src="directive/toastMessage/toastMessage.js"></script>
+    <script src="internal/login.js"></script>
+
+    <!-- Add New Component JS Above -->
+
+</head>
+<body>
+    <div class="main-content" ng-controller="LoginCtrl">
+        <div class="account-pages"></div>
+        <div class="clearfix"></div>
+        <div class="wrapper-page">
+
+            <div class="account-bg">
+                <div class="card-box m-b-0">
+                    <div class="text-xs-center m-t-20">
+                        <a href="index.html" class="logo">
+                            <img src="img/logo_indonesiare.png" alt="IndonesiaRe"><br>
+                            <span>CLIENTS PORTAL</span>
+                        </a>
+                    </div>
+                    <div class="m-t-10 p-20">
+                        <div class="row">
+                            <div class="col-xs-12 text-xs-center">
+                                <div ng-if="createUser.validation.createdSucceed" class="alert alert-primary" id="successMessage">
+                                    User Created Successfully
+                                </div>
+                                <div ng-if="createUser.validation.createFailed" class="alert alert-warning" id="failedMessage">
+                                    {{createUser.validation.errorMessage}}
+                                </div>
+                                <div ng-if="!createUser.validation.isValid" class="alert alert-warning" id="infoMessage">
+                                    <p ng-if="!createUser.validation.FirstName">
+                                        The First Name field is required.<br />
+                                    </p>
+                                    <p ng-if="!createUser.validation.LastName">
+                                        The Last Name field is required.<br />
+                                    </p>
+                                    <p ng-if="!createUser.validation.Email">
+                                        The Email Address field is required.<br />
+                                    </p>
+                                    <p ng-if="!createUser.validation.Phone">
+                                        The Phone field is required.<br />
+                                    </p>
+                                    <p ng-if="!createUser.validation.Company">
+                                        The Company field is required.<br />
+                                    </p>
+                                    <p ng-if="!createUser.validation.Position">
+                                        The Position field is required.<br />
+                                    </p>
+                                    <p ng-if="!createUser.validation.Password">
+                                        The Password field is required.<br />
+                                    </p>
+                                    <p ng-if="!createUser.validation.ConfirmationPassword">
+                                        The Password Confirmation field is required.<br />
+                                    </p>
+                                    <p ng-if="!createUser.validation.PasswordMatch">
+                                        The Password confirmation doesn't match.<br />
+                                    </p>
+                                </div>
+                                <h3>Create User</h3>
+                                <h6 class="text-muted  m-b-0 m-t-0">Please enter the user's information below.</h6><br>
+                            </div>
+
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-xs-12">
+                                <input ng-keypress="onKeyPress($event, user)" ng-model="user.FirstName" type="text" name="firstName" value="" id="firstName" placeholder="First Name" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-xs-12">
+                                <input ng-keypress="onKeyPress($event, user)" ng-model="user.LastName" type="text" name="lastName" value="" id="lastName" placeholder="Last Name" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-xs-12">
+                                <input ng-keypress="onKeyPress($event, user)" ng-model="user.Company" type="text" name="company" value="" id="company" placeholder="Company" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-xs-12">
+                                <input ng-keypress="onKeyPress($event, user)" ng-model="user.Position" type="text" name="position" value="" id="position" placeholder="Position" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-xs-12">
+                                <input ng-keypress="onKeyPress($event, user)" ng-model="user.Email" type="text" name="email" value="" id="email" placeholder="Email" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-xs-12">
+                                <input ng-keypress="onKeyPress($event, user)" ng-model="user.Phone" type="text" name="phone" value="" id="phone" placeholder="Phone" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-xs-12">
+                                <input ng-keypress="onKeyPress($event, user)" ng-model="user.Password" type="password" name="password" value="" id="password" placeholder="Password" class="form-control">                                </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-xs-12">
+                                <input ng-keypress="onKeyPress($event, user)" ng-model="user.ConfirmationPassword" type="password" name="confirm_password" value="" id="confirm_password" placeholder="Password confirmation" class="form-control">                                </div>
+                        </div>
+
+
+
+                        <div class="form-group text-center row m-t-10">
+                            <div class="col-xs-12">
+                                <button ng-disabled="!createUser.validation.button" class="btn btn-success btn-block waves-effect waves-light" ng-click="onCreateUser(user)">Create User</button>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <!-- end card-box-->
+
+            <div class="m-t-20">
+                <div class="text-xs-center">
+                    <p class="text-white">Already have account? <a ng-disabled="!createUser.validation.button" href="login.html" class="text-white m-l-5"><b>Sign In</b> </a></p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+<div class="col-md-12" ng-controller="ApplicationSettingFormCtrl">
+    <div class="panel panel-primary">
+        <div class="panel-heading clearfix">
+            Application Settings
+        </div>
+        <div class="panel-body">
+            <div class="tab-pane" style="width:600px !important" id="tab_aloc">
+              <table class="table table-striped">                        
+                  <tr ng-repeat="applicationSetting in applicationSettings">
+                      <td>{{applicationSetting.key_value.split("_").pop()}}</td>
+                      <td>
+                          <div class="col-sm-8">
+                              <input type="text" class="form-control" id="applicationSetting.setting_value_default" placeholder="Value" ng-model="applicationSetting.setting_value_default">
+                          </div>
+                      </td>
+                      <td><input type="checkbox" ng-model="applicationSetting.can_be_overrided_by_user" checked="{{applicationSetting.can_be_overrided_by_user}}" /></td>
+                  </tr>                  
+                </table>
+                <div class="modal-footer">
+                    <span class="btn btn-danger" ng-click="$dismiss()">
+                        <i class="fa fa-times"></i>
+                        Cancel
+                    </span>
+                    <span class="btn btn-success" ng-click="onSave(applicationSettings)">
+                        <i class="fa fa-floppy-o"></i>
+                        Save
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

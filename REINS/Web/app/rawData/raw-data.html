@@ -1,0 +1,411 @@
+<style>
+    .form-control {
+        display: inline;
+        width: 100%;
+    }
+
+    .text-year {
+        display: inline;
+        width: 60px;
+    }
+
+    .validation {
+        color: red;
+    }
+
+    .checkbox-inline, .radio-inline {
+        margin-left: 10px;
+    }
+</style>
+<div class="col-md-12 no-side-padding" ng-controller="RawDataCtrl">
+    <div class="panel panel-primary">
+        <div class="panel-heading clearfix">
+            Raw Data
+        </div>
+        <div class="panel-body form-horizontal">
+            <div class="row form-group">
+                <div class="col-md-3">
+                    <label>Incident Type <span class="validation">*</span></label>
+                </div>
+                <div class="col-md-4">
+                    <select ng-change="onChangeIncidentType()" ng-model="param.incident_type_id"
+                        ng-change="selectAll(incidentSubTypes, false)"
+                        class="form-control"
+                        ng-options="i.incident_type_id as i.incident_type_name for i in incidentTypes">
+                        <option value="">-- Select Type --</option>
+                    </select>
+                    <div ng-show="clicked && !param.incident_type_id" class="validation">Please Provide Incident Type</div>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-md-3">
+                    <label>Incident Sub Type</label>
+                </div>
+                <div class="col-md-9">
+                    <div class="col-md-5">
+                        Available
+                    </div>
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-5">
+                        Selected
+                    </div>
+
+                    <div class="col-md-5">
+                        <div>
+                            <select ng-disabled="incidentTypeSelected.MasterIncidentSubTypes.length <= 0" style="height: 150px; width: 100%" ng-model="available" multiple>
+                                <option ng-repeat="sub in incidentSubTypes" value="{{sub.incident_sub_type_id}}" ng-if="!sub.is_selected  && sub.incident_type_id == param.incident_type_id">
+                                {{sub.incident_sub_type_name}}<option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <button style="width: 100%" class="btn btn-primary" ng-click="select(available, hashIncidentSubType, true)">Select</button>
+                        <button style="width: 100%" class="btn btn-warning" ng-click="select(selected, hashIncidentSubType, false)">Unselect</button>
+                        <button style="width: 100%" class="btn btn-success" ng-click="selectSubTypeAll(incidentSubTypes, true)">Select All</button>
+                        <button style="width: 100%" class="btn btn-danger" ng-click="selectSubTypeAll(incidentSubTypes, false)">Unselect All</button>
+                    </div>
+                    <div class="col-md-5">
+                        <div>
+                            <select ng-disabled="incidentTypeSelected.MasterIncidentSubTypes.length <= 0" style="height: 150px; width: 100%" ng-model="selected" multiple>
+                                <option ng-repeat="sub in incidentSubTypes" value="{{sub.incident_sub_type_id}}" ng-if="sub.is_selected && sub.incident_type_id == param.incident_type_id">
+                                {{sub.incident_sub_type_name}}<option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--<div class="row form-group">
+                <div class="col-md-3">
+                    <label>Incident Sub Type</label>
+                </div>
+                <div class="col-md-9">
+                    <div ng-repeat="subType in incidentSubTypes" ng-if="subType.incident_type_id == param.incident_type_id">
+                        <label style="font-weight:normal">
+                            <input type="radio" name="sub" ng-model="param.incident_sub_type_id" ng-value="subType.incident_sub_type_id">
+                            {{subType.incident_sub_type_name}}
+                        </label>
+                    </div>
+
+                    <!--<select ng-disabled="!any()" ng-model="param.incident_sub_type_id"
+                        class="form-control">
+                        <option value="">-- Select Sub Type --</option>
+                        <option ng-repeat="sub in incidentSubTypes" ng-show="sub.incident_type_id == param.incident_type_id" value="{{sub.incident_sub_type_id}}">{{replace(sub.incident_sub_type_name)}}</option>
+                    </select>
+                </div>
+            </div>-->
+
+            <!--<div class="row form-group">
+                <div class="col-md-3">
+                    <label>Location</label>
+                </div>
+                <div class="col-md-4">
+                    <select ng-model="param.location_id"
+                        class="form-control"
+                        ng-options="i.location_id as i.location_name for i in locations">
+                        <option value="">-- Select Location --</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-md-3">
+                    <label>Department</label>
+                </div>
+                <div class="col-md-4">
+                    <select ng-model="param.department_id"
+                        class="form-control"
+                        ng-options="i.department_id as i.department_description for i in departments">
+                        <option value="">-- Select Department --</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-md-3">
+                    <label>Category of Person</label>
+                </div>
+                <div class="col-md-4">
+                    <select ng-model="param.person_category"
+                        class="form-control"
+                        ng-options="category for category in personCategories">
+                        <option value="">-- Select Person Category --</option>
+                    </select>
+                </div>
+            </div>-->
+
+            <div class="row form-group">
+                <div class="col-md-3">
+                    <label>Name of Person Involved</label>
+                </div>
+                <div class="col-md-4">
+                    <input placeholder="Name" class="form-control" type="text" ng-model="param.name" />
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-md-3">
+                    <label>NRIC of Person Involved</label>
+                </div>
+                <div class="col-md-4">
+                    <input placeholder="NRIC" class="form-control" type="text" ng-model="param.nric" />
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-md-3">
+                    <label>Date of Occurrence</label>
+                </div>
+                <div style="float: left;padding-left: 15px;padding-top: 5px;">
+                    From
+                </div>
+                <div class="col-md-2">
+                    <p class="input-group">
+                        <input ng-readonly="!isDateEnable" 
+                            type="text"  name="dateIncidentFrom" class="form-control" datepicker-popup="dd-MM-yyyy" 
+                            ng-model="param.incident_from_date" 
+                            close-text="Close" show-weeks="false" show-button-bar="false"
+                            id="dtIncidentFromDate"
+                        date-fix />                                
+                        <span ng-if="!isDateEnable" class="input-group-btn">
+                            <button type="button" class="btn btn-default"
+                                ng-click="param.incident_from_date = null">
+                                <img src="/Web/img/fa-times.png" />
+                            </button>
+                        </span>
+                        <span ng-if="isDateEnable" class="input-group-btn">
+                            <button type="button" class="btn btn-default"
+                                ng-click="datePickerOpen('dtIncidentFromDate')">
+                                <i class="fa fa-calendar"></i>
+                            </button>
+                        </span>
+                    </p>
+                </div>
+                <div style="float: left;padding-left: 15px;padding-top: 5px;">
+                    To
+                </div>
+                <div class="col-md-2">
+                    <p class="input-group">
+                        <input ng-readonly="!isDateEnable" 
+                            type="text"  name="dateIncidentTo" class="form-control" datepicker-popup="dd-MM-yyyy" 
+                            ng-model="param.incident_to_date" 
+                            close-text="Close" show-weeks="false" show-button-bar="false"
+                            id="dtIncidentToDate"
+                        date-fix />                                
+                        <span ng-if="!isDateEnable" class="input-group-btn">
+                            <button type="button" class="btn btn-default"
+                                ng-click="param.incident_to_date = null">
+                                <img src="/Web/img/fa-times.png" />
+                            </button>
+                        </span>
+                        <span ng-if="isDateEnable" class="input-group-btn">
+                            <button type="button" class="btn btn-default"
+                                ng-click="datePickerOpen('dtIncidentToDate')">
+                                <i class="fa fa-calendar"></i>
+                            </button>
+                        </span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-md-3">
+                    <label>Date of Creation</label>
+                </div>
+                <div style="float: left;padding-left: 15px;padding-top: 5px;">
+                    From
+                </div>
+                <div class="col-md-2">
+                    <p class="input-group">
+                        <input ng-readonly="!isDateEnable" 
+                            type="text"  name="dateIncidentCreFrom" class="form-control" datepicker-popup="dd-MM-yyyy" 
+                            ng-model="param.report_from_date" close-text="Close" 
+                            show-weeks="false" show-button-bar="false" max="today"
+                            id="dtIncidentFromCreDate"
+                        date-fix />                                
+                        <span ng-if="!isDateEnable" class="input-group-btn">
+                            <button type="button" class="btn btn-default"
+                                ng-click="param.report_from_date = null">
+                                <img src="/Web/img/fa-times.png" />
+                            </button>
+                        </span>
+                        <span ng-if="isDateEnable" class="input-group-btn">
+                            <button type="button" class="btn btn-default"
+                                ng-click="datePickerOpen('dtIncidentFromCreDate')">
+                                <i class="fa fa-calendar"></i>
+                            </button>
+                        </span>
+                    </p>
+                </div>
+                <div style="float: left;padding-left: 15px;padding-top: 5px;">
+                    To
+                </div>
+                <div class="col-md-2">
+                    <p class="input-group">
+                        <input ng-readonly="!isDateEnable" 
+                            type="text"  name="dateIncidentCreTo" class="form-control" datepicker-popup="dd-MM-yyyy" 
+                            ng-model="param.report_to_date" close-text="Close" 
+                            show-weeks="false" show-button-bar="false" max="today"
+                            id="dtIncidentToCreDate"
+                        date-fix />                                
+                        <span ng-if="!isDateEnable" class="input-group-btn">
+                            <button type="button" class="btn btn-default"
+                                ng-click="param.report_to_date = null">
+                                <img src="/Web/img/fa-times.png" />
+                            </button>
+                        </span>
+                        <span ng-if="isDateEnable" class="input-group-btn">
+                            <button type="button" class="btn btn-default"
+                                ng-click="datePickerOpen('dtIncidentToCreDate')">
+                                <i class="fa fa-calendar"></i>
+                            </button>
+                        </span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-md-3">
+                    <label>Near Miss?</label>
+                </div>
+                <div class="col-md-9">
+                    <label class="checkbox-inline">
+                        <input type="checkbox" ng-model="flt.near_miss.yes" />Yes</label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" ng-model="flt.near_miss.no" />No</label>
+                    <div class="invalid" ng-show="first && !someSelected(flt.near_miss)">Please provide Near Miss</div>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-md-3">
+                    <label>Type of Person Involved</label>
+                </div>
+                <div class="col-md-9">
+                    <label class="checkbox-inline">
+                        <input type="checkbox" ng-model="flt.person_type.patient" ng-change="onClickPatient()" />Patient</label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" ng-model="flt.person_type.staff" />Staff</label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" ng-model="flt.person_type.visitor" />Visitor</label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" ng-model="flt.person_type.other" />Other</label>
+                    <div class="invalid" ng-show="first && !someSelected(flt.person_type)">Please provide Type of Person</div>
+                </div>
+            </div>
+
+            <div class="row form-group" ng-show="flt.person_type.patient">
+                <div class="col-md-3">
+                    <label>Patient Type</label>
+                </div>
+                <div class="col-md-9">
+                    <label class="checkbox-inline">
+                        <input type="checkbox" ng-model="flt.patient_type.inpatient">In-Patient</label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" ng-model="flt.patient_type.outpatient">Out-Patient</label>
+                    <div class="invalid" ng-show="first && !someSelected(flt.patient_type)">Please provide Patient Type</div>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-md-3">
+                    <label>Person Affected?</label>
+                </div>
+                <div class="col-md-9">
+                    <label class="checkbox-inline">
+                        <input type="checkbox" ng-model="flt.person_affected.yes" />Yes</label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" ng-model="flt.person_affected.no" />No</label>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-md-3">
+                    <label>Location <span class="validation">*</span></label>
+                    <div ng-show="locationNotValid" class="validation">Please select location.</div>
+                </div>
+                <div class="col-md-9">
+                    <div class="col-md-5">
+                        Available
+                    </div>
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-5">
+                        Selected
+                    </div>
+
+                    <div class="col-md-5">
+                        <div>
+                            <select style="height: 200px; width: 100%" ng-model="available" multiple>
+                                <option ng-repeat="loc in locations" value="{{loc.location_id}}" ng-if="!loc.is_selected">
+                                {{loc.location_name}}<option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <button style="width: 100%" class="btn btn-primary" ng-click="select(available, hashLocation, true)">Select</button>
+                        <button style="width: 100%" class="btn btn-warning" ng-click="select(selected, hashLocation, false)">Unselect</button>
+                        <button style="width: 100%" class="btn btn-success" ng-click="selectAll(locations, true)">Select All</button>
+                        <button style="width: 100%" class="btn btn-danger" ng-click="selectAll(locations, false)">Unselect All</button>
+                    </div>
+                    <div class="col-md-5">
+                        <div>
+                            <select style="height: 200px; width: 100%" ng-model="selected" multiple>
+                                <option ng-repeat="loc in locations" value="{{loc.location_id}}" ng-if="loc.is_selected">
+                                {{loc.location_name}}<option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-md-3">
+                    <label>Department</label>
+                </div>
+                <div class="col-md-9">
+                    <div class="col-md-5">
+                        Available
+                    </div>
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-5">
+                        Selected
+                    </div>
+
+                    <div class="col-md-5">
+                        <div>
+                            <select style="height: 200px; width: 100%" ng-model="available" multiple>
+                                <option ng-repeat="dep in departments" value="{{dep.department_id}}" ng-if="!dep.is_selected">
+                                {{dep.department_description}}<option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <button style="width: 100%" class="btn btn-primary" ng-click="select(available, hashDepartment, true)">Select</button>
+                        <button style="width: 100%" class="btn btn-warning" ng-click="select(selected, hashDepartment, false)">Unselect</button>
+                        <button style="width: 100%" class="btn btn-success" ng-click="selectAll(departments, true)">Select All</button>
+                        <button style="width: 100%" class="btn btn-danger" ng-click="selectAll(departments, false)">Unselect All</button>
+                    </div>
+                    <div class="col-md-5">
+                        <div>
+                            <select style="height: 200px; width: 100%" ng-model="selected" multiple>
+                                <option ng-repeat="dep in departments" value="{{dep.department_id}}" ng-if="dep.is_selected">
+                                {{dep.department_description}}<option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <span ng-disabled="action" ng-click="onGenerateXls()" class="btn btn-primary" style="width: 200px">Generate Excel
+                    </span>
+                </div>
+            </div>
+
+
+            <br />
+        </div>
+    </div>
+</div>

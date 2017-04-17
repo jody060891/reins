@@ -1,0 +1,78 @@
+<div class="col-md-12 no-side-padding" ng-controller="EmailQueueCtrl">
+    <div class="panel panel-primary">
+        <div class="panel-heading clearfix">
+            Setup > Email Queue       
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-3 pull-left" style="padding-right: 0;">
+                    <div class="input-group">
+                        <select class="form-control" ng-model="keywordQueue" ng-change="onSearchQueue()">
+                            <option value="">--Select Email Status--</option>
+                            <option value="sent">Sent</option>
+                            <option value="pending">Pending</option>
+                            <option value="failed">Failed</option>
+                        </select>
+                        <!--<input type="text" class="form-control" ng-model="keywordQueue" /> -->
+                        <span class="input-group-addon btn btn-primary" ng-click="onSearchQueue()">
+                            <i class="fa fa-search icon-white"></i>
+                        </span>
+                    </div>
+                </div>
+                <!--<div class="col-sm-9 pull-left" style="padding-left: 5px;">
+                    <span class="btn btn-primary" ng-click="onCreateNew()">
+                        <i class="fa fa-plus-circle"></i>
+                        Add
+                    </span>
+                </div>-->
+            </div>
+            <div class="row">
+                <br />
+                <div class="col-md-12">
+                    <table class="table table-striped table-bordered data-grid">
+                        <thead>
+                            <tr>
+                                <th>To
+                                </th>
+                                <th>Subject
+                                </th>
+                                <th>Status
+                                </th>
+                                <th>Failed Message
+                                </th>
+                                <th ng-click="onSort('last_sent_attempt')">
+                                    Date
+                                    <span>
+                                        <i class="fa fa-sort"></i>
+                                    </span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-show="emailQueue.length <= 0">
+                                <td colspan="3">No results found
+                                </td>
+                            </tr>
+                            <tr ng-repeat="email in emailQueue">
+                                <td>{{email.to}}</td>
+                                <td>{{email.subject}}</td>
+                                <td>
+                                    {{email.is_failed?("Failed"):(email.is_sent?("Sent"):("Pending"))}}
+                                </td>
+                                <td>{{email.failed_message}}</td>
+                                <td>{{email.last_sent_attempt | momentDateTimeFilter}}</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                                <tr>
+                                    <td colspan="5">
+                                        <div pagination max-size="10" boundary-links="true" total-items="SearchQueryQueue.total_data"  ng-show="SearchQueryQueue.total_data > 0" page="SearchQueryQueue.page" class="pagination-sm" on-select-page="onPageChanged(page)"></div>
+                                    </td>
+                                </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+<div class="col-md-12" ng-controller="AclListCtrl">
+    <br />
+    <div class="tab-pane " id="tab_aloc">
+                <div>
+                    <input type="text" placeholder="Search ACL items..." class="form-control" ng-model="aclSearch" />
+                    
+                    <div
+                        ivh-treeview="acls"
+                        ivh-treeview-filter="aclSearch"
+                        ivh-treeview-id-attribute="'acl_id'"
+                        ivh-treeview-label-attribute="'description'"
+                        ivh-treeview-children-attribute="'Children'"
+                        ivh-treeview-use-checkboxes="false"
+                        ivh-treeview-expand-to-depth="-1">
+                    </div>
+                </div>
+            </div>
+</div>

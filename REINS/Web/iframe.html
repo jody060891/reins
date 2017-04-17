@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login - Indonesiare: Client Portal</title>
+    <!-- Optional theme -->
+    <!--<link rel="stylesheet" type="text/css" href="../Content/css/eHOR-Style.css">-->
+    <!--<link href="app.less" type="text/css" rel="stylesheet/less">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
+    <meta name="author" content="Coderthemes">
+    <!-- Extra metadata -->
+    <!-- App Favicon -->
+
+
+
+    <script src="components/js/css3-mediaqueries.js"></script>
+    <!-- JS from Bower Components -->
+    <!--<script src="bower_components/less.js/dist/less-1.6.2.js" data-concat="false"></script>-->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/underscore/underscore.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+
+    
+
+    <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
+
+    <script src="bower_components/angular-loading-bar/src/loading-bar.js"></script>
+    <script type="text/javascript" src="components/js/crypto/jsencrypt.js"></script>
+    <!-- Add New Bower Component JS Above -->
+
+
+    <!-- Main App JS -->
+
+
+    <!-- Add New Component JS Above -->
+    <script type="text/javascript">
+
+
+        $(document).ready(function(){
+            var iframeReins = $('#reinsIframe');
+            var domain = 'http://localhost:3333';
+            setTimeout(function(){
+                var message = "ELO|Administrator";
+                console.log('blog.local:  sending message:  ' + message);
+                iframeReins[0].contentWindow.postMessage(message,domain); //send the message and target URI
+
+            },2000);
+
+            $("#search").click(function(){
+                setTimeout(function(){
+                    var message = {};
+                    message.param = "$('#searchOpenCover').click()";
+                    message.fn = "eval";
+                    iframeReins[0].contentWindow.postMessage(message,domain); //send the message and target URI
+
+                },2000);
+            });
+
+            $("#save").click(function(){
+               setTimeout(function(){
+                   var message = {};
+                   message.param = "$('#saveOpenCover').click()";
+                   message.fn = "eval";
+                   iframeReins[0].contentWindow.postMessage(message,domain);
+               }, 2000);
+            });
+        });
+
+    </script>
+</head>
+<body>
+    <div>
+        <button id="search" class="btn btn-primary btn-sm">Search</button>
+        <button id="save" class="btn btn-primary btn-sm">Save</button>
+    </div>
+    <div>
+        <!--<iframe id="reinsIframe" src="http://192.168.1.133:8888/Web/login.html#/OPNCOVER" height="400" width="700" /> -->
+        <iframe id="reinsIframe" src="http://localhost:3333/Web/login.html#/OPNCOVER" height="400" width="700" />
+
+    </div>
+
+
+</body>
+</html>

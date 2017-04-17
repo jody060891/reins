@@ -1,0 +1,74 @@
+<div class="col-md-12" ng-controller="DisciplineListCtrl">
+    <div class="row">
+                <div class="col-sm-3 pull-left" style="padding-right:0;">
+                    <div class="input-group">
+                        <input  ng-keypress="onKeyPress($event)" type="text" class="form-control" ng-model="keyword"/>
+                        <span class="input-group-addon btn btn-primary" ng-click="onSearch()">
+                            <i class="fa fa-search"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-sm-5 pull-left" style="padding-left:5px;">
+                    <span class="btn btn-primary" ng-click="onCreateNew()">
+                        <i class="fa fa-plus-circle"></i>
+                        Add
+                    </span>
+                </div>
+            </div>
+    <div class="row">
+                <br />
+                <div class="col-md-12">
+                    <table class="table table-striped table-bordered data-grid">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th ng-click="onSort('discipline_code')" width="20%">
+                                    Discipline Code
+                                    <img src="/Web/img/sort.png">
+                                </th>
+                                <th ng-click="onSort('discipline_name')" width="50%">
+                                    Discipline Name
+                                    <img src="/Web/img/sort.png">
+                                </th>
+                                <th ng-click="onSort('exclude_from_report')" width="15%">
+                                    Exclude From Report
+                                    <img src="/Web/img/sort.png">
+                                </th>
+                                <th ng-click="onSort('last_updated_date')" width="15%">
+                                    Last Modified
+                                    <img src="/Web/img/sort.png">
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-show="disciplines.length < 1">
+                                <td colspan="5">
+                                    No results found
+                                </td>
+                            </tr>
+                            <tr ng-repeat="discipline in disciplines">
+                                <td class="action-button">
+                                    <span ng-click="onRowEdit(discipline)"  class="btn btn-primary btn-sm">
+                                        Edit
+                                    </span>
+                                    <span ng-click="onRowDelete(discipline)"  class="btn btn-danger btn-sm">
+                                        Delete
+                                    </span>
+                                </td>
+                                <td>{{discipline.discipline_code}}</td>
+                                <td>{{discipline.discipline_name}}</td>
+                                <td>{{discipline.exclude_from_report ? "Yes" : "No"}}</td>
+                                <td>{{discipline.last_updated_date | momentDateFilter : "DD/MM/YYYY HH:mm:ss"}}</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="5">
+                                    <div pagination boundary-links="true" total-items="SearchQuery.total_data" ng-show="SearchQuery.total_data > 0" page="SearchQuery.page" class="pagination-sm" max-size="10" first-text="<<" last-text=">>" on-select-page="onPageChanged(page)"></div>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+</div>

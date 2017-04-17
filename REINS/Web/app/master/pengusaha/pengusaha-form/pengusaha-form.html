@@ -1,0 +1,116 @@
+<style>
+    .validation-new {
+        margin-top: 0px;
+        color: red;
+        font-size:0.9em;
+    }
+</style>
+<div>
+    <div class="modal-header">
+        <button type="button" class="close pull-right" ng-click="$dismiss()" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Data Pengusaha</h4>
+    </div>
+    <div class="modal-body form-horizontal">
+        
+        <div class="form-group">
+            <label for="txtPengusahaName" class="col-sm-4 control-label">Nama Pengusaha <span class="validation-new">*</span></label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="txtPengusahaName" placeholder="Pengusaha" ng-model="pengusaha.nama_pengusaha">
+                <div class="validation-new" ng-show="validate.nama_pengusaha">
+                    Please enter Pengusaha.
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="txtJenisPengusaha" class="col-sm-4 control-label">Kode Jenis Pengusaha <span class="validation-new">*</span></label>
+            <div class="col-sm-8">
+                <select class="form-control" id="txtJenisPengusaha" ng-model="pengusaha.kode_jenis_pengusaha_id">
+                    <option></option>
+                </select>
+                <div class="validation-new" ng-show="validate.kode_jenis_pengusaha_id">
+                    Please select Kode Jenis Pengusaha.
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label for="txtJenisUsaha" class="col-sm-4 control-label">Jenis Usaha <span class="validation-new">*</span></label>
+            <div class="col-sm-8">
+                <select ng-options="i.jenis_usaha_id as i.kode+' '+i.nama_jenis_usaha for i in listJenisUsaha"
+                        class="form-control" id="txtJenisUsaha" ng-model="pengusaha.jenis_usaha_id">
+                    <option value="">-- Select Jenis Usaha --</option>
+                </select>
+                <div class="validation-new" ng-show="validate.jenis_usaha_id">
+                    Please select Jenis Usaha.
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="txtPengusahaPengurus" class="col-sm-4 control-label">Nama Pengurus <span class="validation-new">*</span></label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="txtPengusahaPengurus" placeholder="Pengurus" ng-model="pengusaha.nama_pengurus">
+                <div class="validation-new" ng-show="validate.nama_pengurus">
+                    Please enter Pengurus.
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="txtAlamatPengusaha" class="col-sm-4 control-label">Alamat Pengusaha <span class="validation-new">*</span></label>
+            <div class="col-sm-8">
+                <textarea rows="3" class="form-control" id="txtAlamatPengusaha" placeholder="Alamat Pengusaha" ng-model="pengusaha.alamat_pengusaha"></textarea>
+                <div class="validation-new" ng-show="validate.alamat_pengusaha">
+                    Please enter Alamat Pengusaha.
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="txtPropinsi" class="col-sm-4 control-label">Provinsi <span class="validation-new">*</span></label>
+            <div class="col-sm-8">
+                <select ng-change="FetchWilayah()" ng-options="i.propinsi_id as i.kode_propinsi+' '+i.nama_propinsi for i in listPropinsi"
+                        class="form-control" id="txtPropinsi" ng-model="pengusaha.propinsi_id">
+                    <option value="">-- Select Provinsi --</option>
+                </select>
+                <div class="validation-new" ng-show="validate.propinsi_id">
+                    Please select Provinsi.
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="txtWilayah" class="col-sm-4 control-label">Wilayah <span class="validation-new">*</span></label>
+            <div class="col-sm-8">
+                <select ng-disabled="pengusaha.propinsi_id == 0 || pengusaha.propinsi_id == null" ng-options="i.wilayah_id as i.kode+' '+i.nama_wilayah for i in listWilayah"
+                        class="form-control" id="txtWilayah" ng-model="pengusaha.wilayah_id">
+                    <option value="">-- Select Wilayah --</option>
+                </select>
+                <div class="validation-new" ng-show="validate.wilayah_id">
+                    Please select Wilayah.
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="txtRekening" class="col-sm-4 control-label">No. Rekening <span class="validation-new">*</span></label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="txtRekening" placeholder="Nomor Rekening" ng-model="pengusaha.nomor_rekening">
+                <div class="validation-new" ng-show="validate.nomor_rekening">
+                    Please enter No. Rekening.
+                </div>
+            </div>
+        </div>
+
+    </div>
+   <div class="modal-footer">
+        <button class="btn btn-danger" ng-click="$dismiss()">
+            <i class="fa fa-times"></i>
+            Cancel
+        </button>
+        <button class="btn btn-success" ng-disabled="!validate.button" ng-click="onSave(pengusaha)">
+            <i class="fa fa-floppy-o"></i>
+            Save
+        </button>
+    </div>
+</div>

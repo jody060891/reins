@@ -1,0 +1,106 @@
+<div class="col-md-12" ng-controller="AngsuranListCtrl">
+    <div class="panel panel-primary">
+        <div class="panel-heading clearfix">
+            Transaction > Data Angsuran
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-3 col-xs-8" style="padding-right: 0;">
+                    <div class="input-group">
+                        <input placeholder="Nomor Register" ng-keypress="onKeyPress($event)" type="text" class="form-control" ng-model="keyword"/>
+                        <span class="input-group-addon btn btn-primary" ng-click="onSearch()">
+                            <i class="fa fa-search"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-xs-4" style="padding-left: 5px;">
+                    <span class="btn btn-primary" ng-click="onCreateNew()">
+                        <i class="fa fa-plus-circle"></i>
+                        Add
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <br />
+                <div class="col-md-12 col-xs-11" style="overflow-x: auto">
+                    <table class="table table-striped table-bordered data-grid">
+                        <thead>
+                            <tr>
+                                <th class="action-button"></th>
+                                <th ng-click="onSort('Pinjaman.nomor_register')">
+                                    No Register
+                                    <span>
+                                        <i class="fa fa-sort"></i>
+                                    </span>
+                                </th>
+                                <th ng-click="onSort('Pinjaman.nomor_perjanjian')">
+                                    No Perjanjian
+                                    <span>
+                                        <i class="fa fa-sort"></i>
+                                    </span>
+                                </th>
+                                <th ng-click="onSort('NomorPerkiraan.nomor_perkiraan')">
+                                    No Bk Bsr.
+                                    <span>
+                                        <i class="fa fa-sort"></i>
+                                    </span>
+                                </th>
+                                <th ng-click="onSort('nomor_perkiraan_lawan_id')">
+                                    No Bk Lawan
+                                    <span>
+                                        <i class="fa fa-sort"></i>
+                                    </span>
+                                </th>
+                                <th ng-click="onSort('nomor_bukti')">
+                                    No Bukti
+                                    <span>
+                                        <i class="fa fa-sort"></i>
+                                    </span>
+                                </th>
+                                <th ng-click="onSort('jumlah_angsuran')">
+                                    Nominal
+                                    <span>
+                                        <i class="fa fa-sort"></i>
+                                    </span>
+                                </th>
+                                <th ng-click="onSort('tanggal_angsuran')">
+                                    Tanggal Angsuran
+                                    <span>
+                                        <i class="fa fa-sort"></i>
+                                    </span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-hide="listAngsuran.length > 0">
+                                <td colspan="8">No data found in the system.
+                                </td>
+                            </tr>
+                            <tr ng-repeat="angsuran in listAngsuran">
+                                <td class="action-button">
+                                    <span ng-click="onViewDetail(angsuran)" class="btn btn-primary btn-sm">
+                                        View Details
+                                    </span>
+                                </td>
+                                <td>{{angsuran.Pinjaman.nomor_register}}</td>
+                                <td>{{angsuran.Pinjaman.nomor_perjanjian}}</td>
+                                <td>{{angsuran.NomorPerkiraan.nomor_perkiraan}}</td>
+                                <td>{{angsuran.nomor_perkiraan_lawan}}</td>
+                                <td>{{angsuran.nomor_bukti}}</td>
+                                <td>Rp. {{angsuran.jumlah_angsuran | momentMoneyFilter}}</td>
+                                <td>{{angsuran.tanggal_angsuran | momentDateFilter : "DD/MM/YYYY"}}</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr ng-show="listAngsuran.length > 0">
+                            <td colspan="8">
+                                <div pagination boundary-links="true" total-items="SearchQuery.total_data" ng-show="SearchQuery.total_data > 0" page="SearchQuery.page" class="pagination-sm" on-select-page="onPageChanged(page)" max-size="8"></div>
+                            </td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

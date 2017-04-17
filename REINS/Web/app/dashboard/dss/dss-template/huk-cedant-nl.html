@@ -1,0 +1,88 @@
+<head>
+    <style type="text/css">
+        .auto-style4 {
+            width: 23%;
+        }
+        a {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<div class="row" style="margin-top:10px !important;">
+    <div class="col-md-12">
+        <div class="row">
+            <br>
+            <div class="col-sm-4 col-xs-12" style="padding-right: 0;">
+                <div class="input-group">
+                    <input ng-keypress="onKeyPressHukCedantNL($event)" placeholder="Search by company name or cedant" type="text" class="form-control" ng-model="keyword.keywordHukCedantNL"/>
+                    <span class="input-group-addon btn btn-primary" ng-click="onSearchHukCedantNL()">
+                            <i class="fa fa-search"></i>
+                        </span>
+                </div>
+            </div>
+            <div class="col-sm-2 col-xs-8" style="padding-right: 0;">
+                <div class="input-group">
+                    <select ng-change="onSearchHukCedantNL()"
+                            type="text" class="form-control" ng-model="keyword.keywordHukCedantNLTahun"
+                            ng-options="t as t for t in listTahun">
+                        <option value="">-Tahun-</option>
+                    </select>
+
+                </div>
+            </div>
+            <div class="col-sm-6 col-xs-12" style="padding-right: 0;">
+                <div class="input-group col-sm-6" style="float: right;">
+                    <label for="HukCedantNLNumberRow" class="col-sm-7 control-label">Rows per page :</label>
+                    <div class="col-sm-5">
+                        <select id="HukCedantNLNumberRow" ng-change="onChangeRowNumberHukCedantNL()"
+                                type="text" class="form-control" ng-model="SearchQueryHukCedantNL.row_per_page"
+                                ng-options="t as t for t in listRowNumber">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <br>
+        <table datatable="" id="datatable" class="table table-striped table-bordered">
+            <thead>
+            <tr>
+                <th style="cursor: pointer" ng-click="onSortHukCedantNL('cedant')">Cedant</th>
+                <th style="cursor: pointer" ng-click="onSortHukCedantNL('comp_name')">Company Name</th>
+                <th style="cursor: pointer" ng-click="onSortHukCedantNL('premi')">Premi</th>
+                <th style="cursor: pointer" ng-click="onSortHukCedantNL('komisi')">Komisi</th>
+                <th style="cursor: pointer" ng-click="onSortHukCedantNL('klaim')">Klaim</th>
+                <th style="cursor: pointer" ng-click="onSortHukCedantNL('net')">Net</th>
+                <th style="cursor: pointer" ng-click="onSortHukCedantNL('anggaran')">Anggaran</th>
+                <th style="cursor: pointer" ng-click="onSortHukCedantNL('tbus')">Tbus</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-if="listHukCedantNlList.length < 1">
+                <td colspan="8">
+                    No results found
+                </td>
+            </tr>
+            <tr ng-repeat="hukCedantNl in listHukCedantNlList">
+                <td>{{hukCedantNl.cedant}}</td>
+                <td>{{hukCedantNl.comp_name}}</td>
+                <td>Rp {{hukCedantNl.premi | momentDecimalFilter: 3 | momentMoneyFilter}}</td>
+                <td>Rp {{hukCedantNl.komisi | momentDecimalFilter: 3 | momentMoneyFilter}}</td>
+                <td>Rp {{hukCedantNl.klaim | momentDecimalFilter: 3 | momentMoneyFilter}}</td>
+                <td>Rp {{hukCedantNl.net | momentDecimalFilter: 3 | momentMoneyFilter}}</td>
+                <td>Rp {{hukCedantNl.anggaran | momentDecimalFilter: 3 | momentMoneyFilter}}</td>
+                <td>{{hukCedantNl.tbus}}</td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr ng-show="listHukCedantNlList.length > 0">
+                <td colspan="8">
+                    <div pagination boundary-links="true" items-per-page="SearchQueryHukCedantNL.row_per_page" total-items="SearchQueryHukCedantNL.total_data" ng-show="SearchQueryHukCedantNL.total_data > 0" page="SearchQueryHukCedantNL.page" class="pagination-sm" on-select-page="onPageChangedHukCedantNL(page)" max-size="8"></div>
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>

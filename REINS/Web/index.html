@@ -1,0 +1,334 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Indonesiare: Client Portal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href="img/favicon.ico">
+    <script src="components/Dashboard/modernizr-2.5.3.js"></script>
+    <!--<link href="app.less" type="text/css" rel="stylesheet/less">-->
+    <!--<link rel="stylesheet" type="text/css" href="/Content/css/eHOR-Style.css">-->
+    <link href="bower_components/bootstrap/dist/css/bootstrap.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="components/css/morris.css">
+    <!-- DataTables -->
+    <link href="components/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="components/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <!-- Responsive datatable examples -->
+    <link href="components/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <!-- Switchery css -->
+    <link href="components/css/switchery.min.css" rel="stylesheet" />
+    <!-- App CSS -->
+    <link href="components/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="components/css/custom.css" rel="stylesheet" type="text/css" />
+
+    <link href="bower_components/angular-resizable/angular-resizable.min.css" rel="stylesheet" type="text/css" />
+    <link href="bower_components/jquery-ui/themes/redmond/jquery-ui.min.css" type="text/css" rel="stylesheet" />
+    <link href="bower_components/angular-loading-bar/src/loading-bar.css" type="text/css" rel="stylesheet" />
+    <link href="bower_components/angucomplete-alt/angucomplete-alt.css" type="text/css" rel="stylesheet" />
+    <!--<link rel="stylesheet" href="bower_components/angular-chart.js/dist/angular-chart.css" />-->
+    <!--[if lte IE 8]>
+    <script type="text/javascript" src="components/Dashboard/excanvas.js"></script>
+    <script src="components/Dashboard/es5-shim.min.js"></script>
+    <![endif]-->
+
+    <script src="components/js/css3-mediaqueries.js"></script>
+    <script type="text/javascript">
+        var postMsg = {
+            sendMessage: function (idFrame, domain, fn, param, haveReturnValue)
+            {
+                iframe = document.getElementById(idFrame).contentWindow;
+                var message = {
+                    fn: fn,
+                    param: param,
+                    result: null,
+                    haveReturnValue: haveReturnValue
+                };
+                iframe.postMessage(message, domain);
+            },
+            addEventListener: function (domain) {
+                window.addEventListener('message', function (event) {
+                    if (event.origin !== domain && domain !== '*')
+                        return;
+                    if (event.data.fn == "eval") {
+                        eval(event.data.param);
+
+                        if (event.data.haveReturnValue) {
+                            var message = {
+                                fn: 'PostBack',
+                                refFn: event.data.fn,
+                                param: event.data.param,
+                                result: event.data.result
+                            };
+                            event.source.postMessage(message, event.origin);
+                        }
+                    }
+                }, false);
+            }
+        }
+        postMsg.addEventListener("*");
+    </script>
+</head>
+<!--[if IE 8]>   <body class="oldie"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<body>
+    <!--<![endif]-->
+        <!-- Livereload script for development only (stripped during dist build) -->
+        <!--<script src="http://localhost:35729/livereload.js" data-concat="false"></script>-->
+        <!--<script type="text/javascript" data-remove="false" data-concat="false">-->
+            <!--(function () {-->
+                <!--window['livespell___installPath'] = "/Web/JavaScriptSpellCheck/";-->
+            <!--}());-->
+        <!--</script>-->
+        <!-- JS from Bower Components -->
+        <!--<script src="bower_components/less.js/dist/less-1.6.2.js" data-concat="false"></script>-->
+        <script src="bower_components/jquery/dist/jquery.js"></script>
+        <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="bower_components/underscore/underscore.js"></script>
+        <script src="bower_components/moment/moment.js"></script>
+        <script src="bower_components/angular/angular.js"></script>
+        <script src="bower_components/angular-route/angular-route.js"></script>
+        <script src="bower_components/angular-animate/angular-animate.js"></script>
+        <script src="bower_components/angular-resource/angular-resource.js"></script>
+        <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+        <script src="bower_components/angular-ui-utils/ui-utils.js"></script>
+        <script src="bower_components/angular-ivh-treeview/dist/ivh-treeview.js"></script>
+        <script src="bower_components/angular-strap/dist/angular-strap.min.js"></script>
+        <script src="bower_components/angular-strap/dist/angular-strap.tpl.min.js"></script>
+        <script src="bower_components/es5-shim/es5-shim.min.js"></script>
+        <script src="bower_components/es5-shim/es5-sham.min.js"></script>
+        <script src="bower_components/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.min.js"></script>
+        <script src="bower_components/angular-wysiwyg/angular-wysiwyg.js"></script>
+        <script src="bower_components/ngSticky/dist/sticky.min.js"></script>
+        <script src="bower_components/angular-file-upload/angular-file-upload.js"></script>
+        <script src="bower_components/angular-scroll/angular-scroll.js"></script>
+        <script src="components/js/timepickerpop.js"></script>
+        <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
+        <script src="bower_components/angular-ui-date/src/date.js"></script>
+        <script src="bower_components/jQuery-One-Page-Nav/jquery.nav.js"></script>
+        <script src="bower_components/jquery-sticky/jquery.sticky.js"></script>
+        <script src="bower_components/angular-morris/build/module/angular-morris/angular-morris.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+        <script src="bower_components/angular-resizable/angular-resizable.min.js"></script>
+        <script src="bower_components/angular-loading-bar/src/loading-bar.js"></script>
+        <script src="bower_components/angucomplete-alt/angucomplete-alt.js"></script>
+            
+
+    <!--<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>-->
+        <script type="text/javascript" src="components/js/crypto/jsencrypt.js"></script>
+        <script src="components/js/chart.js/dist/Chart.min.js"></script>
+        <script src="components/js/angular-chart.js/dist/angular-chart.min.js"></script>
+        <script src="components/js/jquery.core.js"></script>
+        <script src="components/Dashboard/json2.min.js" type="text/javascript"></script>
+        <script src="components/js/dx.all.js" type="text/javascript"></script>
+        <!-- Add New Bower Component JS Above -->
+        <!-- Main App JS -->
+        <script src="app.js"></script>
+        <script src="factory/factory.js"></script>
+        <script src="factory/internal-factory.js"></script>
+        <script src="factory/open-cover-factory.js"></script>
+        <!--<script src="factory/incident-factory.js"></script>-->
+        <script src="directive/angularMorris/angularMorris.js"></script>
+        <script src="directive/toastMessage/toastMessage.js"></script>
+        <script src="internal/login.js"></script>
+        <script src="internal/navigation.js"></script>
+        <script src="internal/user-profile.js"></script>
+        <script src="internal/main.js"></script>
+        <script src="directive/loadingScreen/loadingScreen.js"></script>
+        <script src="filter/momentDateFilter.js"></script>
+        <script src="directive/angularHtmlBind/angularHtmlBind.js"></script>
+        <script src="directive/numberOnlyInput/numberOnlyInput.js"></script>
+        <script src="directive/decimalOnlyInput/decimalOnlyInput.js"></script>
+        <script src="directive/calendar/calendar.js"></script>
+        <script src="directive/textAreaMaxlength/textAreaMaxlength.js"></script>
+        <script src="internal/session-reminder/session-reminder.js"></script>
+        <script src="app/unauthorized/unauthorized.js"></script>
+        <script src="directive/userActivityWatcher/userActivityWatcher.js"></script>
+        <script src="directive/autoWidthSelect/autoWidthSelect.js"></script>
+
+        <script src="directive/timeFormatInput/timeFormatInput.js"></script>
+        <script src="directive/dateFix/dateFix.js"></script>
+        <script src="directive/tabRightClick/tabRightClick.js"></script>
+        <script src="directive/sidebarTree/sidebarTree.js"></script>
+        <script src="directive/countTo/countTo.js"></script>
+    
+        <script src="app/dashboard/dashboard.js"></script>
+        <script src="app/transaction/activaAtk/atk/atk-list.js"></script>
+        <script src="app/transaction/facultativeInwardModule/facultativeInwardInput/openCoverDetails/open-cover-details-list.js"></script>
+        <script src="app/transaction/facultativeInwardModule/facultativeInwardInput/facultativeRiskDetailsPropor/facultative-risk-details-propor-list.js"></script>
+
+        <script src="app/dashboard/risk-polis/risk-polis.js"></script>
+    
+        <script src="app/dashboard/dss/dss.js"></script>
+
+        <script src="app/landing-page/landing-page.js"></script>
+
+        <!-- Add New Component JS Above -->
+    <div user-activity-watcher="click mousemove keypress"></div>
+    <div class="row" style="margin-left: 0px; margin-right: 0px;width:100%;">
+        <div id="reinsHeader" class="col-md-12 reins-header">
+            <!-- header -->
+            <div class="row" ng-controller="UserProfileCtrl">
+                <div class="col-md-12 eHOR_header">
+                    <div class="row" style="height:100%">
+                        <!--<div class="col-md-7" id="logo-hits">-->
+                        <!--<img style="cursor: pointer" ng-click="onLogoClick()" src="/Web/img/hits_logo.png" />-->
+                    </div>
+                    <div class="col-md-5">
+                        <div class="row">
+                            <div class="col-md-1">
+                            </div>
+                            <div class="col-md-11 ktphalign">
+                                <p>
+                                            <span style="color: #007cc4;display:block;width:400px;word-wrap:break-word;">
+                                                <b>
+                                                    Welcome,
+                                                    <spans>
+                                                        {{userInfo.UserId}}
+                                                    </spans>
+                                                </b>
+                                            </span>
+                                    <font style="text-decoration: underline; cursor: pointer;"><span ng-click="onLogout()">Logout</span></font>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- header -->
+        <div class="row main-content ehor-content" style="min-height: 400px;">
+            <div class="col-md-12">
+                <div class="row gap">
+                    <div class="col-md-12">
+                    </div>
+                </div>
+                <!--<div class="navbar navbar-default" role="navigation" ng-controller="NavigationCtrl">-->
+                <!--<span class="pull-left menu-click" style="padding-left: 10px; padding-top: 10px;" ng-click="onHomeClick()" ng-show="isShowHome"><i class="fa fa-home fa-2x"></i></span>-->
+                <!--<div id="navigation-container"></div>-->
+                <!--</div>-->
+
+                <div class="row">
+                    <div id="sidebar" class="col-sm-4 col-md-3 sidebar reins-navbar" ng-controller="NavigationCtrl">
+                        <div class="mini-submenu">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </div>
+                        <div class="list-group">
+                            <span href="#" class="list-group-item active">
+                                Menu
+                            </span>
+                            <span id="navigation-container"></span>
+                        </div>
+                    </div>
+                    <div id="content" class="col-sm-8 col-md-9" style="padding-left: 0px; padding-right: 2%;">
+                        <div ng-controller="MainCtrl" class="reins-content">
+                            <div id="main-content-app" ng-view="ng-view">
+                            </div>
+                        </div>
+                        <toast-message></toast-message>
+                    </div>
+                </div>
+
+
+                <!--<div ng-controller="MainCtrl">-->
+                <!--<div id="main-content-app" ng-view="ng-view">-->
+                <!--</div>-->
+                <!--</div>-->
+            </div>
+        </div>
+        <!--<div class="row" style="height: 20px;">-->
+        <!--<div class="col-md-12 footers">-->
+        <!--Copyright &copy; 2017-->
+        <!--</div>-->
+        <!--</div>-->
+    </div>
+    </div>
+
+        <div id="scriptPlaceholder"></div>
+        <script type="text/javascript" src="/Web/JavaScriptSpellCheck/include.js" data-remove="false" data-concat="false"></script>
+        <script type="text/javascript" data-remove="false" data-concat="false">
+            (function () {
+                var pkblApp = angular.module('PKBL');
+                var finishFetchUser = false;
+                var currentProgress = 0;
+                var maxProgress = 240;
+                var finishFetchUserAcl = false;
+                $.post("/Authentication/GetCurrentUser", function (response) {
+                    pkblApp.value("UserSessionData", response.data);
+                    finishFetchUser = true;
+                });
+
+
+
+
+
+//                $.post("/Authentication/GetCurrentUserAcl", function (responseAcl) {
+//                    pkblApp.value("UserAclSessionData", responseAcl.data);
+//                    finishFetchUserAcl = true;
+//                });
+                var bootstrapHandler = setInterval(function () {
+                    if (finishFetchUser) {
+                        maxProgress = 256;
+                        angular.bootstrap(document, ["PKBL"]);
+                        clearInterval(bootstrapHandler);
+                        $.post("/Module/RenderNavigation", function (response) {
+                            $("#navigation-container").html(response.data.RenderNavigation);
+
+                            pkblApp.value("UserAclSessionData", response.data.AccessModule);
+                            console.log(pkblApp.value());
+                            $(".list-group-item").on("click.navigation", function () {
+                                var sidebarTreeChildren = $(this).attr('sidebar-tree-children');
+                                if (typeof sidebarTreeChildren !== typeof undefined && sidebarTreeChildren !== false) {
+                                    $(this).find('i:first').toggleClass("fa-minus-circle");
+                                    $(this).toggleClass("downed")
+                                    $("."+sidebarTreeChildren).toggle();
+                                    $("."+sidebarTreeChildren).filter(".downed").trigger("click");
+                                }
+                            });
+                            $(".menu-click").on("click.navigation", function () {
+                                if ($(this).hasClass("open-toggle") && $(this).attr("data-route") == '') {
+                                    $(document).unbind("click.navigation");
+                                    $("li.open").removeClass("open");
+                                    setTimeout(function () {
+                                        $(document).on("click.navigation", function () {
+                                            $("li.open").removeClass("open");
+                                            $(document).unbind("click.navigation");
+                                        })
+                                    }, 1);
+                                    $(this).parent().addClass("open");
+                                } else if ($(this).attr("data-route") != '') {
+                                    if($(window).width() <= 991){
+                                        $('#navigation').slideToggle(500);
+                                    }
+
+                                    $(document).unbind("click.navigation");
+                                    $("li.open").removeClass("open");
+                                    document.location = 'index.html#' + $(this).attr("data-route");
+                                }
+                            });
+
+                            $('.lines').on("click", function(){
+                                $('#navigation-container').slideToggle(500);
+                            });
+
+                            $('.has-submenu').on("click", function () {
+                                if($(window).width() <= 991){
+                                    $(this).children(".submenu").slideToggle(100);
+                                    $('.parent').show();
+                                }
+
+                            })
+                        });
+
+                    }
+                }, 10);
+
+            }());
+        </script>
+
+    </body>
+</html>

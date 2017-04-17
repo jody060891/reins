@@ -1,0 +1,75 @@
+<div ng-controller="UserEditFormCtrl">
+    <div class="modal-header">
+        <h4 class="modal-title">User</h4>
+    </div>
+    <div class="modal-body form-horizontal" style="max-height:450px;overflow-y: scroll;">
+        <div accordion close-others="false">
+            <div accordion-group is-open="true">
+                <div accordion-heading>
+                    User Info <i class="pull-right fa fa-chevron-down"></i>
+                </div>
+                <div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="row form-group">
+                                <label class="col-sm-4 control-label" for="txtEmployeeName">Employee Name</label>
+                                <div class="col-sm-8">
+                                    <div class="input-group col-sm-12">
+                                        <input type="text" class="form-control" ng-change="enabledSaveButton()" placeholder="Employee Name" id="txtEmployeeName" ng-model="user.name"/>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="row form-group">
+                                <label class="col-sm-4 control-label">Designation</label>
+                                <div class="col-sm-8">
+                                    <select ng-change="enabledSaveButton()" ng-model="user.designation_id" class="form-control"
+                                        ng-options="d.designation_id as d.designation_description for d in designations">
+                                        <option value="">-- Select Designation --</option>
+                                    </select>
+                                    <!--<input type="text" class="form-control" placeholder="Designation" id="txtDesignation" disabled ng-model="user.designation_id" />-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="row form-group">
+                                <label class="col-sm-4 control-label">Department</label>
+                                <div class="col-sm-8">
+                                    <select ng-change="enabledSaveButton()" ng-model="user.department_id" class="form-control"
+                                        ng-options="d.department_id as d.department_description for d in departments">
+                                        <option value=""> -- Select Department -- </option>
+                                    </select>
+                                    <!--<input type="text" class="form-control" placeholder="Department" id="txtDepartment" disabled ng-model="user.department_id" />-->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="row form-group">
+                                <label class="col-sm-4 control-label">Employee Category</label>
+                                <div class="col-sm-8">
+                                    <select ng-change="enabledSaveButton()" ng-model="user.employee_category_id" class="form-control"
+                                        ng-options="e.employee_category_id as e.employee_category_description for e in employeeCategories">
+                                        <option value="">-- Select Employee Category --</option>
+                                    </select>
+                                    <!--<input type="text" class="form-control" placeholder="Employee Category" id="txtEmployeCategory" disabled ng-model="user.employee_category_id" />-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        
+    </div>
+    <div class="modal-footer">
+        <span class="btn btn-success" ng-disabled="isDisabled" ng-click="onSave(user)">
+            <i class="fa fa-floppy-o"></i>
+            Save
+        </span>
+    </div>
+</div>

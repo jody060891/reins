@@ -1,0 +1,98 @@
+<style>
+    .validation-new {
+        margin-top: 0px;
+        color: red;
+        font-size: 0.9em;
+    }
+</style>
+<div>
+    <div class="modal-header">
+        <button type="button" class="close pull-right" ng-click="$dismiss()" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Committee Group</h4>
+    </div>
+    <div class="modal-body form-horizontal">
+        <div class="form-group">
+            <label class="col-sm-4 control-label">Name <span class="validation-new">*</span></label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" placeholder="Name" ng-model="committeeGroup.name">
+                <div class="validation-new" ng-show="validate.name">
+                    Please enter Name
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">Incident Type</label>
+            <div class="col-sm-8">
+                <select ng-change="onChange()" ng-model="committeeGroup.incident_type_id"
+                    class="form-control"
+                    ng-options="i.incident_type_id as i.incident_type_name for i in incidentTypes">
+                    <option value="">-- Select IncidentType --</option>
+                </select>
+                <div class="validation-new" ng-show="validate.incident_type_id">
+                    Please Select IncidentType
+                </div>
+
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">Incident SubType</label>
+            <div class="col-md-8" ng-repeat="incidentType in incidentTypes | filter:committeeGroup.incident_type_id">
+                <div class="checkbox checkbox-incident-sub-type"
+                    ng-repeat="subType in incidentType.MasterIncidentSubTypes" ng-show="committeeGroup.incident_type_id == incidentType.incident_type_id">
+                    <label>
+                        <input type="checkbox" id="subType.incident_sub_type_id" on-click="onChange(this)" ng-model="subType.is_selected" ng-checked="checkSelected(subType.incident_sub_type_id)">
+                        {{subType.incident_sub_type_name}}
+                    </label>
+                </div>
+            </div>
+        </div>
+        <!--
+        <div class="form-group">
+            <label class="col-sm-4 control-label">Assigned Role</label>
+            <div class="col-sm-8">
+                <select ng-change="onChange()" ng-model="committeeGroup.role_id"
+                    class="form-control"
+                    ng-options="i.role_id as i.role_name for i in Roles">
+                    <option value="">-- Select Default Role --</option>
+                </select>
+
+            </div>
+        </div>
+        -->
+    </div>
+    <div class="modal-footer">
+        <div class="row" style="padding: 0px 10px;">
+            <span class="btn btn-primary btn-sm" ng-click="openLocationForm(committeeGroup)">
+                <i class="fa fa-hospital-o" tooltip="Assign Location"></i>
+                Assign Location
+            </span>
+            <span class="btn btn-primary btn-sm" ng-click="openDepartmentForm(committeeGroup)">
+                <i class="fa fa-hospital-o" tooltip="Assign Department"></i>
+                Assign Department
+            </span>
+            <span class="btn btn-primary btn-sm" ng-click="openDisciplineForm(committeeGroup)">
+                <i class="fa fa-hospital-o" tooltip="Assign Discipline"></i>
+                Assign Discipline
+            </span>
+            <span class="btn btn-primary btn-sm" ng-click="openPersonCategoryForm(committeeGroup)">
+                <i class="fa fa-hospital-o" tooltip="Assign Person Category"></i>
+                Assign Person Category
+            </span>
+            <span class="btn btn-primary btn-sm" ng-click="openEmployeeCategoryForm(committeeGroup)">
+                <i class="fa fa-hospital-o" tooltip="Assign Person Category"></i>
+                Assign Emp. Category
+            </span>
+        </div>
+        <div class="row" style="padding: 0px 10px;margin-top: 10px;">
+            <span class="btn btn-danger" ng-click="$dismiss()">
+                <i class="fa fa-times"></i>
+                Cancel
+            </span>
+            <span class="btn btn-success" ng-disabled="!validate.button" ng-click="onSave(committeeGroup)">
+                <i class="fa fa-floppy-o"></i>
+                Save
+            </span>
+        </div>
+
+    </div>
+</div>

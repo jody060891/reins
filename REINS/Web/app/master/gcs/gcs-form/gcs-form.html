@@ -1,0 +1,62 @@
+<div>
+    <div class="modal-header">
+        <button type="button" class="close pull-right" ng-click="$dismiss()" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">GLASGOW COMA SCALE</h4>
+    </div>
+    <div class="modal-body form-horizontal">
+        <div class="form-group">
+            <label for="txtGcsName" class="col-sm-4 control-label">Name</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="txtGcsName" placeholder="GCS Name" ng-model="gcs.gcs_description">
+            </div>
+        </div>
+       
+        <div class="form-group">
+            <div accordion-group is-open="true" ng-hide="gcs === null">
+                <div accordion-heading>
+                    GCS <i class="pull-right fa fa-chevron-down"></i>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-primary" ng-click="onCreateNew(gcs.gcs_id)">Add Details</button>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Description</th>
+                                <th>Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-hide="(gcsDetails.length > 0)">
+                                <td colspan="2">
+                                    No data found in the system.
+                                </td>
+                            </tr>
+                            <tr ng-repeat="gcsDetail in gcsDetails">
+                                <td>
+                                    <span ng-click="onRowEdit(gcsDetail)">
+                                        <i class="fa fa-pencil-square-o icon-blue" tooltip="Edit Data"></i>
+                                    </span>
+                                    &nbsp;&nbsp
+                                    <span ng-click="onRowDelete(gcsDetail)">
+                                        <i class="fa fa-times icon-red" tooltip="Delete Data"></i>
+                                    </span>
+                                </td>
+                                <td>
+                                    {{gcsDetail.gcs_detail_description}}                                   
+                                </td>
+                                <td>
+                                    {{gcsDetail.gcs_detail_value}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default" ng-click="$dismiss()">Cancel</button>
+        <button type="button" class="btn btn-primary" ng-click="onSave(gcs)">Save changes</button>
+    </div>
+</div>

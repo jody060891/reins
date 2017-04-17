@@ -1,0 +1,57 @@
+<style>
+    .validation-new {
+        margin-top: 0px;
+        color: red;
+        font-size:0.9em;
+    }
+</style>
+<div>
+    <div class="modal-header">
+        <button type="button" class="close pull-right" ng-click="$dismiss()" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Wilayah</h4>
+    </div>
+    <div class="modal-body form-horizontal">
+        <div class="form-group">
+            <label for="txtPropinsi" class="col-sm-4 control-label">Provinsi <span class="validation-new">*</span></label>
+            <div class="col-sm-8">
+                <select ng-change="FetchWilayah()" ng-options="i.propinsi_id as i.kode_propinsi+' '+i.nama_propinsi for i in listPropinsi"
+                        class="form-control" id="txtPropinsi" ng-model="wilayah.propinsi_id">
+                    <option value="">-- Select Provinsi --</option>
+                </select>
+                <div class="validation-new" ng-show="validate.propinsi_id">
+                    Please select Provinsi.
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="txtKode" class="col-sm-4 control-label">Kode <span class="validation-new">*</span></label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="txtKode" placeholder="Kode WIlayah" ng-model="wilayah.kode">
+                <div class="validation-new" ng-show="validate.kode">
+                    Please enter Kode Wilayah
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="txtNamaWilayah" class="col-sm-4 control-label">Nama Wilayah <span class="validation-new">*</span></label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="txtNamaWilayah" placeholder="Nama Provinsi" ng-model="wilayah.nama_wilayah">
+                <div class="validation-new" ng-show="validate.nama_wilayah">
+                    Please enter Nama Wilayah
+                </div>
+            </div>
+        </div>
+    </div>
+   <div class="modal-footer">
+        <button class="btn btn-danger" ng-click="$dismiss()">
+            <i class="fa fa-times"></i>
+            Cancel
+        </button>
+        <button class="btn btn-success" ng-disabled="!validate.button" ng-click="onSave(wilayah)">
+            <i class="fa fa-floppy-o"></i>
+            Save
+        </button>
+    </div>
+</div>

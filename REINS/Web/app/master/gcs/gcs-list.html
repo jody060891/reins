@@ -1,0 +1,57 @@
+<div class="col-md-12" ng-controller="GcsListCtrl">
+    <div class="panel panel-primary">
+        <div class="panel-heading clearfix">
+            GLASGOW COMA SCALE
+        </div>
+        <div class="panel-body">
+            <div class="tab-pane " id="tab_aloc">
+                <div class="pull-left">
+                    <div class="input-append">
+                        <i class="icon-zoom-in"></i>
+                        <input data-provide="typeahead" data-items="4" type="text"
+                               class="span2 search-query" />
+                        <button class="btn btn-primary" ng-click="onSearch()">Search</button>
+                        <button type="button" class="btn btn-primary" ng-click="onCreateNew()">Add</button>
+                    </div>
+                </div>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th ng-click="onSort('gcs_description')">
+                                Description
+                                <span>
+                                    <i class="fa fa-arrow-up"></i>
+                                </span>
+                            </th>
+                            <th>Last Modified</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-hide="gcss.length > 0">
+                            <td colspan="3">
+                                No data found in the system.
+                            </td>
+                        </tr>
+                        <tr ng-repeat="gcs in gcss">
+                            <td>
+                                <span ng-click="onRowEdit(gcs)">
+                                    <i class="fa fa-pencil-square-o icon-blue" tooltip="Edit Data"></i>
+                                </span>
+                                &nbsp;&nbsp
+                                <span ng-click="onRowDelete(gcs)">
+                                    <i class="fa fa-times icon-red" tooltip="Delete Data"></i>
+                                </span>
+                                &nbsp;&nbsp;
+                            </td>
+                            <td>{{gcs.gcs_description}}</td>
+                            <td>{{gcs.last_updated_date | momentDateFilter : "DD/MM/YYYY HH:mm:ss"}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+</div>

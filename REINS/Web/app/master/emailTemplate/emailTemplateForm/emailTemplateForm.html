@@ -1,0 +1,226 @@
+<div>
+    <div class="modal-header">
+        <button type="button" class="close pull-right" ng-click="$dismiss()" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">{{emailTemplate.action_description}}</h4>
+    </div>
+    <div class="modal-body">
+        <div class="col-sm-9">
+            <label class="control-label">Subject</label>
+            <div>
+                <input type="text" ng-model="emailTemplate.template_subject" class="form-control" />
+            </div>
+            <label class="control-label">Body</label>
+            <div>
+                <wysiwyg
+                    textarea-id="question"
+                    textarea-class="form-control"
+                    textarea-height="220px"
+                    textarea-name="textareaQuestion"
+                    ng-model="emailTemplate.template_body"
+                    enable-bootstrap-title="true"
+                    textarea-menu="{{customMenu}}"></wysiwyg>
+            </div>
+            <label class="control-label">Email Template Code</label>
+            <div>
+                <input type="text" ng-model="emailTemplate.template_code" class="form-control" />
+            </div>
+        </div>
+        <div >
+            <label class="control-label">Aliases</label>
+            <div class="col-sm-3" style="overflow-y: scroll;height: 395px;">
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div><strong>[INSTITUTION]</strong></div>
+                                <div>Institution</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div><strong>[INCIDENT_NO]</strong></div>
+                                <div>Incident Number</div>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div><strong>[INCIDENT_TYPE]</strong></div>
+                                <div>Incident Type</div>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div><strong>[INCIDENT_SUBTYPE]</strong></div>
+                                <div>Incident Subtype</div>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div><strong>[NEAR_MISS]</strong></div>
+                                <div>Near Miss</div>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div><strong>[DATE]</strong></div>
+                                <div>Date of Occurence</div>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div><strong>[LOCATION]</strong></div>
+                                <div>Location of Occurence</div>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div><strong>[DAYS]</strong></div>
+                                <div>Number of Days to Complete</div>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div><strong>[LOGIN_PAGE]</strong></div>
+                                <div>Login Page</div>
+                            </td>
+                        </tr>
+                         <tr>
+                            <td>
+                                <div><strong>[DUE_DATE]</strong></div>
+                                <div>Due Date</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div><strong>[FOLLOW_UP_ACTION]</strong></div>
+                                <div>Follow Up Action</div>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div><strong>[MERGED_NO]</strong></div>
+                                <div>Merged Incident Number</div>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div><strong>[COMMENTS]</strong></div>
+                                <div>Comments</div>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div><strong>[STAFF_NAME]</strong></div>
+                                <div>Staff Name</div>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div><strong>[ASSESSMENT_OF_INJURY]</strong></div>
+                                <div>Assessment of Injury Level</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div><strong>[SAC_LEVEL]</strong></div>
+                                <div>SAC Level</div>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div><strong>[POTENTIAL_SRE]</strong></div>
+                                <div>Potential SRE Information</div>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div><strong>[POTENTIAL_MEDIA]</strong></div>
+                                <div>Potential Media Information</div>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div><strong>[POTENTIAL_LEGAL]</strong></div>
+                                <div>Potential Legal Information</div>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div><strong>[EMAIL_TEMPLATE_CODE]</strong></div>
+                                <div>Email Template Code</div>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div><strong>[FORWARDER_EMAIL]</strong></div>
+                                <div>Email of the Person who forward the incident</div>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div><strong>[EMAIL_TEMPLATE_CODE]</strong></div>
+                                <div>Email Template Code</div>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div><strong>[FORWARD_REMARKS]</strong></div>
+                                <div>Remarks from forwarder</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div><strong>[FORWARDER_EMAIL]</strong></div>
+                                <div>Email of the Person who forward the incident</div>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div><strong>[LIST_INCIDENT_REMINDER]</strong></div>
+                                <div>Table contains weekly notification incidents</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div><strong>[EMAIL_TEMPLATE_CODE]</strong></div>
+                                <div>Email Template Code</div>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <span class="btn btn-danger" ng-click="$dismiss()">
+            <i class="fa fa-times"></i>
+            Cancel
+        </span>
+        <span class="btn btn-success" ng-click="onSave(emailTemplate)" ng-disabled="action">
+            <i class="fa fa-floppy-o"></i>
+            Save
+        </span>
+    </div>
+</div>

@@ -1,0 +1,48 @@
+<div>
+	<div class="modal-header">
+        <button type="button" class="close pull-right" ng-click="$dismiss()" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Add User</h4>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-6">
+                <h4>Available User</h4>
+                <input type="text" placeholder="Search" ng-model="vSearch">
+                <div>
+                    <label>
+                        <input type="checkbox" ng-model="select.selectAllUser" ng-click="select_all_user()" />
+                        Select All
+                    </label>
+                    <label>
+                        <input type="checkbox" ng-model="select.unselectAllUser" ng-click="unselect_all_user()" />
+                        Unselect All
+                    </label>
+                </div>
+                <div ng-repeat="user in committeeGroup.Users  | filter:vSearch">
+                    <label>
+                        <input type="checkbox" placeholder="Name" ng-model="user.is_active">
+                        {{user.User.name}}
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h4>Selected User</h4>
+                <input type="text" placeholder="Search" ng-model="sSearch">
+                <div ng-show="user.is_active" ng-repeat="user in committeeGroup.Users | filter:sSearch">
+                    {{user.User.name}}
+                </div>
+            </div>
+            <div class="row gap"></div>
+        </div>
+    </div>
+   <div class="modal-footer">
+        <span class="btn btn-danger" ng-click="$dismiss()">
+            <i class="fa fa-times"></i>
+            Cancel
+        </span>
+        <span class="btn btn-success" ng-disabled="!validate.button" ng-click="onSave()">
+            <i class="fa fa-floppy-o"></i>
+            Save
+        </span>
+    </div>
+</div>

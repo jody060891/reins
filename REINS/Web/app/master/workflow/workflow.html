@@ -1,0 +1,89 @@
+<div class="col-md-12 no-side-padding" ng-controller="WorkflowCtrl">
+    <div class="panel panel-primary">
+        <div class="panel-heading clearfix">
+            Setup > Workflow        
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-3 pull-left" style="padding-right: 0;">
+                    <div class="input-group">
+                        <input ng-keypress="onKeyPress($event)" type="text" class="form-control" ng-model="keyword" />
+                        <span class="input-group-addon btn btn-primary" ng-click="onSearch()">
+                            <i class="fa fa-search icon-white"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-sm-9 pull-left" style="padding-left: 5px;">
+                    <span class="btn btn-primary" ng-click="onCreateNew()">
+                        <i class="fa fa-plus-circle"></i>
+                        Add
+                    </span>
+                </div>
+            </div>
+            
+            <div class="row">
+                <br />
+                <div class="col-md-12">
+                    <span><b>Note:</b> Incident will go straight to the admin if no workflow is matched</span>
+                </div>
+                <div class="col-md-12">
+                    <table class="table table-striped table-bordered data-grid">
+                        <thead>
+                            <tr>
+                                <th class="action-button"></th>
+                                <th>Workflow Name
+                                    <!--<span>
+                                        <i class="fa fa-arrow-up"></i>
+                                    </span>-->
+                                </th>
+                                <th>Employee Category
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-show="workflows.length <= 0">
+                                <td colspan="3">No results found
+                                </td>
+                            </tr>
+                            <tr ng-repeat="workflow in workflows">
+                                <td class="action-button">
+                                    <span ng-click="onRowEdit(workflow)"  class="btn btn-primary btn-sm">
+                                        Edit
+                                    </span>
+                                    <span ng-click="onRowDelete(workflow)"  class="btn btn-danger btn-sm">
+                                        Delete
+                                    </span>
+                                    <span class="btn btn-primary btn-sm" ng-click="openEmployeeCategoryForm(workflow)">
+                                        <i class="fa fa-users" tooltip-trigger="mouseenter" tooltip="Assign Employee Category"></i>
+                                        Assign Employee Category
+                                    </span>
+                                    <span class="btn btn-primary btn-sm" ng-click="openDepartmentForm(workflow)">
+                                        <i class="fa fa-users" tooltip-trigger="mouseenter" tooltip="Assign Department"></i>
+                                        Assign Department
+                                    </span>
+                                    <span class="btn btn-primary btn-sm" ng-click="openLocationForm(workflow)">
+                                        <i class="fa fa-users" tooltip-trigger="mouseenter" tooltip="Assign Location"></i>
+                                        Assign Location
+                                    </span>
+                                </td>
+                                <td>{{workflow.workflow_description}}</td>
+                                <td>
+                                    <span ng-repeat="category in workflow.Employees | filter: {is_active: true}" ng-click="onManageDesignation(category)">
+                                        <span style="min-width:100px;" class="btn btn-primary btn-sm">{{category.EmployeeCategory.employee_category_description}}</span>
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <td colspan="3">
+                                <div pagination max-size="10" boundary-links="true" total-items="SearchQuery.total_data"  ng-show="SearchQuery.total_data > 0" page="SearchQuery.page" class="pagination-sm" on-select-page="onPageChanged(page)"></div>
+                            </td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,418 @@
+<br>
+<div accordion close-others="true">
+    <div accordion-group is-open="true">
+        <div accordion-heading>
+            Admin Information <i class="pull-right fa fa-chevron-down"></i>
+        </div>
+        <div>
+            <div class="form-group row" style="margin-bottom: 0px;">
+                <label for="dateTanggalInput" class="col-sm-2 col-xs-6 mini-label"
+                       style="width: 12%; text-align: right">Input Date :</label>
+                <div class="col-sm-2 col-xs-6" style="padding-left: 5px">
+                    <p class="input-group" style="margin-bottom: 5px;">
+                        <input ng-disabled="!isEditState" type="text" id="dateTanggalInput"
+                               ng-blur="onChangeDateOfOccurance(facul.FacInpDate)" name="dateTanggalInput"
+                               class="form-control mini-label" datepicker-popup="dd-MM-yyyy" ng-model="facul.FacInpDate"
+                               close-text="Close" show-weeks="false" show-button-bar="false" date-fix/>
+
+                        <span class="input-group-btn">
+                            <button ng-disabled="!isEditState" type="button" class="btn btn-default" style="border: 1px solid #ccc"
+                                ng-click="datePickerOpen('dateTanggalInput')">
+                            <i class="fa fa-calendar"></i>
+                            </button>
+                        </span>
+                    </p>
+                </div>
+                <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Underwriter :</label>
+                <div class="col-sm-2 col-xs-6" style="padding-left: 5px;">
+                    <input ng-disabled="!isEditState" type="text" class="form-control mini-label"
+                           ng-model="facul.FacOfrNo"/>
+                </div>
+            </div>
+            <div class="form-group row" style="margin-bottom: 0px;">
+                <label for="dateTanggalUpdate" class="col-sm-2 col-xs-6 mini-label"
+                       style="width: 12%; text-align: right">Update Date :</label>
+                <div class="col-sm-2 col-xs-6" style="padding-left: 5px">
+                    <p class="input-group" style="margin-bottom: 5px;">
+                        <input ng-disabled="!isEditState" type="text" id="dateTanggalUpdate"
+                               ng-blur="onChangeDateOfOccurance(facul.FacUpdDate)" name="dateTanggalUpdate"
+                               class="form-control mini-label" datepicker-popup="dd-MM-yyyy" ng-model="facul.FacUpdDate"
+                               close-text="Close" show-weeks="false" show-button-bar="false" date-fix/>
+
+                        <span class="input-group-btn">
+                            <button ng-disabled="!isEditState" type="button" class="btn btn-default" style="border: 1px solid #ccc"
+                                    ng-click="datePickerOpen('dateTanggalUpdate')">
+                                <i class="fa fa-calendar"></i>
+                            </button>
+                        </span>
+                    </p>
+                </div>
+
+                <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Open Cover Code
+                    :</label>
+                <div class="col-sm-2 col-xs-6" style="padding-left: 5px; width: 28%;">
+                    <input ng-disabled="!isEditState" style="width: 50%" type="text" class="form-control mini-label"
+                           ng-model="facul.FacOpnCode"/>
+                </div>
+                <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Type :</label>
+                <div class="col-sm-2 col-xs-6" style="padding-left: 5px;">
+                    <select ng-disabled="!isEditState" class="form-control mini-label" ng-model="facul.FacType">
+                        <option value="PR">PR</option>
+                        <option value="NP">NP</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row" style="margin-bottom: 0px;">
+                <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Old Code :</label>
+                <div class="col-sm-2 col-xs-6" style="padding-left: 5px;">
+                    <input ng-disabled="!isEditState" type="text" class="form-control mini-label"
+                           ng-model="facul.FacOldCode"/>
+                </div>
+
+                <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Sub Type :</label>
+                <div class="col-sm-2 col-xs-6" style="padding-left: 5px; width: 28%">
+                    <div angucomplete-alt id="ex3" style="width: 40px; display: inline-block;"
+                         placeholder=""
+                         maxlength="50"
+                         pause="100"
+                         disable-input="!isEditState"
+                         selected-object="selectedSubType"
+                         local-data="listSubType"
+                         search-fields="SubtypeCode,SubtypeDesc"
+                         title-field="SubtypeCode"
+                         description-field="SubtypeDesc"
+                         minlength="1"
+                         input-class="form-control form-control-small mini-label"
+                         model-name="{{facul.FacSubType}}"
+                         input-changed="subTypeChanged"
+                         match-class="highlight"></div>
+                    <input disabled style="width: 180px; display: inline-block;" type="text"
+                           class="form-control mini-label" ng-model="facul.MasterSubType.SubtypeDesc"/>
+                </div>
+
+                <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Ref. No :</label>
+                <div class="col-sm-2 col-xs-6" style="padding-left: 5px;">
+                    <input ng-disabled="!isEditState" type="text" class="form-control mini-label"
+                           ng-model="facul.FacOldRef"/>
+                </div>
+            </div>
+            <div class="form-group row" style="margin-bottom: 0px;">
+                <label for="dateTanggalOffer" class="col-sm-2 col-xs-8 mini-label"
+                       style="width: 12%; text-align: right">Offer Date :</label>
+                <div class="col-sm-2 col-xs-8" style="padding-left: 5px">
+                    <p class="input-group" style="margin-bottom: 5px;">
+                        <input ng-disabled="!isEditState" type="text" id="dateTanggalOffer" name="dateTanggalOffer"
+                               class="form-control mini-label" datepicker-popup="dd-MM-yyyy" ng-model="facul.FacOfrDate"
+                               close-text="Close" show-weeks="false" show-button-bar="false" date-fix/>
+
+                        <span class="input-group-btn">
+                <button ng-disabled="!isEditState" type="button" class="btn btn-default" style="border: 1px solid #ccc"
+                        ng-click="datePickerOpen('dateTanggalOffer')">
+                    <i class="fa fa-calendar"></i>
+                </button>
+            </span>
+                    </p>
+                </div>
+
+                <label for="dateTanggalReply" class="col-sm-2 col-xs-6 mini-label"
+                       style="width: 12%; text-align: right">Reply Date :</label>
+                <div class="col-sm-2 col-xs-6" style="padding-left: 5px">
+                    <p class="input-group" style="margin-bottom: 5px;">
+                        <input ng-disabled="!isEditState" type="text" id="dateTanggalReply" name="dateTanggalReply"
+                               class="form-control mini-label" datepicker-popup="dd-MM-yyyy" ng-model="facul.FacRepDate"
+                               close-text="Close" show-weeks="false" show-button-bar="false" date-fix/>
+
+                        <span class="input-group-btn">
+                <button ng-disabled="!isEditState" type="button" class="btn btn-default" style="border: 1px solid #ccc"
+                        ng-click="datePickerOpen('dateTanggalReply')">
+                    <i class="fa fa-calendar"></i>
+                </button>
+            </span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="form-group row" style="margin-bottom: 0px;">
+                <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Cedant :</label>
+                <div class="col-sm-10 col-xs-6" style="padding-left: 5px;">
+                    <div angucomplete-alt id="ex1" style="width: 10%; display: inline-block;"
+                         placeholder=""
+                         maxlength="50"
+                         pause="100"
+                         selected-object="selectedCompany"
+                         disable-input="!isEditState"
+                         local-data="listCompany"
+                         search-fields="CompCode,CompName"
+                         title-field="CompCode"
+                         description-field="CompName"
+                         minlength="1"
+                         input-class="form-control form-control-small mini-label"
+                         model-name="{{facul.FacCedant}}"
+                         input-changed="companyChanged"
+                         match-class="highlight"></div>
+                    <input disabled style="width: 80%; display: inline-block;" type="text"
+                           class="form-control mini-label" ng-model="facul.MasterCompany.CompName"/>
+                </div>
+            </div>
+
+            <div class="form-group row" style="margin-bottom: 0px;">
+                <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Broker :</label>
+                <div class="col-sm-10 col-xs-6" style="padding-left: 5px;">
+                    <div angucomplete-alt id="ex2" style="width: 10%; display: inline-block;"
+                         placeholder=""
+                         maxlength="50"
+                         pause="100"
+                         selected-object="selectedBroker"
+                         disable-input="!isEditState"
+                         local-data="listBroker"
+                         search-fields="CompCode,CompName"
+                         title-field="CompCode"
+                         description-field="CompName"
+                         minlength="1"
+                         input-class="form-control form-control-small mini-label"
+                         model-name="{{facul.FacBroker}}"
+                         input-changed="brokerChanged"
+                         match-class="highlight"></div>
+                    <input disabled style="width: 80%; display: inline-block;" type="text"
+                           class="form-control mini-label" ng-model="facul.MasterBroker.CompName"/>
+                </div>
+            </div>
+
+            <div class="form-group row" style="margin-bottom: 0px;">
+                <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Policy No :</label>
+                <div class="col-sm-2 col-xs-6" style="padding-left: 5px;">
+                    <input ng-disabled="!isEditState" type="text" class="form-control mini-label"
+                           ng-model="facul.FacPolicyNo"/>
+                </div>
+                <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Cc. Ref :</label>
+                <div class="col-sm-2 col-xs-6" style="padding-left: 5px; width: 28%;">
+                    <input ng-disabled="!isEditState" type="text" class="form-control mini-label"
+                           ng-model="facul.FacCcRef"/>
+                </div>
+                <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Source :</label>
+                <div class="col-sm-2 col-xs-6" style="padding-left: 5px;">
+                    <select ng-disabled="!isEditState" class="form-control mini-label" ng-model="facul.FacSource">
+                        <option value="L">Local</option>
+                        <option value="A">Asean</option>
+                        <option value="O">Overseas</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row" style="margin-bottom: 0px;">
+                <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Sub Class :</label>
+                <div class="col-sm-4 col-xs-6" style="padding-left: 5px;">
+                    <div angucomplete-alt id="ex4" style="width: 20%; display: inline-block;"
+                         placeholder=""
+                         maxlength="50"
+                         pause="100"
+                         selected-object="selectedSubClass"
+                         disable-input="!isEditState"
+                         local-data="listSubClass"
+                         search-fields="ClassCode,ClassName"
+                         title-field="ClassCode"
+                         description-field="ClassName"
+                         minlength="1"
+                         input-class="form-control form-control-small mini-label"
+                         model-name="{{facul.FacSubClass}}"
+                         input-changed="subClassChanged"
+                         match-class="highlight"></div>
+                    <input disabled style="width: 70%; display: inline-block;" type="text"
+                           class="form-control mini-label" ng-model="facul.MasterSubClass.ClassName"/>
+                </div>
+                <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Main Class :</label>
+                <div class="col-sm-4 col-xs-6" style="padding-left: 5px;">
+                    <div angucomplete-alt id="ex5" style="width: 20%; display: inline-block;"
+                         placeholder=""
+                         maxlength="50"
+                         pause="100"
+                         selected-object="selectedMainClass"
+                         disable-input="!isEditState"
+                         local-data="listMainClass"
+                         search-fields="MclassCode,MclassName"
+                         title-field="MclassCode"
+                         description-field="MclassName"
+                         minlength="1"
+                         input-class="form-control form-control-small mini-label"
+                         model-name="{{facul.FacMainClass}}"
+                         input-changed="mainClassChanged"
+                         match-class="highlight"></div>
+                    <input disabled style="width: 70%; display: inline-block;" type="text"
+                           class="form-control mini-label" ng-model="facul.MasterMainClass.MclassName"/>
+                </div>
+            </div>
+
+            <div class="form-group row" style="margin-bottom: 0px;">
+                <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Insured :</label>
+                <div class="col-sm-10 col-xs-6" style="padding-left: 5px;">
+                    <input ng-disabled="!isEditState" type="text" class="form-control mini-label"
+                           ng-model="facul.FacInsured"/>
+                </div>
+            </div>
+
+            <div class="form-group row" style="margin-bottom: 0px;">
+                <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Risk :</label>
+                <div class="col-sm-5 col-xs-6" style="padding-left: 5px;">
+                    <input ng-disabled="!isEditState" type="text" class="form-control mini-label"
+                           ng-model="facul.FacRisk1"/>
+                </div>
+                <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Cover :</label>
+                <div class="col-sm-3 col-xs-6" style="padding-left: 5px; width: 29.6%">
+                    <input ng-disabled="!isEditState" type="text" class="form-control mini-label"
+                           ng-model="facul.FacCover1"/>
+                </div>
+                <div class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">&nbsp;</div>
+                <div class="col-sm-5 col-xs-6" style="padding-left: 5px;">
+                    <input ng-disabled="!isEditState" type="text" class="form-control mini-label"
+                           ng-model="facul.FacRisk2"/>
+                </div>
+                <div class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">&nbsp;</div>
+                <div class="col-sm-3 col-xs-6" style="padding-left: 5px; width: 29.6%">
+                    <input ng-disabled="!isEditState" type="text" class="form-control mini-label"
+                           ng-model="facul.FacCover2"/>
+                </div>
+            </div>
+
+            <div class="form-group row" style="margin-bottom: 0px;">
+                <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Description :</label>
+                <div class="col-sm-6 col-xs-6" style="padding-left: 5px;">
+                    <input ng-disabled="!isEditState" type="text" class="form-control mini-label"
+                           ng-model="facul.FacDesc1"/>
+                </div>
+                <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right"></label>
+                <div class="col-sm-3 col-xs-6" style="padding-left: 5px; width: 21.1%">
+                    &nbsp;
+                </div>
+
+            </div>
+
+            <div class="form-group row" style="margin-bottom: 0px;">
+                <div class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">&nbsp;</div>
+                <div class="col-sm-6 col-xs-6" style="padding-left: 5px;">
+                    <input ng-disabled="!isEditState" type="text" class="form-control mini-label"
+                           ng-model="facul.FacDesc2"/>
+                </div>
+                <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">R/I Period</label>
+                <div class="col-sm-3 col-xs-6" style="padding-left: 5px; width: 21.1%">
+                    <input ng-disabled="!isEditState" type="text" class="form-control mini-label"
+                           ng-model="facul.FacRiPrd"/>
+                </div>
+            </div>
+
+            <div class="form-group row" style="margin-bottom: 0px;">
+                <div class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">&nbsp;</div>
+                <div class="col-sm-6 col-xs-6" style="padding-left: 5px;">
+                    <input ng-disabled="!isEditState" type="text" class="form-control mini-label"
+                           ng-model="facul.FacDesc3"/>
+                </div>
+                <label for="dateTanggalFrom" class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">From</label>
+                <div class="col-sm-3 col-xs-6" style="padding-left: 5px; width: 21.1%">
+                    <p class="input-group" style="margin-bottom: 5px;">
+                        <input ng-disabled="!isEditState" type="text" id="dateTanggalFrom" name="dateTanggalReply"
+                               class="form-control mini-label" datepicker-popup="dd-MM-yyyy" ng-model="facul.FacComDate"
+                               close-text="Close" show-weeks="false" show-button-bar="false" date-fix/>
+
+                        <span class="input-group-btn">
+                <button ng-disabled="!isEditState" type="button" class="btn btn-default" style="border: 1px solid #ccc"
+                        ng-click="datePickerOpen('dateTanggalFrom')">
+                    <i class="fa fa-calendar"></i>
+                </button>
+            </span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="form-group row" style="margin-bottom: 0px;">
+                <div class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">&nbsp;</div>
+                <div class="col-sm-6 col-xs-6" style="padding-left: 5px;">
+                    <input ng-disabled="!isEditState" type="text" class="form-control mini-label"
+                           ng-model="facul.FacDesc4"/>
+                </div>
+                <label for="dateTanggalTo" class="col-sm-2 col-xs-6 mini-label"
+                       style="width: 12%; text-align: right">To</label>
+                <div class="col-sm-3 col-xs-6" style="padding-left: 5px; width: 21.1%">
+                    <p class="input-group" style="margin-bottom: 5px;">
+                        <input ng-disabled="!isEditState" type="text" id="dateTanggalTo" name="dateTanggalReply"
+                               class="form-control mini-label" datepicker-popup="dd-MM-yyyy" ng-model="facul.FacExpDate"
+                               close-text="Close" show-weeks="false" show-button-bar="false" date-fix/>
+
+                        <span class="input-group-btn">
+                <button ng-disabled="!isEditState" type="button" class="btn btn-default" style="border: 1px solid #ccc"
+                        ng-click="datePickerOpen('dateTanggalTo')">
+                    <i class="fa fa-calendar"></i>
+                </button>
+            </span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="form-group row" style="margin-bottom: 0px;">
+                <div class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">&nbsp;</div>
+                <div class="col-sm-6 col-xs-6" style="padding-left: 5px;">
+                    <input ng-disabled="!isEditState" type="text" class="form-control mini-label"
+                           ng-model="facul.FacDesc5"/>
+                </div>
+                <label for="dateTanggalHoldCvr" class="col-sm-2 col-xs-6 mini-label"
+                       style="width: 12%; text-align: right">Hold Cvr Date</label>
+                <div class="col-sm-3 col-xs-6" style="padding-left: 5px; width: 21.1%">
+                    <p class="input-group" style="margin-bottom: 5px;">
+                        <input ng-disabled="!isEditState" type="text" id="dateTanggalHoldCvr" name="dateTanggalHoldCvr"
+                               class="form-control mini-label" datepicker-popup="dd-MM-yyyy"
+                               ng-model="facul.FacHoldCvrDate" close-text="Close" show-weeks="false"
+                               show-button-bar="false" date-fix/>
+
+                        <span class="input-group-btn">
+                <button ng-disabled="!isEditState" type="button" class="btn btn-default" style="border: 1px solid #ccc"
+                        ng-click="datePickerOpen('dateTanggalHoldCvr')">
+                    <i class="fa fa-calendar"></i>
+                </button>
+            </span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="form-group row" style="margin-bottom: 0px;">
+                <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Territory :</label>
+                <div class="col-sm-4 col-xs-6" style="padding-left: 5px;">
+                    <div angucomplete-alt id="ex6" style="width: 20%; display: inline-block;"
+                         placeholder=""
+                         maxlength="50"
+                         pause="100"
+                         selected-object="selectedTerritory"
+                         disable-input="!isEditState"
+                         local-data="listSterr"
+                         search-fields="SterrCode,SterrName"
+                         title-field="SterrCode"
+                         description-field="SterrName"
+                         minlength="1"
+                         input-class="form-control form-control-small mini-label"
+                         model-name="{{facul.FacSterr}}"
+                         input-changed="territoryChanged"
+                         match-class="highlight"></div>
+                    <input disabled style="width: 70%; display: inline-block;" type="text"
+                           class="form-control mini-label" ng-model="facul.MasterSterr.SterrName"/>
+                </div>
+                <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Bus Type :</label>
+                <div class="col-sm-2 col-xs-6" style="padding-left: 5px; width: 13.8%">
+                    <select ng-disabled="!isEditState" class="form-control mini-label" ng-model="facul.FacRnSts">
+                        <option value="N">New</option>
+                        <option value="R">Renew</option>
+                    </select>
+                </div>
+                <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Renew Sts :</label>
+                <div class="col-sm-2 col-xs-6" style="padding-left: 5px; width: 12%">
+                    <select ng-disabled="!isEditState" class="form-control mini-label" ng-model="facul.FacRnFlag">
+                        <option value="Y">Y</option>
+                        <option value="N">N</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<br>
+<br>
+
+

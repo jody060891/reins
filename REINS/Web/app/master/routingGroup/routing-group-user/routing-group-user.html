@@ -1,0 +1,82 @@
+<div class="col-md-12" ng-controller="RoutingGroupUserCtrl">
+    <div class="panel panel-primary">
+        <div class="panel-heading clearfix">
+            Routing Group : {{routingGroup.name}}
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <span class="btn btn-primary" ng-click="onAddUser(routingGroup)">
+                        <i class="fa fa-plus-circle"></i>
+                        Add User
+                    </span>
+                </div>
+                
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-striped table-bordered data-grid">
+                        <thead>
+                            <tr>
+                                <th class="action-button"></th>
+                                <th>User</th>
+                                <th>Locations</th>
+                                <th>Departments</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-hide="(routingGroup.RoutingUsers | filter: filterRoutingUser).length > 0">
+                                <td colspan="4">No data found in the system.</td>
+                            </tr>
+                            <tr ng-repeat="routingUser in routingGroup.RoutingUsers | filter: filterRoutingUser">
+                                <td class="action-button">
+                                    <span class="btn btn-danger btn-sm" ng-click="onRowDelete(routingUser)">
+                                        Delete
+                                    </span>
+                                    &nbsp;&nbsp;
+                                    <span class="btn btn-primary" ng-click="onManageLocation(routingUser, routingGroup)">
+                                        <i class="fa fa-hospital-o" tooltip="Edit Location"></i>
+                                        Assign Location
+                                    </span>
+                                    &nbsp;&nbsp;
+                                    <span class="btn btn-primary" ng-click="onManageDepartment(routingUser, routingGroup)">
+                                        <i class="fa fa-hospital-o" tooltip="Edit Department"></i>
+                                        Assign Department
+                                    </span>
+                                    &nbsp;&nbsp;
+                                </td>
+                                <td>{{routingUser.User.name}} [{{routingUser.User.user_name}}]
+                                </td>
+                                <td>
+                                    <div ng-show="routingUser.is_all_location">
+                                        All Locations
+                                    </div>
+                                    <div ng-show="!routingUser.is_all_location">
+                                        <span ng-repeat="routingLocation in routingUser.RoutingLocations">[{{routingLocation.Location.location_name}}]&nbsp;
+                                        </span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div ng-show="routingUser.is_all_department">
+                                        All Departments
+                                    </div>
+                                    <div ng-show="!routingUser.is_all_department">
+                                        <span ng-repeat="routingDepartment in routingUser.RoutingDepartments">[{{routingDepartment.Department.department_description}}]&nbsp;
+                                        </span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-12" style="text-align: right;">
+                    <span class="btn btn-warning" ng-click="onBack()">
+                        <i class="fa fa-arrow-left"></i>
+                        Back
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
