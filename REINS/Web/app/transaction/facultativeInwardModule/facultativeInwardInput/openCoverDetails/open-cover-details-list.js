@@ -302,6 +302,9 @@ angular.module('PKBL')
                 $scope.validation.FacIndemnity = false;
                 $scope.validation.FacMinPrem = false;
                 $scope.validation.FacDepPrem = false;
+
+                $scope.validation.mainPage = false;
+                $scope.validation.page2 = false;
             };
 
             $scope.isValid = function(){
@@ -392,6 +395,24 @@ angular.module('PKBL')
                 if($scope.openCover.FacDepPrem != null && $scope.openCover.FacDepPrem !== "")
                     $scope.validation.FacDepPrem = true;
 
+                if($scope.validation.FacOfrNo && $scope.validation.FacType &&
+                    $scope.validation.FacSubType && $scope.validation.FacOpnCode &&
+                    $scope.validation.FacComDate && $scope.validation.FacExpDate &&
+                    $scope.validation.FacCedant && $scope.validation.FacBroker &&
+                    $scope.validation.FacSource && $scope.validation.FacMainClass &&
+                    $scope.validation.FacSubClass && $scope.validation.FacSterr)
+                    $scope.validation.mainPage = true;
+
+                console.log($scope.validation.mainPage);
+
+                if($scope.validation.FacCurrency && $scope.validation.FacAccSts &&
+                    $scope.validation.FacWrtShr &&
+                    $scope.validation.FacSndShr && $scope.validation.FacTotsi &&
+                    $scope.validation.FacCcsi && $scope.validation.FacCcRetn &&
+                    $scope.validation.FacOursi && $scope.validation.FacGpremium &&
+                    $scope.validation.FacNpremium && $scope.validation.FacAccsi)
+                    $scope.validation.page2 = true;
+
                 return  $scope.validation.FacOfrNo && $scope.validation.FacType &&
                         $scope.validation.FacSubType && $scope.validation.FacOpnCode &&
                         $scope.validation.FacComDate && $scope.validation.FacExpDate &&
@@ -407,6 +428,7 @@ angular.module('PKBL')
                     // $scope.validation.FacRnSts &&
                     // $scope.validation.FacDeductible && $scope.validation.FacIndemnity &&
                         // $scope.validation.FacMinPrem && $scope.validation.FacDepPrem;
+
 
             };
 

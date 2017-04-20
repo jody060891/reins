@@ -66,7 +66,6 @@ angular.module('PKBL')
             $("#content").removeClass();
             $("#content").addClass("col-md-12 col-sm-12");
         }else{
-
             SessionService.scheduleReminder();
         }
 

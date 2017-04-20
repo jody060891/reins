@@ -60,7 +60,7 @@ div.modif div.dataTables_wrapper div.dataTables_filter input.input-sm {
     .reins-content{
         position: absolute;
         top: 56px;
-        width: 95%;
+        /*width: 95%;*/
     }
     .reins-navbar{
         margin-top: 56px;

@@ -8,7 +8,7 @@
                 <br>
                 <div class="col-md-12 col-xs-11" >
                     <div tabset>
-                        <div style="cursor:pointer;" tab heading="Page 1" ng-click="onFetchMainPage()">
+                        <div ng-style="!validation.mainPage && {'color':'red'}" style="cursor:pointer;" tab heading="Page 1" ng-click="onFetchMainPage()">
                             <div angular-html-bind-template="onMainPageTemplate" compile-scope="mainScope"></div>
                         </div>
 

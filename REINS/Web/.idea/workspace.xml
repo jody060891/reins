@@ -18,20 +18,20 @@
       <file leaf-file-name="open-cover-details-list.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/transaction/facultativeInwardModule/facultativeInwardInput/openCoverDetails/open-cover-details-list.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="537">
-              <caret line="547" column="48" lean-forward="false" selection-start-line="547" selection-start-column="48" selection-end-line="547" selection-end-column="48" />
+            <state relative-caret-position="6885">
+              <caret line="405" column="56" lean-forward="false" selection-start-line="405" selection-start-column="56" selection-end-line="405" selection-end-column="56" />
               <folding>
-                <element signature="e#24630#24708#0" expanded="false" />
-                <element signature="e#24773#24911#0" expanded="false" />
-                <element signature="e#24965#25341#0" expanded="false" />
-                <element signature="e#25378#26098#0" expanded="false" />
-                <element signature="e#26136#26857#0" expanded="false" />
-                <element signature="e#26919#27387#0" expanded="false" />
-                <element signature="e#27474#28549#0" expanded="false" />
-                <element signature="e#28630#29141#0" expanded="false" />
-                <element signature="e#29206#29354#0" expanded="false" />
-                <element signature="e#29406#30069#0" expanded="false" />
-                <element signature="e#30698#30955#0" expanded="false" />
+                <element signature="e#25853#25931#0" expanded="false" />
+                <element signature="e#25996#26134#0" expanded="false" />
+                <element signature="e#26188#26564#0" expanded="false" />
+                <element signature="e#26601#27321#0" expanded="false" />
+                <element signature="e#27359#28080#0" expanded="false" />
+                <element signature="e#28142#28610#0" expanded="false" />
+                <element signature="e#28697#29772#0" expanded="false" />
+                <element signature="e#29853#30364#0" expanded="false" />
+                <element signature="e#30429#30577#0" expanded="false" />
+                <element signature="e#30629#31292#0" expanded="false" />
+                <element signature="e#31921#32178#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -108,11 +108,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="398">
-              <caret line="60" column="13" lean-forward="false" selection-start-line="60" selection-start-column="13" selection-end-line="60" selection-end-column="13" />
+            <state relative-caret-position="1139">
+              <caret line="67" column="14" lean-forward="false" selection-start-line="67" selection-start-column="14" selection-end-line="67" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -131,21 +131,22 @@
       <file leaf-file-name="open-cover-details-list.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/transaction/facultativeInwardModule/facultativeInwardInput/openCoverDetails/open-cover-details-list.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="731">
-              <caret line="43" column="40" lean-forward="false" selection-start-line="43" selection-start-column="40" selection-end-line="43" selection-end-column="40" />
+            <state relative-caret-position="1003">
+              <caret line="59" column="25" lean-forward="true" selection-start-line="59" selection-start-column="25" selection-end-line="59" selection-end-column="25" />
               <folding>
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#button#7;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <marker date="1492393929551" expanded="false" signature="1237:1252" ph="..." />
+                <marker date="1492501061382" expanded="false" signature="1288:1303" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="numberOnlyInput.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/directive/numberOnlyInput/numberOnlyInput.js">
+      <file leaf-file-name="custom.css" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/components/css/custom.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1547">
-              <caret line="91" column="21" lean-forward="false" selection-start-line="91" selection-start-column="21" selection-end-line="91" selection-end-column="21" />
+            <state relative-caret-position="355">
+              <caret line="62" column="8" lean-forward="false" selection-start-line="62" selection-start-column="10" selection-end-line="62" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -242,20 +243,20 @@
         <option value="$PROJECT_DIR$/app/transaction/facultativeInwardModule/facultativeInwardInput/facultativeRiskDetailsPropor/facultative-risk-detail-propor-template/main-page.html" />
         <option value="$PROJECT_DIR$/factory/factory.js" />
         <option value="$PROJECT_DIR$/app/transaction/facultativeInwardModule/facultativeInwardInput/facultativeRiskDetailsPropor/facultative-risk-details-propor-list.js" />
-        <option value="$PROJECT_DIR$/components/css/custom.css" />
         <option value="$PROJECT_DIR$/app/transaction/facultativeInwardModule/facultativeInwardInput/openCoverDetails/open-cover-template/page-2.html" />
         <option value="$PROJECT_DIR$/factory/open-cover-factory.js" />
         <option value="$PROJECT_DIR$/login.html" />
         <option value="$PROJECT_DIR$/directive/numberOnlyInput/numberOnlyInput.js" />
         <option value="$PROJECT_DIR$/app/transaction/facultativeInwardModule/facultativeInwardInput/openCoverDetails/open-cover-template/main-page.html" />
         <option value="$PROJECT_DIR$/appLogin.js" />
-        <option value="$PROJECT_DIR$/app/transaction/facultativeInwardModule/facultativeInwardInput/openCoverDetails/open-cover-details-list.html" />
         <option value="$PROJECT_DIR$/factory/internal-factory.js" />
         <option value="$PROJECT_DIR$/internal/login.js" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/iframe.html" />
-        <option value="$PROJECT_DIR$/app/transaction/facultativeInwardModule/facultativeInwardInput/openCoverDetails/open-cover-details-list.js" />
         <option value="$PROJECT_DIR$/app.js" />
+        <option value="$PROJECT_DIR$/app/transaction/facultativeInwardModule/facultativeInwardInput/openCoverDetails/open-cover-details-list.js" />
+        <option value="$PROJECT_DIR$/app/transaction/facultativeInwardModule/facultativeInwardInput/openCoverDetails/open-cover-details-list.html" />
+        <option value="$PROJECT_DIR$/components/css/custom.css" />
       </list>
     </option>
   </component>
@@ -302,6 +303,7 @@
     </navigator>
     <panes>
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -371,6 +373,52 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="numberOnlyInput" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Web" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="components" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Web" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="components" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Web" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bower_components" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -520,7 +568,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -674,12 +721,13 @@
       <workItem from="1491959610622" duration="17109000" />
       <workItem from="1492045823407" duration="12288000" />
       <workItem from="1492390955714" duration="11906000" />
-      <workItem from="1492478579547" duration="709000" />
+      <workItem from="1492478579547" duration="7417000" />
+      <workItem from="1492650105673" duration="1302000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="594938000" />
+    <option name="totallyTimeSpent" value="602948000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1296" height="1000" extended-state="6" />
@@ -967,13 +1015,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/components/css/custom.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1445">
-          <caret line="85" column="19" lean-forward="false" selection-start-line="85" selection-start-column="1" selection-end-line="85" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/transaction/facultativeInwardModule/facultativeInwardInput/openCoverDetails/open-cover-template/page-2.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2210">
@@ -1007,17 +1048,6 @@
         <state relative-caret-position="1547">
           <caret line="91" column="21" lean-forward="false" selection-start-line="91" selection-start-column="21" selection-end-line="91" selection-end-column="21" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/transaction/facultativeInwardModule/facultativeInwardInput/openCoverDetails/open-cover-details-list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="731">
-          <caret line="43" column="40" lean-forward="false" selection-start-line="43" selection-start-column="40" selection-end-line="43" selection-end-column="40" />
-          <folding>
-            <element signature="n#style#0;n#button#7;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <marker date="1492393929551" expanded="false" signature="1237:1252" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1090,30 +1120,50 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1139">
+          <caret line="67" column="14" lean-forward="false" selection-start-line="67" selection-start-column="14" selection-end-line="67" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/transaction/facultativeInwardModule/facultativeInwardInput/openCoverDetails/open-cover-details-list.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="537">
-          <caret line="547" column="48" lean-forward="false" selection-start-line="547" selection-start-column="48" selection-end-line="547" selection-end-column="48" />
+        <state relative-caret-position="6885">
+          <caret line="405" column="56" lean-forward="false" selection-start-line="405" selection-start-column="56" selection-end-line="405" selection-end-column="56" />
           <folding>
-            <element signature="e#24630#24708#0" expanded="false" />
-            <element signature="e#24773#24911#0" expanded="false" />
-            <element signature="e#24965#25341#0" expanded="false" />
-            <element signature="e#25378#26098#0" expanded="false" />
-            <element signature="e#26136#26857#0" expanded="false" />
-            <element signature="e#26919#27387#0" expanded="false" />
-            <element signature="e#27474#28549#0" expanded="false" />
-            <element signature="e#28630#29141#0" expanded="false" />
-            <element signature="e#29206#29354#0" expanded="false" />
-            <element signature="e#29406#30069#0" expanded="false" />
-            <element signature="e#30698#30955#0" expanded="false" />
+            <element signature="e#25853#25931#0" expanded="false" />
+            <element signature="e#25996#26134#0" expanded="false" />
+            <element signature="e#26188#26564#0" expanded="false" />
+            <element signature="e#26601#27321#0" expanded="false" />
+            <element signature="e#27359#28080#0" expanded="false" />
+            <element signature="e#28142#28610#0" expanded="false" />
+            <element signature="e#28697#29772#0" expanded="false" />
+            <element signature="e#29853#30364#0" expanded="false" />
+            <element signature="e#30429#30577#0" expanded="false" />
+            <element signature="e#30629#31292#0" expanded="false" />
+            <element signature="e#31921#32178#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app.js">
+    <entry file="file://$PROJECT_DIR$/app/transaction/facultativeInwardModule/facultativeInwardInput/openCoverDetails/open-cover-details-list.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="398">
-          <caret line="60" column="13" lean-forward="false" selection-start-line="60" selection-start-column="13" selection-end-line="60" selection-end-column="13" />
+        <state relative-caret-position="1003">
+          <caret line="59" column="25" lean-forward="true" selection-start-line="59" selection-start-column="25" selection-end-line="59" selection-end-column="25" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#7;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <marker date="1492501061382" expanded="false" signature="1288:1303" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/css/custom.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="355">
+          <caret line="62" column="8" lean-forward="false" selection-start-line="62" selection-start-column="10" selection-end-line="62" selection-end-column="21" />
           <folding />
         </state>
       </provider>
