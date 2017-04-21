@@ -158,6 +158,7 @@ angular.module('PKBL')
             },
 
             scheduleReminder: function() {
+
                 checkLoginStatus(function(sessionTime, timeoutTime) {
                     $interval(function() {
                         sessionTimeCount++;
@@ -196,6 +197,81 @@ angular.module('PKBL')
             },
             resetReminder: function() {
                 sessionTimeCount = 0;
+            },
+            sendMessage: function (idFrame, domain, fn, param, haveReturnValue)
+            {
+                iframe = document.getElementById(idFrame).contentWindow;
+                var message = {
+                    fn: fn,
+                    param: param,
+                    result: null,
+                    haveReturnValue: haveReturnValue
+                };
+                iframe.postMessage(message, domain);
+            },
+            addEventListener: function (domain, scope) {
+
+                window.addEventListener('message', function (event) {
+                    if (event.origin !== domain && domain !== '*')
+                        return;
+                    if (event.data.fn == "eval") {
+                        var result = eval("scope."+event.data.param);
+
+                        if (event.data.haveReturnValue) {
+                            var message = {
+                                fn: 'PostBack',
+                                refFn: event.data.fn,
+                                param: event.data.param,
+                                result: result
+                            };
+                            event.source.postMessage(message, event.origin);
+                        }
+                    }
+                }, false);
+            },
+            firstLoadElo: function(domain){
+                window.addEventListener('message', function (event) {
+                    var keys = event.data.split("|");
+                    if(keys[0] === "ELO"){
+                        var result = AuthenticationService.Login({
+                            username: keys[1],
+                            password: "",
+                            isElo: true
+                        }, function () {
+                            var loginResult = result.data;
+                            console.log(keys);
+                            if (loginResult.IsSuccess) {
+                                status = {
+                                    userId : keys[1],
+                                    isElo : true
+                                };
+                                console.log($location);
+                                window.location = "/Web/index.html#" + $location.$$url;
+                                ApplicationStatusService.set(status);
+                                $("#reinsHeader").hide();
+                                $("#sidebar").hide();
+                                $("#content").removeClass();
+                                $("#content").addClass("col-md-12 col-sm-12");
+                            }
+                            else {
+                                var message = loginResult.Message;
+                                //var message = "Login failed. The User ID or Password is incorrect.";
+                                if (loginResult.Message == "User is not active!") {
+                                    message = "Login failed. User is not active!";
+                                }
+                                //var message = "Login Failed. Error : " + loginResult.Message;
+
+                                ToastMessageService.removeAlerts();
+                                ToastMessageService.addAlerts("danger", message);
+                            }
+                        }, function(){
+                            window.location.reload();
+                        });
+
+                    }
+
+                    scheduleReminder();
+                }, false);
             }
         };
 
