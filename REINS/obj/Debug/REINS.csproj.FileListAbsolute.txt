@@ -144,6 +144,7 @@ D:\Projects\Reins\REINS\bin\EF.dll
 D:\Projects\Reins\REINS\bin\MailKit.dll
 D:\Projects\Reins\REINS\bin\MimeKit.dll
 D:\Projects\Reins\REINS\bin\LinqKit.dll
+D:\Projects\Reins\REINS\bin\FluentValidationNA.dll
 D:\Projects\Reins\REINS\bin\EFCache.dll
 D:\Projects\Reins\REINS\bin\EntityFramework.Functions.dll
 D:\Projects\Reins\REINS\bin\EntityFramework.OracleHelpers.dll

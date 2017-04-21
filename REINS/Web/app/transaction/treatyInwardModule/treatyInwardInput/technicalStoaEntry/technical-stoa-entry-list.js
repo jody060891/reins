@@ -1,7 +1,7 @@
 angular.module('PKBL')
     .controller('TechnicalStoaEntryListCtrl',
         function TechnicalStoaEntryListCtrl($rootScope, $http, $window, $timeout, $scope, $resource, $location, $modal, UserAclSessionData, OpenCoverFormService,
-                                          ToastMessageService, SessionService, AtkJenisBisnisService, OpenCoverService, StatusService,
+                                          ToastMessageService, SessionService, AtkJenisBisnisService, StatementService, TreatyService,
                                           CompanyService, SubTypeService, ClassService, MainClassService, SterrService, FileUploader) {
             SessionService.setAclSession(UserAclSessionData);
 
@@ -12,18 +12,18 @@ angular.module('PKBL')
             $scope.SearchQuery = {
                 page: 1,
                 row_per_page: 10,
-                sort_by: 'FacOpnCode',
+                sort_by: 'StatNo',
                 is_sort_asc: true,
                 total_data: 0,
                 search: {
                     keyword: $scope.keyword,
-                    fields: ['FacOpnCode']
+                    fields: ['StatNo']
                 }
             };
 
             SessionService.addEventListener("*", $scope);
 
-            $scope.openCover = {};
+            $scope.statement = {};
             $scope.keyword = {};
 
             $scope.onMainPageTemplate = "";
@@ -36,21 +36,20 @@ angular.module('PKBL')
             $scope.isAddNew = false;
             $scope.isDataSelected = false;
             $scope.isSaveClicked = false;
-            $scope.openCoverTemp = {};
+            $scope.statementTemp = {};
 
             $scope.currentIndexPosition = 0;
             $scope.selectedPage = 1;
 
-            $scope.FetchAllStatus = function(){
-                var jsonResult = StatusService.FetchAll(function(){
+            $scope.FetchAllTreaties = function(str){
+                var jsonResult = TreatyService.FetchAllByTreatyCode({treatyCode:str}, function(){
                     var data = jsonResult.data;
-                    $scope.listStatus = [];
-                    $scope.listStatus = data;
+                    $scope.listTreaty = [];
+                    $scope.listTreaty = data;
 
                 });
             };
 
-            $scope.FetchAllStatus();
 
             $scope.FetchAllCompanies = function(str){
                 var jsonResult = CompanyService.FetchAllByCompCode({compCode:str}, function(){
@@ -107,6 +106,9 @@ angular.module('PKBL')
                 });
             };
 
+            $scope.treatyChanged = function($parent){
+                $scope.FetchAllTreaties($parent);
+            };
 
             $scope.companyChanged = function($parent){
                 $scope.FetchAllCompanies($parent);
@@ -132,10 +134,10 @@ angular.module('PKBL')
                 $scope.FetchAllTerritories($parent);
             };
 
-            $scope.selectedStatus = function($parent){
+            $scope.selectedTreaty = function($parent){
                 if($parent != null){
-                    $scope.openCover.FacAccSts = $parent.originalObject.StatusCode;
-                    $scope.openCover.MasterStatus = $parent.originalObject;
+                    $scope.statement.StatTrt  = $parent.originalObject.TrtCode;
+                    $scope.statement.Treaty = $parent.originalObject;
                 }
 
             };
@@ -190,7 +192,7 @@ angular.module('PKBL')
 
             $scope.onFetchMainPage = function(){
                 if ($scope.onMainPageTemplate.length <= 0){
-                    var url = "app/transaction/facultativeInwardModule/facultativeInwardInput/openCoverDetails/open-cover-template/main-page.html";
+                    var url = "app/transaction/treatyInwardModule/treatyInwardInput/technicalStoaEntry/technical-stoa-entry-template/main-page.html";
                     $http.get(url).then(function(result) {
                         var template = result.data;
                         $scope.onMainPageTemplate = template;
@@ -242,21 +244,21 @@ angular.module('PKBL')
             $scope.onFetchMainPage();
 
             $scope.FetchAllWithPagination = function(){
-                var jsonResult = OpenCoverService.FetchAllWithPagination(
+                var jsonResult = StatementService.FetchAllWithPagination(
                     {
                         searchQuery: $scope.SearchQuery,
-                        facOpnCode: $scope.keyword
+                        statementSearch: $scope.keyword
                     }, function(){
                     var result_data = jsonResult.data;
                     if(result_data.IsSuccess){
-                        $scope.listOpenCover = result_data.Data.list;
+                        $scope.listStatement = result_data.Data.list;
                         $scope.SearchQuery.total_data = result_data.Data.totalData;
-                        if($scope.listOpenCover.length > 0 && $scope.isFirstSearch){
-                            $scope.openCover = $scope.listOpenCover[$scope.currentIndexPosition-($scope.selectedPage-1)*10];
+                        if($scope.listStatement.length > 0 && $scope.isFirstSearch){
+                            $scope.statement = $scope.listStatement[$scope.currentIndexPosition-($scope.selectedPage-1)*10];
                             $scope.isFirstSearch= false;
                             $scope.isEditState = false;
                             $scope.isDataSelected = true;
-                            $scope.openCoverTemp = angular.copy($scope.openCover);
+                            $scope.statementTemp = angular.copy($scope.statement);
                         }
 
                     }
@@ -266,7 +268,7 @@ angular.module('PKBL')
             $scope.onCreateNew = function(){
                 OpenCoverFormService.setInitialize();
                 $scope.isSearchState = false;
-                $scope.openCover = OpenCoverFormService.get();
+                $scope.statement = OpenCoverFormService.get();
                 // $scope.openCover = {};
                 $scope.isEditState = true;
                 $scope.isDataSelected = false;

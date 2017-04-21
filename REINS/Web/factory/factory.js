@@ -3304,6 +3304,36 @@ angular.module('PKBL')
             });
         }
     ])
+    .factory('StatementService', [
+        '$resource', function($resource) {
+            return $resource('/Statement/:verb', {}, {
+                FetchAll: {
+                    method: 'POST',
+                    params: {
+                        verb: 'FetchAll'
+                    }
+                },
+                FetchAllWithPagination: {
+                    method: 'POST',
+                    params: {
+                        verb: 'FetchAllWithPagination'
+                    }
+                },
+                Save: {
+                    method: 'POST',
+                    params: {
+                        verb: 'Save'
+                    }
+                },
+                Delete: {
+                    method: 'POST',
+                    params: {
+                        verb: 'Delete'
+                    }
+                }
+            });
+        }
+    ])
     .factory('CompanyService', [
         '$resource', function($resource) {
             return $resource('/Company/:verb', {}, {
@@ -3509,6 +3539,42 @@ angular.module('PKBL')
                     method: 'POST',
                     params: {
                         verb: 'FetchAllBySterrCode'
+                    }
+                }
+            });
+        }
+    ])
+    .factory('TreatyService', [
+        '$resource', function($resource) {
+            return $resource('/Treaty/:verb', {}, {
+                FetchAll: {
+                    method: 'POST',
+                    params: {
+                        verb: 'FetchAll'
+                    }
+                },
+                FetchAllWithPagination: {
+                    method: 'POST',
+                    params: {
+                        verb: 'FetchAllWithPagination'
+                    }
+                },
+                Save: {
+                    method: 'POST',
+                    params: {
+                        verb: 'Save'
+                    }
+                },
+                Delete: {
+                    method: 'POST',
+                    params: {
+                        verb: 'Delete'
+                    }
+                },
+                FetchAllByTreatyCode: {
+                    method: 'POST',
+                    params: {
+                        verb: 'FetchAllByTreatyCode'
                     }
                 }
             });

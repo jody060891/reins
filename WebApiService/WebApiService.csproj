@@ -167,6 +167,8 @@
     <Compile Include="Master\Company\CompanyService.cs" />
     <Compile Include="Master\Class\IClassService.cs" />
     <Compile Include="Master\Class\ClassService.cs" />
+    <Compile Include="Master\Treaty\ITreatyService.cs" />
+    <Compile Include="Master\Treaty\TreatyService.cs" />
     <Compile Include="Master\SubType\ISubTypeService.cs" />
     <Compile Include="Master\SubType\SubTypeService.cs" />
     <Compile Include="Master\Status\IStatusService.cs" />

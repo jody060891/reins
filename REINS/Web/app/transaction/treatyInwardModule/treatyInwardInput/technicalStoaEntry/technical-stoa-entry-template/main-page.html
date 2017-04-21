@@ -3,8 +3,8 @@
     <label for="dateTanggalInput" class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Input Date :</label>
     <div class="col-sm-3 col-xs-6" style="padding-left: 5px">
         <p class="input-group" style="margin-bottom: 5px;">
-            <input ng-disabled="!isEditState" type="text" id="dateTanggalInput" ng-blur="onChangeDateOfOccurance(openCover.FacInpDate)" name="dateTanggalInput"
-                   class="form-control mini-label" datepicker-popup="dd-MM-yyyy" ng-model="openCover.FacInpDate" close-text="Close" show-weeks="false" show-button-bar="false" date-fix />
+            <input ng-disabled="!isEditState" type="text" id="dateTanggalInput" ng-blur="onChangeDateOfOccurance(statement.StatInpDate)" name="dateTanggalInput"
+                   class="form-control mini-label" datepicker-popup="dd-MM-yyyy" ng-model="statement.StatInpDate" close-text="Close" show-weeks="false" show-button-bar="false" date-fix />
 
             <span class="input-group-btn">
                 <button ng-disabled="!isEditState" type="button" class="btn btn-default" style="border: 1px solid #ccc"
@@ -17,8 +17,8 @@
     <label for="dateTanggalUpdate" class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Update Date :</label>
     <div class="col-sm-3 col-xs-6" style="padding-left: 5px">
         <p class="input-group" style="margin-bottom: 5px;">
-            <input ng-disabled="!isEditState" type="text" id="dateTanggalUpdate" ng-blur="onChangeDateOfOccurance(openCover.FacUpdDate)" name="dateTanggalUpdate"
-                   class="form-control mini-label" datepicker-popup="dd-MM-yyyy" ng-model="openCover.FacUpdDate" close-text="Close" show-weeks="false" show-button-bar="false" date-fix />
+            <input ng-disabled="!isEditState" type="text" id="dateTanggalUpdate" ng-blur="onChangeDateOfOccurance(statement.StatUpdDate)" name="dateTanggalUpdate"
+                   class="form-control mini-label" datepicker-popup="dd-MM-yyyy" ng-model="statement.StatUpdDate" close-text="Close" show-weeks="false" show-button-bar="false" date-fix />
 
             <span class="input-group-btn">
                 <button ng-disabled="!isEditState" type="button" class="btn btn-default" style="border: 1px solid #ccc"

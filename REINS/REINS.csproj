@@ -230,6 +230,7 @@
     <Compile Include="Controllers\Master\SterrController.cs" />
     <Compile Include="Controllers\Master\MainClassController.cs" />
     <Compile Include="Controllers\Master\ClassController.cs" />
+    <Compile Include="Controllers\Master\TreatyController.cs" />
     <Compile Include="Controllers\Master\SubTypeController.cs" />
     <Compile Include="Controllers\Master\CompanyController.cs" />
     <Compile Include="Controllers\Master\StatusController.cs" />

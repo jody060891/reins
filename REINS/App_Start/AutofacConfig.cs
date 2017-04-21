@@ -10,8 +10,10 @@ using WebApiService.Master.Facul;
 using WebApiService.Master.MainClass;
 using WebApiService.Master.Occupation;
 using WebApiService.Master.OpenCover;
+using WebApiService.Master.Statement;
 using WebApiService.Master.Sterr;
 using WebApiService.Master.SubType;
+using WebApiService.Master.Treaty;
 using WebApiService.Master.User;
 using WebApiService.Security;
 using WebApiService.Sys;
@@ -61,6 +63,9 @@ namespace HITS
             builder.RegisterType<MainClassService>().As<IMainClassService>().InstancePerRequest();
             builder.RegisterType<SterrService>().As<ISterrService>().InstancePerRequest();
             builder.RegisterType<OpenCoverDocumentService>().As<IOpenCoverDocumentService>().InstancePerRequest();
+
+            builder.RegisterType<TreatyService>().As<ITreatyService>().InstancePerRequest();
+            builder.RegisterType<StatementService>().As<IStatementService>().InstancePerRequest();
 
             builder.RegisterType<EmailService>().As<IEmailService>().InstancePerRequest();
 
