@@ -155,6 +155,8 @@
     <Compile Include="Email\Email\EmailService.cs" />
     <Compile Include="Email\Email\IEmailService.cs" />
     <Compile Include="EncryptionHelper.cs" />
+    <Compile Include="Master\Statement\IStatementService.cs" />
+    <Compile Include="Master\Statement\StatementService.cs" />
     <Compile Include="Master\OpenCoverDocument\OpenCoverDocumentService.cs" />
     <Compile Include="Master\OpenCoverDocument\IOpenCoverDocumentService.cs" />
     <Compile Include="Master\Sterr\ISterrService.cs" />

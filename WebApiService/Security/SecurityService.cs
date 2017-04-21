@@ -21,7 +21,7 @@ namespace WebApiService.Security
     {
         private readonly IRepository<MasterUser> _masterUserRepository;
         private readonly IRepository<Facul> _masterFaculRepository;
-        private readonly IRepository<MasterUwriter> _masterUwriterRepository;
+        private readonly IRepository<MasterStatement> _masterUwriterRepository;
         private readonly IRepository<MasterUserRole> _masterUserRoleRepository;
         private readonly IRepository<MasterMenuList> _masterMenuListRepository;
         private readonly IRepository<MasterSterr> _masterSteerRepository;
@@ -39,7 +39,11 @@ namespace WebApiService.Security
             IContextProvider contextProvider, 
             ISpWrapper spWrapper, 
             
-            IUserService userService, IRepository<Facul> masterFaculRepository, IRepository<MasterUwriter> masterUwriterRepository, IRepository<MasterUserRole> masterUserRoleRepository, IRepository<MasterMenuList> masterMenuListRepository, IRepository<MasterSterr> masterSteerRepository, IRepository<MasterStatus> masterStatusRepository, IRepository<MasterCurrency> masterCurrencyRepository, IRepository<MasterCompany> masterCompanyRepository, IRepository<MasterClass> masterClassRepository, IRepository<MasterTreaty> masterTreatyRepository)
+            IUserService userService, IRepository<Facul> masterFaculRepository, IRepository<MasterStatement> masterUwriterRepository, 
+            IRepository<MasterUserRole> masterUserRoleRepository, IRepository<MasterMenuList> masterMenuListRepository, 
+            IRepository<MasterSterr> masterSteerRepository, IRepository<MasterStatus> masterStatusRepository, 
+            IRepository<MasterCurrency> masterCurrencyRepository, IRepository<MasterCompany> masterCompanyRepository, 
+            IRepository<MasterClass> masterClassRepository, IRepository<MasterTreaty> masterTreatyRepository)
         {
             _masterUserRepository = masterUserRepository;
             _contextProvider = contextProvider;
@@ -232,10 +236,36 @@ namespace WebApiService.Security
             return b;
         }
         
-        public List<UwriterModel> TestUWriter()
+        public List<StatementModel> TestUWriter()
         {
-            var a = _masterUwriterRepository.Query().ToList();
-            var b = _masterUwriterRepository.Query().ToList().Select(e => e.TransformTo<UwriterModel>()).ToList();
+           // var a = _masterUwriterRepository.Query().ToList();
+            var b = _masterUwriterRepository.Query().Where(st => st.StatTrt.Equals("I0TH019A")).ToList()
+                .Select(e =>
+                {
+                    var result = e.TransformTo<StatementModel>();
+                    result.Treaty = e.Treaty.TransformTo<TreatyModel>();
+                    result.Cedant = e.Cedant.TransformTo<CompanyModel>();
+                    result.Currency = e.Currency.TransformTo<CurrencyModel>();
+                    result.JenisPremi = e.JenisPremi.TransformTo<JenisPremiModel>();
+                    result.Broker = e.Broker.TransformTo<CompanyModel>();
+                    result.SubClass = e.SubClass.TransformTo<ClassModel>();
+
+                    result.StatLine1 = e.StatLine1.TransformTo<StatLineModel>();
+                    result.StatLine2 = e.StatLine2.TransformTo<StatLineModel>();
+                    result.StatLine3 = e.StatLine3.TransformTo<StatLineModel>();
+                    result.StatLine4 = e.StatLine4.TransformTo<StatLineModel>();
+                    result.StatLine5 = e.StatLine5.TransformTo<StatLineModel>();
+                    result.StatLine6 = e.StatLine6.TransformTo<StatLineModel>();
+                    result.StatLine7 = e.StatLine7.TransformTo<StatLineModel>();
+                    result.StatLine8 = e.StatLine8.TransformTo<StatLineModel>();
+                    result.StatLine9 = e.StatLine9.TransformTo<StatLineModel>();
+                    result.StatLine10 = e.StatLine10.TransformTo<StatLineModel>();
+                    result.StatLine11 = e.StatLine11.TransformTo<StatLineModel>();
+                    result.StatLine12 = e.StatLine12.TransformTo<StatLineModel>();
+                    result.StatLine13 = e.StatLine13.TransformTo<StatLineModel>();
+                    result.StatLine14 = e.StatLine14.TransformTo<StatLineModel>();
+                    return result;
+                }).ToList();
             return b;
         }
 

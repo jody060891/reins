@@ -58,7 +58,11 @@ namespace EF
         public DbSet<MasterAtkBdatk> MasterAtkBdatk { get; set; }
         public DbSet<MasterOpenCover> MasterOpenCover { get; set; }
         public DbSet<MasterMainClass> MasterMainClass { get; set; }
-        public DbSet<MasterOpenCoverDoc> MasterOpenCoverDoc { get; set; } 
+        public DbSet<MasterOpenCoverDoc> MasterOpenCoverDoc { get; set; }
+        public DbSet<MasterStatement> MasterStatement { get; set; }
+        public DbSet<MasterStatLine> MasterStatLine { get; set; }
+        public DbSet<MasterStshed> MasterStshed { get; set; } 
+        public DbSet<MasterJenisPremi> MasterJenisPremi { get; set; } 
         
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -85,6 +89,8 @@ namespace EF
                 .HasOptional(c => c.MasterCountry)
                 .WithMany()
                 .HasForeignKey(c => c.CompCont);
+
+
 
             modelBuilder.Entity<MasterTreaty>()
                 .HasOptional(c => c.MasterSubType)
@@ -116,6 +122,8 @@ namespace EF
                 .WithMany()
                 .HasForeignKey(c => c.TrtCedant);
 
+
+
             modelBuilder.Entity<MasterAtkBhatk>()
                 .HasOptional(c => c.MasterAtkJenisBisnis)
                 .WithMany()
@@ -125,6 +133,7 @@ namespace EF
                .HasOptional(c => c.MasterAtkBagian)
                .WithMany()
                .HasForeignKey(c => c.KodeBag);
+
 
             modelBuilder.Entity<MasterOpenCover>()
                 .HasOptional(oc => oc.MasterSubType)
@@ -166,7 +175,93 @@ namespace EF
 //                .WithMany()
 //                .HasForeignKey(opd => opd.TrtimgCode);
 
+            modelBuilder.Entity<MasterStatement>()
+                .HasOptional(st => st.Treaty)
+                .WithMany()
+                .HasForeignKey(st => st.StatTrt);
+            modelBuilder.Entity<MasterStatement>()
+                .HasOptional(st => st.JenisPremi)
+                .WithMany()
+                .HasForeignKey(st => st.StatJpc);
+            modelBuilder.Entity<MasterStatement>()
+                .HasOptional(st => st.Currency)
+                .WithMany()
+                .HasForeignKey(st => st.StatCurr);
+            modelBuilder.Entity<MasterStatement>()
+                .HasOptional(st => st.Cedant)
+                .WithMany()
+                .HasForeignKey(st => st.StatCedant);
+            modelBuilder.Entity<MasterStatement>()
+                .HasOptional(st => st.Broker)
+                .WithMany()
+                .HasForeignKey(st => st.StatBroker);
+            modelBuilder.Entity<MasterStatement>()
+                .HasOptional(st => st.SubClass)
+                .WithMany()
+                .HasForeignKey(st => st.StatSclass);
 
+            modelBuilder.Entity<MasterStatement>()
+                .HasOptional(st => st.StatLine1)
+                .WithMany()
+                .HasForeignKey(st => st.StatLn01);
+            modelBuilder.Entity<MasterStatement>()
+                .HasOptional(st => st.StatLine2)
+                .WithMany()
+                .HasForeignKey(st => st.StatLn02);
+            modelBuilder.Entity<MasterStatement>()
+                .HasOptional(st => st.StatLine3)
+                .WithMany()
+                .HasForeignKey(st => st.StatLn03);
+            modelBuilder.Entity<MasterStatement>()
+                .HasOptional(st => st.StatLine4)
+                .WithMany()
+                .HasForeignKey(st => st.StatLn04);
+            modelBuilder.Entity<MasterStatement>()
+                .HasOptional(st => st.StatLine5)
+                .WithMany()
+                .HasForeignKey(st => st.StatLn05);
+            modelBuilder.Entity<MasterStatement>()
+                .HasOptional(st => st.StatLine6)
+                .WithMany()
+                .HasForeignKey(st => st.StatLn06);
+            modelBuilder.Entity<MasterStatement>()
+                .HasOptional(st => st.StatLine7)
+                .WithMany()
+                .HasForeignKey(st => st.StatLn07);
+            modelBuilder.Entity<MasterStatement>()
+                .HasOptional(st => st.StatLine8)
+                .WithMany()
+                .HasForeignKey(st => st.StatLn08);
+            modelBuilder.Entity<MasterStatement>()
+                .HasOptional(st => st.StatLine9)
+                .WithMany()
+                .HasForeignKey(st => st.StatLn09);
+            modelBuilder.Entity<MasterStatement>()
+                .HasOptional(st => st.StatLine10)
+                .WithMany()
+                .HasForeignKey(st => st.StatLn10);
+            modelBuilder.Entity<MasterStatement>()
+                .HasOptional(st => st.StatLine11)
+                .WithMany()
+                .HasForeignKey(st => st.StatLn11);
+            modelBuilder.Entity<MasterStatement>()
+                .HasOptional(st => st.StatLine12)
+                .WithMany()
+                .HasForeignKey(st => st.StatLn12);
+            modelBuilder.Entity<MasterStatement>()
+                .HasOptional(st => st.StatLine13)
+                .WithMany()
+                .HasForeignKey(st => st.StatLn13);
+            modelBuilder.Entity<MasterStatement>()
+                .HasOptional(st => st.StatLine14)
+                .WithMany()
+                .HasForeignKey(st => st.StatLn14);
+
+
+            modelBuilder.Entity<MasterStatLine>()
+                .HasOptional(st => st.Stshed)
+                .WithMany()
+                .HasForeignKey(st => st.LineStsGrp);
 
             System.Data.Entity.Database.SetInitializer<REINS_Database>(null);
             modelBuilder.Conventions.Add(new FunctionConvention(typeof(OracleFunctions)));

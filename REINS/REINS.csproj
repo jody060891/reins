@@ -226,6 +226,7 @@
     <Compile Include="App_Start\AutofacConfig.cs" />
     <Compile Include="ContextProvider.cs" />
     <Compile Include="Controllers\FileSystem\FileController.cs" />
+    <Compile Include="Controllers\Master\StatementController.cs" />
     <Compile Include="Controllers\Master\SterrController.cs" />
     <Compile Include="Controllers\Master\MainClassController.cs" />
     <Compile Include="Controllers\Master\ClassController.cs" />

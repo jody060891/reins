@@ -107,6 +107,10 @@
     <Compile Include="DTO\Master\AtkBhatkModel.cs" />
     <Compile Include="DTO\Master\AtkBagianModel.cs" />
     <Compile Include="DTO\Master\AtkJenisBisnisModel.cs" />
+    <Compile Include="DTO\Master\JenisPremiModel.cs" />
+    <Compile Include="DTO\Master\StshedModel.cs" />
+    <Compile Include="DTO\Master\StatLineModel.cs" />
+    <Compile Include="DTO\Master\StatementModel.cs" />
     <Compile Include="DTO\Master\OpenCoverDocModel.cs" />
     <Compile Include="DTO\Master\MainClassModel.cs" />
     <Compile Include="DTO\Master\OpenCoverModel.cs" />

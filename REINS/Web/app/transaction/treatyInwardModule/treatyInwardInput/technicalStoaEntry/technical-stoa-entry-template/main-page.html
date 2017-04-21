@@ -1,0 +1,377 @@
+<br>
+<div class="form-group row" style="margin-bottom: 0px;">
+    <label for="dateTanggalInput" class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Input Date :</label>
+    <div class="col-sm-3 col-xs-6" style="padding-left: 5px">
+        <p class="input-group" style="margin-bottom: 5px;">
+            <input ng-disabled="!isEditState" type="text" id="dateTanggalInput" ng-blur="onChangeDateOfOccurance(openCover.FacInpDate)" name="dateTanggalInput"
+                   class="form-control mini-label" datepicker-popup="dd-MM-yyyy" ng-model="openCover.FacInpDate" close-text="Close" show-weeks="false" show-button-bar="false" date-fix />
+
+            <span class="input-group-btn">
+                <button ng-disabled="!isEditState" type="button" class="btn btn-default" style="border: 1px solid #ccc"
+                        ng-click="datePickerOpen('dateTanggalInput')">
+                    <i class="fa fa-calendar"></i>
+                </button>
+            </span>
+        </p>
+    </div>
+    <label for="dateTanggalUpdate" class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Update Date :</label>
+    <div class="col-sm-3 col-xs-6" style="padding-left: 5px">
+        <p class="input-group" style="margin-bottom: 5px;">
+            <input ng-disabled="!isEditState" type="text" id="dateTanggalUpdate" ng-blur="onChangeDateOfOccurance(openCover.FacUpdDate)" name="dateTanggalUpdate"
+                   class="form-control mini-label" datepicker-popup="dd-MM-yyyy" ng-model="openCover.FacUpdDate" close-text="Close" show-weeks="false" show-button-bar="false" date-fix />
+
+            <span class="input-group-btn">
+                <button ng-disabled="!isEditState" type="button" class="btn btn-default" style="border: 1px solid #ccc"
+                        ng-click="datePickerOpen('dateTanggalUpdate')">
+                    <i class="fa fa-calendar"></i>
+                </button>
+            </span>
+        </p>
+    </div>
+</div>
+<div class="form-group row" style="margin-bottom: 0px;">
+    <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Offer No<span class="red-font">*</span> :</label>
+    <div class="col-sm-2 col-xs-6" style="padding-left: 5px;">
+        <input ng-disabled="!isEditState" number-only-input type="text" class="form-control mini-label" ng-model="openCover.FacOfrNo" />
+        <div ng-if="!validation.FacOfrNo && isSaveClicked" class="red-font validation-message">Please enter the Offer No</div>
+    </div>
+    <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Open Cover Code<span class="red-font">*</span> :</label>
+    <div class="col-sm-2 col-xs-6" style="padding-left: 5px; width: 28%;">
+        <input ng-disabled="!isEditState" type="text" class="form-control mini-label" ng-model="openCover.FacOpnCode" />
+        <div ng-if="!validation.FacOpnCode && isSaveClicked" class="red-font validation-message">Please enter Open Cover Code</div>
+    </div>
+    <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Type<span class="red-font">*</span> :</label>
+    <div class="col-sm-2 col-xs-6" style="padding-left: 5px;">
+        <select ng-disabled="!isEditState" class="form-control mini-label" ng-model="openCover.FacType">
+            <option value="PR">PR</option>
+            <option value="NP">NP</option>
+        </select>
+        <div ng-if="!validation.FacType && isSaveClicked" class="red-font validation-message">Please enter Type</div>
+    </div>
+</div>
+<div class="form-group row" style="margin-bottom: 0px;">
+    <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Old Code :</label>
+    <div class="col-sm-2 col-xs-6" style="padding-left: 5px;">
+        <input ng-disabled="!isEditState" type="text" class="form-control mini-label" ng-model="openCover.FacOldCode" />
+    </div>
+
+    <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Sub Type<span class="red-font">*</span> :</label>
+    <div class="col-sm-2 col-xs-6" style="padding-left: 5px; width: 28%">
+        <div angucomplete-alt id="ex3" style="width: 80px; display: inline-block;"
+             placeholder=""
+             maxlength="50"
+             pause="100"
+             disable-input="!isEditState"
+             selected-object="selectedSubType"
+             local-data="listSubType"
+             search-fields="SubtypeCode,SubtypeDesc"
+             title-field="SubtypeCode"
+             description-field="SubtypeDesc"
+             minlength="1"
+             input-class="form-control form-control-small mini-label"
+             model-name="{{openCover.FacSubType}}"
+             input-changed="subTypeChanged"
+             match-class="highlight"></div>
+        <input disabled style="width: 180px; display: inline-block;" type="text" class="form-control mini-label" ng-model="openCover.MasterSubType.SubtypeDesc" />
+        <div ng-if="!validation.FacSubType && isSaveClicked" class="red-font validation-message">Please enter Sub Type</div>
+    </div>
+
+    <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Ref. No :</label>
+    <div class="col-sm-2 col-xs-6" style="padding-left: 5px;">
+        <input ng-disabled="!isEditState" type="text" class="form-control mini-label" ng-model="openCover.FacOldRef" />
+    </div>
+</div>
+<div class="form-group row" style="margin-bottom: 0px;" >
+    <label for="dateTanggalOffer" class="col-sm-2 col-xs-8 mini-label" style="width: 12%; text-align: right">Offer Date :</label>
+    <div class="col-sm-3 col-xs-8" style="padding-left: 5px">
+        <p class="input-group" style="margin-bottom: 5px;">
+            <input ng-disabled="!isEditState" type="text" id="dateTanggalOffer" name="dateTanggalOffer"
+                   class="form-control mini-label" datepicker-popup="dd-MM-yyyy" ng-model="openCover.FacOfrDate" close-text="Close" show-weeks="false" show-button-bar="false" date-fix />
+
+            <span class="input-group-btn">
+                <button ng-disabled="!isEditState" type="button" class="btn btn-default" style="border: 1px solid #ccc"
+                        ng-click="datePickerOpen('dateTanggalOffer')">
+                    <i class="fa fa-calendar"></i>
+                </button>
+            </span>
+        </p>
+    </div>
+
+    <label for="dateTanggalReply" class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Reply Date :</label>
+    <div class="col-sm-3 col-xs-6" style="padding-left: 5px">
+        <p class="input-group" style="margin-bottom: 5px;">
+            <input ng-disabled="!isEditState" type="text" id="dateTanggalReply"  name="dateTanggalReply"
+                   class="form-control mini-label" datepicker-popup="dd-MM-yyyy" ng-model="openCover.FacRepDate" close-text="Close" show-weeks="false" show-button-bar="false" date-fix />
+
+            <span class="input-group-btn">
+                <button ng-disabled="!isEditState" type="button" class="btn btn-default" style="border: 1px solid #ccc"
+                        ng-click="datePickerOpen('dateTanggalReply')">
+                    <i class="fa fa-calendar"></i>
+                </button>
+            </span>
+        </p>
+    </div>
+</div>
+
+<div class="form-group row" style="margin-bottom: 0px;">
+    <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Cedant<span class="red-font">*</span> :</label>
+    <div class="col-sm-10 col-xs-6" style="padding-left: 5px;">
+        <div angucomplete-alt id="ex1" style="width: 20%; display: inline-block;"
+             placeholder=""
+             maxlength="50"
+             pause="100"
+             selected-object="selectedCompany"
+             disable-input="!isEditState"
+             local-data="listCompany"
+             search-fields="CompCode,CompName"
+             title-field="CompCode"
+             description-field="CompName"
+             minlength="1"
+             input-class="form-control form-control-small mini-label"
+             model-name="{{openCover.FacCedant}}"
+             input-changed="companyChanged"
+             match-class="highlight"></div>
+        <input disabled style="width: 70%; display: inline-block;" type="text" class="form-control mini-label" ng-model="openCover.MasterCompany.CompName" />
+        <div ng-if="!validation.FacCedant && isSaveClicked" class="red-font validation-message">Please enter Cedant</div>
+    </div>
+</div>
+
+<div class="form-group row" style="margin-bottom: 0px;">
+    <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Broker<span class="red-font">*</span> :</label>
+    <div class="col-sm-10 col-xs-6" style="padding-left: 5px;">
+        <div angucomplete-alt id="ex2" style="width: 20%; display: inline-block;"
+             placeholder=""
+             maxlength="50"
+             pause="100"
+             selected-object="selectedBroker"
+             disable-input="!isEditState"
+             local-data="listBroker"
+             search-fields="CompCode,CompName"
+             title-field="CompCode"
+             description-field="CompName"
+             minlength="1"
+             input-class="form-control form-control-small mini-label"
+             model-name="{{openCover.FacBroker}}"
+             input-changed="brokerChanged"
+             match-class="highlight"></div>
+        <input disabled style="width: 70%; display: inline-block;" type="text" class="form-control mini-label" ng-model="openCover.MasterBroker.CompName" />
+        <div ng-if="!validation.FacBroker && isSaveClicked" class="red-font validation-message">Please enter Broker</div>
+    </div>
+</div>
+
+<div class="form-group row" style="margin-bottom: 0px;">
+    <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Policy No :</label>
+    <div class="col-sm-2 col-xs-6" style="padding-left: 5px;">
+        <input ng-disabled="!isEditState" type="text" class="form-control mini-label" ng-model="openCover.FacPolicyNo" />
+    </div>
+    <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Cc. Ref :</label>
+    <div class="col-sm-2 col-xs-6" style="padding-left: 5px; width: 28%;">
+        <input ng-disabled="!isEditState" type="text" class="form-control mini-label" ng-model="openCover.FacCcRef" />
+    </div>
+    <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Source<span class="red-font">*</span> :</label>
+    <div class="col-sm-2 col-xs-6" style="padding-left: 5px;">
+        <select ng-disabled="!isEditState" class="form-control mini-label" ng-model="openCover.FacSource">
+            <option value="L">Local</option>
+            <option value="A">Asean</option>
+            <option value="O">Overseas</option>
+        </select>
+        <div ng-if="!validation.FacSource && isSaveClicked" class="red-font validation-message">Please enter Source</div>
+    </div>
+</div>
+
+<div class="form-group row" style="margin-bottom: 0px;">
+    <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Sub Class<span class="red-font">*</span> :</label>
+    <div class="col-sm-4 col-xs-6" style="padding-left: 5px;">
+        <div angucomplete-alt id="ex4" style="width: 50%; display: inline-block;"
+             placeholder=""
+             maxlength="50"
+             pause="100"
+             selected-object="selectedSubClass"
+             disable-input="!isEditState"
+             local-data="listSubClass"
+             search-fields="ClassCode,ClassName"
+             title-field="ClassCode"
+             description-field="ClassName"
+             minlength="1"
+             input-class="form-control form-control-small mini-label"
+             model-name="{{openCover.FacSubClass}}"
+             input-changed="subClassChanged"
+             match-class="highlight"></div>
+        <input disabled style="width: 100%; display: inline-block;" type="text" class="form-control mini-label" ng-model="openCover.MasterSubClass.ClassName" />
+        <div ng-if="!validation.FacSubClass && isSaveClicked" class="red-font validation-message">Please enter Sub Class</div>
+    </div>
+    <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Main Class<span class="red-font">*</span> :</label>
+    <div class="col-sm-4 col-xs-6" style="padding-left: 5px;">
+        <div angucomplete-alt id="ex5" style="width: 50%; display: inline-block;"
+             placeholder=""
+             maxlength="50"
+             pause="100"
+             selected-object="selectedMainClass"
+             disable-input="!isEditState"
+             local-data="listMainClass"
+             search-fields="MclassCode,MclassName"
+             title-field="MclassCode"
+             description-field="MclassName"
+             minlength="1"
+             input-class="form-control form-control-small mini-label"
+             model-name="{{openCover.FacMainClass}}"
+             input-changed="mainClassChanged"
+             match-class="highlight"></div>
+        <input disabled style="width: 100%; display: inline-block;" type="text" class="form-control mini-label" ng-model="openCover.MasterMainClass.MclassName" />
+        <div ng-if="!validation.FacMainClass && isSaveClicked" class="red-font validation-message">Please enter Main Class</div>
+    </div>
+</div>
+
+<div class="form-group row" style="margin-bottom: 0px;">
+    <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Insured :</label>
+    <div class="col-sm-10 col-xs-6" style="padding-left: 5px;">
+        <input ng-disabled="!isEditState" type="text" class="form-control mini-label" ng-model="openCover.FacInsured" />
+    </div>
+</div>
+
+<div class="form-group row" style="margin-bottom: 0px;">
+    <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Risk :</label>
+    <div class="col-sm-5 col-xs-6" style="padding-left: 5px;">
+        <input ng-disabled="!isEditState" type="text" class="form-control mini-label" ng-model="openCover.FacRisk1" />
+    </div>
+    <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Cover :</label>
+    <div class="col-sm-3 col-xs-6" style="padding-left: 5px; width: 29.6%">
+        <input ng-disabled="!isEditState" type="text" class="form-control mini-label" ng-model="openCover.FacCover1" />
+    </div>
+    <div class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">&nbsp;</div>
+    <div class="col-sm-5 col-xs-6" style="padding-left: 5px;">
+        <input ng-disabled="!isEditState" type="text" class="form-control mini-label" ng-model="openCover.FacRisk2" />
+    </div>
+    <div class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">&nbsp;</div>
+    <div class="col-sm-3 col-xs-6" style="padding-left: 5px; width: 29.6%">
+        <input ng-disabled="!isEditState" type="text" class="form-control mini-label" ng-model="openCover.FacCover2" />
+    </div>
+</div>
+
+<div class="form-group row" style="margin-bottom: 0px;">
+    <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Description :</label>
+    <div class="col-sm-6 col-xs-6" style="padding-left: 5px;">
+        <input ng-disabled="!isEditState" type="text" class="form-control mini-label" ng-model="openCover.FacDesc1" />
+    </div>
+    <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right"></label>
+    <div class="col-sm-3 col-xs-6" style="padding-left: 5px; width: 21.1%">
+        &nbsp;
+    </div>
+
+</div>
+
+<div class="form-group row" style="margin-bottom: 0px;">
+    <div class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">&nbsp;</div>
+    <div class="col-sm-6 col-xs-6" style="padding-left: 5px;">
+        <input ng-disabled="!isEditState" type="text" class="form-control mini-label" ng-model="openCover.FacDesc2" />
+    </div>
+    <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">R/I Period</label>
+    <div class="col-sm-3 col-xs-6" style="padding-left: 5px; width: 21.1%">
+        <input ng-disabled="!isEditState" type="text" class="form-control mini-label" ng-model="openCover.FacRiPrd" />
+    </div>
+</div>
+
+<div class="form-group row" style="margin-bottom: 0px;">
+    <div class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">&nbsp;</div>
+    <div class="col-sm-6 col-xs-6" style="padding-left: 5px;">
+        <input ng-disabled="!isEditState" type="text" class="form-control mini-label" ng-model="openCover.FacDesc3" />
+    </div>
+    <label for="dateTanggalFrom" class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">From<span class="red-font">*</span></label>
+    <div class="col-sm-3 col-xs-6" style="padding-left: 5px; width: 25.1%">
+        <p class="input-group" style="margin-bottom: 5px;">
+            <input ng-disabled="!isEditState" type="text" id="dateTanggalFrom" name="dateTanggalReply"
+                   class="form-control mini-label" datepicker-popup="dd-MM-yyyy" ng-model="openCover.FacComDate" close-text="Close" show-weeks="false" show-button-bar="false" date-fix />
+
+            <span class="input-group-btn">
+                <button ng-disabled="!isEditState" type="button" class="btn btn-default" style="border: 1px solid #ccc"
+                        ng-click="datePickerOpen('dateTanggalFrom')">
+                    <i class="fa fa-calendar"></i>
+                </button>
+            </span>
+        </p>
+        <div ng-if="!validation.FacComDate && isSaveClicked" class="red-font validation-message">Please enter from date</div>
+    </div>
+</div>
+
+<div class="form-group row" style="margin-bottom: 0px;">
+    <div class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">&nbsp;</div>
+    <div class="col-sm-6 col-xs-6" style="padding-left: 5px;">
+        <input ng-disabled="!isEditState" type="text" class="form-control mini-label" ng-model="openCover.FacDesc4" />
+    </div>
+    <label for="dateTanggalTo" class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">To<span class="red-font">*</span></label>
+    <div class="col-sm-3 col-xs-6" style="padding-left: 5px; width: 25.1%">
+        <p class="input-group" style="margin-bottom: 5px;">
+            <input ng-disabled="!isEditState" type="text" id="dateTanggalTo" name="dateTanggalReply"
+                   class="form-control mini-label" datepicker-popup="dd-MM-yyyy" ng-model="openCover.FacExpDate" close-text="Close" show-weeks="false" show-button-bar="false" date-fix />
+
+            <span class="input-group-btn">
+                <button ng-disabled="!isEditState" type="button" class="btn btn-default" style="border: 1px solid #ccc"
+                        ng-click="datePickerOpen('dateTanggalTo')">
+                    <i class="fa fa-calendar"></i>
+                </button>
+            </span>
+        </p>
+        <div ng-if="!validation.FacExpDate && isSaveClicked" class="red-font validation-message">Please enter to date</div>
+    </div>
+</div>
+
+<div class="form-group row" style="margin-bottom: 0px;">
+    <div class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">&nbsp;</div>
+    <div class="col-sm-6 col-xs-6" style="padding-left: 5px;">
+        <input ng-disabled="!isEditState" type="text" class="form-control mini-label" ng-model="openCover.FacDesc5" />
+    </div>
+    <label for="dateTanggalHoldCvr" class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Hold Cvr Date</label>
+    <div class="col-sm-3 col-xs-6" style="padding-left: 5px; width: 25.1%">
+        <p class="input-group" style="margin-bottom: 5px;">
+            <input ng-disabled="!isEditState" type="text" id="dateTanggalHoldCvr" name="dateTanggalHoldCvr"
+                   class="form-control mini-label" datepicker-popup="dd-MM-yyyy" ng-model="openCover.FacHoldCvrDate" close-text="Close" show-weeks="false" show-button-bar="false" date-fix />
+
+            <span class="input-group-btn">
+                <button ng-disabled="!isEditState" type="button" class="btn btn-default" style="border: 1px solid #ccc"
+                        ng-click="datePickerOpen('dateTanggalHoldCvr')">
+                    <i class="fa fa-calendar"></i>
+                </button>
+            </span>
+        </p>
+    </div>
+</div>
+
+<div class="form-group row" style="margin-bottom: 0px;">
+    <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Territory<span class="red-font">*</span> :</label>
+    <div class="col-sm-4 col-xs-6" style="padding-left: 5px;">
+        <div angucomplete-alt id="ex6" style="width: 50%; display: inline-block;"
+             placeholder=""
+             maxlength="50"
+             pause="100"
+             selected-object="selectedTerritory"
+             disable-input="!isEditState"
+             local-data="listSterr"
+             search-fields="SterrCode,SterrName"
+             title-field="SterrCode"
+             description-field="SterrName"
+             minlength="1"
+             input-class="form-control form-control-small mini-label"
+             model-name="{{openCover.FacSterr}}"
+             input-changed="territoryChanged"
+             match-class="highlight"></div>
+        <input disabled style="width: 100%; display: inline-block;" type="text" class="form-control mini-label" ng-model="openCover.MasterSterr.SterrName" />
+        <div ng-if="!validation.FacSterr && isSaveClicked" class="red-font validation-message">Please enter territory</div>
+    </div>
+    <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Bus Type :</label>
+    <div class="col-sm-2 col-xs-6" style="padding-left: 5px; width: 17%">
+        <select ng-disabled="!isEditState" class="form-control mini-label" ng-model="openCover.FacRnSts">
+            <option value="N">New</option>
+            <option value="R">Renew</option>
+        </select>
+    </div>
+    <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Renew Sts :</label>
+    <div class="col-sm-2 col-xs-6" style="padding-left: 5px; width: 12%">
+        <select ng-disabled="!isEditState" class="form-control mini-label" ng-model="openCover.FacRnFlag">
+            <option value="Y">Y</option>
+            <option value="N">N</option>
+        </select>
+    </div>
+</div>
+<br>
+
+

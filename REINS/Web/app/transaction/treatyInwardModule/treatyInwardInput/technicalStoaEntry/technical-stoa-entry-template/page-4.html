@@ -1,0 +1,98 @@
+<br>
+<div class="row">
+    <br>
+    <div class="col-sm-1 col-xs-4" style="right: 0px; margin-right: 5px;">
+        <button class="btn btn-primary btn-sm" ng-click="onUpload()">
+            <i class="fa fa-upload"></i>
+            Upload
+        </button>
+        <input id="docUpload" type="file" nv-file-select uploader="uploader" multiple style="display: none" />
+        <div>
+            <table class="table" ng-show="uploader.queue.length > 0">
+                <thead>
+                <tr>
+                    <th width="50%">Name</th>
+                    <th ng-show="uploader.isHTML5">Size</th>
+                    <th>Result</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in uploader.queue">
+                    <td>
+                        <strong><span ng-bind="item.file.name"></span></strong>
+                    </td>
+                    <td ng-show="uploader.isHTML5"><span>{{ item.file.size/1024/1024|number:2 }} MB</span></td>
+                    <td>
+                        <div ng-show="uploader.isHTML5 && item.isUploading" class="progress" style="margin-bottom: 0;">
+                            <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+                        </div>
+                        <i class="fa fa-check icon-blue" ng-show="item.isSuccess"></i>
+                        <i class="fa fa-times icon-red" ng-show="item.isError"></i>
+                        <span ng-show="item.isSuccess">Uploaded</span>
+                        <span ng-show="item.errorMessage" class="invalid">Upload attachment failed</span>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger btn-s" ng-click="item.cancel()" ng-show="item.isUploading">
+                            <span class="glyphicon glyphicon-trash"></span>Cancel
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+<div class="row">
+    <br>
+    <div class="col-sm-12">
+        <table class="table table-striped table-bordered data-grid">
+            <thead>
+                <tr>
+                    <th class="action-button"></th>
+                    <th ng-click="onSort('FacOpnCode')">
+                        Name
+                        <span>
+                            <i class="fa fa-sort"></i>
+                        </span>
+                    </th>
+                    <th ng-click="onSort('FacOfrNo')">
+                        File
+                        <span>
+                            <i class="fa fa-sort"></i>
+                        </span>
+                    </th>
+                    <th ng-click="onSort('FacType')">
+                        Date
+                        <span>
+                            <i class="fa fa-sort"></i>
+                        </span>
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-hide="openCover.MasterDocuments.length > 0">
+                    <td colspan="8">No data found in the system.
+                    </td>
+                </tr>
+                <tr ng-repeat="doc in openCover.MasterDocuments">
+                    <td class="action-button">
+                        <span ng-click="onViewFile(doc)" class="btn btn-primary btn-sm">
+                            View File
+                        </span>
+                    </td>
+                    <td>{{doc.TrtimgFname}}</td>
+                    <td>{{doc.TrtimgFile}}</td>
+                    <td>{{doc.TrtimgDatetime | momentDateFilter : "DD-MMM-YYYY HH:mm:ss"}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<br>
+
+
+
+

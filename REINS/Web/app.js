@@ -24,6 +24,7 @@ angular.module('PKBL').config(function ($routeProvider, cfpLoadingBarProvider) {
     $routeProvider.when('/ATK', { templateUrl: 'app/transaction/activaAtk/atk/atk-list.html' });
     $routeProvider.when('/OPNCOVER', {templateUrl: 'app/transaction/facultativeInwardModule/facultativeInwardInput/openCoverDetails/open-cover-details-list.html'});
     $routeProvider.when('/FACULPRADM', {templateUrl: 'app/transaction/facultativeInwardModule/facultativeInwardInput/facultativeRiskDetailsPropor/facultative-risk-details-propor-list.html'});
+    $routeProvider.when('/STATEMENT', {templateUrl: 'app/transaction/treatyInwardModule/treatyInwardInput/technicalStoaEntry/technical-stoa-entry-list.html'});
     /* Add New Routes Above */
     $routeProvider.otherwise({ redirectTo: '/landingPage' });
 
@@ -53,21 +54,23 @@ angular.module('PKBL')
         $rootScope.loginUrl = '/Web/login.html';
 
 
+        // if($location.$$search.isElo && $location.$$search.isElo == "true"){
+        //     var status = {
+        //         userId : $location.$$search.userId,
+        //         isElo : $location.$$search.isElo
+        //     }
+        //     ApplicationStatusService.set(status);
+        //     SessionService.setStatus(status);
+        //     $("#reinsHeader").hide();
+        //     $("#sidebar").hide();
+        //     $("#content").removeClass();
+        //     $("#content").addClass("col-md-12 col-sm-12");
+        // }else{
+        //     SessionService.firstLoadElo();
+        //     SessionService.scheduleReminder();
+        // }
+        SessionService.firstLoadElo("*");
+        //SessionService.scheduleReminder();
 
-        if($location.$$search.isElo && $location.$$search.isElo == "true"){
-            var status = {
-                userId : $location.$$search.userId,
-                isElo : $location.$$search.isElo
-            }
-            ApplicationStatusService.set(status);
-            SessionService.setStatus(status);
-            $("#reinsHeader").hide();
-            $("#sidebar").hide();
-            $("#content").removeClass();
-            $("#content").addClass("col-md-12 col-sm-12");
-        }else{
-            SessionService.scheduleReminder();
-        }
-
-
+        console.log($location);
     });

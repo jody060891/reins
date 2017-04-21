@@ -1,6 +1,6 @@
 angular.module('PKBL')
-    .controller('OpenCoverDetailsListCtrl',
-        function OpenCoverDetailsListCtrl($rootScope, $http, $window, $timeout, $scope, $resource, $location, $modal, UserAclSessionData, OpenCoverFormService,
+    .controller('TechnicalStoaEntryListCtrl',
+        function TechnicalStoaEntryListCtrl($rootScope, $http, $window, $timeout, $scope, $resource, $location, $modal, UserAclSessionData, OpenCoverFormService,
                                           ToastMessageService, SessionService, AtkJenisBisnisService, OpenCoverService, StatusService,
                                           CompanyService, SubTypeService, ClassService, MainClassService, SterrService, FileUploader) {
             SessionService.setAclSession(UserAclSessionData);

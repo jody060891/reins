@@ -6,7 +6,7 @@ using Core;
 
 namespace EF.Database.master
 {
-    [Table("PRTREATY")]
+    [Table("TREATY")]
     public class MasterTreaty : BaseEntityModel
     {
         [Key, StringLength(8)]
@@ -265,13 +265,13 @@ namespace EF.Database.master
         public decimal? TrtLmtRsmd { get; set; }
         public decimal? TrtLmtEq { get; set; }
         public decimal? TrtLmtFlood { get; set; }
-//        public decimal? TrtData23 { get; set; }
-//        public decimal? TrtData08Pr { get; set; }
-//        public decimal? TrtData14Pr { get; set; }
-//        public decimal? TrtData06Pr { get; set; }
-//        public decimal? TrtData10Pr { get; set; }
-//        public decimal? TrtData11Pr { get; set; }
-//        public decimal? TrtData12_Pr { get; set; }
+        public decimal? TrtData23 { get; set; }
+        public decimal? TrtData08_Pr { get; set; }
+        public decimal? TrtData14_Pr { get; set; }
+        public decimal? TrtData06_Pr { get; set; }
+        public decimal? TrtData10_Pr { get; set; }
+        public decimal? TrtData11_Pr { get; set; }
+        public decimal? TrtData12_Pr { get; set; }
 
 
         public virtual MasterSubType MasterSubType { get; set; }

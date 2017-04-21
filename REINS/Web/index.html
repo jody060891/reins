@@ -35,54 +35,44 @@
 
     <script src="components/js/css3-mediaqueries.js"></script>
     <script type="text/javascript">
-        var postMsg = {
-            sendMessage: function (idFrame, domain, fn, param, haveReturnValue)
-            {
-                iframe = document.getElementById(idFrame).contentWindow;
-                var message = {
-                    fn: fn,
-                    param: param,
-                    result: null,
-                    haveReturnValue: haveReturnValue
-                };
-                iframe.postMessage(message, domain);
-            },
-            addEventListener: function (domain) {
-                window.addEventListener('message', function (event) {
-                    if (event.origin !== domain && domain !== '*')
-                        return;
-                    if (event.data.fn == "eval") {
-                        eval(event.data.param);
-
-                        if (event.data.haveReturnValue) {
-                            var message = {
-                                fn: 'PostBack',
-                                refFn: event.data.fn,
-                                param: event.data.param,
-                                result: event.data.result
-                            };
-                            event.source.postMessage(message, event.origin);
-                        }
-                    }
-                }, false);
-            }
-        }
-        postMsg.addEventListener("*");
+//        var postMsg = {
+//            sendMessage: function (idFrame, domain, fn, param, haveReturnValue)
+//            {
+//                iframe = document.getElementById(idFrame).contentWindow;
+//                var message = {
+//                    fn: fn,
+//                    param: param,
+//                    result: null,
+//                    haveReturnValue: haveReturnValue
+//                };
+//                iframe.postMessage(message, domain);
+//            },
+//            addEventListener: function (domain) {
+//                window.addEventListener('message', function (event) {
+//                    if (event.origin !== domain && domain !== '*')
+//                        return;
+//                    if (event.data.fn == "eval") {
+//                        eval(event.data.param);
+//
+//                        if (event.data.haveReturnValue) {
+//                            var message = {
+//                                fn: 'PostBack',
+//                                refFn: event.data.fn,
+//                                param: event.data.param,
+//                                result: event.data.result
+//                            };
+//                            event.source.postMessage(message, event.origin);
+//                        }
+//                    }
+//                }, false);
+//            }
+//        }
+//        postMsg.addEventListener("*");
     </script>
 </head>
 <!--[if IE 8]>   <body class="oldie"> <![endif]-->
 <!--[if gt IE 8]><!-->
 <body>
-    <!--<![endif]-->
-        <!-- Livereload script for development only (stripped during dist build) -->
-        <!--<script src="http://localhost:35729/livereload.js" data-concat="false"></script>-->
-        <!--<script type="text/javascript" data-remove="false" data-concat="false">-->
-            <!--(function () {-->
-                <!--window['livespell___installPath'] = "/Web/JavaScriptSpellCheck/";-->
-            <!--}());-->
-        <!--</script>-->
-        <!-- JS from Bower Components -->
-        <!--<script src="bower_components/less.js/dist/less-1.6.2.js" data-concat="false"></script>-->
         <script src="bower_components/jquery/dist/jquery.js"></script>
         <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
         <script src="bower_components/underscore/underscore.js"></script>
@@ -158,6 +148,7 @@
         <script src="app/transaction/activaAtk/atk/atk-list.js"></script>
         <script src="app/transaction/facultativeInwardModule/facultativeInwardInput/openCoverDetails/open-cover-details-list.js"></script>
         <script src="app/transaction/facultativeInwardModule/facultativeInwardInput/facultativeRiskDetailsPropor/facultative-risk-details-propor-list.js"></script>
+        <script src="app/transaction/treatyInwardModule/treatyInwardInput/technicalStoaEntry/technical-stoa-entry-list.js"></script>
 
         <script src="app/dashboard/risk-polis/risk-polis.js"></script>
     
@@ -205,11 +196,6 @@
                     <div class="col-md-12">
                     </div>
                 </div>
-                <!--<div class="navbar navbar-default" role="navigation" ng-controller="NavigationCtrl">-->
-                <!--<span class="pull-left menu-click" style="padding-left: 10px; padding-top: 10px;" ng-click="onHomeClick()" ng-show="isShowHome"><i class="fa fa-home fa-2x"></i></span>-->
-                <!--<div id="navigation-container"></div>-->
-                <!--</div>-->
-
                 <div class="row">
                     <div id="sidebar" class="col-sm-4 col-md-3 sidebar reins-navbar" ng-controller="NavigationCtrl">
                         <div class="mini-submenu">
@@ -233,18 +219,8 @@
                     </div>
                 </div>
 
-
-                <!--<div ng-controller="MainCtrl">-->
-                <!--<div id="main-content-app" ng-view="ng-view">-->
-                <!--</div>-->
-                <!--</div>-->
             </div>
         </div>
-        <!--<div class="row" style="height: 20px;">-->
-        <!--<div class="col-md-12 footers">-->
-        <!--Copyright &copy; 2017-->
-        <!--</div>-->
-        <!--</div>-->
     </div>
     </div>
 
@@ -262,14 +238,6 @@
                     finishFetchUser = true;
                 });
 
-
-
-
-
-//                $.post("/Authentication/GetCurrentUserAcl", function (responseAcl) {
-//                    pkblApp.value("UserAclSessionData", responseAcl.data);
-//                    finishFetchUserAcl = true;
-//                });
                 var bootstrapHandler = setInterval(function () {
                     if (finishFetchUser) {
                         maxProgress = 256;

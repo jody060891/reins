@@ -18,7 +18,7 @@ namespace WebApiService.Security
         List<MenuListRoleModel> GetCurrentMenuListRole();
 
         List<ReinsUserModel> TestConnection();
-        List<UwriterModel> TestUWriter();
+        List<StatementModel> TestUWriter();
 
         List<UserRoleModel> TestUserRole();
         List<MenuListModel> TestMenuList();

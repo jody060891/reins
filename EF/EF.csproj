@@ -102,6 +102,10 @@
     <Compile Include="Database\master\MasterATKBdatk.cs" />
     <Compile Include="Database\master\MasterATKBhatk.cs" />
     <Compile Include="Database\master\MasterATKBagian.cs" />
+    <Compile Include="Database\master\MasterJenisPremi.cs" />
+    <Compile Include="Database\master\MasterStshed.cs" />
+    <Compile Include="Database\master\MasterStatLine.cs" />
+    <Compile Include="Database\master\MasterStatement.cs" />
     <Compile Include="Database\master\MasterOpenCoverDoc.cs" />
     <Compile Include="Database\master\MasterMainClass.cs" />
     <Compile Include="Database\master\MasterOpenCover.cs" />
