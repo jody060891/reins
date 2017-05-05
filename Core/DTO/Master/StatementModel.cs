@@ -7,16 +7,23 @@ namespace Core.DTO.Master
     public class StatementModel
     {
         public long StatNo { get; set; }
+
         
         public string StatUsid { get; set; }
+
         
         public string StatUsidUpd { get; set; }
+
         
         public string StatTrt { get; set; }
+
         
         public string StatCedant { get; set; }
+        
         public string StatBroker { get; set; }
+        
         public string StatSclass { get; set; }
+
         
         public string StatQtr { get; set; }
 
@@ -29,48 +36,55 @@ namespace Core.DTO.Master
         public DateTime? StatDueDate { get; set; }
 
         public long? StatAcyr { get; set; }
-        public long? StatSndShr { get; set; }
+        public decimal? StatSndShr { get; set; }
+        
         public string StatCurr { get; set; }
-        public long? StatRate { get; set; }
-        public long? StatPrc { get; set; }
+        public decimal? StatRate { get; set; }
+        public decimal? StatPrc { get; set; }
+        
         public string StatDesc { get; set; }
+        
         public string StatLn01 { get; set; }
-        public long? StatAmt01 { get; set; }
+        public decimal? StatAmt01 { get; set; }
+        
         public string StatLn02 { get; set; }
-        public long? StatAmt02 { get; set; }
+        public decimal? StatAmt02 { get; set; }
+        
         public string StatLn03 { get; set; }
-        public long? StatAmt03 { get; set; }
+        public decimal? StatAmt03 { get; set; }
+        
         public string StatLn04 { get; set; }
-        public long? StatAmt04 { get; set; }
+        public decimal? StatAmt04 { get; set; }
+        
         public string StatLn05 { get; set; }
-        public long? StatAmt05 { get; set; }
+        public decimal? StatAmt05 { get; set; }
         
         public string StatLn06 { get; set; }
-        public long? StatAmt06 { get; set; }
+        public decimal? StatAmt06 { get; set; }
         
         public string StatLn07 { get; set; }
-        public long? StatAmt07 { get; set; }
+        public decimal? StatAmt07 { get; set; }
         
         public string StatLn08 { get; set; }
-        public long? StatAmt08 { get; set; }
+        public decimal? StatAmt08 { get; set; }
         
         public string StatLn09 { get; set; }
-        public long? StatAmt09 { get; set; }
+        public decimal? StatAmt09 { get; set; }
         
         public string StatLn10 { get; set; }
-        public long? StatAmt10 { get; set; }
+        public decimal? StatAmt10 { get; set; }
         
         public string StatLn11 { get; set; }
-        public long? StatAmt11 { get; set; }
+        public decimal? StatAmt11 { get; set; }
         
         public string StatLn12 { get; set; }
-        public long? StatAmt12 { get; set; }
+        public decimal? StatAmt12 { get; set; }
         
         public string StatLn13 { get; set; }
-        public long? StatAmt13 { get; set; }
+        public decimal? StatAmt13 { get; set; }
         
         public string StatLn14 { get; set; }
-        public long? StatAmt14 { get; set; }
+        public decimal? StatAmt14 { get; set; }
 
         
         public string StatRelLn01 { get; set; }
@@ -119,28 +133,32 @@ namespace Core.DTO.Master
 
         
         public string StatOutTty1 { get; set; }
-        public long? StatOutPrc1 { get; set; }
+        public decimal? StatOutPrc1 { get; set; }
 
         
         public string StatOutTty2 { get; set; }
-        public long? StatOutPrc2 { get; set; }
+        public decimal? StatOutPrc2 { get; set; }
 
         
         public string StatOutTty3 { get; set; }
-        public long? StatOutPrc3 { get; set; }
+        public decimal? StatOutPrc3 { get; set; }
 
         
         public string StatOutTty4 { get; set; }
-        public long? StatOutPrc4 { get; set; }
+        public decimal? StatOutPrc4 { get; set; }
 
         
         public string StatOutTty5 { get; set; }
-        public long? StatOutPrc5 { get; set; }
+        public decimal? StatOutPrc5 { get; set; }
 
-        public long? StatOsloss { get; set; }
+        public decimal? StatOsloss { get; set; }
+        
         public string StatCtrlCode { get; set; }
+        
         public string StatJpc { get; set; }
+        
         public string StatPrsts { get; set; }
+        
         public string StatRetroPrsts { get; set; }
 
 

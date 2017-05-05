@@ -274,6 +274,7 @@ namespace Core.DTO.Master
         public StatusModel MasterStatus { get; set; }
         public CurrencyModel MasterCurrency { get; set; }
         public CompanyModel MasterCompany { get; set; }
+        public CompanyModel MasterBroker { get; set; }
         public ClassModel MasterClass { get; set; }
     }
 

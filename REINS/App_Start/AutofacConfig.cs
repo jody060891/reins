@@ -11,6 +11,7 @@ using WebApiService.Master.MainClass;
 using WebApiService.Master.Occupation;
 using WebApiService.Master.OpenCover;
 using WebApiService.Master.Statement;
+using WebApiService.Master.StatLine;
 using WebApiService.Master.Sterr;
 using WebApiService.Master.SubType;
 using WebApiService.Master.Treaty;
@@ -66,6 +67,7 @@ namespace HITS
 
             builder.RegisterType<TreatyService>().As<ITreatyService>().InstancePerRequest();
             builder.RegisterType<StatementService>().As<IStatementService>().InstancePerRequest();
+            builder.RegisterType<StatLineService>().As<IStatLineService>().InstancePerRequest();
 
             builder.RegisterType<EmailService>().As<IEmailService>().InstancePerRequest();
 

@@ -9,7 +9,7 @@ angular.module('PKBL').directive('decimalOnlyInput', function() {
             ngModelCtrl.$parsers.push(function (val) {
                 var clean = "";
                 if (val != null && val.length > 0) {
-                    clean = val.replace(/[^0-9\.]+/g, '');
+                    clean = val.replace(/[^0-9\.-]+/g, '');
                     if (val !== clean) {
                         ngModelCtrl.$setViewValue(clean);
                         ngModelCtrl.$render();

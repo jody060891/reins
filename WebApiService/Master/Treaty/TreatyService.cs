@@ -42,6 +42,9 @@ namespace WebApiService.Master.Treaty
                  .Select(e =>
                  {
                      var r = e.TransformTo<TreatyModel>();
+                     r.MasterCompany = e.MasterCompany.TransformTo<CompanyModel>();
+                     r.MasterBroker = e.MasterBroker.TransformTo<CompanyModel>();
+                     r.MasterClass = e.MasterClass.TransformTo<ClassModel>();
                      return r;
                  }).ToList();
             return result;

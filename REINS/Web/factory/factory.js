@@ -3472,6 +3472,54 @@ angular.module('PKBL')
             });
         }
     ])
+    .factory('StatLineService', [
+        '$resource', function ($resource) {
+            return $resource('/StatLine/:verb', {}, {
+                FetchAll: {
+                    method: 'POST',
+                    params: {
+                        verb: 'FetchAll'
+                    }
+                },
+                FetchAllWithPagination: {
+                    method: 'POST',
+                    params: {
+                        verb: 'FetchAllWithPagination'
+                    }
+                },
+                Save: {
+                    method: 'POST',
+                    params: {
+                        verb: 'Save'
+                    }
+                },
+                Delete: {
+                    method: 'POST',
+                    params: {
+                        verb: 'Delete'
+                    }
+                },
+                FetchAllByLineCode: {
+                    method: 'POST',
+                    params: {
+                        verb: 'FetchAllByLineCode'
+                    }
+                },
+                FetchOne: {
+                    method: 'POST',
+                    params: {
+                        verb: 'FetchOne'
+                    }
+                },
+                FetchByLineCodeList: {
+                    method: 'POST',
+                    params: {
+                        verb: 'FetchByLineCodeList'
+                    }
+                }
+            });
+        }
+    ])
     .factory('MainClassService', [
         '$resource', function($resource) {
             return $resource('/MainClass/:verb', {}, {

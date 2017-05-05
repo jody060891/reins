@@ -68,7 +68,15 @@ div.modif div.dataTables_wrapper div.dataTables_filter input.input-sm {
 }
 
 .mini-label{
-    font-size: 0.88rem;
+    font-size: 0.7rem;
+}
+
+.width-21-p{
+    width: 21%;
+}
+
+.padding-lr-halfrem{
+    padding: 0rem 0.5rem;
 }
 
 .tab-content {

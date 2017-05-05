@@ -279,6 +279,7 @@ namespace EF.Database.master
         public virtual MasterStatus MasterStatus { get; set; }
         public virtual MasterCurrency MasterCurrency { get; set; }
         public virtual MasterCompany MasterCompany { get; set; }
+        public virtual MasterCompany MasterBroker { get; set; }
         public virtual MasterClass MasterClass { get; set; }
 
         

@@ -1,144 +1,421 @@
 <br>
 <div class="form-group row" style="margin-bottom: 0px;">
-    <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Currency<span class="red-font">*</span> :</label>
-    <div class="col-sm-2 col-xs-6" style="padding-left: 5px">
-        <input ng-disabled="!isEditState" type="text" class="form-control mini-label" ng-model="openCover.FacCurrency" />
-        <div ng-if="!validation.FacCurrency && isSaveClicked" class="red-font validation-message">Please enter currency</div>
+    <div class="col-sm-6 col-xs-6 mini-label">
+        <div class="row">
+            <div class="col-sm-12">
+                <b>Line Code</b>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-xs-12" style="padding-left: 5px;">
+                <div angucomplete-alt id="ex4" style="width: 12%; display: inline-block;"
+                     placeholder=""
+                     maxlength="50"
+                     pause="100"
+                     selected-object="selectedStatLine1"
+                     disable-input="!isEditState"
+                     local-data="listStatLine"
+                     search-fields="LineCode,LineDesc"
+                     title-field="LineCode"
+                     description-field="LineDesc"
+                     minlength="1"
+                     input-class="form-control form-control-small mini-label"
+                     model-name="{{statement.StatLn01}}"
+                     input-changed="statLineChanged"
+                     match-class="highlight"></div>
+                <input disabled style="width: 70%; display: inline-block;" type="text" class="form-control mini-label" ng-model="statement.StatLine1.LineDesc" />
+                <input disabled style="width: 12%; display: inline-block;" type="text" class="form-control mini-label" ng-model="statement.StatLine1.LineOsflag" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12 col-xs-12" style="padding-left: 5px;">
+                <div angucomplete-alt id="ex4" style="width: 12%; display: inline-block;"
+                     placeholder=""
+                     maxlength="50"
+                     pause="100"
+                     selected-object="selectedStatLine2"
+                     disable-input="!isEditState"
+                     local-data="listStatLine"
+                     search-fields="LineCode,LineDesc"
+                     title-field="LineCode"
+                     description-field="LineDesc"
+                     minlength="1"
+                     input-class="form-control form-control-small mini-label"
+                     model-name="{{statement.StatLn02}}"
+                     input-changed="statLineChanged"
+                     match-class="highlight"></div>
+                <input disabled style="width: 70%; display: inline-block;" type="text" class="form-control mini-label" ng-model="statement.StatLine2.LineDesc" />
+                <input disabled style="width: 12%; display: inline-block;" type="text" class="form-control mini-label" ng-model="statement.StatLine2.LineOsflag" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12 col-xs-12" style="padding-left: 5px;">
+                <div angucomplete-alt id="ex4" style="width: 12%; display: inline-block;"
+                     placeholder=""
+                     maxlength="50"
+                     pause="100"
+                     selected-object="selectedStatLine3"
+                     disable-input="!isEditState"
+                     local-data="listStatLine"
+                     search-fields="LineCode,LineDesc"
+                     title-field="LineCode"
+                     description-field="LineDesc"
+                     minlength="1"
+                     input-class="form-control form-control-small mini-label"
+                     model-name="{{statement.StatLn03}}"
+                     input-changed="statLineChanged"
+                     match-class="highlight"></div>
+                <input disabled style="width: 70%; display: inline-block;" type="text" class="form-control mini-label" ng-model="statement.StatLine3.LineDesc" />
+                <input disabled style="width: 12%; display: inline-block;" type="text" class="form-control mini-label" ng-model="statement.StatLine3.LineOsflag" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12 col-xs-12" style="padding-left: 5px;">
+                <div angucomplete-alt id="ex4" style="width: 12%; display: inline-block;"
+                     placeholder=""
+                     maxlength="50"
+                     pause="100"
+                     selected-object="selectedStatLine4"
+                     disable-input="!isEditState"
+                     local-data="listStatLine"
+                     search-fields="LineCode,LineDesc"
+                     title-field="LineCode"
+                     description-field="LineDesc"
+                     minlength="1"
+                     input-class="form-control form-control-small mini-label"
+                     model-name="{{statement.StatLn04}}"
+                     input-changed="statLineChanged"
+                     match-class="highlight"></div>
+                <input disabled style="width: 70%; display: inline-block;" type="text" class="form-control mini-label" ng-model="statement.StatLine4.LineDesc" />
+                <input disabled style="width: 12%; display: inline-block;" type="text" class="form-control mini-label" ng-model="statement.StatLine4.LineOsflag" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12 col-xs-12" style="padding-left: 5px;">
+                <div angucomplete-alt id="ex4" style="width: 12%; display: inline-block;"
+                     placeholder=""
+                     maxlength="50"
+                     pause="100"
+                     selected-object="selectedStatLine5"
+                     disable-input="!isEditState"
+                     local-data="listStatLine"
+                     search-fields="LineCode,LineDesc"
+                     title-field="LineCode"
+                     description-field="LineDesc"
+                     minlength="1"
+                     input-class="form-control form-control-small mini-label"
+                     model-name="{{statement.StatLn05}}"
+                     input-changed="statLineChanged"
+                     match-class="highlight"></div>
+                <input disabled style="width: 70%; display: inline-block;" type="text" class="form-control mini-label" ng-model="statement.StatLine5.LineDesc" />
+                <input disabled style="width: 12%; display: inline-block;" type="text" class="form-control mini-label" ng-model="statement.StatLine5.LineOsflag" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12 col-xs-12" style="padding-left: 5px;">
+                <div angucomplete-alt id="ex4" style="width: 12%; display: inline-block;"
+                     placeholder=""
+                     maxlength="50"
+                     pause="100"
+                     selected-object="selectedStatLine6"
+                     disable-input="!isEditState"
+                     local-data="listStatLine"
+                     search-fields="LineCode,LineDesc"
+                     title-field="LineCode"
+                     description-field="LineDesc"
+                     minlength="1"
+                     input-class="form-control form-control-small mini-label"
+                     model-name="{{statement.StatLn06}}"
+                     input-changed="statLineChanged"
+                     match-class="highlight"></div>
+                <input disabled style="width: 70%; display: inline-block;" type="text" class="form-control mini-label" ng-model="statement.StatLine6.LineDesc" />
+                <input disabled style="width: 12%; display: inline-block;" type="text" class="form-control mini-label" ng-model="statement.StatLine6.LineOsflag" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12 col-xs-12" style="padding-left: 5px;">
+                <div angucomplete-alt id="ex4" style="width: 12%; display: inline-block;"
+                     placeholder=""
+                     maxlength="50"
+                     pause="100"
+                     selected-object="selectedStatLine7"
+                     disable-input="!isEditState"
+                     local-data="listStatLine"
+                     search-fields="LineCode,LineDesc"
+                     title-field="LineCode"
+                     description-field="LineDesc"
+                     minlength="1"
+                     input-class="form-control form-control-small mini-label"
+                     model-name="{{statement.StatLn07}}"
+                     input-changed="statLineChanged"
+                     match-class="highlight"></div>
+                <input disabled style="width: 70%; display: inline-block;" type="text" class="form-control mini-label" ng-model="statement.StatLine7.LineDesc" />
+                <input disabled style="width: 12%; display: inline-block;" type="text" class="form-control mini-label" ng-model="statement.StatLine7.LineOsflag" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12 col-xs-12" style="padding-left: 5px;">
+                <div angucomplete-alt id="ex4" style="width: 12%; display: inline-block;"
+                     placeholder=""
+                     maxlength="50"
+                     pause="100"
+                     selected-object="selectedStatLine8"
+                     disable-input="!isEditState"
+                     local-data="listStatLine"
+                     search-fields="LineCode,LineDesc"
+                     title-field="LineCode"
+                     description-field="LineDesc"
+                     minlength="1"
+                     input-class="form-control form-control-small mini-label"
+                     model-name="{{statement.StatLn08}}"
+                     input-changed="statLineChanged"
+                     match-class="highlight"></div>
+                <input disabled style="width: 70%; display: inline-block;" type="text" class="form-control mini-label" ng-model="statement.StatLine8.LineDesc" />
+                <input disabled style="width: 12%; display: inline-block;" type="text" class="form-control mini-label" ng-model="statement.StatLine8.LineOsflag" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12 col-xs-12" style="padding-left: 5px;">
+                <div angucomplete-alt id="ex4" style="width: 12%; display: inline-block;"
+                     placeholder=""
+                     maxlength="50"
+                     pause="100"
+                     selected-object="selectedStatLine9"
+                     disable-input="!isEditState"
+                     local-data="listStatLine"
+                     search-fields="LineCode,LineDesc"
+                     title-field="LineCode"
+                     description-field="LineDesc"
+                     minlength="1"
+                     input-class="form-control form-control-small mini-label"
+                     model-name="{{statement.StatLn09}}"
+                     input-changed="statLineChanged"
+                     match-class="highlight"></div>
+                <input disabled style="width: 70%; display: inline-block;" type="text" class="form-control mini-label" ng-model="statement.StatLine9.LineDesc" />
+                <input disabled style="width: 12%; display: inline-block;" type="text" class="form-control mini-label" ng-model="statement.StatLine9.LineOsflag" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12 col-xs-12" style="padding-left: 5px;">
+                <div angucomplete-alt id="ex4" style="width: 12%; display: inline-block;"
+                     placeholder=""
+                     maxlength="50"
+                     pause="100"
+                     selected-object="selectedStatLine10"
+                     disable-input="!isEditState"
+                     local-data="listStatLine"
+                     search-fields="LineCode,LineDesc"
+                     title-field="LineCode"
+                     description-field="LineDesc"
+                     minlength="1"
+                     input-class="form-control form-control-small mini-label"
+                     model-name="{{statement.StatLn10}}"
+                     input-changed="statLineChanged"
+                     match-class="highlight"></div>
+                <input disabled style="width: 70%; display: inline-block;" type="text" class="form-control mini-label" ng-model="statement.StatLine10.LineDesc" />
+                <input disabled style="width: 12%; display: inline-block;" type="text" class="form-control mini-label" ng-model="statement.StatLine10.LineOsflag" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 col-xs-6" style="padding-left: 5px;">
+                <input ng-disabled="!isEditState" type="text" class="form-control mini-label" ng-model="statement.StatRelLn01" />
+            </div>    
+        </div>
+        <div class="row">
+            <div class="col-sm-6 col-xs-6" style="padding-left: 5px;">
+                <input ng-disabled="!isEditState" type="text" class="form-control mini-label" ng-model="statement.StatRelLn02" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 col-xs-6" style="padding-left: 5px;">
+                <input ng-disabled="!isEditState" type="text" class="form-control mini-label" ng-model="statement.StatRelLn03" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 col-xs-6" style="padding-left: 5px;">
+                <input ng-disabled="!isEditState" type="text" class="form-control mini-label" ng-model="statement.StatRelLn04" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12 col-xs-12" style="padding-left: 5px;">
+                <div angucomplete-alt id="ex4" style="width: 12%; display: inline-block;"
+                     placeholder=""
+                     maxlength="50"
+                     pause="100"
+                     selected-object="selectedStatLine11"
+                     disable-input="!isEditState"
+                     local-data="listStatLine"
+                     search-fields="LineCode,LineDesc"
+                     title-field="LineCode"
+                     description-field="LineDesc"
+                     minlength="1"
+                     input-class="form-control form-control-small mini-label"
+                     model-name="{{statement.StatLn11}}"
+                     input-changed="statLineChanged"
+                     match-class="highlight"></div>
+                <input disabled style="width: 70%; display: inline-block;" type="text" class="form-control mini-label" ng-model="statement.StatLine11.LineDesc" />
+                <input disabled style="width: 12%; display: inline-block;" type="text" class="form-control mini-label" ng-model="statement.StatLine11.LineOsflag" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-xs-12" style="padding-left: 5px;">
+                <div angucomplete-alt id="ex4" style="width: 12%; display: inline-block;"
+                     placeholder=""
+                     maxlength="50"
+                     pause="100"
+                     selected-object="selectedStatLine12"
+                     disable-input="!isEditState"
+                     local-data="listStatLine"
+                     search-fields="LineCode,LineDesc"
+                     title-field="LineCode"
+                     description-field="LineDesc"
+                     minlength="1"
+                     input-class="form-control form-control-small mini-label"
+                     model-name="{{statement.StatLn12}}"
+                     input-changed="statLineChanged"
+                     match-class="highlight"></div>
+                <input disabled style="width: 70%; display: inline-block;" type="text" class="form-control mini-label" ng-model="statement.StatLine12.LineDesc" />
+                <input disabled style="width: 12%; display: inline-block;" type="text" class="form-control mini-label" ng-model="statement.StatLine12.LineOsflag" />
+            </div>
+        </div>
+
     </div>
-    <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Write Share<span class="red-font">*</span> :</label>
-    <div class="col-sm-2 col-xs-6" style="padding-left: 5px">
-        <input ng-disabled="!isEditState" type="number" step="0.001" class="form-control mini-label" ng-model="openCover.FacWrtShr" />
-        <div ng-if="!validation.FacWrtShr && isSaveClicked" class="red-font validation-message">Please enter write share</div>
-    </div>
-    <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Signd Share<span class="red-font">*</span> :</label>
-    <div class="col-sm-2 col-xs-6" style="padding-left: 5px">
-        <input ng-disabled="!isEditState" type="number" step="0.001" class="form-control mini-label"  ng-model="openCover.FacSndShr" />
-        <div ng-if="!validation.FacSndShr && isSaveClicked" class="red-font validation-message">Please enter signd share</div>
+    
+
+    <div class="col-sm-6 col-xs-6 mini-label">
+        <div class="row">
+            <div class="col-sm-12">
+                <b>Amount</b>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6 col-xs-6" style="padding-left: 5px;">
+                <input money-format-input ng-change="onAmountChanged()" decimal-only-input ng-disabled="!isEditState" type="text" class="form-control mini-label" ng-model="statement.StatAmt01" />
+            </div>
+            <label class="col-sm-3 col-xs-3 mini-label" style="text-align: right">Stat No.</label>
+            <div class="col-sm-3 col-xs-3" style="padding-left: 5px;">
+                <input disabled type="text" class="form-control mini-label" ng-model="statement.StatNo" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6 col-xs-6" style="padding-left: 5px;">
+                <input money-format-input ng-change="onAmountChanged()" decimal-only-input ng-disabled="!isEditState" type="text" class="form-control mini-label" ng-model="statement.StatAmt02" />
+            </div>
+            <label class="col-sm-3 col-xs-3 mini-label" style="text-align: right">Currency</label>
+            <div class="col-sm-3 col-xs-3" style="padding-left: 5px;">
+                <input disabled type="text" class="form-control mini-label" ng-model="statement.StatCurr" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6 col-xs-6" style="padding-left: 5px;">
+                <input money-format-input ng-change="onAmountChanged()" decimal-only-input ng-disabled="!isEditState" type="text" class="form-control mini-label" ng-model="statement.StatAmt03" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6 col-xs-6" style="padding-left: 5px;">
+                <input money-format-input ng-change="onAmountChanged()" decimal-only-input ng-disabled="!isEditState" type="text" class="form-control mini-label" ng-model="statement.StatAmt04" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6 col-xs-6" style="padding-left: 5px;">
+                <input money-format-input ng-change="onAmountChanged()" decimal-only-input ng-disabled="!isEditState" type="text" class="form-control mini-label" ng-model="statement.StatAmt05" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6 col-xs-6" style="padding-left: 5px;">
+                <input money-format-input ng-change="onAmountChanged()" decimal-only-input ng-disabled="!isEditState" type="text" class="form-control mini-label" ng-model="statement.StatAmt06" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6 col-xs-6" style="padding-left: 5px;">
+                <input money-format-input ng-change="onAmountChanged()" decimal-only-input ng-disabled="!isEditState" type="text" class="form-control mini-label" ng-model="statement.StatAmt07" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6 col-xs-6" style="padding-left: 5px;">
+                <input money-format-input ng-change="onAmountChanged()" decimal-only-input ng-disabled="!isEditState" type="text" class="form-control mini-label" ng-model="statement.StatAmt08" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6 col-xs-6" style="padding-left: 5px;">
+                <input money-format-input ng-change="onAmountChanged()" decimal-only-input ng-disabled="!isEditState" type="text" class="form-control mini-label" ng-model="statement.StatAmt09" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6 col-xs-6" style="padding-left: 5px;">
+                <input money-format-input ng-change="onAmountChanged()" decimal-only-input ng-disabled="!isEditState" type="text" class="form-control mini-label" ng-model="statement.StatAmt10" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6 col-xs-6" style="padding-left: 5px;">
+                <input money-format-input ng-change="onAmountChanged()" decimal-only-input ng-disabled="!isEditState" type="text" class="form-control mini-label" ng-model="statement.StatRelAmt01" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6 col-xs-6" style="padding-left: 5px;">
+                <input money-format-input ng-change="onAmountChanged()" decimal-only-input ng-disabled="!isEditState" type="text" class="form-control mini-label" ng-model="statement.StatRelAmt02" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6 col-xs-6" style="padding-left: 5px;">
+                <input money-format-input ng-change="onAmountChanged()" decimal-only-input ng-disabled="!isEditState" type="text" class="form-control mini-label" ng-model="statement.StatRelAmt03" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6 col-xs-6" style="padding-left: 5px;">
+                <input money-format-input ng-change="onAmountChanged()" decimal-only-input ng-disabled="!isEditState" type="text" class="form-control mini-label" ng-model="statement.StatRelAmt04" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6 col-xs-6" style="padding-left: 5px;">
+                <input money-format-input ng-change="onAmountChanged()" decimal-only-input ng-disabled="!isEditState" type="text" class="form-control mini-label" ng-model="statement.StatAmt11" />
+            </div>
+
+            <div class="col-sm-6 col-xs-6" style="padding-left: 5px;">
+                <input disabled type="text" class="form-control mini-label" ng-model="statement.TxtNone" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6 col-xs-6" style="padding-left: 5px;">
+                <div class="mini-label">
+                    {{statement.StatAmt12 | momentMoneyFilter}}
+                </div>
+                <input money-format-input decimal-only-input disabled type="text" class="form-control mini-label" ng-model="statement.StatAmt12" />
+            </div>
+
+            <div class="col-sm-6 col-xs-6" style="padding-left: 5px;">
+                <input money-format-changed disabled type="text" class="form-control mini-label" ng-model="statement.StatAmt12Temp" />
+            </div>
+        </div>
     </div>
 </div>
-<div class="form-group row" style="margin-bottom: 0px;">
-    <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Total S.I.<span class="red-font">*</span> :</label>
-    <div class="col-sm-4 col-xs-6" style="padding-left: 5px;">
-        <input ng-disabled="!isEditState" type="text" class="form-control mini-label" money-format-input ng-model="openCover.FacTotsi" />
-        <div ng-if="!validation.FacTotsi && isSaveClicked" class="red-font validation-message">Please enter total S.I.</div>
-    </div>
-</div>
 
-<div class="form-group row" style="margin-bottom: 0px;">
-    <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">CC. Share S.I.<span class="red-font">*</span> :</label>
-    <div class="col-sm-4 col-xs-6" style="padding-left: 5px;">
-        <input ng-disabled="!isEditState" type="text" class="form-control mini-label" money-format-input ng-model="openCover.FacCcsi" />
-        <div ng-if="!validation.FacCcsi && isSaveClicked" class="red-font validation-message">Please enter CC. Share S.I.</div>
-    </div>
-
-</div>
-
-<div class="form-group row" style="margin-bottom: 0px;">
-    <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">CC. Retention<span class="red-font">*</span> :</label>
-    <div class="col-sm-4 col-xs-6" style="padding-left: 5px;">
-        <input ng-disabled="!isEditState" type="text" class="form-control mini-label" money-format-input ng-model="openCover.FacCcRetn" />
-        <div ng-if="!validation.FacCcRetn && isSaveClicked" class="red-font validation-message">Please enter CC. retention</div>
-    </div>
-</div>
-
-<div class="form-group row" style="margin-bottom: 0px;">
-    <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Our Share S.I.<span class="red-font">*</span> :</label>
-    <div class="col-sm-4 col-xs-6" style="padding-left: 5px;">
-        <input ng-disabled="!isEditState" type="text" class="form-control mini-label" money-format-input ng-model="openCover.FacOursi" />
-        <div ng-if="!validation.FacOursi && isSaveClicked" class="red-font validation-message">Please enter our share S.I.</div>
-    </div>
-</div>
-
-<div class="form-group row" style="margin-bottom: 0px;">
-    <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Est Gross Premium<span class="red-font">*</span> :</label>
-    <div class="col-sm-4 col-xs-6" style="padding-left: 5px;">
-        <input ng-disabled="!isEditState" type="text" class="form-control mini-label" money-format-input ng-model="openCover.FacGpremium" />
-        <div ng-if="!validation.FacGpremium && isSaveClicked" class="red-font validation-message">Please enter est gross premium</div>
-    </div>
-</div>
-
-<div class="form-group row" style="margin-bottom: 0px;">
-    <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Est Net Premium<span class="red-font">*</span> :</label>
-    <div class="col-sm-4 col-xs-6" style="padding-left: 5px;">
-        <input ng-disabled="!isEditState" type="text" class="form-control mini-label" money-format-input ng-model="openCover.FacNpremium" />
-        <div ng-if="!validation.FacNpremium && isSaveClicked" class="red-font validation-message">Please enter est net premium</div>
-    </div>
-
-    <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Accumulated CC. S.I.<span class="red-font">*</span> :</label>
-    <div class="col-sm-4 col-xs-6" style="padding-left: 5px;">
-        <input ng-disabled="!isEditState" type="text" class="form-control mini-label" money-format-input ng-model="openCover.FacAccsi" />
-        <div ng-if="!validation.FacAccsi && isSaveClicked" class="red-font validation-message">Please enter accumulated CC. S.I.</div>
-    </div>
-
-</div>
-
-<div class="form-group row" style="margin-bottom: 0px;">
-    <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Premium Rate :</label>
-    <div class="col-sm-5 col-xs-6" style="padding-left: 5px;">
-        <input ng-disabled="!isEditState" type="text" class="form-control mini-label"  ng-model="openCover.FacPremRate1" />
-    </div>
-
-</div>
-<div class="form-group row" style="margin-bottom: 0px;">
-    <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">&nbsp;</label>
-    <div class="col-sm-5 col-xs-6" style="padding-left: 5px;">
-        <input ng-disabled="!isEditState" type="text" class="form-control mini-label"  ng-model="openCover.FacPremRate2" />
-    </div>
-
-</div>
-
-<div class="form-group row" style="margin-bottom: 0px;">
-    <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Commission Rate :</label>
-    <div class="col-sm-5 col-xs-6" style="padding-left: 5px;">
-        <input ng-disabled="!isEditState" type="text" class="form-control mini-label"  ng-model="openCover.FacCommRate1" />
-    </div>
-
-</div>
-<div class="form-group row" style="margin-bottom: 0px;">
-    <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">&nbsp;</label>
-    <div class="col-sm-5 col-xs-6" style="padding-left: 5px;">
-        <input ng-disabled="!isEditState" type="text" class="form-control mini-label"  ng-model="openCover.FacCommRate2" />
-    </div>
-
-</div>
-
-<div class="form-group row" style="margin-bottom: 0px;">
-    <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Other Charges :</label>
-    <div class="col-sm-5 col-xs-6" style="padding-left: 5px;">
-        <input ng-disabled="!isEditState" type="text" class="form-control mini-label"  ng-model="openCover.FacOthDeduct1" />
-    </div>
-
-</div>
-<div class="form-group row" style="margin-bottom: 0px;">
-    <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">&nbsp;</label>
-    <div class="col-sm-5 col-xs-6" style="padding-left: 5px;">
-        <input ng-disabled="!isEditState" type="text" class="form-control mini-label"  ng-model="openCover.FacOthDeduct2" />
-    </div>
-
-</div>
-<div class="form-group row" style="margin-bottom: 0px;">
-    <label class="col-sm-2 col-xs-6 mini-label" style="width: 12%; text-align: right">Status<span class="red-font">*</span> :</label>
-    <div class="col-sm-5 col-xs-6" style="padding-left: 5px;">
-        <div angucomplete-alt id="ex1" style="width: 50px; display: inline-block;"
-             placeholder=""
-             maxlength="50"
-             pause="100"
-             selected-object="selectedStatus"
-             disable-input="!isEditState"
-             local-data="listStatus"
-             search-fields="StatusCode"
-             title-field="StatusCode, StatusDesc"
-             description-field="StatusDesc"
-             minlength="1"
-             input-class="form-control form-control-small mini-label"
-             model-name="{{openCover.FacAccSts}}"
-             match-class="highlight"></div>
-        <!--<input style="width: 50px; display: inline-block;" type="text" class="form-control mini-label" ng-model="openCover.FacAccSts" />-->
-        <input disabled style="width: 100%; display: inline-block;" type="text" class="form-control mini-label" ng-model="openCover.MasterStatus.StatusDesc" />
-        <div ng-if="!validation.FacAccSts && isSaveClicked" class="red-font validation-message">Please enter status</div>
-    </div>
-
-</div>
 <br>
 
 

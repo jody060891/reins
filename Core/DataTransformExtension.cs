@@ -89,7 +89,7 @@ namespace Core
                
                 else
                 {
-                    query = query + String.Format("{0}.Value == {1}", targetTypeProperty.Name, value);
+                    query = query + String.Format("{0} == {1}", targetTypeProperty.Name, value);
                     query = query + " && ";
                 }
                 

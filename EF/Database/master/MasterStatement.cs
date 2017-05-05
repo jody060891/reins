@@ -156,7 +156,7 @@ namespace EF.Database.master
         public string StatOutTty5 { get; set; }
         public decimal? StatOutPrc5 { get; set; }
 
-        public long? StatOsloss { get; set; }
+        public decimal? StatOsloss { get; set; }
         [StringLength(1)]
         public string StatCtrlCode { get; set; }
         [StringLength(5)]

@@ -1,7 +1,7 @@
 angular.module('PKBL')
     .controller('TechnicalStoaEntryListCtrl',
         function TechnicalStoaEntryListCtrl($rootScope, $http, $window, $timeout, $scope, $resource, $location, $modal, UserAclSessionData, OpenCoverFormService,
-                                          ToastMessageService, SessionService, AtkJenisBisnisService, StatementService, TreatyService,
+                                          ToastMessageService, SessionService, AtkJenisBisnisService, StatementService, TreatyService, StatLineService,
                                           CompanyService, SubTypeService, ClassService, MainClassService, SterrService, FileUploader) {
             SessionService.setAclSession(UserAclSessionData);
 
@@ -106,6 +106,15 @@ angular.module('PKBL')
                 });
             };
 
+            $scope.FetchAllStatLines = function (str) {
+                var jsonResult = StatLineService.FetchAllByLineCode({ lineCode: str }, function () {
+                    var data = jsonResult.data;
+                    $scope.listStatLine = [];
+                    $scope.listStatLine = data;
+
+                });
+            };
+
             $scope.treatyChanged = function($parent){
                 $scope.FetchAllTreaties($parent);
             };
@@ -134,26 +143,97 @@ angular.module('PKBL')
                 $scope.FetchAllTerritories($parent);
             };
 
+            $scope.statLineChanged = function ($parent) {
+                $scope.FetchAllStatLines($parent);
+            };
+
             $scope.selectedTreaty = function($parent){
                 if($parent != null){
                     $scope.statement.StatTrt  = $parent.originalObject.TrtCode;
                     $scope.statement.Treaty = $parent.originalObject;
+
+                    $scope.statement.StatCedant = $parent.originalObject.TrtCedant;
+                    $scope.statement.Cedant = $parent.originalObject.MasterCompany;
+
+                    $scope.statement.StatBroker = $parent.originalObject.TrtBroker;
+                    $scope.statement.Broker = $parent.originalObject.MasterBroker;
+
+                    $scope.statement.StatSclass = $parent.originalObject.TrtClass;
+                    $scope.statement.SubClass = $parent.originalObject.MasterClass;
+
+
+                    var lineCodeList = [];
+                    if ($scope.statement.Treaty.TrtType == "PR") {
+                        $scope.statement.StatLn01 = "01";
+                        $scope.statement.StatLn02 = '02';
+                        $scope.statement.StatLn03 = '03';
+                        $scope.statement.StatLn04 = '04';
+                        $scope.statement.StatLn05 = '05';
+                        $scope.statement.StatLn06 = '06';
+                        $scope.statement.StatLn07 = '07';
+                        $scope.statement.StatLn08 = '08';
+                        $scope.statement.StatLn09 = '09';
+                        $scope.statement.StatLn10 = '10';
+                        $scope.statement.StatLn11 = '11';
+                        $scope.statement.StatLn12 = '50';
+                    } else {
+                        $scope.statement.StatLn01 = "51";
+                        $scope.statement.StatLn02 = '52';
+                        $scope.statement.StatLn03 = '53';
+                        $scope.statement.StatLn04 = '54';
+                        $scope.statement.StatLn05 = '55';
+                        $scope.statement.StatLn06 = '56';
+                        $scope.statement.StatLn07 = '57';
+                        $scope.statement.StatLn08 = '58';
+                        $scope.statement.StatLn09 = '59';
+                        $scope.statement.StatLn10 = '60';
+                        $scope.statement.StatLn11 = '61';
+                        $scope.statement.StatLn12 = '99';
+                    }
+                    lineCodeList.push($scope.statement.StatLn01);
+                    lineCodeList.push($scope.statement.StatLn02);
+                    lineCodeList.push($scope.statement.StatLn03);
+                    lineCodeList.push($scope.statement.StatLn04);
+                    lineCodeList.push($scope.statement.StatLn05);
+                    lineCodeList.push($scope.statement.StatLn06);
+                    lineCodeList.push($scope.statement.StatLn07);
+                    lineCodeList.push($scope.statement.StatLn08);
+                    lineCodeList.push($scope.statement.StatLn09);
+                    lineCodeList.push($scope.statement.StatLn10);
+                    lineCodeList.push($scope.statement.StatLn11);
+                    lineCodeList.push($scope.statement.StatLn12);
+
+                    var jsonResult = StatLineService.FetchByLineCodeList({ lineCodes: lineCodeList }, function() {
+                        var data_result = jsonResult.data;
+                        $scope.statement.StatLine1 = data_result[0];
+                        $scope.statement.StatLine2 = data_result[1];
+                        $scope.statement.StatLine3 = data_result[2];
+                        $scope.statement.StatLine4 = data_result[3];
+                        $scope.statement.StatLine5 = data_result[4];
+                        $scope.statement.StatLine6 = data_result[5];
+                        $scope.statement.StatLine7 = data_result[6];
+                        $scope.statement.StatLine8 = data_result[7];
+                        $scope.statement.StatLine9 = data_result[8];
+                        $scope.statement.StatLine10 = data_result[9];
+                        $scope.statement.StatLine11 = data_result[10];
+                        $scope.statement.StatLine12 = data_result[11];
+                    });
                 }
 
             };
 
             $scope.selectedCompany = function($parent){
                 if($parent != null) {
-                    $scope.openCover.FacCedant = $parent.originalObject.CompCode;
-                    $scope.openCover.MasterCompany = $parent.originalObject;
+                    $scope.statement.StatCedant = $parent.originalObject.CompCode;
+                    $scope.statement.Cedant = $parent.originalObject;
                 }
 
             };
 
             $scope.selectedBroker = function($parent){
                 if($parent != null) {
-                    $scope.openCover.FacBroker = $parent.originalObject.CompCode;
-                    $scope.openCover.MasterBroker = $parent.originalObject;
+                    $scope.statement.StatBroker = $parent.originalObject.CompCode;
+                    $scope.statement.Broker = $parent.originalObject;
                 }
 
             };
@@ -168,16 +248,16 @@ angular.module('PKBL')
 
             $scope.selectedSubClass = function($parent){
                 if($parent != null) {
-                    $scope.openCover.FacSubClass = $parent.originalObject.ClassCode;
-                    $scope.openCover.MasterSubClass = $parent.originalObject;
+                    $scope.statement.StatSclass= $parent.originalObject.ClassCode;
+                    $scope.statement.SubClass = $parent.originalObject;
                 }
 
             };
 
             $scope.selectedMainClass = function($parent){
                 if($parent != null) {
-                    $scope.openCover.FacMainClass = $parent.originalObject.MclassCode;
-                    $scope.openCover.MasterMainClass = $parent.originalObject;
+                    $scope.openCover.StatSclass = $parent.originalObject.MclassCode;
+                    $scope.openCover.StatSclass = $parent.originalObject;
                 }
 
             };
@@ -186,6 +266,102 @@ angular.module('PKBL')
                 if($parent != null) {
                     $scope.openCover.FacSterr = $parent.originalObject.SterrCode;
                     $scope.openCover.MasterSterr = $parent.originalObject;
+                }
+
+            };
+
+            $scope.selectedStatLine1 = function ($parent) {
+                if ($parent != null) {
+                    $scope.statement.StatLn01 = $parent.originalObject.LineCode;
+                    $scope.statement.StatLine1 = $parent.originalObject;
+                }
+
+            };
+
+            $scope.selectedStatLine2 = function ($parent) {
+                if ($parent != null) {
+                    $scope.statement.StatLn02 = $parent.originalObject.LineCode;
+                    $scope.statement.StatLine2 = $parent.originalObject;
+                }
+
+            };
+
+            $scope.selectedStatLine3 = function ($parent) {
+                if ($parent != null) {
+                    $scope.statement.StatLn03 = $parent.originalObject.LineCode;
+                    $scope.statement.StatLine3 = $parent.originalObject;
+                }
+
+            };
+
+            $scope.selectedStatLine4 = function ($parent) {
+                if ($parent != null) {
+                    $scope.statement.StatLn04 = $parent.originalObject.LineCode;
+                    $scope.statement.StatLine4 = $parent.originalObject;
+                }
+
+            };
+
+            $scope.selectedStatLine5 = function ($parent) {
+                if ($parent != null) {
+                    $scope.statement.StatLn05 = $parent.originalObject.LineCode;
+                    $scope.statement.StatLine5 = $parent.originalObject;
+                }
+
+            };
+
+            $scope.selectedStatLine6 = function ($parent) {
+                if ($parent != null) {
+                    $scope.statement.StatLn06 = $parent.originalObject.LineCode;
+                    $scope.statement.StatLine6 = $parent.originalObject;
+                }
+
+            };
+
+            $scope.selectedStatLine7 = function ($parent) {
+                if ($parent != null) {
+                    $scope.statement.StatLn07 = $parent.originalObject.LineCode;
+                    $scope.statement.StatLine7 = $parent.originalObject;
+                }
+
+            };
+
+            $scope.selectedStatLine8 = function ($parent) {
+                if ($parent != null) {
+                    $scope.statement.StatLn08 = $parent.originalObject.LineCode;
+                    $scope.statement.StatLine8 = $parent.originalObject;
+                }
+
+            };
+
+            $scope.selectedStatLine9 = function ($parent) {
+                if ($parent != null) {
+                    $scope.statement.StatLn09 = $parent.originalObject.LineCode;
+                    $scope.statement.StatLine9 = $parent.originalObject;
+                }
+
+            };
+
+            $scope.selectedStatLine10 = function ($parent) {
+                if ($parent != null) {
+                    $scope.statement.StatLn10 = $parent.originalObject.LineCode;
+                    $scope.statement.StatLine10 = $parent.originalObject;
+                }
+
+            };
+
+            $scope.selectedStatLine11 = function ($parent) {
+                if ($parent != null) {
+                    $scope.statement.StatLn11 = $parent.originalObject.LineCode;
+                    $scope.statement.StatLine11 = $parent.originalObject;
+                }
+
+            };
+
+            $scope.selectedStatLine12 = function ($parent) {
+                if ($parent != null) {
+                    $scope.statement.StatLn12 = $parent.originalObject.LineCode;
+                    $scope.statement.StatLine12 = $parent.originalObject;
                 }
 
             };
@@ -205,7 +381,7 @@ angular.module('PKBL')
             $scope.onFetchPage2 = function(){
                 if ($scope.onPage2Template.length <= 0 || $scope.isDataChange){
                     $scope.onPage2Template = "";
-                    var url = "app/transaction/facultativeInwardModule/facultativeInwardInput/openCoverDetails/open-cover-template/page-2.html";
+                    var url = "app/transaction/treatyInwardModule/treatyInwardInput/technicalStoaEntry/technical-stoa-entry-template/page-2.html";
                     $http.get(url).then(function(result) {
                         var template = result.data;
                         $scope.isDataChange = false;
@@ -218,7 +394,7 @@ angular.module('PKBL')
             $scope.onFetchPage3 = function(){
                 if ($scope.onPage3Template.length <= 0 || $scope.isDataChange){
                     $scope.onPage3Template = "";
-                    var url = "app/transaction/facultativeInwardModule/facultativeInwardInput/openCoverDetails/open-cover-template/page-3.html";
+                    var url = "app/transaction/treatyInwardModule/treatyInwardInput/technicalStoaEntry/technical-stoa-entry-template/page-3.html";
                     $http.get(url).then(function(result) {
                         var template = result.data;
                         $scope.isDataChange = false;
@@ -231,7 +407,7 @@ angular.module('PKBL')
             $scope.onFetchPage4 = function(){
                 if ($scope.onPage4Template.length <= 0 || $scope.isDataChange){
                     $scope.onPage4Template = "";
-                    var url = "app/transaction/facultativeInwardModule/facultativeInwardInput/openCoverDetails/open-cover-template/page-4.html";
+                    var url = "app/transaction/treatyInwardModule/treatyInwardInput/technicalStoaEntry/technical-stoa-entry-template/page-4.html";
                     $http.get(url).then(function(result) {
                         var template = result.data;
                         $scope.isDataChange = false;
@@ -533,17 +709,17 @@ angular.module('PKBL')
             };
 
             $scope.onResetForm = function(){
-                $scope.openCover = {};
+                $scope.statement = {};
             };
 
             $scope.onCancel = function(){
-                $scope.openCover = {};
+                $scope.statement = {};
                 $scope.isEditState = false;
                 $scope.isDataSelected = false;
                 $scope.isSaveClicked = false;
 
                 if(!$scope.isAddNew){
-                    $scope.openCover= angular.copy($scope.openCoverTemp);
+                    $scope.statement = angular.copy($scope.statementTemp);
                     $scope.isDataSelected = true;
                 }
                 $scope.isAddNew = false;
@@ -555,21 +731,21 @@ angular.module('PKBL')
                 $scope.isSaveClicked = false;
                 if(!$scope.isSearchState){
                     $scope.isSearchState = true;
-                    $scope.openCover = {};
+                    $scope.statement = {};
                     $scope.isDataSelected = false;
                     $scope.isEditState = true;
                 }else{
-                    $scope.keyword = angular.copy($scope.openCover);
+                    $scope.keyword = angular.copy($scope.statement);
 
-                    if($scope.openCover != null){
-                        $scope.keyword.MasterSubType = null;
-                        $scope.keyword.MasterCompany = null;
-                        $scope.keyword.MasterSterr = null;
-                        $scope.keyword.MasterMainClass = null;
-                        $scope.keyword.MasterClass = null;
-                        $scope.keyword.MasterBroker = null;
-                        $scope.keyword.MasterStatus = null;
-                        $scope.keyword.MasterSubClass = null;
+                    if($scope.statement != null){
+//                        $scope.keyword.MasterSubType = null;
+//                        $scope.keyword.MasterCompany = null;
+//                        $scope.keyword.MasterSterr = null;
+//                        $scope.keyword.MasterMainClass = null;
+//                        $scope.keyword.MasterClass = null;
+//                        $scope.keyword.MasterBroker = null;
+//                        $scope.keyword.MasterStatus = null;
+//                        $scope.keyword.MasterSubClass = null;
                     }
 
                     $scope.isDataChange = true;
@@ -581,6 +757,19 @@ angular.module('PKBL')
                     $scope.FetchAllWithPagination();
                 }
 
+            };
+
+            $scope.onAmountChanged = function () {
+                console.log("a");
+                $scope.statement.StatAmt12Temp = parseFloat($scope.statement.StatAmt01) + parseFloat($scope.statement.StatAmt02)
+                    + parseFloat($scope.statement.StatAmt03) + parseFloat($scope.statement.StatAmt04) + parseFloat($scope.statement.StatAmt05)
+                    + parseFloat($scope.statement.StatAmt06) + parseFloat($scope.statement.StatAmt07) + parseFloat($scope.statement.StatAmt08)
+                    + parseFloat($scope.statement.StatAmt09) + parseFloat($scope.statement.StatAmt10) + parseFloat($scope.statement.StatAmt11)
+                    + parseFloat($scope.statement.StatRelAmt01) + parseFloat($scope.statement.StatRelAmt02) + parseFloat($scope.statement.StatRelAmt03)
+                    + parseFloat($scope.statement.StatRelAmt04);
+                $scope.statement.StatAmt12 = $scope.statement.StatAmt12Temp * (-1);
+
+                console.log($scope.statement.StatAmt12Temp);
             };
 
             $scope.onDownload = function(){

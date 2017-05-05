@@ -17,11 +17,16 @@ namespace WebApiService
             if (String.IsNullOrEmpty(searchQuery.search.keyword))
                 return data;
   
-            searchQuery.search.fields.ForEach(f =>
+            searchQuery.search.fields.ToList().ForEach(f =>
             {
                 query = query + String.Format("{0}.ToString().ToLower().Contains(\"{1}\")", f, searchQuery.search.keyword.ToLower());
                 query = query + " || ";
             });
+//            searchQuery.search.fields.ForEach(f =>
+//            {
+//                query = query + String.Format("{0}.ToString().ToLower().Contains(\"{1}\")", f, searchQuery.search.keyword.ToLower());
+//                query = query + " || ";
+//            });
 
             query = query.Substring(0, query.Length - 4);
 

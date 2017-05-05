@@ -122,6 +122,11 @@ namespace EF
                 .WithMany()
                 .HasForeignKey(c => c.TrtCedant);
 
+            modelBuilder.Entity<MasterTreaty>()
+                .HasOptional(c => c.MasterBroker)
+                .WithMany()
+                .HasForeignKey(c => c.TrtBroker);
+
 
 
             modelBuilder.Entity<MasterAtkBhatk>()

@@ -76,13 +76,13 @@ angular.module('PKBL')
 
 
                 ngModelCtrl.$parsers.push(function (val) {
-                    var newClean = val.replace(/[^.0-9]+/g, '').replace(/,/g , "");
+                    var newClean = val.replace(/[^-.0-9]+/g, '').replace(/,/g , "");
 
                     var clean = newClean.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                     var numbers = clean.split(".");
                     if(numbers.length > 1){
                         var decimal = numbers[1];
-                        decimal = decimal.replace(/[^0-9]+/g, '');
+                        decimal = decimal.replace(/[^-0-9]+/g, '');
 
                         clean = numbers[0]+"."+decimal;
                     }
@@ -94,6 +94,54 @@ angular.module('PKBL')
                 });
 
                 scope.parseMoneyFormat = function(val){
+
+
+                };
+                //
+                // scope.parseMoenyFormat(ngModelCtrl.$modelValue);
+
+                var defaultValue = attrs.moneyFormatInput;
+
+
+                element.bind('keypress', function (event) {
+                    if (event.keyCode === 32) {
+                        event.preventDefault();
+                    }
+                });
+            }
+        };
+    })
+    .directive('moneyFormatChanged', function () {
+        return {
+            require: '^ngModel',
+            link: function (scope, element, attrs, ngModelCtrl, ngModel) {
+                if (!ngModelCtrl) {
+                    return;
+                }
+
+                ngModelCtrl.$viewChangeListeners.push(function () {
+                    console.log(ngModelCtrl.$modelValue);
+                });
+
+                ngModelCtrl.$parsers.push(function (val) {
+                    var newClean = val.replace(/[^-.0-9]+/g, '').replace(/,/g, "");
+
+                    var clean = newClean.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    var numbers = clean.split(".");
+                    if (numbers.length > 1) {
+                        var decimal = numbers[1];
+                        decimal = decimal.replace(/[^-0-9]+/g, '');
+
+                        clean = numbers[0] + "." + decimal;
+                    }
+                    if (val !== clean) {
+                        ngModelCtrl.$setViewValue(clean);
+                        ngModelCtrl.$render();
+                    }
+                    return newClean;
+                });
+
+                scope.parseMoneyFormat = function (val) {
 
 
                 };
